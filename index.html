@@ -1,0 +1,2051 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DLC载具查询器</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #eef4f7;
+      --panel: rgba(255, 255, 255, 0.72);
+      --panel-strong: rgba(255, 255, 255, 0.9);
+      --line: rgba(118, 140, 153, 0.24);
+      --text: #1d2b34;
+      --muted: #657582;
+      --accent: #18a4a7;
+      --accent-2: #4f80ff;
+      --good: #16a36b;
+      --bad: #dc4d4d;
+      --same: #7a8892;
+      --shadow: 0 22px 70px rgba(34, 61, 78, 0.16);
+      --radius: 8px;
+      font-family: "Microsoft YaHei UI", "Microsoft YaHei", "Segoe UI", system-ui, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 18% 8%, rgba(112, 202, 207, 0.28), transparent 34%),
+        radial-gradient(circle at 88% 18%, rgba(122, 165, 255, 0.2), transparent 30%),
+        linear-gradient(135deg, #f8fbfc 0%, var(--bg) 48%, #f5f7fb 100%);
+      overflow: hidden;
+    }
+
+    button,
+    select,
+    input {
+      font: inherit;
+    }
+
+    .shell {
+      height: 100vh;
+      display: grid;
+      padding: 18px;
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .main {
+      min-width: 0;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      backdrop-filter: blur(24px) saturate(150%);
+      box-shadow: var(--shadow);
+      display: grid;
+      grid-template-rows: auto auto minmax(0, 1fr);
+      overflow: hidden;
+    }
+
+    .topbar {
+      min-height: 72px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      border-bottom: 1px solid var(--line);
+      background: #ffffff;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 22px;
+      line-height: 1.25;
+      font-weight: 750;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .search {
+      width: min(320px, 36vw);
+      position: relative;
+      flex: 0 1 320px;
+    }
+
+    .search input {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.76);
+      padding: 10px 12px 10px 36px;
+      outline: 0;
+      color: var(--text);
+    }
+
+    .search span {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+    }
+
+    .compare-bar {
+      display: grid;
+      grid-template-columns: auto auto auto auto auto;
+      justify-content: start;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--line);
+      background: #ffffff;
+    }
+
+    .primary {
+      border: 0;
+      border-radius: 8px;
+      padding: 0 18px;
+      min-height: 42px;
+      color: #fff;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 10px 24px rgba(38, 143, 203, 0.22);
+      cursor: pointer;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .primary:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      box-shadow: none;
+      background: #b9c2ca;
+    }
+
+    .primary.danger {
+      background: linear-gradient(135deg, #e25555, #c92f52);
+      box-shadow: 0 10px 24px rgba(201, 47, 82, 0.18);
+    }
+
+    .confirm {
+      display: none;
+      border: 0;
+      border-radius: 8px;
+      padding: 0 18px;
+      min-height: 42px;
+      color: #fff;
+      background: linear-gradient(135deg, #17b978, #079e68);
+      box-shadow: 0 10px 24px rgba(7, 158, 104, 0.2);
+      cursor: pointer;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .confirm.show {
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .compare-hint {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .target-mode-button {
+      margin-left: 34px;
+      border: 0;
+      border-radius: 8px;
+      padding: 0 18px;
+      min-height: 42px;
+      color: #fff;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 10px 24px rgba(38, 143, 203, 0.22);
+      cursor: pointer;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .target-mode-button.danger {
+      color: #fff;
+      border-color: transparent;
+      background: linear-gradient(135deg, #e25555, #c92f52);
+    }
+
+    .target-mode-button:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      box-shadow: none;
+      background: #b9c2ca;
+    }
+
+    .target-hint {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .table-wrap {
+      min-height: 0;
+      overflow: auto;
+    }
+
+    table {
+      width: 100%;
+      min-width: 1380px;
+      border-collapse: separate;
+      border-spacing: 0;
+      font-size: 14px;
+    }
+
+    thead th {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      text-align: center;
+      color: #3d515d;
+      background: #ffffff;
+      border-bottom: 1px solid var(--line);
+      padding: 12px 14px;
+      white-space: nowrap;
+    }
+
+    thead th.sortable {
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .sort-indicator {
+      display: inline-grid;
+      place-items: center;
+      width: 18px;
+      margin-left: 4px;
+      color: var(--muted);
+      font-size: 12px;
+      vertical-align: 1px;
+    }
+
+    thead th.sorted .sort-indicator {
+      color: var(--accent-2);
+      font-weight: 900;
+    }
+
+    tbody td {
+      padding: 13px 14px;
+      border-bottom: 1px solid rgba(118, 140, 153, 0.16);
+      vertical-align: middle;
+      text-align: center;
+    }
+
+    tbody tr {
+      background: rgba(255, 255, 255, 0.34);
+      transition: background 0.16s ease, transform 0.16s ease, box-shadow 0.16s ease;
+    }
+
+    body:not(.compare-mode) tbody tr:hover {
+      background: rgba(207, 247, 221, 0.72);
+      box-shadow: inset 4px 0 0 #48c985, inset 0 0 0 9999px rgba(207, 247, 221, 0.08);
+      cursor: pointer;
+    }
+
+    body.target-mode tbody tr.no-target-weapon,
+    body.target-mode tbody tr.no-target-weapon:hover {
+      color: #8b99a4;
+      background: rgba(226, 232, 237, 0.62);
+      box-shadow: none;
+      cursor: not-allowed;
+      opacity: 0.58;
+      transform: none;
+    }
+
+    body.compare-mode tbody tr {
+      cursor: pointer;
+    }
+
+    body.compare-mode tbody tr.selected {
+      position: relative;
+      z-index: 2;
+      background: rgba(135, 206, 250, 0.34);
+      box-shadow: 0 10px 24px rgba(56, 169, 245, 0.22), inset 4px 0 0 #38a9f5;
+      transform: scale(1.008);
+    }
+
+    .num {
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    .faction {
+      display: inline-flex;
+      align-items: center;
+      min-width: 48px;
+      justify-content: center;
+      border-radius: 8px;
+      padding: 4px 8px;
+      font-size: 12px;
+      font-weight: 700;
+      background: rgba(24, 164, 167, 0.12);
+      color: #167d82;
+    }
+
+    .faction.de {
+      background: #ead7bd;
+      color: #7a5126;
+    }
+
+    .faction.us {
+      background: #d9ecff;
+      color: #21669e;
+    }
+
+    .faction.jp {
+      background: #ffe0df;
+      color: #b0443f;
+    }
+
+    .faction.uk {
+      background: rgba(24, 164, 167, 0.12);
+      color: #167d82;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      place-items: center;
+      padding: 24px;
+      background: rgba(38, 55, 66, 0.24);
+      z-index: 10;
+    }
+
+    .modal.open {
+      display: grid;
+    }
+
+    .dialog {
+      width: min(1080px, 96vw);
+      max-height: min(840px, 92vh);
+      overflow: auto;
+      overscroll-behavior: contain;
+      scrollbar-gutter: stable;
+      border: 1px solid rgba(255, 255, 255, 0.72);
+      border-radius: var(--radius);
+      background: #ffffff;
+      box-shadow: 0 24px 64px rgba(21, 37, 50, 0.22);
+      backface-visibility: hidden;
+      transform: translateZ(0);
+    }
+
+    .dialog-head {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      padding: 16px 18px;
+      background: #ffffff;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      transform: translateZ(0);
+    }
+
+    .dialog-head h2 {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.3;
+    }
+
+    .icon-button {
+      width: 38px;
+      height: 38px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.72);
+      color: var(--muted);
+      font-size: 22px;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .compare-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 280px minmax(0, 1fr);
+      gap: 12px;
+      padding: 18px;
+      align-items: stretch;
+    }
+
+    .vehicle-card,
+    .metric-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.72);
+      overflow: hidden;
+    }
+
+    .vehicle-card {
+      padding: 16px;
+    }
+
+    .vehicle-head {
+      min-height: 100px;
+    }
+
+    .vehicle-card h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+      line-height: 1.35;
+    }
+
+    .weapon {
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .metric-labels,
+    .side-values {
+      display: grid;
+      grid-auto-rows: 58px;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .metric-labels {
+      margin-top: 132px;
+    }
+
+    .metric-label,
+    .side-value {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.64);
+      align-items: center;
+      min-width: 0;
+      min-height: 58px;
+    }
+
+    .group-label,
+    .group-spacer {
+      min-height: 44px;
+    }
+
+    .group-label {
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(79, 128, 255, 0.18);
+      border-radius: 8px;
+      background: rgba(226, 240, 255, 0.92);
+      color: #285c97;
+      font-weight: 900;
+      text-align: center;
+    }
+
+    .group-spacer {
+      border: 1px solid transparent;
+    }
+
+    .metric-label {
+      display: grid;
+      place-items: center;
+      color: var(--muted);
+      font-weight: 800;
+      text-align: center;
+      padding: 0 10px;
+      line-height: 1.25;
+    }
+
+    .metric-label .metric-title {
+      color: var(--text);
+    }
+
+    .metric-label .metric-subtitle {
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .side-value {
+      display: grid;
+      grid-template-columns: 1fr 34px;
+      align-items: center;
+      justify-content: stretch;
+      gap: 12px;
+      padding: 0 14px;
+      font-weight: 900;
+      font-variant-numeric: tabular-nums;
+      text-align: center;
+    }
+
+    .side-value.right {
+      justify-content: stretch;
+    }
+
+    .side-value .value-text {
+      min-width: 0;
+      text-align: center;
+      line-height: 1.25;
+    }
+
+    .side-value::before {
+      content: "";
+      display: none;
+    }
+
+    .metrics {
+      display: grid;
+      gap: 10px;
+      padding: 0 18px 18px;
+    }
+
+    .metric-card {
+      display: grid;
+      grid-template-columns: minmax(120px, 1fr) 130px 54px 130px;
+      align-items: center;
+      min-height: 58px;
+    }
+
+    .metric-name {
+      padding: 12px 14px;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .metric-value {
+      padding: 12px 14px;
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+      text-align: center;
+      word-break: break-word;
+    }
+
+    .arrow {
+      width: 34px;
+      height: 34px;
+      margin: auto;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      font-size: 20px;
+      font-weight: 900;
+      line-height: 1;
+      background: rgba(122, 136, 146, 0.12);
+      color: var(--same);
+    }
+
+    .arrow.up {
+      color: var(--good);
+      background: rgba(22, 163, 107, 0.12);
+    }
+
+    .arrow.down {
+      color: var(--bad);
+      background: rgba(220, 77, 77, 0.12);
+    }
+
+    .arrow.hidden {
+      visibility: hidden;
+    }
+
+    .result-row {
+      border-color: rgba(24, 164, 167, 0.24);
+      background: rgba(235, 249, 249, 0.78);
+    }
+
+    .bad-word {
+      color: var(--bad);
+      font-size: 19px;
+      letter-spacing: 0;
+    }
+
+    .detail-dialog {
+      width: min(980px, 96vw);
+    }
+
+    .detail-hero {
+      margin: 18px 18px 0;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(235, 249, 249, 0.92));
+      text-align: center;
+    }
+
+    .detail-hero h3 {
+      margin: 10px 0 0;
+      font-size: 24px;
+      line-height: 1.3;
+    }
+
+    .detail-rows {
+      display: grid;
+      gap: 12px;
+      padding: 18px;
+    }
+
+    .detail-section {
+      display: grid;
+      gap: 10px;
+    }
+
+    .detail-section + .detail-section {
+      margin-top: 16px;
+    }
+
+    .detail-section-title {
+      min-height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, rgba(24, 164, 167, 0.13), rgba(79, 128, 255, 0.12));
+      color: var(--text);
+      font-weight: 900;
+      letter-spacing: 0;
+      border: 1px solid rgba(24, 164, 167, 0.18);
+    }
+
+    .detail-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      min-height: 54px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.72);
+    }
+
+    .detail-name,
+    .detail-value {
+      display: grid;
+      place-items: center;
+      padding: 10px 12px;
+      text-align: center;
+      line-height: 1.3;
+    }
+
+    .detail-name {
+      color: var(--muted);
+      font-weight: 800;
+      background: rgba(248, 252, 253, 0.94);
+      border-right: 1px solid var(--line);
+    }
+
+    .detail-value {
+      font-weight: 850;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .target-dialog {
+      width: min(1500px, calc(100vw - 48px));
+      height: min(880px, calc(100vh - 48px));
+      max-height: calc(100vh - 48px);
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.72);
+      border-radius: var(--radius);
+      background: #f5f9fb;
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr);
+    }
+
+    .target-layout {
+      min-height: 0;
+      display: grid;
+      grid-template-columns: 7fr 3fr;
+      gap: 18px;
+      padding: 22px;
+      min-width: 0;
+      height: 100%;
+    }
+
+    .target-stage {
+      position: relative;
+      min-height: 0;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(rgba(31, 68, 89, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(31, 68, 89, 0.04) 1px, transparent 1px),
+        #ffffff;
+      background-size: 32px 32px;
+      overflow: hidden;
+      contain: layout paint;
+    }
+
+    .tank-model {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: var(--tank-body-width, 116px);
+      height: 62px;
+      transform: translate(-50%, -50%);
+      border-radius: 6px;
+      background: #60755f;
+      border: 0;
+      box-shadow: none;
+      z-index: 4;
+    }
+
+    .tank-model::after {
+      content: "";
+      position: absolute;
+      left: calc(100% - 24px);
+      top: 25px;
+      width: 82px;
+      height: 12px;
+      border-radius: 0 6px 6px 0;
+      background: #60755f;
+      box-shadow: none;
+    }
+
+    .tank-label {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-weight: 900;
+      text-align: center;
+      padding: 8px;
+      font-size: 13px;
+      line-height: 1.2;
+      overflow: hidden;
+      word-break: break-all;
+      z-index: 1;
+    }
+
+    .threat-token {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 54px;
+      height: 54px;
+      border: 2px solid rgba(255, 255, 255, 0.9);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 900;
+      text-align: center;
+      line-height: 1.05;
+      box-shadow: none;
+      cursor: grab;
+      isolation: isolate;
+      touch-action: none;
+      user-select: none;
+      z-index: 3;
+      will-change: transform;
+      backface-visibility: hidden;
+    }
+
+    .threat-token.dragging {
+      cursor: grabbing;
+      transition: none;
+    }
+
+    .threat-token.top-threat {
+      outline: 4px solid #e53935;
+      z-index: 4;
+    }
+
+    .threat-token.dragging {
+      z-index: 5;
+    }
+
+    .target-panel {
+      min-height: 0;
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr);
+      gap: 14px;
+    }
+
+    .target-section {
+      min-height: 0;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .target-section:last-child {
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr);
+    }
+
+    .target-section h3 {
+      margin: 0;
+      padding: 13px 14px;
+      font-size: 15px;
+      border-bottom: 1px solid var(--line);
+      background: #fff;
+    }
+
+    .threat-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 12px;
+    }
+
+    .threat-button {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 8px 10px;
+      background: #f7fbfc;
+      color: var(--text);
+      cursor: pointer;
+      font-weight: 750;
+      font-size: 13px;
+    }
+
+    .threat-button.active {
+      color: #fff;
+      border-color: transparent;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    }
+
+    .priority-list {
+      display: grid;
+      gap: 8px;
+      padding: 12px;
+      align-content: start;
+      min-height: 0;
+      height: 100%;
+      overflow: auto;
+      overscroll-behavior: contain;
+      scrollbar-gutter: stable;
+      contain: layout paint;
+    }
+
+    .priority-item {
+      position: relative;
+      display: grid;
+      grid-template-columns: 28px minmax(0, 1fr) auto;
+      gap: 8px;
+      align-items: center;
+      min-height: 46px;
+      padding: 8px 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(248, 252, 253, 0.9);
+      transition: background 0.14s ease, box-shadow 0.14s ease;
+    }
+
+    .priority-item.top {
+      background: rgba(235, 249, 249, 0.96);
+      box-shadow: 0 10px 24px rgba(24, 164, 167, 0.12);
+    }
+
+    .priority-rank {
+      width: 24px;
+      height: 24px;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      background: var(--accent);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .priority-name {
+      font-weight: 850;
+      min-width: 0;
+    }
+
+    .priority-score {
+      font-weight: 900;
+      font-variant-numeric: tabular-nums;
+      color: var(--accent-2);
+    }
+
+    .detail-row.at-row {
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.85fr) minmax(0, 0.85fr);
+      min-height: 68px;
+    }
+
+    .detail-row.at-row .detail-value {
+      border-right: 1px solid var(--line);
+    }
+
+    .detail-percent {
+      color: var(--good);
+    }
+
+    .detail-at-title {
+      color: var(--text);
+      font-weight: 900;
+    }
+
+    .detail-at-subtitle {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 750;
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 24px;
+      transform: translateX(-50%);
+      padding: 10px 14px;
+      border-radius: 8px;
+      color: #fff;
+      background: rgba(29, 43, 52, 0.88);
+      box-shadow: var(--shadow);
+      display: none;
+      z-index: 20;
+    }
+
+    .toast.show {
+      display: block;
+    }
+
+    @media (max-width: 860px) {
+      body {
+        overflow: auto;
+      }
+
+      .shell {
+        min-height: 100vh;
+        height: auto;
+        grid-template-columns: 1fr;
+        padding: 10px;
+      }
+
+      .main {
+        min-height: calc(100vh - 20px);
+      }
+
+      .topbar {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .search {
+        width: 100%;
+        flex-basis: auto;
+      }
+
+      .compare-bar {
+        grid-template-columns: 1fr;
+      }
+
+      .primary {
+        min-height: 44px;
+      }
+
+      .table-wrap {
+        overflow: auto;
+      }
+
+      .compare-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .metric-labels {
+        display: none;
+      }
+
+      .side-value,
+      .side-value.right {
+        grid-template-columns: minmax(92px, 1fr) minmax(80px, 1fr) 34px;
+      }
+
+      .side-value::before {
+        content: attr(data-label);
+        display: block;
+        color: var(--muted);
+        font-weight: 700;
+        text-align: left;
+        line-height: 1.25;
+      }
+
+      .metric-card {
+        grid-template-columns: 1fr 88px 44px 88px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <h1>DLC载具查询器</h1>
+          <div class="subtitle"> </div>
+        </div>
+        <label class="search">
+          <span>⌕</span>
+          <input id="searchInput" type="search" placeholder="搜索载具、武器或阵营">
+        </label>
+      </header>
+
+      <section class="compare-bar" aria-label="选择载具比较">
+        <button class="primary" id="compareBtn">比较</button>
+        <button class="confirm" id="confirmCompareBtn">确认比较</button>
+        <div class="compare-hint" id="compareHint">在列表中选两个载具进行对比</div>
+        <button class="target-mode-button" id="targetModeBtn">载具索敌优选</button>
+        <div class="target-hint" id="targetHint">查看载具索敌的优先级</div>
+      </section>
+
+      <section class="table-wrap" aria-label="载具数据表">
+        <table>
+          <thead>
+            <tr>
+              <th>阵营</th>
+              <th>载具名</th>
+              <th class="sortable" data-sort="hp">生命值<span class="sort-indicator"></span></th>
+              <th class="sortable" data-sort="speed">最大速度<span class="sort-indicator"></span></th>
+              <th class="sortable" data-sort="acceleration">加速度<span class="sort-indicator"></span></th>
+              <th class="sortable" data-sort="turret">炮塔转速<span class="sort-indicator"></span></th>
+              <th class="sortable" data-sort="threshold">受击门槛<span class="sort-indicator"></span></th>
+              <th class="sortable" data-sort="reduction">爆炸减伤<span class="sort-indicator"></span></th>
+              <th>武器名</th>
+              <th class="sortable" data-sort="reload">装填速度<span class="sort-indicator"></span></th>
+              <th class="sortable" data-sort="vision">玩家视野修正<span class="sort-indicator"></span></th>
+              <th class="sortable" data-sort="blast">爆炸伤害<span class="sort-indicator"></span></th>
+            </tr>
+          </thead>
+          <tbody id="vehicleRows"></tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal" id="compareModal" role="dialog" aria-modal="true" aria-labelledby="compareTitle">
+    <div class="dialog">
+      <div class="dialog-head">
+        <h2 id="compareTitle">载具对比</h2>
+        <button class="icon-button" id="closeModal" title="关闭">×</button>
+      </div>
+      <div class="compare-grid" id="compareCards"></div>
+      <div class="metrics" id="compareMetrics"></div>
+    </div>
+  </div>
+
+  <div class="modal" id="detailModal" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
+    <div class="dialog detail-dialog">
+      <div class="dialog-head">
+        <h2 id="detailTitle">载具详细参数</h2>
+        <button class="icon-button" id="closeDetailModal" title="关闭">×</button>
+      </div>
+      <div class="detail-hero" id="detailHero"></div>
+      <div class="detail-rows" id="detailRows"></div>
+    </div>
+  </div>
+
+  <div class="modal" id="targetModal" role="dialog" aria-modal="true" aria-labelledby="targetTitle">
+    <div class="dialog target-dialog">
+      <div class="dialog-head">
+        <h2 id="targetTitle">载具索敌优选</h2>
+        <button class="icon-button" id="closeTargetModal" title="关闭">×</button>
+      </div>
+      <div class="target-layout">
+        <section class="target-stage" id="targetStage">
+          <div class="tank-model" id="targetTank"><div class="tank-label" id="targetTankLabel"></div></div>
+        </section>
+        <aside class="target-panel">
+          <section class="target-section">
+            <h3>威胁类型</h3>
+            <div class="threat-buttons" id="threatButtons"></div>
+          </section>
+          <section class="target-section">
+            <h3>优先级</h3>
+            <div class="priority-list" id="priorityList"></div>
+          </section>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const vehicles = [
+      { faction: "德军", hp: 2.4, speed: 22, acceleration: 6.5, turret: null, threshold: 0, reduction: 0.5, name: "大众82型桶车", weapon: "—", reload: null, vision: 1, blast: null, vehicleType: "light_vehicle" },
+      { faction: "德军", hp: 4.8, speed: 18, acceleration: 6, turret: null, threshold: 0, reduction: 0.5, name: "欧宝闪电卡车", weapon: "—", reload: null, vision: 1, blast: null, vehicleType: "light_vehicle" },
+      { faction: "德军", hp: 10, speed: 9, acceleration: 12, turret: 10.31, threshold: 1.01, reduction: 0.9, name: "Sd.Kfz.251半履带装甲车", weapon: "MG34机枪", reload: null, vision: 1, blast: null, vehicleType: "light_vehicle" },
+      { faction: "德军", hp: 10, speed: 9, acceleration: 12, turret: 10.31, threshold: 1.01, reduction: 0.9, name: "Sd.Kfz.251/17防空车", weapon: "20mm Flak 38机炮", reload: null, vision: 1.6, blast: 1, vehicleType: "light_vehicle" },
+      { faction: "德军", hp: 14, speed: 12.2, acceleration: 11, turret: 7.73, threshold: 0, reduction: 0.9, name: "二号“山猫”轻型坦克", weapon: "20mm KwK30机炮", reload: null, vision: 1.6, blast: 1, vehicleType: "light_armour" },
+      { faction: "德军", hp: 17, speed: 7, acceleration: 12, turret: 2.86, threshold: 1.02, reduction: 0.9, name: "四号中型坦克", weapon: "75mm KwK40型坦克炮", reload: 5.5, vision: 1, blast: 4.7, vehicleType: "medium_armour" },
+      { faction: "德军", hp: 17, speed: 7, acceleration: 12, turret: 11.46, threshold: 1.02, reduction: 0.9, name: "三号突击炮", weapon: "75mm StuK40型突击炮", reload: 5.5, vision: 1.6, blast: 6, vehicleType: "medium_armour" },
+      { faction: "德军", hp: 30, speed: 7, acceleration: 11, turret: 2.29, threshold: 1.02, reduction: 0.9, name: "虎式重型坦克", weapon: "88mm KwK36型坦克炮", reload: 6.5, vision: 1.4, blast: 8.4, vehicleType: "heavy_armour" },
+      { faction: "德军", hp: 40, speed: 6.5, acceleration: 7.5, turret: 0.86, threshold: 3.91, reduction: 0.9, name: "虎王重型坦克", weapon: "88mm KwK43型坦克炮", reload: 7.5, vision: 1.4, blast: 9.9, vehicleType: "heavy_armour" },
+      { faction: "德军", hp: 200, speed: 6.5, acceleration: 7.5, turret: 0.86, threshold: 3.91, reduction: 0.9, name: "虎王重型坦克（精英）", weapon: "88mm KwK43型坦克炮", reload: 7.5, vision: 1.4, blast: 9.9, vehicleType: "heavy_armour" },
+      { faction: "德军", hp: 300, speed: 6.5, acceleration: 7.5, turret: 0.86, threshold: 3.91, reduction: 0.9, name: "鼠式超重型坦克", weapon: "128mm KwK44型坦克炮", reload: 7.5, vision: 1.8, blast: 9.3, vehicleType: "heavy_armour" },
+      { faction: "英军", hp: 4.8, speed: 18, acceleration: 6, turret: null, threshold: 0, reduction: 0.5, name: "奥斯汀K5卡车", weapon: "—", reload: null, vision: 1, blast: null, vehicleType: "ligh_vehicle" },
+      { faction: "英军", hp: 6, speed: 11, acceleration: 14.6, turret: 34.38, threshold: 0, reduction: 0.9, name: "布伦履带运输车", weapon: "布伦车载机枪", reload: null, vision: 1, blast: null, vehicleType: "light_vehicle" },
+      { faction: "英军", hp: 6, speed: 11, acceleration: 14.6, turret: 34.38, threshold: 0, reduction: 0.9, name: "黄蜂喷火车", weapon: "喷火器", reload: null, vision: 1, blast: 1.01, vehicleType: "light_vehicle" },
+      { faction: "英军", hp: 26, speed: 6, acceleration: 10, turret: 2.86, threshold: 1.02, reduction: 0.9, name: "丘吉尔Mk.VII步兵坦克", weapon: "75mm 坦克炮", reload: 4.4, vision: 1, blast: 4.8, vehicleType: "medium_armour" },
+      { faction: "英军", hp: 17.5, speed: 7, acceleration: 12, turret: 2.29, threshold: 1.02, reduction: 0.9, name: "谢尔曼“萤火虫”坦克", weapon: "QF 17磅坦克炮", reload: 5.5, vision: 1.6, blast: 7, vehicleType: "medium_armour" },
+      { faction: "英军", hp: 300, speed: 6.5, acceleration: 7.5, turret: 0.86, threshold: 3.91, reduction: 0.9, name: "TOG II 超重型坦克", weapon: "QF 17磅坦克炮", reload: 6.5, vision: 1.8, blast: 7, vehicleType: "heavy_armour" },
+      { faction: "美军", hp: 2.4, speed: 22, acceleration: 6.5, turret: null, threshold: 0, reduction: 0.5, name: "威利斯MB吉普", weapon: "—", reload: null, vision: 1, blast: null, vehicleType: "light_vehicle" },
+      { faction: "美军", hp: 4.8, speed: 18, acceleration: 6, turret: null, threshold: 0, reduction: 0.5, name: "DUKW两栖军械车", weapon: "—", reload: null, vision: 1, blast: null, vehicleType: "light_vehicle" },
+      { faction: "美军", hp: 2.4, speed: 22, acceleration: 6.5, turret: 34.38, threshold: 0, reduction: 0.5, name: "威利斯MB无后坐力炮吉普", weapon: "57mm M18无后坐力炮", reload: 4, vision: 1, blast: 6.4, vehicleType: "light_vehicle" },
+      { faction: "美军", hp: 2.4, speed: 22, acceleration: 6.5, turret: 34.38, threshold: 0, reduction: 0.5, name: "威利斯MB机枪吉普", weapon: "M2HB 重机枪", reload: null, vision: 1, blast: null, vehicleType: "light_vehicle" },
+      { faction: "美军", hp: 10, speed: 9, acceleration: 12, turret: 17.19, threshold: 0, reduction: 0.9, name: "M3半履带装甲车", weapon: "M2HB 重机枪", reload: null, vision: 1, blast: null, vehicleType: "light_vehicle" },
+      { faction: "美军", hp: 11, speed: 7.5, acceleration: 8, turret: 5.73, threshold: 0, reduction: 0.9, name: "LVT4两栖战车", weapon: "M2HB 重机枪", reload: null, vision: 1, blast: null, vehicleType: "light_vehicle" },
+      { faction: "美军", hp: 13, speed: 10, acceleration: 10, turret: 8.31, threshold: 0, reduction: 0.9, name: "M3“斯图亚特”轻型坦克", weapon: "37mm M6型坦克炮", reload: 3.75, vision: 1, blast: 3.3, vehicleType: "light_armour" },
+      { faction: "美军", hp: 15, speed: 10, acceleration: 10, turret: 7.16, threshold: 1.02, reduction: 0.9, name: "M10“狼獾”坦克歼击车", weapon: "3英寸 M7坦克炮", reload: 5.5, vision: 1.6, blast: 7, vehicleType: "medium_armour" },
+      { faction: "美军", hp: 17.5, speed: 7, acceleration: 12, turret: 2.86, threshold: 1.02, reduction: 0.9, name: "谢尔曼中型坦克", weapon: "75mm M3坦克炮", reload: 5.5, vision: 1, blast: 4.7, vehicleType: "medium_armour" },
+      { faction: "美军", hp: 20, speed: 70, acceleration: 7, turret: 5.73, threshold: 0, reduction: 0.9, name: "鱼雷艇", weapon: "40mm 博福斯机炮", reload: null, vision: 1.8, blast: 2.5, vehicleType: "未定义" },
+      { faction: "日军", hp: 2.4, speed: 22, acceleration: 6.5, turret: null, threshold: 0, reduction: 0.5, name: "九五式小型乘用车", weapon: "—", reload: null, vision: 1, blast: null, vehicleType: "light_vehicle" },
+      { faction: "日军", hp: 4.8, speed: 18, acceleration: 6, turret: null, threshold: 0, reduction: 0.5, name: "四式两栖军械车", weapon: "—", reload: null, vision: 1, blast: null, vehicleType: "light_vehicle" },
+      { faction: "日军", hp: 12, speed: 11, acceleration: 10, turret: 8.31, threshold: 0, reduction: 0.9, name: "九五式轻战车", weapon: "37mm 九四式坦克炮", reload: 3.25, vision: 1, blast: 3, vehicleType: "light_armour" },
+      { faction: "日军", hp: 14.5, speed: 7, acceleration: 12, turret: 2.86, threshold: 1.02, reduction: 0.9, name: "九七式中战车改", weapon: "47mm 一式坦克炮", reload: 4.25, vision: 1, blast: 4.45, vehicleType: "medium_armour" },
+      { faction: "日军", hp: 17.5, speed: 6, acceleration: 8.5, turret: 11.46, threshold: 1.02, reduction: 0.9, name: "特四式内火艇", weapon: "13mm 九三式机关炮", reload: null, vision: 1, blast: 1.01, vehicleType: "light_vehicle" },
+      { faction: "日军", hp: 10, speed: 9, acceleration: 9, turret: 17.19, threshold: 0, reduction: 0.9, name: "一式半履带装甲车", weapon: "九七式车载机枪", reload: null, vision: 1.3, blast: null, vehicleType: "light_vehicle" },
+      { faction: "日军", hp: 28, speed: 60, acceleration: 6, turret: 5.73, threshold: 0, reduction: 0.9, name: "装甲艇", weapon: "57mm 九〇式火炮", reload: 2.25, vision: 1.5, blast: 4, vehicleType: "未定义" }
+    ];
+
+    const rowsEl = document.getElementById("vehicleRows");
+    const searchInput = document.getElementById("searchInput");
+    const compareBtn = document.getElementById("compareBtn");
+    const confirmCompareBtn = document.getElementById("confirmCompareBtn");
+    const compareHint = document.getElementById("compareHint");
+    const modal = document.getElementById("compareModal");
+    const closeModal = document.getElementById("closeModal");
+    const compareCards = document.getElementById("compareCards");
+    const compareMetrics = document.getElementById("compareMetrics");
+    const detailModal = document.getElementById("detailModal");
+    const closeDetailModal = document.getElementById("closeDetailModal");
+    const detailTitle = document.getElementById("detailTitle");
+    const detailHero = document.getElementById("detailHero");
+    const detailRows = document.getElementById("detailRows");
+    const targetModeBtn = document.getElementById("targetModeBtn");
+    const targetHint = document.getElementById("targetHint");
+    const targetModal = document.getElementById("targetModal");
+    const closeTargetModal = document.getElementById("closeTargetModal");
+    const targetTitle = document.getElementById("targetTitle");
+    const targetStage = document.getElementById("targetStage");
+    const targetTank = document.getElementById("targetTank");
+    const targetTankLabel = document.getElementById("targetTankLabel");
+    const threatButtons = document.getElementById("threatButtons");
+    const priorityList = document.getElementById("priorityList");
+    const toast = document.getElementById("toast");
+    let compareMode = false;
+    let targetMode = false;
+    let selectedIndices = [];
+    let currentList = vehicles;
+    let filteredList = vehicles;
+    let sortState = { key: null, direction: null };
+    let scoreFrame = null;
+    let pendingScoreUpdate = false;
+    let currentTopThreatTag = null;
+    const antiTankWeapons = [
+      { label: "反坦克枪榴弹", file: "kar98k_rifle_grenade_at.weapon", blast: 2.3 },
+      { label: "巴祖卡火箭筒", file: "m1_bazooka.weapon", blast: 4.4 },
+      { label: "M18无后座力炮", file: "m18_recoilless_rifle.weapon", blast: 4.4 },
+      { label: "四式火箭筒", file: "type4_rocket_launcher.weapon", blast: 4.4 },
+      { label: "铁拳发射器", file: "panzerfaust.weapon", blast: 5.4 },
+      { label: "PIAT发射器", file: "piat.weapon", blast: 5.4 },
+      { label: "M1巴祖卡火箭筒", file: "m9a1_bazooka.weapon", blast: 4.7 },
+      { label: "坦克杀手火箭筒", file: "panzerschreck.weapon", blast: 4.7 },
+      { label: "固定式火炮", file: "at_gun.projectile", blast: 6.4 },
+      { label: "固定式重型迫击炮", file: "heavy_mortar_shell.projectile", blast: 3.9 },
+      { label: "堡垒化炮塔火炮", file: "at_gun_fortified_turret_cannon.projectile", blast: 4.7 },
+      { label: "堡垒化炮塔迫击炮", file: "at_gun_fortified_turret_grenade_launcher.projectile", blast: 1.0 },
+      { label: "轻型迫击炮", file: "mortar_shell.projectile", blast: 1.9 },
+      { label: "航空火箭弹", file: "air_strike_rocket.projectile", blast: 4.4 },
+      { label: "航空炸弹", file: "air_strike_bomb.projectile", blast: 8.0 },
+      { label: "轻型舰炮", file: "artillery_shell.projectile", blast: 2.4 },
+      { label: "喷烟者火箭炮", file: "rocket_mortar.projectile", blast: 6.9 },
+      { label: "重型舰炮", file: "naval_artillery_shell.projectile", blast: 8.9 }
+    ];
+    const threatNames = {
+      "light_vehicle": "轻型载具",
+      "ligh_vehicle": "轻型载具",
+      "light_armour": "轻型装甲",
+      "medium_armour": "中型装甲",
+      "heavy_armour": "重型装甲",
+      "at_gun": "反坦克炮",
+      "light_at_gun": "防空炮",
+      "defensive_weapon": "架设武器",
+      "bazooka": "反坦克兵",
+      "": "其他",
+      "未定义": "未定义"
+    };
+    const threatShortNames = {
+      "light_vehicle": "轻载",
+      "light_armour": "轻甲",
+      "medium_armour": "中甲",
+      "heavy_armour": "重甲",
+      "at_gun": "AT炮",
+      "light_at_gun": "防空",
+      "defensive_weapon": "架设",
+      "bazooka": "AT兵",
+      "": "其他"
+    };
+    const threatColors = {
+      "light_vehicle": "#57b8ff",
+      "light_armour": "#4fc3a1",
+      "medium_armour": "#7c83ff",
+      "heavy_armour": "#6b7a90",
+      "at_gun": "#2f80ed",
+      "light_at_gun": "#58a6a6",
+      "defensive_weapon": "#8d7bd4",
+      "bazooka": "#138a72",
+      "": "#7d8a94"
+    };
+    const mediumCannonThreats = [["",1,0,1,0.5],["heavy_armour",1,0,1,3],["medium_armour",1,0,1,6],["light_armour",1,0,1,5.5],["at_gun",1,0,1,5.5],["light_at_gun",1,0,1,4],["bazooka",1,0,1,3.5],["light_vehicle",1,0,1,2.5],["defensive_weapon",1,0,1,2]];
+    const tankDestroyerThreats = [["",1,0,1,0.5],["heavy_armour",1,0,1,8],["medium_armour",1,0,1,6],["light_armour",1,0,1,5],["at_gun",1,0,1,5.5],["light_at_gun",1,0,1,4],["bazooka",1,0,1,3.5],["light_vehicle",1,0,1,2.5],["defensive_weapon",1,0,1,2]];
+    const heavyCannonThreats = [["",1,0,1,0.5],["heavy_armour",1,0,1,10],["medium_armour",1,0,1,7],["light_armour",1,0,1,5.5],["at_gun",1,0,1,7.5],["light_at_gun",1,0,1,4],["bazooka",1,0,1,3.5],["light_vehicle",1,0,1,2.5],["defensive_weapon",1,0,1,2]];
+    const lightCannonThreats = [["",1,0,1,0.5],["heavy_armour",1,0,1,1],["medium_armour",1,0,1,3],["light_armour",1,0,1,6],["at_gun",1,0,1,5.5],["light_at_gun",1,0,1,4],["bazooka",1,0,1,3.5],["light_vehicle",1,0,1,2.5],["defensive_weapon",1,0,1,2]];
+    const autoCannonThreats = [["",1,0,1,0.5],["heavy_armour",1,0,1,0],["medium_armour",1,0,1,0],["light_armour",1,0,1,8],["light_vehicle",1,0,1,6]];
+    const recoillessThreats = [["",1,0,1,0.5],["heavy_armour",1,0,1,5],["medium_armour",1,0,1,6],["light_armour",1,0,1,6],["at_gun",1,0,1,2],["light_at_gun",1,0,1,2],["light_vehicle",1,0,1,4],["defensive_weapon",1,0,1,2]];
+    const mgThreats = [["",1,0,1,0.5],["bazooka",1,0,1,2]];
+    let targetVehicle = null;
+    let activeThreats = new Map();
+    let dragThreat = null;
+
+    function factors(rows) {
+      return rows.map(([tag, distance, direction, squadCommand, baseScore]) => ({ tag, distance, direction, squadCommand: 0, baseScore }));
+    }
+
+    function fmt(value) {
+      if (value === null || value === undefined) return "—";
+      return Number.isInteger(value) ? String(value) : String(Number(value.toFixed(2)));
+    }
+
+    function factionClass(faction) {
+      if (faction === "德军") return "de";
+      if (faction === "美军") return "us";
+      if (faction === "日军") return "jp";
+      if (faction === "英军") return "uk";
+      return "";
+    }
+
+    function factionBadge(vehicle) {
+      return `<span class="faction ${factionClass(vehicle.faction)}">${vehicle.faction}</span>`;
+    }
+
+    function isUnarmedVehicle(vehicle) {
+      return !vehicle.weapon || vehicle.weapon === "—";
+    }
+
+    function vehicleTypeLabel(type) {
+      return threatNames[type] || type || "未定义";
+    }
+
+    function getFilteredList() {
+      const keyword = searchInput.value.trim().toLowerCase();
+      return vehicles.filter((vehicle) => {
+        return [vehicle.faction, vehicle.name, vehicle.weapon].some((value) => {
+          return value.toLowerCase().includes(keyword);
+        });
+      });
+    }
+
+    function getSortedList(list) {
+      if (!sortState.key || !sortState.direction) return list.slice();
+      const multiplier = sortState.direction === "desc" ? -1 : 1;
+      return list.slice().sort((a, b) => {
+        const left = a[sortState.key];
+        const right = b[sortState.key];
+        const leftMissing = left === null || left === undefined;
+        const rightMissing = right === null || right === undefined;
+        if (leftMissing && rightMissing) return vehicles.indexOf(a) - vehicles.indexOf(b);
+        if (leftMissing) return 1;
+        if (rightMissing) return -1;
+        if (left === right) return vehicles.indexOf(a) - vehicles.indexOf(b);
+        return (left - right) * multiplier;
+      });
+    }
+
+    function updateSortHeaders() {
+      document.querySelectorAll("th.sortable").forEach((header) => {
+        const indicator = header.querySelector(".sort-indicator");
+        const active = header.dataset.sort === sortState.key && sortState.direction;
+        header.classList.toggle("sorted", Boolean(active));
+        indicator.textContent = active ? (sortState.direction === "desc" ? "↓" : "↑") : "";
+      });
+    }
+
+    function applyView() {
+      filteredList = getFilteredList();
+      renderTable(getSortedList(filteredList));
+      updateSortHeaders();
+    }
+
+    function renderTable(list) {
+      currentList = list;
+      rowsEl.innerHTML = list.map((vehicle) => {
+        const index = vehicles.indexOf(vehicle);
+        const rowClasses = [];
+        if (selectedIndices.includes(index)) rowClasses.push("selected");
+        if (targetMode && isUnarmedVehicle(vehicle)) rowClasses.push("no-target-weapon");
+        const classAttr = rowClasses.length ? ` class="${rowClasses.join(" ")}"` : "";
+        return `
+        <tr data-index="${index}"${classAttr}>
+          <td>${factionBadge(vehicle)}</td>
+          <td>${vehicle.name}</td>
+          <td class="num">${fmt(vehicle.hp)}</td>
+          <td class="num">${fmt(vehicle.speed)}</td>
+          <td class="num">${fmt(vehicle.acceleration)}</td>
+          <td class="num">${fmt(vehicle.turret)}</td>
+          <td class="num">${fmt(vehicle.threshold)}</td>
+          <td class="num">${fmt(vehicle.reduction)}</td>
+          <td>${vehicle.weapon}</td>
+          <td class="num">${fmt(vehicle.reload)}</td>
+          <td class="num">${fmt(vehicle.vision)}</td>
+          <td class="num">${fmt(vehicle.blast)}</td>
+        </tr>
+      `;
+      }).join("");
+    }
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add("show");
+      window.clearTimeout(showToast.timer);
+      showToast.timer = window.setTimeout(() => toast.classList.remove("show"), 1800);
+    }
+
+    function compareArrow(left, right) {
+      if (left > right) return { left: "↑", right: "↓", leftClass: "up", rightClass: "down" };
+      if (left < right) return { left: "↓", right: "↑", leftClass: "down", rightClass: "up" };
+      return { left: "=", right: "=", leftClass: "", rightClass: "" };
+    }
+
+    function compareArrowLowerBetter(left, right) {
+      if (left < right) return { left: "↑", right: "↓", leftClass: "up", rightClass: "down" };
+      if (left > right) return { left: "↓", right: "↑", leftClass: "down", rightClass: "up" };
+      return { left: "=", right: "=", leftClass: "", rightClass: "" };
+    }
+
+    function compareArrowLowerWorse(left, right) {
+      if (left < right) return { left: "↓", right: "↑", leftClass: "down", rightClass: "up" };
+      if (left > right) return { left: "↑", right: "↓", leftClass: "up", rightClass: "down" };
+      return { left: "=", right: "=", leftClass: "", rightClass: "" };
+    }
+
+    function setCompareMode(enabled) {
+      if (enabled && targetMode) setTargetMode(false);
+      compareMode = enabled;
+      selectedIndices = [];
+      document.body.classList.toggle("compare-mode", enabled);
+      compareBtn.textContent = enabled ? "取消" : "比较";
+      compareBtn.classList.toggle("danger", enabled);
+      targetModeBtn.disabled = enabled;
+      confirmCompareBtn.classList.remove("show");
+      compareHint.textContent = enabled ? "点选两个载具进行比较" : "在列表中选两个载具进行对比";
+      applyView();
+    }
+
+    function updateConfirmState() {
+      confirmCompareBtn.classList.toggle("show", selectedIndices.length === 2);
+      compareHint.textContent = compareMode
+        ? `已选择 ${selectedIndices.length}/2 个载具${selectedIndices.length === 2 ? "，是否确认比较" : "。"}`
+        : "在列表中选两个载具进行对比";
+    }
+
+    function toggleRowSelection(index) {
+      if (!compareMode) return;
+
+      if (selectedIndices.includes(index)) {
+        selectedIndices = selectedIndices.filter((item) => item !== index);
+      } else {
+        if (selectedIndices.length >= 2) selectedIndices.shift();
+        selectedIndices.push(index);
+      }
+
+      applyView();
+      updateConfirmState();
+    }
+
+    function hitResult(attacker, defender) {
+      if (attacker.blast <= defender.threshold) {
+        return { valid: false, label: '<span class="bad-word">太硬了</span>' };
+      }
+
+      const realDamage = attacker.blast - defender.reduction;
+      if (realDamage <= 0) {
+        return { valid: false, label: '<span class="bad-word">太硬了</span>' };
+      }
+
+      return {
+        valid: true,
+        realDamage,
+        percent: (realDamage / defender.hp) * 100,
+        shots: Math.ceil(defender.hp / realDamage)
+      };
+    }
+
+    function weaponHitResult(blastDamage, defender) {
+      if (blastDamage <= defender.threshold) {
+        return { valid: false, label: '<span class="bad-word">太硬了</span>' };
+      }
+
+      const realDamage = blastDamage - defender.reduction;
+      if (realDamage <= 0) {
+        return { valid: false, label: '<span class="bad-word">太硬了</span>' };
+      }
+
+      return {
+        valid: true,
+        realDamage,
+        percent: (realDamage / defender.hp) * 100,
+        shots: Math.ceil(defender.hp / realDamage)
+      };
+    }
+
+    function buildCompareRows(a, b, aHitsB, bHitsA) {
+      const percentValue = (hit) => hit.valid ? hit.percent : -Infinity;
+      const shotsValue = (hit) => hit.valid ? hit.shots : -Infinity;
+      const reloadComparable = a.reload !== null && b.reload !== null;
+      const duelComparable = aHitsB.valid && bHitsA.valid;
+      const rows = [
+        { type: "group", label: "基础信息" },
+        { label: "生命值", leftDisplay: fmt(a.hp), leftCompare: a.hp, rightDisplay: fmt(b.hp), rightCompare: b.hp },
+        { label: "最大速度", leftDisplay: fmt(a.speed), leftCompare: a.speed, rightDisplay: fmt(b.speed), rightCompare: b.speed },
+        { label: "加速度", leftDisplay: fmt(a.acceleration), leftCompare: a.acceleration, rightDisplay: fmt(b.acceleration), rightCompare: b.acceleration },
+        { label: "炮塔转速", leftDisplay: fmt(a.turret), leftCompare: a.turret, rightDisplay: fmt(b.turret), rightCompare: b.turret, comparable: a.turret !== null && b.turret !== null },
+        { label: "受击门槛", leftDisplay: fmt(a.threshold), leftCompare: a.threshold, rightDisplay: fmt(b.threshold), rightCompare: b.threshold },
+        { label: "爆炸减伤", leftDisplay: fmt(a.reduction), leftCompare: a.reduction, rightDisplay: fmt(b.reduction), rightCompare: b.reduction },
+        { label: "装填速度", leftDisplay: fmt(a.reload), leftCompare: a.reload, rightDisplay: fmt(b.reload), rightCompare: b.reload, comparable: reloadComparable, lowerBetter: true },
+        { label: "玩家视野修正", leftDisplay: fmt(a.vision), leftCompare: a.vision, rightDisplay: fmt(b.vision), rightCompare: b.vision },
+        { label: "爆炸伤害", leftDisplay: fmt(a.blast), leftCompare: a.blast, rightDisplay: fmt(b.blast), rightCompare: b.blast, comparable: a.blast !== null && b.blast !== null },
+        { type: "group", label: "互摧毁性" },
+        {
+          label: "单次射击给对方的伤害",
+          leftDisplay: aHitsB.valid ? `${fmt(aHitsB.percent)}%` : '<span class="bad-word">太硬了</span>',
+          leftCompare: percentValue(aHitsB),
+          rightDisplay: bHitsA.valid ? `${fmt(bHitsA.percent)}%` : '<span class="bad-word">太硬了</span>',
+          rightCompare: percentValue(bHitsA),
+          comparable: duelComparable
+        },
+        {
+          label: "摧毁对方需要的射击数",
+          leftDisplay: aHitsB.valid ? `${aHitsB.shots} 发` : '<span class="bad-word">太硬了</span>',
+          leftCompare: shotsValue(aHitsB),
+          rightDisplay: bHitsA.valid ? `${bHitsA.shots} 发` : '<span class="bad-word">太硬了</span>',
+          rightCompare: shotsValue(bHitsA),
+          comparable: duelComparable,
+          lowerBetter: true
+        },
+        { type: "group", label: "伤害抗性" }
+      ];
+
+      antiTankWeapons.forEach((weapon) => {
+        const leftResult = weaponHitResult(weapon.blast, a);
+        const rightResult = weaponHitResult(weapon.blast, b);
+        const comparable = leftResult.valid && rightResult.valid;
+        rows.push({
+          label: weapon.label,
+          subtitle: "需射击多少发摧毁",
+          leftDisplay: leftResult.valid ? String(leftResult.shots) : leftResult.label,
+          leftCompare: leftResult.valid ? leftResult.shots : Infinity,
+          rightDisplay: rightResult.valid ? String(rightResult.shots) : rightResult.label,
+          rightCompare: rightResult.valid ? rightResult.shots : Infinity,
+          comparable,
+          lowerWorse: true
+        });
+      });
+
+      return rows;
+    }
+
+    function sideMetricRows(rows, side) {
+      return rows.map((row) => {
+        if (row.type === "group") {
+          return `<div class="group-spacer"></div>`;
+        }
+
+        const comparable = row.comparable !== false;
+        const arrow = comparable
+          ? (row.lowerWorse ? compareArrowLowerWorse(row.leftCompare, row.rightCompare) : (row.lowerBetter ? compareArrowLowerBetter(row.leftCompare, row.rightCompare) : compareArrow(row.leftCompare, row.rightCompare)))
+          : { left: "", right: "", leftClass: "hidden", rightClass: "hidden" };
+        const symbol = comparable ? (side === "left" ? arrow.left : arrow.right) : "";
+        const symbolClass = comparable ? (side === "left" ? arrow.leftClass : arrow.rightClass) : "hidden";
+        const display = side === "left" ? row.leftDisplay : row.rightDisplay;
+        return `
+          <div class="side-value ${side}" data-label="${row.label}">
+            <span class="value-text">${display}</span>
+            <span class="arrow ${symbolClass}">${symbol}</span>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function metricLabels(rows) {
+      return rows.map((row) => {
+        if (row.type === "group") {
+          return `<div class="group-label">${row.label}</div>`;
+        }
+
+        if (row.subtitle) {
+          return `
+            <div class="metric-label">
+              <div>
+                <div class="metric-title">${row.label}</div>
+                <div class="metric-subtitle">${row.subtitle}</div>
+              </div>
+            </div>
+          `;
+        }
+
+        return `<div class="metric-label">${row.label}</div>`;
+      }).join("");
+    }
+
+    function detailBaseRows(vehicle) {
+      return [
+        { name: "生命值", value: fmt(vehicle.hp) },
+        { name: "最大速度", value: fmt(vehicle.speed) },
+        { name: "加速度", value: fmt(vehicle.acceleration) },
+        { name: "炮塔转速", value: fmt(vehicle.turret) },
+        { name: "受击门槛", value: fmt(vehicle.threshold) },
+        { name: "爆炸减伤", value: fmt(vehicle.reduction) },
+        { name: "武器名", value: vehicle.weapon },
+        { name: "装填速度", value: fmt(vehicle.reload) },
+        { name: "玩家视野修正", value: fmt(vehicle.vision) },
+        { name: "爆炸伤害", value: fmt(vehicle.blast) },
+        { name: "载具类型", value: vehicleTypeLabel(vehicle.vehicleType) }
+      ];
+    }
+
+    function detailAntiTankRows(vehicle) {
+      return antiTankWeapons.map((weapon) => {
+        const result = weaponHitResult(weapon.blast, vehicle);
+        return {
+          at: true,
+          name: weapon.label,
+          percent: result.valid ? `${fmt(result.percent)}%` : result.label,
+          shots: result.valid ? `${result.shots}` : result.label
+        };
+      });
+    }
+
+    function repairRows(vehicle) {
+      const repairPercent = (amount) => `${fmt((amount / vehicle.hp) * 100)}%`;
+      return [
+        { name: "小扳手单次维修量", value: repairPercent(1.5) },
+        { name: "大扳手单次维修量", value: repairPercent(2.0) },
+        { name: "维修坦克单次维修量", value: repairPercent(0.5) }
+      ];
+    }
+
+    function renderDetailRow(row) {
+      if (row.at) {
+        return `
+          <div class="detail-row at-row">
+            <div class="detail-name">
+              <div>
+                <div class="detail-at-title">${row.name}</div>
+                <div class="detail-at-subtitle">单发命中伤害百分比 / 摧毁需多少发</div>
+              </div>
+            </div>
+            <div class="detail-value detail-percent">${row.percent}</div>
+            <div class="detail-value">${row.shots}</div>
+          </div>
+        `;
+      }
+
+      return `
+        <div class="detail-row">
+          <div class="detail-name">${row.name}</div>
+          <div class="detail-value">${row.value}</div>
+        </div>
+      `;
+    }
+
+    function renderDetailSection(title, rows) {
+      return `
+        <section class="detail-section">
+          <div class="detail-section-title">${title}</div>
+          ${rows.map(renderDetailRow).join("")}
+        </section>
+      `;
+    }
+
+    function openDetail(index) {
+      const vehicle = vehicles[index];
+      detailTitle.textContent = `载具详细参数`;
+      detailHero.innerHTML = `
+        ${factionBadge(vehicle)}
+        <h3>${vehicle.name}</h3>
+      `;
+      detailRows.innerHTML = [
+        renderDetailSection("基本信息", detailBaseRows(vehicle)),
+        renderDetailSection("可维修性", repairRows(vehicle)),
+        renderDetailSection("伤害抗性", detailAntiTankRows(vehicle))
+      ].join("");
+      detailModal.classList.add("open");
+      detailModal.querySelector(".dialog").scrollTop = 0;
+    }
+
+    function getThreatFactors(vehicle) {
+      const weapon = vehicle.weapon || "";
+      if (weapon === "—") return factors(mgThreats);
+      if (weapon.includes("重机枪") || weapon.includes("机枪") || weapon.includes("喷火器")) return factors(mgThreats);
+      if (weapon.includes("20mm") || weapon.includes("40mm") || weapon.includes("13mm")) return factors(autoCannonThreats);
+      if (weapon.includes("无后坐力")) return factors(recoillessThreats);
+      if (weapon.includes("88mm") || weapon.includes("128mm")) return factors(heavyCannonThreats);
+      if (weapon.includes("17磅") || weapon.includes("3英寸") || vehicle.name.includes("狼獾") || vehicle.name.includes("TOG")) return factors(tankDestroyerThreats);
+      if (weapon.includes("37mm") || weapon.includes("57mm")) return factors(lightCannonThreats);
+      return factors(mediumCannonThreats);
+    }
+
+    function setTargetMode(enabled) {
+      targetMode = enabled;
+      if (enabled && compareMode) setCompareMode(false);
+      document.body.classList.toggle("target-mode", enabled);
+      targetModeBtn.textContent = enabled ? "取消" : "载具索敌优选";
+      targetModeBtn.classList.toggle("danger", enabled);
+      compareBtn.disabled = enabled;
+      targetHint.textContent = enabled ? "点选一个载具查看索敌优先级" : "查看载具索敌的优先级";
+      applyView();
+    }
+
+    function openTargetOptimizer(index) {
+      targetVehicle = vehicles[index];
+      activeThreats = new Map();
+      currentTopThreatTag = null;
+      targetTitle.textContent = `${targetVehicle.name} 载具索敌优选`;
+      targetTankLabel.textContent = targetVehicle.name;
+      fitTargetTankLabel(targetVehicle.name);
+      targetStage.querySelectorAll(".threat-token").forEach((node) => node.remove());
+      renderThreatButtons();
+      priorityList.innerHTML = "";
+      targetModal.classList.add("open");
+      setTargetMode(false);
+    }
+
+    function fitTargetTankLabel(name) {
+      const bodyWidth = Math.min(240, Math.max(116, Array.from(name).length * 14 + 24));
+      targetTank.style.setProperty("--tank-body-width", `${bodyWidth}px`);
+      targetTankLabel.style.fontSize = bodyWidth > 170 ? "12px" : "13px";
+    }
+
+    function renderThreatButtons() {
+      const rows = getThreatFactors(targetVehicle);
+      threatButtons.innerHTML = rows.map((row) => {
+        const name = threatNames[row.tag] || row.tag;
+        return `<button class="threat-button" data-tag="${row.tag}">${name}</button>`;
+      }).join("");
+    }
+
+    function toggleThreat(tag) {
+      if (activeThreats.has(tag)) {
+        activeThreats.get(tag).el.remove();
+        activeThreats.delete(tag);
+      } else {
+        const factor = getThreatFactors(targetVehicle).find((item) => item.tag === tag);
+        const pos = { x: 24 + activeThreats.size * 68, y: 24 };
+        const el = document.createElement("div");
+        el.className = "threat-token";
+        el.dataset.tag = tag;
+        el.style.background = threatColors[tag] || threatColors[""];
+        el.textContent = threatShortNames[tag] || tag;
+        targetStage.appendChild(el);
+        const item = { tag, factor, x: pos.x, y: pos.y, el, score: 0 };
+        activeThreats.set(tag, item);
+        placeThreat(item, pos.x, pos.y);
+      }
+      syncThreatButtons();
+      scheduleThreatScores();
+    }
+
+    function syncThreatButtons() {
+      threatButtons.querySelectorAll(".threat-button").forEach((button) => {
+        button.classList.toggle("active", activeThreats.has(button.dataset.tag));
+      });
+    }
+
+    function tankRectInStage() {
+      const stageRect = targetStage.getBoundingClientRect();
+      const tankRect = targetTank.getBoundingClientRect();
+      return { left: tankRect.left - stageRect.left, top: tankRect.top - stageRect.top, right: tankRect.right - stageRect.left, bottom: tankRect.bottom - stageRect.top };
+    }
+
+    function barrelRectInStage() {
+      const tank = tankRectInStage();
+      const bodyWidth = targetTank.getBoundingClientRect().width;
+      return {
+        left: tank.left + bodyWidth - 24,
+        top: tank.top + 25,
+        right: tank.left + bodyWidth + 58,
+        bottom: tank.top + 37
+      };
+    }
+
+    function blockedTankRectInStage() {
+      const tank = tankRectInStage();
+      const barrel = barrelRectInStage();
+      return {
+        left: Math.min(tank.left, barrel.left),
+        top: Math.min(tank.top, barrel.top),
+        right: Math.max(tank.right, barrel.right),
+        bottom: Math.max(tank.bottom, barrel.bottom)
+      };
+    }
+
+    function overlapsRect(x, y, size, rect) {
+      return x < rect.right && x + size > rect.left && y < rect.bottom && y + size > rect.top;
+    }
+
+    function overlapsTank(x, y, size = 54) {
+      return overlapsRect(x, y, size, tankRectInStage()) || overlapsRect(x, y, size, barrelRectInStage());
+    }
+
+    function overlapsThreats(x, y, size = 54, ignoredItem = null) {
+      const gap = 8;
+      const centerX = x + size / 2;
+      const centerY = y + size / 2;
+      return Array.from(activeThreats.values()).some((item) => {
+        if (item === ignoredItem) return false;
+        const otherCenterX = item.x + size / 2;
+        const otherCenterY = item.y + size / 2;
+        return Math.hypot(centerX - otherCenterX, centerY - otherCenterY) < size + gap;
+      });
+    }
+
+    function isThreatPositionClear(x, y, size, item) {
+      return !overlapsTank(x, y, size) && !overlapsThreats(x, y, size, item);
+    }
+
+    function placeThreat(item, x, y) {
+      const stageRect = targetStage.getBoundingClientRect();
+      const size = 54;
+      const padding = 8;
+      const step = size + 8;
+      const clampX = (value) => Math.max(padding, Math.min(value, stageRect.width - size - padding));
+      const clampY = (value) => Math.max(padding, Math.min(value, stageRect.height - size - padding));
+      const baseX = clampX(x);
+      const baseY = clampY(y);
+      let nextX = baseX;
+      let nextY = baseY;
+
+      if (!isThreatPositionClear(nextX, nextY, size, item)) {
+        const tank = blockedTankRectInStage();
+        const centerX = baseX + size / 2;
+        const centerY = baseY + size / 2;
+        const candidates = [
+          { x: centerX < (tank.left + tank.right) / 2 ? tank.left - size - 10 : tank.right + 10, y: baseY },
+          { x: baseX, y: centerY < (tank.top + tank.bottom) / 2 ? tank.top - size - 10 : tank.bottom + 10 },
+          { x: tank.left - size - 10, y: tank.top - size - 10 },
+          { x: tank.left - size - 10, y: tank.bottom + 10 },
+          { x: tank.right + 10, y: tank.top - size - 10 },
+          { x: tank.right + 10, y: tank.bottom + 10 }
+        ];
+
+        activeThreats.forEach((other) => {
+          if (other === item) return;
+          candidates.push(
+            { x: other.x - step, y: other.y },
+            { x: other.x + step, y: other.y },
+            { x: other.x, y: other.y - step },
+            { x: other.x, y: other.y + step },
+            { x: other.x - step, y: other.y - step },
+            { x: other.x + step, y: other.y - step },
+            { x: other.x - step, y: other.y + step },
+            { x: other.x + step, y: other.y + step }
+          );
+        });
+
+        for (let ring = 1; ring <= 8; ring += 1) {
+          const radius = ring * step;
+          for (let dx = -radius; dx <= radius; dx += step) {
+            candidates.push({ x: baseX + dx, y: baseY - radius });
+            candidates.push({ x: baseX + dx, y: baseY + radius });
+          }
+          for (let dy = -radius + step; dy <= radius - step; dy += step) {
+            candidates.push({ x: baseX - radius, y: baseY + dy });
+            candidates.push({ x: baseX + radius, y: baseY + dy });
+          }
+        }
+
+        const clearCandidate = candidates
+          .map((candidate) => ({ x: clampX(candidate.x), y: clampY(candidate.y) }))
+          .filter((candidate, index, list) => list.findIndex((item) => item.x === candidate.x && item.y === candidate.y) === index)
+          .filter((candidate) => isThreatPositionClear(candidate.x, candidate.y, size, item))
+          .sort((a, b) => Math.hypot(a.x - baseX, a.y - baseY) - Math.hypot(b.x - baseX, b.y - baseY))[0];
+
+        if (clearCandidate) {
+          nextX = clearCandidate.x;
+          nextY = clearCandidate.y;
+        } else if (isThreatPositionClear(item.x, item.y, size, item)) {
+          nextX = item.x;
+          nextY = item.y;
+        }
+      }
+      item.x = nextX;
+      item.y = nextY;
+      item.el.style.transform = `translate3d(${nextX}px, ${nextY}px, 0)`;
+    }
+
+    function threatScore(item) {
+      const stageRect = targetStage.getBoundingClientRect();
+      const barrel = barrelRectInStage();
+      const barrelBase = { x: barrel.left, y: (barrel.top + barrel.bottom) / 2 };
+      const barrelTip = { x: barrel.right, y: (barrel.top + barrel.bottom) / 2 };
+      const threatCenter = { x: item.x + 27, y: item.y + 27 };
+      const distance = Math.hypot(threatCenter.x - barrelTip.x, threatCenter.y - barrelTip.y);
+      const maxDistance = Math.max(
+        Math.hypot(barrelTip.x, barrelTip.y),
+        Math.hypot(stageRect.width - barrelTip.x, barrelTip.y),
+        Math.hypot(barrelTip.x, stageRect.height - barrelTip.y),
+        Math.hypot(stageRect.width - barrelTip.x, stageRect.height - barrelTip.y)
+      ) || 1;
+      const distanceFactor = Math.max(0, 1 - distance / maxDistance);
+      const barrelVector = { x: barrelTip.x - barrelBase.x, y: barrelTip.y - barrelBase.y };
+      const targetVector = { x: threatCenter.x - barrelBase.x, y: threatCenter.y - barrelBase.y };
+      const barrelLength = Math.hypot(barrelVector.x, barrelVector.y) || 1;
+      const targetLength = Math.hypot(targetVector.x, targetVector.y) || 1;
+      const directionFactor = Math.max(0, (barrelVector.x * targetVector.x + barrelVector.y * targetVector.y) / (barrelLength * targetLength));
+      return item.factor.baseScore
+        + item.factor.distance * distanceFactor
+        + item.factor.direction * directionFactor
+        + item.factor.squadCommand * 0;
+    }
+
+    function updateThreatScores() {
+      const items = Array.from(activeThreats.values());
+      items.forEach((item) => item.score = threatScore(item));
+      items.sort((a, b) => b.score - a.score);
+      const topTag = getStableTopThreatTag(items);
+      activeThreats.forEach((item) => item.el.classList.toggle("top-threat", item.tag === topTag));
+      renderPriorityList(items, topTag, !dragThreat);
+    }
+
+    function getStableTopThreatTag(items) {
+      if (!items.length) {
+        currentTopThreatTag = null;
+        return null;
+      }
+
+      const best = items[0];
+      const currentTop = items.find((item) => item.tag === currentTopThreatTag);
+      if (!currentTop) {
+        currentTopThreatTag = best.tag;
+        return currentTopThreatTag;
+      }
+
+      if (best.tag !== currentTop.tag && best.score - currentTop.score > 0.08) {
+        currentTopThreatTag = best.tag;
+      }
+      return currentTopThreatTag;
+    }
+
+    function scheduleThreatScores() {
+      pendingScoreUpdate = true;
+      if (scoreFrame) return;
+      scoreFrame = window.requestAnimationFrame(() => {
+        scoreFrame = null;
+        if (!pendingScoreUpdate) return;
+        pendingScoreUpdate = false;
+        updateThreatScores();
+      });
+    }
+
+    function renderPriorityList(items, topTag, allowReorder = true) {
+      items.forEach((item, index) => {
+        let node = Array.from(priorityList.querySelectorAll(".priority-item")).find((itemNode) => itemNode.dataset.tag === item.tag);
+        if (!node) {
+          node = document.createElement("div");
+          node.className = "priority-item";
+          node.dataset.tag = item.tag;
+          node.innerHTML = `
+            <div class="priority-rank"></div>
+            <div class="priority-name"></div>
+            <div class="priority-score"></div>
+          `;
+        }
+
+        node.classList.toggle("top", item.tag === topTag);
+        node.querySelector(".priority-name").textContent = threatNames[item.tag] || item.tag;
+        node.querySelector(".priority-score").textContent = fmt(item.score);
+        if (allowReorder && priorityList.children[index] !== node) {
+          priorityList.insertBefore(node, priorityList.children[index] || null);
+        } else if (!node.parentNode) {
+          priorityList.appendChild(node);
+        }
+      });
+
+      priorityList.querySelectorAll(".priority-item").forEach((node) => {
+        if (!activeThreats.has(node.dataset.tag)) node.remove();
+      });
+
+      Array.from(priorityList.children).forEach((node, index) => {
+        node.querySelector(".priority-rank").textContent = index + 1;
+      });
+    }
+
+    function openComparison(indexA, indexB) {
+      if (indexA === undefined || indexB === undefined) {
+        showToast("需要先选择两个载具");
+        return;
+      }
+
+      if (indexA === indexB) {
+        showToast("请选择两个不同的载具");
+        return;
+      }
+
+      const a = vehicles[indexA];
+      const b = vehicles[indexB];
+      const aHitsB = hitResult(a, b);
+      const bHitsA = hitResult(b, a);
+      const rows = buildCompareRows(a, b, aHitsB, bHitsA);
+
+      compareCards.innerHTML = `
+        <section class="vehicle-card">
+          <div class="vehicle-head">
+            ${factionBadge(a)}
+            <h3>${a.name}</h3>
+            <div class="weapon">${a.weapon}</div>
+          </div>
+          <div class="side-values">${sideMetricRows(rows, "left")}</div>
+        </section>
+        <section class="metric-labels">${metricLabels(rows)}</section>
+        <section class="vehicle-card">
+          <div class="vehicle-head">
+            ${factionBadge(b)}
+            <h3>${b.name}</h3>
+            <div class="weapon">${b.weapon}</div>
+          </div>
+          <div class="side-values">${sideMetricRows(rows, "right")}</div>
+        </section>
+      `;
+
+      compareMetrics.innerHTML = "";
+
+      document.getElementById("compareTitle").textContent = `斗 兽 棋 结 果`;
+      modal.classList.add("open");
+      modal.querySelector(".dialog").scrollTop = 0;
+    }
+
+    searchInput.addEventListener("input", () => {
+      applyView();
+    });
+
+    document.querySelectorAll("th.sortable").forEach((header) => {
+      header.addEventListener("click", () => {
+        const key = header.dataset.sort;
+        if (sortState.key !== key) {
+          sortState = { key, direction: "desc" };
+        } else if (sortState.direction === "desc") {
+          sortState.direction = "asc";
+        } else {
+          sortState = { key: null, direction: null };
+        }
+        applyView();
+      });
+    });
+
+    compareBtn.addEventListener("click", () => setCompareMode(!compareMode));
+    targetModeBtn.addEventListener("click", () => setTargetMode(!targetMode));
+    confirmCompareBtn.addEventListener("click", () => {
+      if (selectedIndices.length !== 2) {
+        showToast("需要点选两个载具");
+        return;
+      }
+      openComparison(selectedIndices[0], selectedIndices[1]);
+      setCompareMode(false);
+    });
+    rowsEl.addEventListener("click", (event) => {
+      const row = event.target.closest("tr[data-index]");
+      if (!row) return;
+      const index = Number(row.dataset.index);
+      if (compareMode) {
+        toggleRowSelection(index);
+        return;
+      }
+      if (targetMode) {
+        if (isUnarmedVehicle(vehicles[index])) {
+          showToast("该载具没有武器，无法查看索敌优先级");
+          return;
+        }
+        openTargetOptimizer(index);
+        return;
+      }
+      openDetail(index);
+    });
+    threatButtons.addEventListener("click", (event) => {
+      const button = event.target.closest(".threat-button");
+      if (!button) return;
+      toggleThreat(button.dataset.tag);
+    });
+    targetStage.addEventListener("pointerdown", (event) => {
+      const token = event.target.closest(".threat-token");
+      if (!token) return;
+      const item = activeThreats.get(token.dataset.tag);
+      if (!item) return;
+      const rect = token.getBoundingClientRect();
+      dragThreat = { item, offsetX: event.clientX - rect.left, offsetY: event.clientY - rect.top };
+      token.classList.add("dragging");
+      token.setPointerCapture(event.pointerId);
+    });
+    targetStage.addEventListener("pointermove", (event) => {
+      if (!dragThreat) return;
+      event.preventDefault();
+      const stageRect = targetStage.getBoundingClientRect();
+      placeThreat(dragThreat.item, event.clientX - stageRect.left - dragThreat.offsetX, event.clientY - stageRect.top - dragThreat.offsetY);
+      scheduleThreatScores();
+    });
+    targetStage.addEventListener("pointerup", (event) => {
+      if (!dragThreat) return;
+      dragThreat.item.el.classList.remove("dragging");
+      dragThreat = null;
+      updateThreatScores();
+    });
+    targetStage.addEventListener("pointercancel", () => {
+      if (dragThreat) dragThreat.item.el.classList.remove("dragging");
+      dragThreat = null;
+      updateThreatScores();
+    });
+    closeModal.addEventListener("click", () => modal.classList.remove("open"));
+    modal.addEventListener("click", (event) => {
+      if (event.target === modal) modal.classList.remove("open");
+    });
+    closeDetailModal.addEventListener("click", () => detailModal.classList.remove("open"));
+    detailModal.addEventListener("click", (event) => {
+      if (event.target === detailModal) detailModal.classList.remove("open");
+    });
+    closeTargetModal.addEventListener("click", () => targetModal.classList.remove("open"));
+    targetModal.addEventListener("click", (event) => {
+      if (event.target === targetModal) targetModal.classList.remove("open");
+    });
+    window.addEventListener("resize", () => {
+      activeThreats.forEach((item) => placeThreat(item, item.x, item.y));
+      if (targetModal.classList.contains("open")) updateThreatScores();
+    });
+    window.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        modal.classList.remove("open");
+        detailModal.classList.remove("open");
+        targetModal.classList.remove("open");
+      }
+    });
+
+    applyView();
+  </script>
+</body>
+</html>
+
+
+
+
+
