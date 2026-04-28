@@ -277,32 +277,29 @@
       border-bottom: 1px solid rgba(118, 140, 153, 0.16);
       vertical-align: middle;
       text-align: center;
-      transition: font-size 0.18s ease, font-weight 0.18s ease;
+      transition: background 0.18s ease, color 0.18s ease, font-weight 0.18s ease;
     }
 
     tbody tr {
       position: relative;
       background: rgba(255, 255, 255, 0.42);
-      transform-origin: center;
-      transition: background 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+      transition: background 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
     }
 
     body:not(.compare-mode) tbody tr:hover {
       z-index: 4;
       background: rgba(206, 245, 221, 0.72);
       box-shadow:
-        0 14px 34px rgba(29, 111, 74, 0.16),
         inset 4px 0 0 #20b66c,
         inset 0 0 0 9999px rgba(206, 245, 221, 0.18);
       cursor: pointer;
       filter: saturate(1.06);
-      transform: scale(1.02);
       backdrop-filter: blur(12px) saturate(145%);
     }
 
     body:not(.compare-mode) tbody tr:hover td {
-      font-size: 16px;
       font-weight: 800;
+      background: rgba(206, 245, 221, 0.16);
     }
 
     body.target-mode tbody tr.no-target-weapon,
@@ -312,7 +309,6 @@
       box-shadow: none;
       cursor: not-allowed;
       opacity: 0.58;
-      transform: none;
     }
 
     body.compare-mode tbody tr {
