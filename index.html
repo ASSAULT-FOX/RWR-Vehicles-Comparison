@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>DLC载具查询器</title>
+  <title>DLC参数查询器</title>
   <style>
     :root {
       color-scheme: light;
@@ -48,14 +48,14 @@
     .shell {
       height: 100vh;
       display: grid;
-      padding: 16px;
+      padding: 18px;
       grid-template-columns: minmax(0, 1fr);
     }
 
     .main {
       min-width: 0;
       border: 1px solid var(--line);
-      border-radius: 18px;
+      border-radius: 20px;
       background: var(--panel);
       backdrop-filter: blur(24px) saturate(150%);
       box-shadow: var(--shadow);
@@ -66,7 +66,7 @@
 
     .topbar {
       min-height: 72px;
-      padding: 16px 20px;
+      padding: 16px 22px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -76,18 +76,38 @@
       backdrop-filter: blur(18px) saturate(150%);
     }
 
-    h1 {
-      margin: 0;
-      font-size: 23px;
-      line-height: 1.25;
-      font-weight: 800;
-      letter-spacing: 0;
+    .tag-tabs {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px;
+      border: 1px solid rgba(93, 125, 159, 0.16);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.68);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.84), 0 10px 26px rgba(35, 76, 124, 0.08);
     }
 
-    .subtitle {
-      margin-top: 4px;
-      color: var(--muted);
-      font-size: 13px;
+    .tag-tab {
+      border: 0;
+      border-radius: 8px;
+      min-height: 38px;
+      padding: 0 18px;
+      color: #52677a;
+      background: transparent;
+      cursor: pointer;
+      font-weight: 850;
+      white-space: nowrap;
+      transition: color 0.16s ease, background 0.16s ease, box-shadow 0.16s ease;
+    }
+
+    .tag-tab.active {
+      color: #fff;
+      background: linear-gradient(135deg, #20c8d4, var(--accent-2));
+      box-shadow: 0 10px 22px rgba(43, 122, 230, 0.2);
+    }
+
+    .hidden {
+      display: none !important;
     }
 
     .search {
@@ -128,7 +148,7 @@
       justify-content: start;
       align-items: center;
       gap: 10px;
-      padding: 12px 20px;
+      padding: 12px 22px;
       border-bottom: 1px solid var(--line);
       background: rgba(255, 255, 255, 0.62);
       backdrop-filter: blur(18px) saturate(150%);
@@ -188,15 +208,19 @@
     }
 
     .compare-hint {
+      min-width: 0;
       color: var(--muted);
       font-size: 13px;
+      line-height: 1.35;
     }
 
     .target-mode-button {
-      margin-left: 34px;
+      margin-left: 44px;
       border: 0;
       border-radius: 8px;
-      padding: 0 18px;
+      width: max-content;
+      max-width: 180px;
+      padding: 0 16px;
       min-height: 42px;
       color: #fff;
       background: linear-gradient(135deg, #20c8d4, var(--accent-2));
@@ -221,24 +245,29 @@
     }
 
     .target-hint {
+      min-width: 0;
       color: var(--muted);
       font-size: 13px;
+      line-height: 1.35;
     }
 
     .table-wrap {
       min-height: 0;
-      overflow: auto;
+      overflow-x: hidden;
+      overflow-y: auto;
       background: rgba(255, 255, 255, 0.34);
+      padding-bottom: 76px;
+      overscroll-behavior: contain;
       scrollbar-gutter: stable;
     }
 
     table {
       width: 100%;
-      min-width: 1380px;
+      min-width: 0;
       table-layout: fixed;
       border-collapse: separate;
       border-spacing: 0;
-      font-size: 14px;
+      font-size: 13px;
     }
 
     col.faction-col {
@@ -266,54 +295,107 @@
     }
 
     col.blast-col {
-      width: 5%;
+      width: 7%;
+    }
+
+    col.weapon-faction-col {
+      width: 8%;
+    }
+
+    col.weapon-type-col {
+      width: 10%;
+    }
+
+    col.weapon-name-col {
+      width: 24%;
+    }
+
+    col.weapon-stat-col {
+      width: 11%;
     }
 
     thead th {
       position: sticky;
       top: 0;
       z-index: 8;
-      text-align: center;
       color: #3d515d;
       background: rgba(255, 255, 255, 0.88);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--line);
-      padding: 12px 14px;
-      white-space: nowrap;
+      padding: 0 8px;
+      height: 58px;
+      line-height: 1.22;
+      white-space: normal;
+      overflow-wrap: anywhere;
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    thead th,
+    tbody td {
+      text-align: center;
+    }
+
+    thead th {
+      align-content: center;
     }
 
     thead th.sortable {
       cursor: pointer;
       user-select: none;
+      white-space: normal;
+      border-radius: 8px;
+      transition: background 0.16s ease, color 0.16s ease, box-shadow 0.16s ease;
     }
 
     .sort-indicator {
-      display: inline-grid;
+      display: none;
       place-items: center;
       width: 18px;
-      margin-left: 4px;
-      color: var(--muted);
+      height: 18px;
+      margin-left: 5px;
+      color: currentColor;
       font-size: 12px;
-      vertical-align: 1px;
+      line-height: 1;
+      vertical-align: middle;
+    }
+
+    thead th.sorted {
+      color: #fff;
+      font-weight: 900;
+      border-bottom-color: transparent;
+    }
+
+    thead th.sorted.advantage-sort {
+      background: linear-gradient(135deg, #25c685, #0c9f72);
+      box-shadow: inset 0 0 0 1px rgba(12, 159, 114, 0.18), 0 8px 18px rgba(7, 158, 104, 0.18);
+    }
+
+    thead th.sorted.disadvantage-sort {
+      background: linear-gradient(135deg, #e25555, #c92f52);
+      box-shadow: inset 0 0 0 1px rgba(201, 47, 82, 0.18), 0 8px 18px rgba(201, 47, 82, 0.16);
     }
 
     thead th.sorted .sort-indicator {
-      color: var(--accent-2);
-      font-weight: 900;
+      display: none;
     }
 
     tbody td {
-      padding: 13px 14px;
+      position: relative;
+      padding: 12px 8px;
       border-bottom: 1px solid rgba(118, 140, 153, 0.16);
       vertical-align: middle;
       text-align: center;
+      line-height: 1.28;
       overflow-wrap: anywhere;
-      transition: padding 0.18s ease, background 0.18s ease, color 0.18s ease, font-size 0.18s ease, font-weight 0.18s ease;
+      word-break: break-word;
+      transition: background 0.18s ease, color 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease, font-size 0.18s ease, font-weight 0.18s ease;
     }
 
     tbody tr {
       position: relative;
       background: rgba(255, 255, 255, 0.42);
+      transform-origin: center;
       transition: background 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
     }
 
@@ -323,22 +405,19 @@
 
     body:not(.compare-mode) tbody tr:hover {
       z-index: 4;
-      background: rgba(206, 245, 221, 0.68);
+      background: rgba(206, 245, 221, 0.7);
       box-shadow:
-        inset 4px 0 0 #20b66c,
-        inset 0 0 0 9999px rgba(206, 245, 221, 0.2),
-        0 14px 28px rgba(24, 126, 82, 0.12);
+        inset 4px 0 0 rgba(32, 182, 108, 0.92),
+        inset 0 0 0 9999px rgba(206, 245, 221, 0.18),
+        0 12px 26px rgba(24, 126, 82, 0.12);
       cursor: pointer;
-      filter: saturate(1.06);
-      backdrop-filter: blur(12px) saturate(145%);
+      filter: saturate(1.08);
     }
 
     body:not(.compare-mode) tbody tr:hover td {
-      padding: 19px 10px;
-      font-size: 15px;
-      font-weight: 800;
-      background: rgba(206, 245, 221, 0.22);
-      backdrop-filter: blur(12px) saturate(145%);
+      background: rgba(206, 245, 221, 0.28);
+      font-size: 14px;
+      font-weight: 850;
     }
 
     body.target-mode tbody tr.no-target-weapon,
@@ -348,15 +427,17 @@
       box-shadow: none;
       cursor: not-allowed;
       opacity: 0.58;
+      transform: none;
       filter: none;
       backdrop-filter: none;
     }
 
     body.target-mode tbody tr.no-target-weapon:hover td {
-      padding: 13px 14px;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: inherit;
+      line-height: 1.28;
       background: transparent;
+      box-shadow: none;
       backdrop-filter: none;
     }
 
@@ -367,39 +448,38 @@
     body.compare-mode tbody tr.selected {
       position: relative;
       z-index: 4;
-      background: rgba(206, 245, 221, 0.68);
+      background: rgba(206, 245, 221, 0.7);
       box-shadow:
-        inset 4px 0 0 #20b66c,
-        inset 0 0 0 9999px rgba(206, 245, 221, 0.2),
-        0 14px 28px rgba(24, 126, 82, 0.12);
-      filter: saturate(1.06);
-      backdrop-filter: blur(12px) saturate(145%);
+        inset 4px 0 0 rgba(32, 182, 108, 0.92),
+        inset 0 0 0 9999px rgba(206, 245, 221, 0.18),
+        0 12px 26px rgba(24, 126, 82, 0.12);
+      filter: saturate(1.08);
     }
 
     body.compare-mode tbody tr.selected td {
-      padding: 19px 10px;
-      font-size: 15px;
-      font-weight: 800;
-      background: rgba(206, 245, 221, 0.22);
-      backdrop-filter: blur(12px) saturate(145%);
+      background: rgba(206, 245, 221, 0.28);
+      font-size: 14px;
+      font-weight: 850;
     }
 
     .num {
       font-variant-numeric: tabular-nums;
-      white-space: nowrap;
+      white-space: normal;
     }
 
     .faction {
       display: inline-flex;
       align-items: center;
-      min-width: 48px;
+      min-width: 64px;
       justify-content: center;
       border-radius: 8px;
-      padding: 4px 8px;
-      font-size: 12px;
-      font-weight: 700;
+      padding: 6px 10px;
+      font-size: 14px;
+      line-height: 1.1;
+      font-weight: 850;
       background: rgba(24, 164, 167, 0.12);
       color: #167d82;
+      white-space: nowrap;
     }
 
     ::-webkit-scrollbar {
@@ -463,9 +543,7 @@
     .dialog {
       width: min(1080px, 96vw);
       max-height: min(840px, 92vh);
-      overflow: auto;
-      overscroll-behavior: contain;
-      scrollbar-gutter: stable;
+      overflow: hidden;
       border: 1px solid rgba(255, 255, 255, 0.72);
       border-radius: 16px;
       background: rgba(255, 255, 255, 0.82);
@@ -473,6 +551,8 @@
       box-shadow: 0 28px 90px rgba(21, 54, 94, 0.26);
       backface-visibility: hidden;
       transform: translateZ(0);
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr);
     }
 
     @keyframes dialogIn {
@@ -488,8 +568,6 @@
     }
 
     .dialog-head {
-      position: sticky;
-      top: 0;
       z-index: 2;
       padding: 16px 18px;
       background: rgba(255, 255, 255, 0.82);
@@ -500,6 +578,13 @@
       justify-content: space-between;
       gap: 14px;
       transform: translateZ(0);
+    }
+
+    .dialog-body {
+      min-height: 0;
+      overflow: auto;
+      overscroll-behavior: contain;
+      scrollbar-gutter: stable;
     }
 
     .dialog-head h2 {
@@ -550,17 +635,24 @@
 
     .vehicle-head {
       min-height: 100px;
+      display: grid;
+      justify-items: center;
+      align-content: start;
+      gap: 8px;
+      text-align: center;
     }
 
     .vehicle-card h3 {
-      margin: 0 0 8px;
-      font-size: 18px;
+      margin: 2px 0 0;
+      font-size: 24px;
       line-height: 1.35;
+      font-weight: 900;
     }
 
     .weapon {
       color: var(--muted);
       line-height: 1.45;
+      font-weight: 700;
     }
 
     .metric-labels,
@@ -731,10 +823,13 @@
       background: linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(235, 249, 249, 0.9));
       box-shadow: var(--soft-shadow);
       text-align: center;
+      display: grid;
+      justify-items: center;
+      gap: 10px;
     }
 
     .detail-hero h3 {
-      margin: 10px 0 0;
+      margin: 0;
       font-size: 24px;
       line-height: 1.3;
     }
@@ -808,6 +903,15 @@
       background: rgba(247, 251, 255, 0.86);
       display: grid;
       grid-template-rows: auto minmax(0, 1fr);
+    }
+
+    .target-dialog .dialog-head {
+      min-width: 0;
+      flex: 0 0 auto;
+    }
+
+    .target-dialog .dialog-body {
+      overflow: hidden;
     }
 
     .target-layout {
@@ -915,9 +1019,14 @@
     }
 
     .threat-token::after {
-      inset: -9px;
-      border: 3px solid rgba(229, 57, 53, 0.88);
-      box-shadow: 0 0 0 5px rgba(229, 57, 53, 0.12);
+      left: 50%;
+      top: 50%;
+      width: 62px;
+      height: 62px;
+      border: 2px solid rgba(229, 57, 53, 0.86);
+      box-shadow: 0 0 0 3px rgba(229, 57, 53, 0.1);
+      transform: translate(-50%, -50%) scale(1);
+      transform-origin: center;
       z-index: -2;
     }
 
@@ -944,11 +1053,11 @@
     @keyframes topThreatRing {
       0%,
       100% {
-        transform: scale(0.96);
+        transform: translate(-50%, -50%) scale(0.98);
       }
 
       50% {
-        transform: scale(1.08);
+        transform: translate(-50%, -50%) scale(1.04);
       }
     }
 
@@ -1049,11 +1158,23 @@
       background: rgba(255, 255, 255, 0.98);
       border-color: rgba(229, 57, 53, 0.9);
       box-shadow: inset 0 0 0 1px rgba(229, 57, 53, 0.9), 0 10px 22px rgba(229, 57, 53, 0.1);
+      animation: priorityPulse 1.25s ease-in-out infinite;
     }
 
     .priority-item.rank-moving {
       z-index: 3;
       box-shadow: 0 18px 32px rgba(20, 45, 58, 0.18);
+    }
+
+    @keyframes priorityPulse {
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.035);
+      }
     }
 
     .priority-rank {
@@ -1157,11 +1278,20 @@
       }
 
       .table-wrap {
-        overflow: auto;
+        overflow-x: hidden;
+        overflow-y: auto;
       }
 
-      .compare-grid {
-        grid-template-columns: 1fr;
+    .compare-grid {
+      grid-template-columns: 1fr;
+    }
+
+      .tag-tabs {
+        width: 100%;
+      }
+
+      .tag-tab {
+        flex: 1;
       }
 
       .metric-labels {
@@ -1192,13 +1322,13 @@
   <div class="shell">
     <main class="main">
       <header class="topbar">
-        <div>
-          <h1>DLC载具查询器</h1>
-          <div class="subtitle"> </div>
-        </div>
+        <nav class="tag-tabs" aria-label="参数查询分类">
+          <button class="tag-tab active" data-tab="vehicles" type="button">载具查询</button>
+          <button class="tag-tab" data-tab="weapons" type="button">枪械查询</button>
+        </nav>
         <label class="search">
           <span>⌕</span>
-          <input id="searchInput" type="search" placeholder="搜索载具、武器或阵营">
+          <input id="searchInput" type="search" placeholder="在载具页中搜索">
         </label>
       </header>
 
@@ -1211,7 +1341,7 @@
       </section>
 
       <section class="table-wrap" aria-label="载具数据表">
-        <table>
+        <table id="vehicleTable">
           <colgroup>
             <col class="faction-col">
             <col class="name-col">
@@ -1244,6 +1374,31 @@
           </thead>
           <tbody id="vehicleRows"></tbody>
         </table>
+        <table id="weaponTable" class="hidden">
+          <colgroup>
+            <col class="weapon-faction-col">
+            <col class="weapon-type-col">
+            <col class="weapon-name-col">
+            <col class="weapon-stat-col">
+            <col class="weapon-stat-col">
+            <col class="weapon-stat-col">
+            <col class="weapon-stat-col">
+            <col class="weapon-stat-col">
+          </colgroup>
+          <thead>
+            <tr>
+              <th>阵营</th>
+              <th>类型</th>
+              <th>枪械名称</th>
+              <th class="sortable weapon-sort" data-sort="基础精度">基础精度<span class="sort-indicator"></span></th>
+              <th class="sortable weapon-sort" data-sort="致死">致死<span class="sort-indicator"></span></th>
+              <th class="sortable weapon-sort" data-sort="射速">射速<span class="sort-indicator"></span></th>
+              <th class="sortable weapon-sort" data-sort="单发后坐力">单发后坐力<span class="sort-indicator"></span></th>
+              <th class="sortable weapon-sort" data-sort="衰减开始距离">衰减开始距离<span class="sort-indicator"></span></th>
+            </tr>
+          </thead>
+          <tbody id="weaponRows"></tbody>
+        </table>
       </section>
     </main>
   </div>
@@ -1254,8 +1409,10 @@
         <h2 id="compareTitle">载具对比</h2>
         <button class="icon-button" id="closeModal" title="关闭">×</button>
       </div>
-      <div class="compare-grid" id="compareCards"></div>
-      <div class="metrics" id="compareMetrics"></div>
+      <div class="dialog-body">
+        <div class="compare-grid" id="compareCards"></div>
+        <div class="metrics" id="compareMetrics"></div>
+      </div>
     </div>
   </div>
 
@@ -1265,8 +1422,10 @@
         <h2 id="detailTitle">载具详细参数</h2>
         <button class="icon-button" id="closeDetailModal" title="关闭">×</button>
       </div>
-      <div class="detail-hero" id="detailHero"></div>
-      <div class="detail-rows" id="detailRows"></div>
+      <div class="dialog-body">
+        <div class="detail-hero" id="detailHero"></div>
+        <div class="detail-rows" id="detailRows"></div>
+      </div>
     </div>
   </div>
 
@@ -1276,65 +1435,5021 @@
         <h2 id="targetTitle">载具索敌优选</h2>
         <button class="icon-button" id="closeTargetModal" title="关闭">×</button>
       </div>
-      <div class="target-layout">
-        <section class="target-stage" id="targetStage">
-          <div class="tank-model" id="targetTank"><div class="tank-label" id="targetTankLabel"></div></div>
-        </section>
-        <aside class="target-panel">
-          <section class="target-section">
-            <h3>威胁类型</h3>
-            <div class="threat-buttons" id="threatButtons"></div>
+      <div class="dialog-body">
+        <div class="target-layout">
+          <section class="target-stage" id="targetStage">
+            <div class="tank-model" id="targetTank"><div class="tank-label" id="targetTankLabel"></div></div>
           </section>
-          <section class="target-section">
-            <h3>优先级</h3>
-            <div class="priority-list" id="priorityList"></div>
-          </section>
-        </aside>
+          <aside class="target-panel">
+            <section class="target-section">
+              <h3>威胁类型</h3>
+              <div class="threat-buttons" id="threatButtons"></div>
+            </section>
+            <section class="target-section">
+              <h3>优先级</h3>
+              <div class="priority-list" id="priorityList"></div>
+            </section>
+          </aside>
+        </div>
       </div>
     </div>
   </div>
 
   <div class="toast" id="toast"></div>
 
-  <script>
-    const vehicles = [
-      { faction: "德军", hp: 2.4, speed: 22, acceleration: 6.5, turret: null, threshold: 0, reduction: 0.5, name: "大众82型桶车", weapon: "—", reload: null, vision: 1, blast: null, vehicleType: "light_vehicle" },
-      { faction: "德军", hp: 4.8, speed: 18, acceleration: 6, turret: null, threshold: 0, reduction: 0.5, name: "欧宝闪电卡车", weapon: "—", reload: null, vision: 1, blast: null, vehicleType: "light_vehicle" },
-      { faction: "德军", hp: 10, speed: 9, acceleration: 12, turret: 10.31, threshold: 1.01, reduction: 0.9, name: "Sd.Kfz.251半履带装甲车", weapon: "MG34机枪", reload: null, vision: 1, blast: null, vehicleType: "light_vehicle" },
-      { faction: "德军", hp: 10, speed: 9, acceleration: 12, turret: 10.31, threshold: 1.01, reduction: 0.9, name: "Sd.Kfz.251/17防空车", weapon: "20mm Flak 38机炮", reload: null, vision: 1.6, blast: 1, vehicleType: "light_vehicle" },
-      { faction: "德军", hp: 14, speed: 12.2, acceleration: 11, turret: 7.73, threshold: 0, reduction: 0.9, name: "二号“山猫”轻型坦克", weapon: "20mm KwK30机炮", reload: null, vision: 1.6, blast: 1, vehicleType: "light_armour" },
-      { faction: "德军", hp: 17, speed: 7, acceleration: 12, turret: 2.86, threshold: 1.02, reduction: 0.9, name: "四号中型坦克", weapon: "75mm KwK40型坦克炮", reload: 5.5, vision: 1, blast: 4.7, vehicleType: "medium_armour" },
-      { faction: "德军", hp: 17, speed: 7, acceleration: 12, turret: 11.46, threshold: 1.02, reduction: 0.9, name: "三号突击炮", weapon: "75mm StuK40型突击炮", reload: 5.5, vision: 1.6, blast: 6, vehicleType: "medium_armour" },
-      { faction: "德军", hp: 30, speed: 7, acceleration: 11, turret: 2.29, threshold: 1.02, reduction: 0.9, name: "虎式重型坦克", weapon: "88mm KwK36型坦克炮", reload: 6.5, vision: 1.4, blast: 8.4, vehicleType: "heavy_armour" },
-      { faction: "德军", hp: 40, speed: 6.5, acceleration: 7.5, turret: 0.86, threshold: 3.91, reduction: 0.9, name: "虎王重型坦克", weapon: "88mm KwK43型坦克炮", reload: 7.5, vision: 1.4, blast: 9.9, vehicleType: "heavy_armour" },
-      { faction: "德军", hp: 200, speed: 6.5, acceleration: 7.5, turret: 0.86, threshold: 3.91, reduction: 0.9, name: "虎王重型坦克（精英）", weapon: "88mm KwK43型坦克炮", reload: 7.5, vision: 1.4, blast: 9.9, vehicleType: "heavy_armour" },
-      { faction: "德军", hp: 300, speed: 6.5, acceleration: 7.5, turret: 0.86, threshold: 3.91, reduction: 0.9, name: "鼠式超重型坦克", weapon: "128mm KwK44型坦克炮", reload: 7.5, vision: 1.8, blast: 9.3, vehicleType: "heavy_armour" },
-      { faction: "英军", hp: 4.8, speed: 18, acceleration: 6, turret: null, threshold: 0, reduction: 0.5, name: "奥斯汀K5卡车", weapon: "—", reload: null, vision: 1, blast: null, vehicleType: "ligh_vehicle" },
-      { faction: "英军", hp: 6, speed: 11, acceleration: 14.6, turret: 34.38, threshold: 0, reduction: 0.9, name: "布伦履带运输车", weapon: "布伦车载机枪", reload: null, vision: 1, blast: null, vehicleType: "light_vehicle" },
-      { faction: "英军", hp: 6, speed: 11, acceleration: 14.6, turret: 34.38, threshold: 0, reduction: 0.9, name: "黄蜂喷火车", weapon: "喷火器", reload: null, vision: 1, blast: 1.01, vehicleType: "light_vehicle" },
-      { faction: "英军", hp: 26, speed: 6, acceleration: 10, turret: 2.86, threshold: 1.02, reduction: 0.9, name: "丘吉尔Mk.VII步兵坦克", weapon: "75mm 坦克炮", reload: 4.4, vision: 1, blast: 4.8, vehicleType: "medium_armour" },
-      { faction: "英军", hp: 17.5, speed: 7, acceleration: 12, turret: 2.29, threshold: 1.02, reduction: 0.9, name: "谢尔曼“萤火虫”坦克", weapon: "QF 17磅坦克炮", reload: 5.5, vision: 1.6, blast: 7, vehicleType: "medium_armour" },
-      { faction: "英军", hp: 300, speed: 6.5, acceleration: 7.5, turret: 0.86, threshold: 3.91, reduction: 0.9, name: "TOG II 超重型坦克", weapon: "QF 17磅坦克炮", reload: 6.5, vision: 1.8, blast: 7, vehicleType: "heavy_armour" },
-      { faction: "美军", hp: 2.4, speed: 22, acceleration: 6.5, turret: null, threshold: 0, reduction: 0.5, name: "威利斯MB吉普", weapon: "—", reload: null, vision: 1, blast: null, vehicleType: "light_vehicle" },
-      { faction: "美军", hp: 4.8, speed: 18, acceleration: 6, turret: null, threshold: 0, reduction: 0.5, name: "DUKW两栖军械车", weapon: "—", reload: null, vision: 1, blast: null, vehicleType: "light_vehicle" },
-      { faction: "美军", hp: 2.4, speed: 22, acceleration: 6.5, turret: 34.38, threshold: 0, reduction: 0.5, name: "威利斯MB无后坐力炮吉普", weapon: "57mm M18无后坐力炮", reload: 4, vision: 1, blast: 6.4, vehicleType: "light_vehicle" },
-      { faction: "美军", hp: 2.4, speed: 22, acceleration: 6.5, turret: 34.38, threshold: 0, reduction: 0.5, name: "威利斯MB机枪吉普", weapon: "M2HB 重机枪", reload: null, vision: 1, blast: null, vehicleType: "light_vehicle" },
-      { faction: "美军", hp: 10, speed: 9, acceleration: 12, turret: 17.19, threshold: 0, reduction: 0.9, name: "M3半履带装甲车", weapon: "M2HB 重机枪", reload: null, vision: 1, blast: null, vehicleType: "light_vehicle" },
-      { faction: "美军", hp: 11, speed: 7.5, acceleration: 8, turret: 5.73, threshold: 0, reduction: 0.9, name: "LVT4两栖战车", weapon: "M2HB 重机枪", reload: null, vision: 1, blast: null, vehicleType: "light_vehicle" },
-      { faction: "美军", hp: 13, speed: 10, acceleration: 10, turret: 8.31, threshold: 0, reduction: 0.9, name: "M3“斯图亚特”轻型坦克", weapon: "37mm M6型坦克炮", reload: 3.75, vision: 1, blast: 3.3, vehicleType: "light_armour" },
-      { faction: "美军", hp: 15, speed: 10, acceleration: 10, turret: 7.16, threshold: 1.02, reduction: 0.9, name: "M10“狼獾”坦克歼击车", weapon: "3英寸 M7坦克炮", reload: 5.5, vision: 1.6, blast: 7, vehicleType: "medium_armour" },
-      { faction: "美军", hp: 17.5, speed: 7, acceleration: 12, turret: 2.86, threshold: 1.02, reduction: 0.9, name: "谢尔曼中型坦克", weapon: "75mm M3坦克炮", reload: 5.5, vision: 1, blast: 4.7, vehicleType: "medium_armour" },
-      { faction: "美军", hp: 20, speed: 70, acceleration: 7, turret: 5.73, threshold: 0, reduction: 0.9, name: "鱼雷艇", weapon: "40mm 博福斯机炮", reload: null, vision: 1.8, blast: 2.5, vehicleType: "未定义" },
-      { faction: "日军", hp: 2.4, speed: 22, acceleration: 6.5, turret: null, threshold: 0, reduction: 0.5, name: "九五式小型乘用车", weapon: "—", reload: null, vision: 1, blast: null, vehicleType: "light_vehicle" },
-      { faction: "日军", hp: 4.8, speed: 18, acceleration: 6, turret: null, threshold: 0, reduction: 0.5, name: "四式两栖军械车", weapon: "—", reload: null, vision: 1, blast: null, vehicleType: "light_vehicle" },
-      { faction: "日军", hp: 12, speed: 11, acceleration: 10, turret: 8.31, threshold: 0, reduction: 0.9, name: "九五式轻战车", weapon: "37mm 九四式坦克炮", reload: 3.25, vision: 1, blast: 3, vehicleType: "light_armour" },
-      { faction: "日军", hp: 14.5, speed: 7, acceleration: 12, turret: 2.86, threshold: 1.02, reduction: 0.9, name: "九七式中战车改", weapon: "47mm 一式坦克炮", reload: 4.25, vision: 1, blast: 4.45, vehicleType: "medium_armour" },
-      { faction: "日军", hp: 17.5, speed: 6, acceleration: 8.5, turret: 11.46, threshold: 1.02, reduction: 0.9, name: "特四式内火艇", weapon: "13mm 九三式机关炮", reload: null, vision: 1, blast: 1.01, vehicleType: "light_vehicle" },
-      { faction: "日军", hp: 10, speed: 9, acceleration: 9, turret: 17.19, threshold: 0, reduction: 0.9, name: "一式半履带装甲车", weapon: "九七式车载机枪", reload: null, vision: 1.3, blast: null, vehicleType: "light_vehicle" },
-      { faction: "日军", hp: 28, speed: 60, acceleration: 6, turret: 5.73, threshold: 0, reduction: 0.9, name: "装甲艇", weapon: "57mm 九〇式火炮", reload: 2.25, vision: 1.5, blast: 4, vehicleType: "未定义" }
-    ];
+  <script type="application/json" id="weaponData">
+[
+    {
+        "id":  0,
+        "阵营":  "德军",
+        "类型":  "冲锋枪",
+        "枪械名称":  "MP40",
+        "致死":  "0.535",
+        "射击间隔":  "0.095",
+        "弹容":  "32",
+        "基础精度":  "0.9",
+        "姿态精度修正-站":  "0.85",
+        "姿态精度修正-蹲":  "0.885",
+        "姿态精度修正-趴":  "0.825",
+        "姿态精度修正-架":  "0.885",
+        "单发后坐力":  "0.235",
+        "后坐力恢复":  "1.65",
+        "弹速":  "91",
+        "衰减开始时间":  "0.275",
+        "衰减结束时间":  "0.55",
+        "速度修正":  "-0.05",
+        "视野修正":  "1x",
+        "缩圈速率":  "8",
+        "射速":  "632",
+        "持续射击一秒恢复时间":  "1.5",
+        "衰减开始距离":  "25",
+        "衰减结束距离":  "50",
+        "站立精度":  "0.77",
+        "蹲伏精度":  "0.8",
+        "趴下精度":  "0.74",
+        "架枪精度":  "0.8",
+        "文件名称":  "mp40"
+    },
+    {
+        "id":  1,
+        "阵营":  "德军",
+        "类型":  "冲锋枪",
+        "枪械名称":  "MP34(奥地利制)",
+        "致死":  "0.535",
+        "射击间隔":  "0.1",
+        "弹容":  "32",
+        "基础精度":  "0.9",
+        "姿态精度修正-站":  "0.85",
+        "姿态精度修正-蹲":  "0.885",
+        "姿态精度修正-趴":  "0.95",
+        "姿态精度修正-架":  "0.885",
+        "单发后坐力":  "0.27",
+        "后坐力恢复":  "1.5",
+        "弹速":  "103",
+        "衰减开始时间":  "0.34",
+        "衰减结束时间":  "0.486",
+        "速度修正":  "-0.05",
+        "视野修正":  "1x",
+        "缩圈速率":  "8",
+        "射速":  "600",
+        "持续射击一秒恢复时间":  "1.8",
+        "衰减开始距离":  "35",
+        "衰减结束距离":  "50",
+        "站立精度":  "0.77",
+        "蹲伏精度":  "0.8",
+        "趴下精度":  "0.86",
+        "架枪精度":  "0.8",
+        "文件名称":  "mp34_o"
+    },
+    {
+        "id":  2,
+        "阵营":  "德军",
+        "类型":  "冲锋枪",
+        "枪械名称":  "M38“伯莱塔”",
+        "致死":  "0.535",
+        "射击间隔":  "0.09",
+        "弹容":  "40",
+        "基础精度":  "0.875",
+        "姿态精度修正-站":  "0.85",
+        "姿态精度修正-蹲":  "0.885",
+        "姿态精度修正-趴":  "0.825",
+        "姿态精度修正-架":  "0.885",
+        "单发后坐力":  "0.21",
+        "后坐力恢复":  "1.6",
+        "弹速":  "103",
+        "衰减开始时间":  "0.34",
+        "衰减结束时间":  "0.485",
+        "速度修正":  "-0.05",
+        "视野修正":  "1x",
+        "缩圈速率":  "8",
+        "射速":  "667",
+        "持续射击一秒恢复时间":  "1.46",
+        "衰减开始距离":  "35",
+        "衰减结束距离":  "50",
+        "站立精度":  "0.74",
+        "蹲伏精度":  "0.77",
+        "趴下精度":  "0.72",
+        "架枪精度":  "0.77",
+        "文件名称":  "beretta_m38"
+    },
+    {
+        "id":  3,
+        "阵营":  "德军",
+        "类型":  "冲锋枪",
+        "枪械名称":  "MP717（俄制）",
+        "致死":  "0.5",
+        "射击间隔":  "0.0625",
+        "弹容":  "71",
+        "基础精度":  "0.865",
+        "姿态精度修正-站":  "0.85",
+        "姿态精度修正-蹲":  "0.9",
+        "姿态精度修正-趴":  "0.95",
+        "姿态精度修正-架":  "0.9",
+        "单发后坐力":  "0.235",
+        "后坐力恢复":  "2.25",
+        "弹速":  "115",
+        "衰减开始时间":  "0.304",
+        "衰减结束时间":  "0.435",
+        "速度修正":  "-0.075",
+        "视野修正":  "1x",
+        "缩圈速率":  "1.8",
+        "射速":  "960",
+        "持续射击一秒恢复时间":  "1.67",
+        "衰减开始距离":  "35",
+        "衰减结束距离":  "50",
+        "站立精度":  "0.74",
+        "蹲伏精度":  "0.78",
+        "趴下精度":  "0.82",
+        "架枪精度":  "0.78",
+        "文件名称":  "ppsh41"
+    },
+    {
+        "id":  4,
+        "阵营":  "德军",
+        "类型":  "冲锋枪",
+        "枪械名称":  "达努维亚43M（折叠）",
+        "致死":  "0.535",
+        "射击间隔":  "0.095",
+        "弹容":  "40",
+        "基础精度":  "0.875",
+        "姿态精度修正-站":  "0.83",
+        "姿态精度修正-蹲":  "0.86",
+        "姿态精度修正-趴":  "0.815",
+        "姿态精度修正-架":  "0.87",
+        "单发后坐力":  "0.23",
+        "后坐力恢复":  "1.575",
+        "弹速":  "105",
+        "衰减开始时间":  "0.29",
+        "衰减结束时间":  "0.476",
+        "速度修正":  "-0.05",
+        "视野修正":  "1x",
+        "缩圈速率":  "8",
+        "射速":  "632",
+        "持续射击一秒恢复时间":  "1.54",
+        "衰减开始距离":  "30",
+        "衰减结束距离":  "50",
+        "站立精度":  "0.73",
+        "蹲伏精度":  "0.75",
+        "趴下精度":  "0.71",
+        "架枪精度":  "0.76",
+        "文件名称":  "danuvia_43m_folded"
+    },
+    {
+        "id":  5,
+        "阵营":  "德军",
+        "类型":  "冲锋枪",
+        "枪械名称":  "达努维亚43M",
+        "致死":  "0.535",
+        "射击间隔":  "0.095",
+        "弹容":  "40",
+        "基础精度":  "0.875",
+        "姿态精度修正-站":  "0.865",
+        "姿态精度修正-蹲":  "0.89",
+        "姿态精度修正-趴":  "0.825",
+        "姿态精度修正-架":  "0.89",
+        "单发后坐力":  "0.22",
+        "后坐力恢复":  "1.575",
+        "弹速":  "105",
+        "衰减开始时间":  "0.3",
+        "衰减结束时间":  "0.476",
+        "速度修正":  "-0.05",
+        "视野修正":  "1x",
+        "缩圈速率":  "8",
+        "射速":  "632",
+        "持续射击一秒恢复时间":  "1.47",
+        "衰减开始距离":  "32",
+        "衰减结束距离":  "50",
+        "站立精度":  "0.76",
+        "蹲伏精度":  "0.78",
+        "趴下精度":  "0.72",
+        "架枪精度":  "0.78",
+        "文件名称":  "danuvia_43m"
+    },
+    {
+        "id":  6,
+        "阵营":  "英军",
+        "类型":  "冲锋枪",
+        "枪械名称":  "司登 Mk II",
+        "致死":  "0.535",
+        "射击间隔":  "0.1",
+        "弹容":  "32",
+        "基础精度":  "0.9",
+        "姿态精度修正-站":  "0.785",
+        "姿态精度修正-蹲":  "0.82",
+        "姿态精度修正-趴":  "0.85",
+        "姿态精度修正-架":  "0.82",
+        "单发后坐力":  "0.265",
+        "后坐力恢复":  "1.5",
+        "弹速":  "95",
+        "衰减开始时间":  "0.316",
+        "衰减结束时间":  "0.53",
+        "速度修正":  "-0.05",
+        "视野修正":  "1x",
+        "缩圈速率":  "8",
+        "射速":  "600",
+        "持续射击一秒恢复时间":  "1.77",
+        "衰减开始距离":  "30",
+        "衰减结束距离":  "50",
+        "站立精度":  "0.71",
+        "蹲伏精度":  "0.74",
+        "趴下精度":  "0.77",
+        "架枪精度":  "0.74",
+        "文件名称":  "sten_mkii"
+    },
+    {
+        "id":  7,
+        "阵营":  "英军",
+        "类型":  "冲锋枪",
+        "枪械名称":  "司登 Mk IIS",
+        "致死":  "0.535",
+        "射击间隔":  "0.1",
+        "弹容":  "32",
+        "基础精度":  "0.95",
+        "姿态精度修正-站":  "0.785",
+        "姿态精度修正-蹲":  "0.835",
+        "姿态精度修正-趴":  "0.875",
+        "姿态精度修正-架":  "0.835",
+        "单发后坐力":  "0.063",
+        "后坐力恢复":  "0.4",
+        "弹速":  "87",
+        "衰减开始时间":  "0.4",
+        "衰减结束时间":  "0.46",
+        "速度修正":  "-0.05",
+        "视野修正":  "1x",
+        "缩圈速率":  "8",
+        "射速":  "600",
+        "持续射击一秒恢复时间":  "1.58",
+        "衰减开始距离":  "35",
+        "衰减结束距离":  "40",
+        "站立精度":  "0.75",
+        "蹲伏精度":  "0.79",
+        "趴下精度":  "0.83",
+        "架枪精度":  "0.79",
+        "文件名称":  "sten_mkii_sd"
+    },
+    {
+        "id":  8,
+        "阵营":  "英军",
+        "类型":  "冲锋枪",
+        "枪械名称":  "司登 Mk V",
+        "致死":  "0.535",
+        "射击间隔":  "0.1",
+        "弹容":  "32",
+        "基础精度":  "0.885",
+        "姿态精度修正-站":  "0.85",
+        "姿态精度修正-蹲":  "0.885",
+        "姿态精度修正-趴":  "0.95",
+        "姿态精度修正-架":  "0.885",
+        "单发后坐力":  "0.255",
+        "后坐力恢复":  "1.65",
+        "弹速":  "95",
+        "衰减开始时间":  "0.29",
+        "衰减结束时间":  "0.53",
+        "速度修正":  "-0.05",
+        "视野修正":  "1x",
+        "缩圈速率":  "8",
+        "射速":  "600",
+        "持续射击一秒恢复时间":  "1.55",
+        "衰减开始距离":  "28",
+        "衰减结束距离":  "50",
+        "站立精度":  "0.75",
+        "蹲伏精度":  "0.78",
+        "趴下精度":  "0.84",
+        "架枪精度":  "0.78",
+        "文件名称":  "sten_mkv"
+    },
+    {
+        "id":  9,
+        "阵营":  "英军",
+        "类型":  "冲锋枪",
+        "枪械名称":  "兰彻斯特",
+        "致死":  "0.535",
+        "射击间隔":  "0.1",
+        "弹容":  "50",
+        "基础精度":  "0.9",
+        "姿态精度修正-站":  "0.85",
+        "姿态精度修正-蹲":  "0.885",
+        "姿态精度修正-趴":  "0.95",
+        "姿态精度修正-架":  "0.885",
+        "单发后坐力":  "0.27",
+        "后坐力恢复":  "1.5",
+        "弹速":  "103",
+        "衰减开始时间":  "0.34",
+        "衰减结束时间":  "0.486",
+        "速度修正":  "-0.05",
+        "视野修正":  "1x",
+        "缩圈速率":  "8",
+        "射速":  "600",
+        "持续射击一秒恢复时间":  "1.8",
+        "衰减开始距离":  "35",
+        "衰减结束距离":  "50",
+        "站立精度":  "0.77",
+        "蹲伏精度":  "0.8",
+        "趴下精度":  "0.86",
+        "架枪精度":  "0.8",
+        "文件名称":  "lanchester"
+    },
+    {
+        "id":  10,
+        "阵营":  "英军",
+        "类型":  "冲锋枪",
+        "枪械名称":  "斯特林",
+        "致死":  "0.535",
+        "射击间隔":  "0.09",
+        "弹容":  "32",
+        "基础精度":  "0.875",
+        "姿态精度修正-站":  "0.85",
+        "姿态精度修正-蹲":  "0.885",
+        "姿态精度修正-趴":  "0.95",
+        "姿态精度修正-架":  "0.885",
+        "单发后坐力":  "0.19",
+        "后坐力恢复":  "1.4",
+        "弹速":  "103",
+        "衰减开始时间":  "0.35",
+        "衰减结束时间":  "0.485",
+        "速度修正":  "-0.05",
+        "视野修正":  "1x",
+        "缩圈速率":  "8",
+        "射速":  "667",
+        "持续射击一秒恢复时间":  "1.51",
+        "衰减开始距离":  "36",
+        "衰减结束距离":  "50",
+        "站立精度":  "0.74",
+        "蹲伏精度":  "0.77",
+        "趴下精度":  "0.83",
+        "架枪精度":  "0.77",
+        "文件名称":  "sterling"
+    },
+    {
+        "id":  11,
+        "阵营":  "日军",
+        "类型":  "冲锋枪",
+        "枪械名称":  "百式",
+        "致死":  "0.5",
+        "射击间隔":  "0.133",
+        "弹容":  "30",
+        "基础精度":  "0.91",
+        "姿态精度修正-站":  "0.85",
+        "姿态精度修正-蹲":  "0.89",
+        "姿态精度修正-趴":  "0.95",
+        "姿态精度修正-架":  "0.95",
+        "单发后坐力":  "0.22",
+        "后坐力恢复":  "1.4",
+        "弹速":  "95",
+        "衰减开始时间":  "0.37",
+        "衰减结束时间":  "0.53",
+        "速度修正":  "-0.05",
+        "视野修正":  "1x",
+        "缩圈速率":  "8",
+        "射速":  "452",
+        "持续射击一秒恢复时间":  "1.18",
+        "衰减开始距离":  "35",
+        "衰减结束距离":  "50",
+        "站立精度":  "0.77",
+        "蹲伏精度":  "0.81",
+        "趴下精度":  "0.86",
+        "架枪精度":  "0.86",
+        "文件名称":  "type100"
+    },
+    {
+        "id":  12,
+        "阵营":  "日军",
+        "类型":  "冲锋枪",
+        "枪械名称":  "百式/44",
+        "致死":  "0.5",
+        "射击间隔":  "0.0725",
+        "弹容":  "30",
+        "基础精度":  "0.88",
+        "姿态精度修正-站":  "0.85",
+        "姿态精度修正-蹲":  "0.885",
+        "姿态精度修正-趴":  "0.95",
+        "姿态精度修正-架":  "0.885",
+        "单发后坐力":  "0.19",
+        "后坐力恢复":  "1.5",
+        "弹速":  "95",
+        "衰减开始时间":  "0.263",
+        "衰减结束时间":  "0.53",
+        "速度修正":  "-0.05",
+        "视野修正":  "1x",
+        "缩圈速率":  "8",
+        "射速":  "828",
+        "持续射击一秒恢复时间":  "1.75",
+        "衰减开始距离":  "25",
+        "衰减结束距离":  "50",
+        "站立精度":  "0.75",
+        "蹲伏精度":  "0.78",
+        "趴下精度":  "0.84",
+        "架枪精度":  "0.78",
+        "文件名称":  "type100_44"
+    },
+    {
+        "id":  13,
+        "阵营":  "日军",
+        "类型":  "冲锋枪",
+        "枪械名称":  "斯泰尔",
+        "致死":  "0.525",
+        "射击间隔":  "0.1",
+        "弹容":  "32",
+        "基础精度":  "0.9",
+        "姿态精度修正-站":  "0.85",
+        "姿态精度修正-蹲":  "0.885",
+        "姿态精度修正-趴":  "0.95",
+        "姿态精度修正-架":  "0.885",
+        "单发后坐力":  "0.2525",
+        "后坐力恢复":  "1.5",
+        "弹速":  "100",
+        "衰减开始时间":  "0.275",
+        "衰减结束时间":  "0.5",
+        "速度修正":  "-0.05",
+        "视野修正":  "1x",
+        "缩圈速率":  "8",
+        "射速":  "600",
+        "持续射击一秒恢复时间":  "1.68",
+        "衰减开始距离":  "28",
+        "衰减结束距离":  "50",
+        "站立精度":  "0.77",
+        "蹲伏精度":  "0.8",
+        "趴下精度":  "0.86",
+        "架枪精度":  "0.8",
+        "文件名称":  "mp34"
+    },
+    {
+        "id":  14,
+        "阵营":  "日军",
+        "类型":  "冲锋枪",
+        "枪械名称":  "伯格曼",
+        "致死":  "0.525",
+        "射击间隔":  "0.1",
+        "弹容":  "50",
+        "基础精度":  "0.9",
+        "姿态精度修正-站":  "0.85",
+        "姿态精度修正-蹲":  "0.885",
+        "姿态精度修正-趴":  "0.95",
+        "姿态精度修正-架":  "0.885",
+        "单发后坐力":  "0.2415",
+        "后坐力恢复":  "1.5",
+        "弹速":  "100",
+        "衰减开始时间":  "0.275",
+        "衰减结束时间":  "0.5",
+        "速度修正":  "-0.05",
+        "视野修正":  "1x",
+        "缩圈速率":  "8",
+        "射速":  "600",
+        "持续射击一秒恢复时间":  "1.61",
+        "衰减开始距离":  "28",
+        "衰减结束距离":  "50",
+        "站立精度":  "0.77",
+        "蹲伏精度":  "0.8",
+        "趴下精度":  "0.86",
+        "架枪精度":  "0.8",
+        "文件名称":  "type_be"
+    },
+    {
+        "id":  15,
+        "阵营":  "日军",
+        "类型":  "冲锋枪",
+        "枪械名称":  "二式冲锋枪",
+        "致死":  "0.5",
+        "射击间隔":  "0.1",
+        "弹容":  "30",
+        "基础精度":  "0.9",
+        "姿态精度修正-站":  "0.85",
+        "姿态精度修正-蹲":  "0.89",
+        "姿态精度修正-趴":  "0.95",
+        "姿态精度修正-架":  "0.89",
+        "单发后坐力":  "0.205",
+        "后坐力恢复":  "1.4",
+        "弹速":  "95",
+        "衰减开始时间":  "0.37",
+        "衰减结束时间":  "0.53",
+        "速度修正":  "-0.05",
+        "视野修正":  "1x",
+        "缩圈速率":  "8",
+        "射速":  "600",
+        "持续射击一秒恢复时间":  "1.46",
+        "衰减开始距离":  "35",
+        "衰减结束距离":  "50",
+        "站立精度":  "0.77",
+        "蹲伏精度":  "0.8",
+        "趴下精度":  "0.86",
+        "架枪精度":  "0.8",
+        "文件名称":  "type2_model_b"
+    },
+    {
+        "id":  16,
+        "阵营":  "日军",
+        "类型":  "冲锋枪",
+        "枪械名称":  "一式冲锋枪",
+        "致死":  "0.5",
+        "射击间隔":  "0.0675",
+        "弹容":  "50",
+        "基础精度":  "0.9",
+        "姿态精度修正-站":  "0.85",
+        "姿态精度修正-蹲":  "0.885",
+        "姿态精度修正-趴":  "0.95",
+        "姿态精度修正-架":  "0.885",
+        "单发后坐力":  "0.1425",
+        "后坐力恢复":  "1.25",
+        "弹速":  "95",
+        "衰减开始时间":  "0.316",
+        "衰减结束时间":  "0.53",
+        "速度修正":  "-0.05",
+        "视野修正":  "1x",
+        "缩圈速率":  "8",
+        "射速":  "889",
+        "持续射击一秒恢复时间":  "1.69",
+        "衰减开始距离":  "30",
+        "衰减结束距离":  "50",
+        "站立精度":  "0.77",
+        "蹲伏精度":  "0.8",
+        "趴下精度":  "0.86",
+        "架枪精度":  "0.8",
+        "文件名称":  "type2_machinepistol"
+    },
+    {
+        "id":  17,
+        "阵营":  "美军",
+        "类型":  "冲锋枪",
+        "枪械名称":  "M55“雷兴”",
+        "致死":  "0.65",
+        "射击间隔":  "0.075",
+        "弹容":  "20",
+        "基础精度":  "0.9",
+        "姿态精度修正-站":  "0.85",
+        "姿态精度修正-蹲":  "0.885",
+        "姿态精度修正-趴":  "0.95",
+        "姿态精度修正-架":  "0.885",
+        "单发后坐力":  "0.275",
+        "后坐力恢复":  "1.55",
+        "弹速":  "91",
+        "衰减开始时间":  "0.275",
+        "衰减结束时间":  "0.495",
+        "速度修正":  "-0.05",
+        "视野修正":  "1x",
+        "缩圈速率":  "8",
+        "射速":  "800",
+        "持续射击一秒恢复时间":  "2.37",
+        "衰减开始距离":  "25",
+        "衰减结束距离":  "45",
+        "站立精度":  "0.77",
+        "蹲伏精度":  "0.8",
+        "趴下精度":  "0.86",
+        "架枪精度":  "0.8",
+        "文件名称":  "m55_reising"
+    },
+    {
+        "id":  18,
+        "阵营":  "美军",
+        "类型":  "冲锋枪",
+        "枪械名称":  "M1A1“汤姆逊”",
+        "致死":  "0.635",
+        "射击间隔":  "0.0855",
+        "弹容":  "30",
+        "基础精度":  "0.89",
+        "姿态精度修正-站":  "0.85",
+        "姿态精度修正-蹲":  "0.885",
+        "姿态精度修正-趴":  "0.825",
+        "姿态精度修正-架":  "0.885",
+        "单发后坐力":  "0.295",
+        "后坐力恢复":  "1.55",
+        "弹速":  "91",
+        "衰减开始时间":  "0.22",
+        "衰减结束时间":  "0.55",
+        "速度修正":  "-0.05",
+        "视野修正":  "1x",
+        "缩圈速率":  "8",
+        "射速":  "702",
+        "持续射击一秒恢复时间":  "2.23",
+        "衰减开始距离":  "20",
+        "衰减结束距离":  "50",
+        "站立精度":  "0.76",
+        "蹲伏精度":  "0.79",
+        "趴下精度":  "0.73",
+        "架枪精度":  "0.79",
+        "文件名称":  "m1a1_thompson"
+    },
+    {
+        "id":  19,
+        "阵营":  "美军",
+        "类型":  "冲锋枪",
+        "枪械名称":  "M1“汤姆逊”",
+        "致死":  "0.635",
+        "射击间隔":  "0.0675",
+        "弹容":  "20",
+        "基础精度":  "0.89",
+        "姿态精度修正-站":  "0.85",
+        "姿态精度修正-蹲":  "0.885",
+        "姿态精度修正-趴":  "0.95",
+        "姿态精度修正-架":  "0.885",
+        "单发后坐力":  "0.243",
+        "后坐力恢复":  "1.55",
+        "弹速":  "91",
+        "衰减开始时间":  "0.22",
+        "衰减结束时间":  "0.55",
+        "速度修正":  "-0.05",
+        "视野修正":  "1x",
+        "缩圈速率":  "8",
+        "射速":  "889",
+        "持续射击一秒恢复时间":  "2.32",
+        "衰减开始距离":  "20",
+        "衰减结束距离":  "50",
+        "站立精度":  "0.76",
+        "蹲伏精度":  "0.79",
+        "趴下精度":  "0.85",
+        "架枪精度":  "0.79",
+        "文件名称":  "m1_thompson"
+    },
+    {
+        "id":  20,
+        "阵营":  "美军",
+        "类型":  "冲锋枪",
+        "枪械名称":  "M1928汤姆逊(50发)",
+        "致死":  "0.635",
+        "射击间隔":  "0.0855",
+        "弹容":  "50",
+        "基础精度":  "0.89",
+        "姿态精度修正-站":  "0.85",
+        "姿态精度修正-蹲":  "0.885",
+        "姿态精度修正-趴":  "0.95",
+        "姿态精度修正-架":  "0.885",
+        "单发后坐力":  "0.275",
+        "后坐力恢复":  "1.75",
+        "弹速":  "91",
+        "衰减开始时间":  "0.22",
+        "衰减结束时间":  "0.55",
+        "速度修正":  "-0.05",
+        "视野修正":  "1x",
+        "缩圈速率":  "1.8",
+        "射速":  "702",
+        "持续射击一秒恢复时间":  "1.84",
+        "衰减开始距离":  "20",
+        "衰减结束距离":  "50",
+        "站立精度":  "0.76",
+        "蹲伏精度":  "0.79",
+        "趴下精度":  "0.85",
+        "架枪精度":  "0.79",
+        "文件名称":  "m1928_t"
+    },
+    {
+        "id":  21,
+        "阵营":  "美军",
+        "类型":  "冲锋枪",
+        "枪械名称":  "M1928汤姆逊(100发)",
+        "致死":  "0.635",
+        "射击间隔":  "0.0855",
+        "弹容":  "100",
+        "基础精度":  "0.89",
+        "姿态精度修正-站":  "0.85",
+        "姿态精度修正-蹲":  "0.885",
+        "姿态精度修正-趴":  "0.825",
+        "姿态精度修正-架":  "0.885",
+        "单发后坐力":  "0.275",
+        "后坐力恢复":  "1.75",
+        "弹速":  "91",
+        "衰减开始时间":  "0.22",
+        "衰减结束时间":  "0.55",
+        "速度修正":  "-0.075",
+        "视野修正":  "1x",
+        "缩圈速率":  "1.35",
+        "射速":  "702",
+        "持续射击一秒恢复时间":  "1.84",
+        "衰减开始距离":  "20",
+        "衰减结束距离":  "50",
+        "站立精度":  "0.76",
+        "蹲伏精度":  "0.79",
+        "趴下精度":  "0.73",
+        "架枪精度":  "0.79",
+        "文件名称":  "m1928_t_l_d"
+    },
+    {
+        "id":  22,
+        "阵营":  "美军",
+        "类型":  "冲锋枪",
+        "枪械名称":  "M1928A1“汤姆逊”",
+        "致死":  "0.635",
+        "射击间隔":  "0.0855",
+        "弹容":  "30",
+        "基础精度":  "0.89",
+        "姿态精度修正-站":  "0.85",
+        "姿态精度修正-蹲":  "0.885",
+        "姿态精度修正-趴":  "0.825",
+        "姿态精度修正-架":  "0.885",
+        "单发后坐力":  "0.275",
+        "后坐力恢复":  "1.75",
+        "弹速":  "91",
+        "衰减开始时间":  "0.22",
+        "衰减结束时间":  "0.55",
+        "速度修正":  "-0.05",
+        "视野修正":  "1x",
+        "缩圈速率":  "8",
+        "射速":  "702",
+        "持续射击一秒恢复时间":  "1.84",
+        "衰减开始距离":  "20",
+        "衰减结束距离":  "50",
+        "站立精度":  "0.76",
+        "蹲伏精度":  "0.79",
+        "趴下精度":  "0.73",
+        "架枪精度":  "0.79",
+        "文件名称":  "m1928a1_t"
+    },
+    {
+        "id":  23,
+        "阵营":  "美军",
+        "类型":  "冲锋枪",
+        "枪械名称":  "M3“注油枪”",
+        "致死":  "0.675",
+        "射击间隔":  "0.13",
+        "弹容":  "30",
+        "基础精度":  "0.9",
+        "姿态精度修正-站":  "0.85",
+        "姿态精度修正-蹲":  "0.885",
+        "姿态精度修正-趴":  "0.825",
+        "姿态精度修正-架":  "0.885",
+        "单发后坐力":  "0.29",
+        "后坐力恢复":  "1.65",
+        "弹速":  "91",
+        "衰减开始时间":  "0.21",
+        "衰减结束时间":  "0.55",
+        "速度修正":  "-0.05",
+        "视野修正":  "1x",
+        "缩圈速率":  "8",
+        "射速":  "462",
+        "持续射击一秒恢复时间":  "1.35",
+        "衰减开始距离":  "19",
+        "衰减结束距离":  "50",
+        "站立精度":  "0.77",
+        "蹲伏精度":  "0.8",
+        "趴下精度":  "0.74",
+        "架枪精度":  "0.8",
+        "文件名称":  "m3_greasegun"
+    },
+    {
+        "id":  24,
+        "阵营":  "美军",
+        "类型":  "冲锋枪",
+        "枪械名称":  "M2“海德”",
+        "致死":  "0.635",
+        "射击间隔":  "0.1",
+        "弹容":  "30",
+        "基础精度":  "0.91",
+        "姿态精度修正-站":  "0.85",
+        "姿态精度修正-蹲":  "0.885",
+        "姿态精度修正-趴":  "0.825",
+        "姿态精度修正-架":  "0.885",
+        "单发后坐力":  "0.21",
+        "后坐力恢复":  "1.4",
+        "弹速":  "91",
+        "衰减开始时间":  "0.22",
+        "衰减结束时间":  "0.55",
+        "速度修正":  "-0.05",
+        "视野修正":  "1x",
+        "缩圈速率":  "8",
+        "射速":  "600",
+        "持续射击一秒恢复时间":  "1.5",
+        "衰减开始距离":  "20",
+        "衰减结束距离":  "50",
+        "站立精度":  "0.77",
+        "蹲伏精度":  "0.81",
+        "趴下精度":  "0.75",
+        "架枪精度":  "0.81",
+        "文件名称":  "m2_hyde"
+    },
+    {
+        "id":  25,
+        "阵营":  "美军",
+        "类型":  "机枪",
+        "枪械名称":  "BAR自动步枪",
+        "致死":  "0.575",
+        "射击间隔":  "0.1",
+        "弹容":  "20",
+        "基础精度":  "0.8",
+        "姿态精度修正-站":  "0.8",
+        "姿态精度修正-蹲":  "0.945",
+        "姿态精度修正-趴":  "1.0945",
+        "姿态精度修正-架":  "1.0945",
+        "单发后坐力":  "0.195",
+        "后坐力恢复":  "0.9",
+        "弹速":  "92",
+        "衰减开始时间":  "0.38",
+        "衰减结束时间":  "0.84",
+        "速度修正":  "-0.1",
+        "视野修正":  "1x",
+        "缩圈速率":  "2.5",
+        "射速":  "600",
+        "持续射击一秒恢复时间":  "2.17",
+        "衰减开始距离":  "35",
+        "衰减结束距离":  "77",
+        "站立精度":  "0.64",
+        "蹲伏精度":  "0.76",
+        "趴下精度":  "0.88",
+        "架枪精度":  "0.88",
+        "文件名称":  "m1918_bar"
+    },
+    {
+        "id":  26,
+        "阵营":  "美军",
+        "类型":  "机枪",
+        "枪械名称":  "BAR轻机枪",
+        "致死":  "0.575",
+        "射击间隔":  "0.1",
+        "弹容":  "20",
+        "基础精度":  "0.8",
+        "姿态精度修正-站":  "0.75",
+        "姿态精度修正-蹲":  "0.925",
+        "姿态精度修正-趴":  "1.15",
+        "姿态精度修正-架":  "1.15",
+        "单发后坐力":  "0.185",
+        "后坐力恢复":  "0.9",
+        "弹速":  "92",
+        "衰减开始时间":  "0.38",
+        "衰减结束时间":  "0.84",
+        "速度修正":  "-0.125",
+        "视野修正":  "1x",
+        "缩圈速率":  "2",
+        "射速":  "600",
+        "持续射击一秒恢复时间":  "2.06",
+        "衰减开始距离":  "35",
+        "衰减结束距离":  "77",
+        "站立精度":  "0.6",
+        "蹲伏精度":  "0.74",
+        "趴下精度":  "0.92",
+        "架枪精度":  "0.92",
+        "文件名称":  "m1918_bar_h"
+    },
+    {
+        "id":  27,
+        "阵营":  "美军",
+        "类型":  "机枪",
+        "枪械名称":  "BAR轻机枪(快速射击)",
+        "致死":  "0.575",
+        "射击间隔":  "0.088",
+        "弹容":  "20",
+        "基础精度":  "0.8",
+        "姿态精度修正-站":  "0.8",
+        "姿态精度修正-蹲":  "0.945",
+        "姿态精度修正-趴":  "1.15",
+        "姿态精度修正-架":  "1.15",
+        "单发后坐力":  "0.175",
+        "后坐力恢复":  "0.9",
+        "弹速":  "92",
+        "衰减开始时间":  "0.38",
+        "衰减结束时间":  "0.84",
+        "速度修正":  "-0.125",
+        "视野修正":  "1x",
+        "缩圈速率":  "2.5",
+        "射速":  "682",
+        "持续射击一秒恢复时间":  "2.21",
+        "衰减开始距离":  "35",
+        "衰减结束距离":  "77",
+        "站立精度":  "0.64",
+        "蹲伏精度":  "0.76",
+        "趴下精度":  "0.92",
+        "架枪精度":  "0.92",
+        "文件名称":  "m1918_bar_r"
+    },
+    {
+        "id":  28,
+        "阵营":  "美军",
+        "类型":  "机枪",
+        "枪械名称":  "M1941“约翰逊”机枪",
+        "致死":  "0.7",
+        "射击间隔":  "0.095",
+        "弹容":  "20",
+        "基础精度":  "0.92",
+        "姿态精度修正-站":  "0.6",
+        "姿态精度修正-蹲":  "0.8",
+        "姿态精度修正-趴":  "1.035",
+        "姿态精度修正-架":  "1.035",
+        "单发后坐力":  "0.165",
+        "后坐力恢复":  "0.9",
+        "弹速":  "117",
+        "衰减开始时间":  "0.45",
+        "衰减结束时间":  "0.69",
+        "速度修正":  "-0.125",
+        "视野修正":  "1x",
+        "缩圈速率":  "2",
+        "射速":  "632",
+        "持续射击一秒恢复时间":  "1.93",
+        "衰减开始距离":  "53",
+        "衰减结束距离":  "81",
+        "站立精度":  "0.55",
+        "蹲伏精度":  "0.74",
+        "趴下精度":  "0.95",
+        "架枪精度":  "0.95",
+        "文件名称":  "m1941_j_lmg"
+    },
+    {
+        "id":  29,
+        "阵营":  "美军",
+        "类型":  "机枪",
+        "枪械名称":  "M1919A6",
+        "致死":  "0.55",
+        "射击间隔":  "0.1",
+        "弹容":  "100",
+        "基础精度":  "0.66",
+        "姿态精度修正-站":  "/",
+        "姿态精度修正-蹲":  "/",
+        "姿态精度修正-趴":  "1.11",
+        "姿态精度修正-架":  "1.11",
+        "单发后坐力":  "0.11",
+        "后坐力恢复":  "0.825",
+        "弹速":  "105",
+        "衰减开始时间":  "0.5",
+        "衰减结束时间":  "0.76",
+        "速度修正":  "-0.15",
+        "视野修正":  "1x",
+        "缩圈速率":  "1",
+        "射速":  "600",
+        "持续射击一秒恢复时间":  "1.33",
+        "衰减开始距离":  "53",
+        "衰减结束距离":  "80",
+        "站立精度":  "/",
+        "蹲伏精度":  "/",
+        "趴下精度":  "0.73",
+        "架枪精度":  "0.73",
+        "文件名称":  "m1919_lmg"
+    },
+    {
+        "id":  30,
+        "阵营":  "美军",
+        "类型":  "机枪",
+        "枪械名称":  "M1919A6(轻型)",
+        "致死":  "0.55",
+        "射击间隔":  "0.1",
+        "弹容":  "100",
+        "基础精度":  "0.66",
+        "姿态精度修正-站":  "/",
+        "姿态精度修正-蹲":  "/",
+        "姿态精度修正-趴":  "1.11",
+        "姿态精度修正-架":  "1.11",
+        "单发后坐力":  "0.115",
+        "后坐力恢复":  "0.825",
+        "弹速":  "105",
+        "衰减开始时间":  "0.5",
+        "衰减结束时间":  "0.76",
+        "速度修正":  "-0.125",
+        "视野修正":  "1x",
+        "缩圈速率":  "1.45",
+        "射速":  "600",
+        "持续射击一秒恢复时间":  "1.39",
+        "衰减开始距离":  "53",
+        "衰减结束距离":  "80",
+        "站立精度":  "/",
+        "蹲伏精度":  "/",
+        "趴下精度":  "0.73",
+        "架枪精度":  "0.73",
+        "文件名称":  "m1919_lmg_l"
+    },
+    {
+        "id":  31,
+        "阵营":  "美军",
+        "类型":  "机枪",
+        "枪械名称":  "AN/M2“毒刺”",
+        "致死":  "0.525",
+        "射击间隔":  "0.05",
+        "弹容":  "150",
+        "基础精度":  "0.665",
+        "姿态精度修正-站":  "/",
+        "姿态精度修正-蹲":  "/",
+        "姿态精度修正-趴":  "1.15",
+        "姿态精度修正-架":  "1.15",
+        "单发后坐力":  "0.11",
+        "后坐力恢复":  "1.21",
+        "弹速":  "110",
+        "衰减开始时间":  "0.45",
+        "衰减结束时间":  "0.73",
+        "速度修正":  "-0.15",
+        "视野修正":  "1x",
+        "缩圈速率":  "1",
+        "射速":  "1200",
+        "持续射击一秒恢复时间":  "1.82",
+        "衰减开始距离":  "50",
+        "衰减结束距离":  "80",
+        "站立精度":  "/",
+        "蹲伏精度":  "/",
+        "趴下精度":  "0.76",
+        "架枪精度":  "0.76",
+        "文件名称":  "stinger"
+    },
+    {
+        "id":  32,
+        "阵营":  "美军",
+        "类型":  "机枪",
+        "枪械名称":  "M1919A6(便携)",
+        "致死":  "0.675",
+        "射击间隔":  "0.1",
+        "弹容":  "100",
+        "基础精度":  "0.62",
+        "姿态精度修正-站":  "0.4",
+        "姿态精度修正-蹲":  "0.5",
+        "姿态精度修正-趴":  "0.6",
+        "姿态精度修正-架":  "0.6",
+        "单发后坐力":  "1",
+        "后坐力恢复":  "3",
+        "弹速":  "100",
+        "衰减开始时间":  "0.5",
+        "衰减结束时间":  "0.8",
+        "速度修正":  "-0.2",
+        "视野修正":  "1x",
+        "缩圈速率":  "1",
+        "射速":  "600",
+        "持续射击一秒恢复时间":  "3.33",
+        "衰减开始距离":  "50",
+        "衰减结束距离":  "80",
+        "站立精度":  "0.25",
+        "蹲伏精度":  "0.31",
+        "趴下精度":  "0.37",
+        "架枪精度":  "0.37",
+        "文件名称":  "m1919_lmg_a"
+    },
+    {
+        "id":  33,
+        "阵营":  "美军",
+        "类型":  "机枪",
+        "枪械名称":  "M1917(便携)",
+        "致死":  "0.675",
+        "射击间隔":  "0.1",
+        "弹容":  "200",
+        "基础精度":  "0.6",
+        "姿态精度修正-站":  "0.4",
+        "姿态精度修正-蹲":  "0.5",
+        "姿态精度修正-趴":  "0.6",
+        "姿态精度修正-架":  "0.6",
+        "单发后坐力":  "1",
+        "后坐力恢复":  "3",
+        "弹速":  "105",
+        "衰减开始时间":  "0.5",
+        "衰减结束时间":  "0.76",
+        "速度修正":  "-0.2",
+        "视野修正":  "1x",
+        "缩圈速率":  "1",
+        "射速":  "600",
+        "持续射击一秒恢复时间":  "3.33",
+        "衰减开始距离":  "53",
+        "衰减结束距离":  "80",
+        "站立精度":  "0.24",
+        "蹲伏精度":  "0.3",
+        "趴下精度":  "0.36",
+        "架枪精度":  "0.36",
+        "文件名称":  "m1917_hmg_a"
+    },
+    {
+        "id":  34,
+        "阵营":  "美军",
+        "类型":  "机枪",
+        "枪械名称":  "温彻斯特自动步枪",
+        "致死":  "0.7",
+        "射击间隔":  "0.11",
+        "弹容":  "20",
+        "基础精度":  "0.975",
+        "姿态精度修正-站":  "0.85",
+        "姿态精度修正-蹲":  "0.9",
+        "姿态精度修正-趴":  "1",
+        "姿态精度修正-架":  "1",
+        "单发后坐力":  "0.28",
+        "后坐力恢复":  "1.54",
+        "弹速":  "115",
+        "衰减开始时间":  "0.45",
+        "衰减结束时间":  "0.7",
+        "速度修正":  "-0.1",
+        "视野修正":  "1x",
+        "缩圈速率":  "2",
+        "射速":  "546",
+        "持续射击一秒恢复时间":  "1.65",
+        "衰减开始距离":  "52",
+        "衰减结束距离":  "81",
+        "站立精度":  "0.83",
+        "蹲伏精度":  "0.88",
+        "趴下精度":  "0.98",
+        "架枪精度":  "0.98",
+        "文件名称":  "winchester"
+    },
+    {
+        "id":  35,
+        "阵营":  "日军",
+        "类型":  "机枪",
+        "枪械名称":  "96式轻机枪",
+        "致死":  "0.535",
+        "射击间隔":  "0.12",
+        "弹容":  "30",
+        "基础精度":  "0.815",
+        "姿态精度修正-站":  "0.65",
+        "姿态精度修正-蹲":  "0.8",
+        "姿态精度修正-趴":  "1",
+        "姿态精度修正-架":  "1",
+        "单发后坐力":  "0.15",
+        "后坐力恢复":  "0.85",
+        "弹速":  "100",
+        "衰减开始时间":  "0.4",
+        "衰减结束时间":  "0.8",
+        "速度修正":  "-0.125",
+        "视野修正":  "1x",
+        "缩圈速率":  "1",
+        "射速":  "500",
+        "持续射击一秒恢复时间":  "1.47",
+        "衰减开始距离":  "40",
+        "衰减结束距离":  "80",
+        "站立精度":  "0.53",
+        "蹲伏精度":  "0.65",
+        "趴下精度":  "0.82",
+        "架枪精度":  "0.82",
+        "文件名称":  "type96_lmg"
+    },
+    {
+        "id":  36,
+        "阵营":  "日军",
+        "类型":  "机枪",
+        "枪械名称":  "96式轻机枪（盾/瞄镜）",
+        "致死":  "0.565",
+        "射击间隔":  "0.12",
+        "弹容":  "30",
+        "基础精度":  "0.815",
+        "姿态精度修正-站":  "/",
+        "姿态精度修正-蹲":  "/",
+        "姿态精度修正-趴":  "1.015",
+        "姿态精度修正-架":  "1.015",
+        "单发后坐力":  "0.14",
+        "后坐力恢复":  "0.85",
+        "弹速":  "100",
+        "衰减开始时间":  "0.5",
+        "衰减结束时间":  "1",
+        "速度修正":  "-0.125",
+        "视野修正":  "1.6x",
+        "缩圈速率":  "1",
+        "射速":  "500",
+        "持续射击一秒恢复时间":  "1.37",
+        "衰减开始距离":  "50",
+        "衰减结束距离":  "100",
+        "站立精度":  "/",
+        "蹲伏精度":  "/",
+        "趴下精度":  "0.83",
+        "架枪精度":  "0.83",
+        "文件名称":  "type96_lmg_ss"
+    },
+    {
+        "id":  37,
+        "阵营":  "日军",
+        "类型":  "机枪",
+        "枪械名称":  "99式轻机枪",
+        "致死":  "0.575",
+        "射击间隔":  "0.0857",
+        "弹容":  "30",
+        "基础精度":  "0.725",
+        "姿态精度修正-站":  "0.7",
+        "姿态精度修正-蹲":  "0.85",
+        "姿态精度修正-趴":  "1.0875",
+        "姿态精度修正-架":  "1.0875",
+        "单发后坐力":  "0.16",
+        "后坐力恢复":  "0.85",
+        "弹速":  "100",
+        "衰减开始时间":  "0.45",
+        "衰减结束时间":  "0.8",
+        "速度修正":  "-0.125",
+        "视野修正":  "1x",
+        "缩圈速率":  "1",
+        "射速":  "701",
+        "持续射击一秒恢复时间":  "2.2",
+        "衰减开始距离":  "45",
+        "衰减结束距离":  "80",
+        "站立精度":  "0.51",
+        "蹲伏精度":  "0.62",
+        "趴下精度":  "0.79",
+        "架枪精度":  "0.79",
+        "文件名称":  "type99_lmg"
+    },
+    {
+        "id":  38,
+        "阵营":  "日军",
+        "类型":  "机枪",
+        "枪械名称":  "99式轻机枪（瞄镜）",
+        "致死":  "0.615",
+        "射击间隔":  "0.0857",
+        "弹容":  "30",
+        "基础精度":  "0.725",
+        "姿态精度修正-站":  "0.7",
+        "姿态精度修正-蹲":  "0.85",
+        "姿态精度修正-趴":  "1.1",
+        "姿态精度修正-架":  "1.1",
+        "单发后坐力":  "0.14",
+        "后坐力恢复":  "0.85",
+        "弹速":  "100",
+        "衰减开始时间":  "0.55",
+        "衰减结束时间":  "1",
+        "速度修正":  "-0.125",
+        "视野修正":  "1.6x",
+        "缩圈速率":  "1",
+        "射速":  "701",
+        "持续射击一秒恢复时间":  "1.92",
+        "衰减开始距离":  "55",
+        "衰减结束距离":  "100",
+        "站立精度":  "0.51",
+        "蹲伏精度":  "0.62",
+        "趴下精度":  "0.8",
+        "架枪精度":  "0.8",
+        "文件名称":  "tupe99_lmg_s"
+    },
+    {
+        "id":  39,
+        "阵营":  "日军",
+        "类型":  "机枪",
+        "枪械名称":  "大正11式",
+        "致死":  "0.625",
+        "射击间隔":  "0.133",
+        "弹容":  "30",
+        "基础精度":  "0.85",
+        "姿态精度修正-站":  "/",
+        "姿态精度修正-蹲":  "/",
+        "姿态精度修正-趴":  "1.13",
+        "姿态精度修正-架":  "1.13",
+        "单发后坐力":  "0.165",
+        "后坐力恢复":  "0.9",
+        "弹速":  "120",
+        "衰减开始时间":  "0.3",
+        "衰减结束时间":  "0.67",
+        "速度修正":  "-0.15",
+        "视野修正":  "1x",
+        "缩圈速率":  "2",
+        "射速":  "452",
+        "持续射击一秒恢复时间":  "1.38",
+        "衰减开始距离":  "36",
+        "衰减结束距离":  "80",
+        "站立精度":  "/",
+        "蹲伏精度":  "/",
+        "趴下精度":  "0.96",
+        "架枪精度":  "0.96",
+        "文件名称":  "type11_lmg"
+    },
+    {
+        "id":  40,
+        "阵营":  "日军",
+        "类型":  "机枪",
+        "枪械名称":  "98式机枪",
+        "致死":  "0.55",
+        "射击间隔":  "0.05",
+        "弹容":  "75",
+        "基础精度":  "0.65",
+        "姿态精度修正-站":  "/",
+        "姿态精度修正-蹲":  "/",
+        "姿态精度修正-趴":  "1.15",
+        "姿态精度修正-架":  "1.15",
+        "单发后坐力":  "0.11",
+        "后坐力恢复":  "1.21",
+        "弹速":  "118",
+        "衰减开始时间":  "0.45",
+        "衰减结束时间":  "0.68",
+        "速度修正":  "-0.15",
+        "视野修正":  "1x",
+        "缩圈速率":  "1",
+        "射速":  "1200",
+        "持续射击一秒恢复时间":  "1.82",
+        "衰减开始距离":  "53",
+        "衰减结束距离":  "80",
+        "站立精度":  "/",
+        "蹲伏精度":  "/",
+        "趴下精度":  "0.75",
+        "架枪精度":  "0.75",
+        "文件名称":  "type98_lmg_mg15"
+    },
+    {
+        "id":  41,
+        "阵营":  "日军",
+        "类型":  "机枪",
+        "枪械名称":  "Te-4航空机枪(便携)",
+        "致死":  "0.675",
+        "射击间隔":  "0.085",
+        "弹容":  "69",
+        "基础精度":  "0.6",
+        "姿态精度修正-站":  "0.4",
+        "姿态精度修正-蹲":  "0.5",
+        "姿态精度修正-趴":  "0.6",
+        "姿态精度修正-架":  "0.6",
+        "单发后坐力":  "1",
+        "后坐力恢复":  "3",
+        "弹速":  "105",
+        "衰减开始时间":  "0.5",
+        "衰减结束时间":  "0.76",
+        "速度修正":  "-0.2",
+        "视野修正":  "1x",
+        "缩圈速率":  "1",
+        "射速":  "706",
+        "持续射击一秒恢复时间":  "3.92",
+        "衰减开始距离":  "53",
+        "衰减结束距离":  "80",
+        "站立精度":  "0.24",
+        "蹲伏精度":  "0.3",
+        "趴下精度":  "0.36",
+        "架枪精度":  "0.36",
+        "文件名称":  "te4_lmg"
+    },
+    {
+        "id":  42,
+        "阵营":  "日军",
+        "类型":  "机枪",
+        "枪械名称":  "Ho-104航空机枪(便携)",
+        "致死":  "1.2",
+        "射击间隔":  "0.15",
+        "弹容":  "100",
+        "基础精度":  "0.6",
+        "姿态精度修正-站":  "0.4",
+        "姿态精度修正-蹲":  "0.5",
+        "姿态精度修正-趴":  "0.6",
+        "姿态精度修正-架":  "0.6",
+        "单发后坐力":  "4",
+        "后坐力恢复":  "3",
+        "弹速":  "111",
+        "衰减开始时间":  "0.71",
+        "衰减结束时间":  "0.72",
+        "速度修正":  "-0.2",
+        "视野修正":  "1x",
+        "缩圈速率":  "1",
+        "射速":  "400",
+        "持续射击一秒恢复时间":  "8.89",
+        "衰减开始距离":  "79",
+        "衰减结束距离":  "80",
+        "站立精度":  "0.24",
+        "蹲伏精度":  "0.3",
+        "趴下精度":  "0.36",
+        "架枪精度":  "0.36",
+        "文件名称":  "ho104_hmg_a"
+    },
+    {
+        "id":  43,
+        "阵营":  "英军",
+        "类型":  "机枪",
+        "枪械名称":  "布伦轻机枪",
+        "致死":  "0.6",
+        "射击间隔":  "0.1075",
+        "弹容":  "30",
+        "基础精度":  "0.85",
+        "姿态精度修正-站":  "0.65",
+        "姿态精度修正-蹲":  "0.8",
+        "姿态精度修正-趴":  "1.0125",
+        "姿态精度修正-架":  "1.0125",
+        "单发后坐力":  "0.175",
+        "后坐力恢复":  "0.875",
+        "弹速":  "100",
+        "衰减开始时间":  "0.375",
+        "衰减结束时间":  "0.8",
+        "速度修正":  "-0.125",
+        "视野修正":  "1x",
+        "缩圈速率":  "1",
+        "射速":  "559",
+        "持续射击一秒恢复时间":  "1.86",
+        "衰减开始距离":  "38",
+        "衰减结束距离":  "80",
+        "站立精度":  "0.55",
+        "蹲伏精度":  "0.68",
+        "趴下精度":  "0.86",
+        "架枪精度":  "0.86",
+        "文件名称":  "bren"
+    },
+    {
+        "id":  44,
+        "阵营":  "英军",
+        "类型":  "机枪",
+        "枪械名称":  "法夸尔轻机枪",
+        "致死":  "0.6",
+        "射击间隔":  "0.11",
+        "弹容":  "77",
+        "基础精度":  "0.85",
+        "姿态精度修正-站":  "0.65",
+        "姿态精度修正-蹲":  "0.8",
+        "姿态精度修正-趴":  "1.0125",
+        "姿态精度修正-架":  "1.0125",
+        "单发后坐力":  "0.165",
+        "后坐力恢复":  "0.875",
+        "弹速":  "105",
+        "衰减开始时间":  "0.375",
+        "衰减结束时间":  "0.76",
+        "速度修正":  "-0.125",
+        "视野修正":  "1x",
+        "缩圈速率":  "1",
+        "射速":  "546",
+        "持续射击一秒恢复时间":  "1.71",
+        "衰减开始距离":  "39",
+        "衰减结束距离":  "80",
+        "站立精度":  "0.55",
+        "蹲伏精度":  "0.68",
+        "趴下精度":  "0.86",
+        "架枪精度":  "0.86",
+        "文件名称":  "beardmore_f_l"
+    },
+    {
+        "id":  45,
+        "阵营":  "英军",
+        "类型":  "机枪",
+        "枪械名称":  "维克斯机枪(脚架)",
+        "致死":  "0.55",
+        "射击间隔":  "0.115",
+        "弹容":  "200",
+        "基础精度":  "0.66",
+        "姿态精度修正-站":  "/",
+        "姿态精度修正-蹲":  "/",
+        "姿态精度修正-趴":  "1.12",
+        "姿态精度修正-架":  "1.12",
+        "单发后坐力":  "0.11",
+        "后坐力恢复":  "0.85",
+        "弹速":  "110",
+        "衰减开始时间":  "0.55",
+        "衰减结束时间":  "0.73",
+        "速度修正":  "-0.15",
+        "视野修正":  "1x",
+        "缩圈速率":  "1",
+        "射速":  "522",
+        "持续射击一秒恢复时间":  "1.13",
+        "衰减开始距离":  "61",
+        "衰减结束距离":  "80",
+        "站立精度":  "/",
+        "蹲伏精度":  "/",
+        "趴下精度":  "0.74",
+        "架枪精度":  "0.74",
+        "文件名称":  "vickers_mb"
+    },
+    {
+        "id":  46,
+        "阵营":  "英军",
+        "类型":  "机枪",
+        "枪械名称":  "维克斯MkVI机枪(便携)",
+        "致死":  "0.675",
+        "射击间隔":  "0.115",
+        "弹容":  "200",
+        "基础精度":  "0.62",
+        "姿态精度修正-站":  "0.4",
+        "姿态精度修正-蹲":  "0.5",
+        "姿态精度修正-趴":  "0.6",
+        "姿态精度修正-架":  "0.6",
+        "单发后坐力":  "1",
+        "后坐力恢复":  "3",
+        "弹速":  "105",
+        "衰减开始时间":  "0.55",
+        "衰减结束时间":  "0.76",
+        "速度修正":  "-0.2",
+        "视野修正":  "1x",
+        "缩圈速率":  "1",
+        "射速":  "522",
+        "持续射击一秒恢复时间":  "2.9",
+        "衰减开始距离":  "58",
+        "衰减结束距离":  "80",
+        "站立精度":  "0.25",
+        "蹲伏精度":  "0.31",
+        "趴下精度":  "0.37",
+        "架枪精度":  "0.37",
+        "文件名称":  "vickers_a"
+    },
+    {
+        "id":  47,
+        "阵营":  "英军",
+        "类型":  "机枪",
+        "枪械名称":  "维克斯-K机枪(便携)",
+        "致死":  "0.6",
+        "射击间隔":  "0.063",
+        "弹容":  "100",
+        "基础精度":  "0.65",
+        "姿态精度修正-站":  "0.65",
+        "姿态精度修正-蹲":  "0.6",
+        "姿态精度修正-趴":  "1",
+        "姿态精度修正-架":  "1",
+        "单发后坐力":  "0.2",
+        "后坐力恢复":  "1.8",
+        "弹速":  "100",
+        "衰减开始时间":  "0.6",
+        "衰减结束时间":  "0.89",
+        "速度修正":  "-0.2",
+        "视野修正":  "1x",
+        "缩圈速率":  "1",
+        "射速":  "953",
+        "持续射击一秒恢复时间":  "1.76",
+        "衰减开始距离":  "60",
+        "衰减结束距离":  "89",
+        "站立精度":  "0.42",
+        "蹲伏精度":  "0.39",
+        "趴下精度":  "0.65",
+        "架枪精度":  "0.65",
+        "文件名称":  "vickers_k"
+    },
+    {
+        "id":  48,
+        "阵营":  "英军",
+        "类型":  "机枪",
+        "枪械名称":  "法夸尔.50机炮",
+        "致死":  "1.4",
+        "射击间隔":  "0.13",
+        "弹容":  "29",
+        "基础精度":  "0.6",
+        "姿态精度修正-站":  "0.4",
+        "姿态精度修正-蹲":  "0.5",
+        "姿态精度修正-趴":  "0.6",
+        "姿态精度修正-架":  "0.6",
+        "单发后坐力":  "4",
+        "后坐力恢复":  "3",
+        "弹速":  "109",
+        "衰减开始时间":  "0.71",
+        "衰减结束时间":  "0.72",
+        "速度修正":  "-0.2",
+        "视野修正":  "1x",
+        "缩圈速率":  "1",
+        "射速":  "462",
+        "持续射击一秒恢复时间":  "10.26",
+        "衰减开始距离":  "77",
+        "衰减结束距离":  "78",
+        "站立精度":  "0.24",
+        "蹲伏精度":  "0.3",
+        "趴下精度":  "0.36",
+        "架枪精度":  "0.36",
+        "文件名称":  "beardmore_f_5"
+    },
+    {
+        "id":  49,
+        "阵营":  "德军",
+        "类型":  "机枪",
+        "枪械名称":  "MG26(捷克制)",
+        "致死":  "0.625",
+        "射击间隔":  "0.12",
+        "弹容":  "20",
+        "基础精度":  "0.825",
+        "姿态精度修正-站":  "0.65",
+        "姿态精度修正-蹲":  "0.8",
+        "姿态精度修正-趴":  "1.1",
+        "姿态精度修正-架":  "1.1",
+        "单发后坐力":  "0.16",
+        "后坐力恢复":  "0.9",
+        "弹速":  "110",
+        "衰减开始时间":  "0.4",
+        "衰减结束时间":  "0.73",
+        "速度修正":  "-0.125",
+        "视野修正":  "1x",
+        "缩圈速率":  "1.1",
+        "射速":  "500",
+        "持续射击一秒恢复时间":  "1.48",
+        "衰减开始距离":  "44",
+        "衰减结束距离":  "80",
+        "站立精度":  "0.54",
+        "蹲伏精度":  "0.66",
+        "趴下精度":  "0.91",
+        "架枪精度":  "0.91",
+        "文件名称":  "mg26t"
+    },
+    {
+        "id":  50,
+        "阵营":  "德军",
+        "类型":  "机枪",
+        "枪械名称":  "FG-42伞兵机枪",
+        "致死":  "0.7",
+        "射击间隔":  "0.085",
+        "弹容":  "20",
+        "基础精度":  "0.975",
+        "姿态精度修正-站":  "0.81",
+        "姿态精度修正-蹲":  "0.9",
+        "姿态精度修正-趴":  "0.975",
+        "姿态精度修正-架":  "0.975",
+        "单发后坐力":  "0.28",
+        "后坐力恢复":  "1.47",
+        "弹速":  "110",
+        "衰减开始时间":  "0.45",
+        "衰减结束时间":  "0.73",
+        "速度修正":  "-0.125",
+        "视野修正":  "1x",
+        "缩圈速率":  "1.35",
+        "射速":  "706",
+        "持续射击一秒恢复时间":  "2.24",
+        "衰减开始距离":  "50",
+        "衰减结束距离":  "80",
+        "站立精度":  "0.79",
+        "蹲伏精度":  "0.88",
+        "趴下精度":  "0.95",
+        "架枪精度":  "0.95",
+        "文件名称":  "fg42_late"
+    },
+    {
+        "id":  51,
+        "阵营":  "德军",
+        "类型":  "机枪",
+        "枪械名称":  "FG-42伞兵机枪（刺刀）",
+        "致死":  "0.7",
+        "射击间隔":  "0.085",
+        "弹容":  "20",
+        "基础精度":  "0.975",
+        "姿态精度修正-站":  "0.775",
+        "姿态精度修正-蹲":  "0.88",
+        "姿态精度修正-趴":  "0.936",
+        "姿态精度修正-架":  "0.936",
+        "单发后坐力":  "0.28",
+        "后坐力恢复":  "1.47",
+        "弹速":  "110",
+        "衰减开始时间":  "0.45",
+        "衰减结束时间":  "0.73",
+        "速度修正":  "-0.125",
+        "视野修正":  "1x",
+        "缩圈速率":  "1.15",
+        "射速":  "706",
+        "持续射击一秒恢复时间":  "2.24",
+        "衰减开始距离":  "50",
+        "衰减结束距离":  "80",
+        "站立精度":  "0.76",
+        "蹲伏精度":  "0.86",
+        "趴下精度":  "0.91",
+        "架枪精度":  "0.91",
+        "文件名称":  "fg42_late_b"
+    },
+    {
+        "id":  52,
+        "阵营":  "德军",
+        "类型":  "机枪",
+        "枪械名称":  "FG-42伞兵机枪(瞄镜)",
+        "致死":  "0.725",
+        "射击间隔":  "0.085",
+        "弹容":  "20",
+        "基础精度":  "0.98",
+        "姿态精度修正-站":  "0.85",
+        "姿态精度修正-蹲":  "0.975",
+        "姿态精度修正-趴":  "1",
+        "姿态精度修正-架":  "1",
+        "单发后坐力":  "0.3",
+        "后坐力恢复":  "1.47",
+        "弹速":  "110",
+        "衰减开始时间":  "0.636",
+        "衰减结束时间":  "0.909",
+        "速度修正":  "-0.125",
+        "视野修正":  "1.6x",
+        "缩圈速率":  "1",
+        "射速":  "706",
+        "持续射击一秒恢复时间":  "2.4",
+        "衰减开始距离":  "70",
+        "衰减结束距离":  "100",
+        "站立精度":  "0.83",
+        "蹲伏精度":  "0.96",
+        "趴下精度":  "0.98",
+        "架枪精度":  "0.98",
+        "文件名称":  "fg42_late_s"
+    },
+    {
+        "id":  53,
+        "阵营":  "德军",
+        "类型":  "机枪",
+        "枪械名称":  "FG-42伞兵步枪（瞄镜|刺刀）",
+        "致死":  "0.725",
+        "射击间隔":  "0.085",
+        "弹容":  "20",
+        "基础精度":  "0.98",
+        "姿态精度修正-站":  "0.8",
+        "姿态精度修正-蹲":  "0.91",
+        "姿态精度修正-趴":  "0.95",
+        "姿态精度修正-架":  "0.95",
+        "单发后坐力":  "0.3",
+        "后坐力恢复":  "1.47",
+        "弹速":  "110",
+        "衰减开始时间":  "0.636",
+        "衰减结束时间":  "0.909",
+        "速度修正":  "-0.125",
+        "视野修正":  "1.6x",
+        "缩圈速率":  "0.95",
+        "射速":  "706",
+        "持续射击一秒恢复时间":  "2.4",
+        "衰减开始距离":  "70",
+        "衰减结束距离":  "100",
+        "站立精度":  "0.78",
+        "蹲伏精度":  "0.89",
+        "趴下精度":  "0.93",
+        "架枪精度":  "0.93",
+        "文件名称":  "fg42_late_s_b"
+    },
+    {
+        "id":  54,
+        "阵营":  "德军",
+        "类型":  "机枪",
+        "枪械名称":  "MG34通用机枪",
+        "致死":  "0.55",
+        "射击间隔":  "0.0775",
+        "弹容":  "50",
+        "基础精度":  "0.775",
+        "姿态精度修正-站":  "/",
+        "姿态精度修正-蹲":  "/",
+        "姿态精度修正-趴":  "1.1",
+        "姿态精度修正-架":  "1.1",
+        "单发后坐力":  "0.21",
+        "后坐力恢复":  "1.5",
+        "弹速":  "110",
+        "衰减开始时间":  "0.375",
+        "衰减结束时间":  "0.73",
+        "速度修正":  "-0.15",
+        "视野修正":  "1x",
+        "缩圈速率":  "1",
+        "射速":  "775",
+        "持续射击一秒恢复时间":  "1.81",
+        "衰减开始距离":  "41",
+        "衰减结束距离":  "80",
+        "站立精度":  "/",
+        "蹲伏精度":  "/",
+        "趴下精度":  "0.85",
+        "架枪精度":  "0.85",
+        "文件名称":  "mg34"
+    },
+    {
+        "id":  55,
+        "阵营":  "德军",
+        "类型":  "机枪",
+        "枪械名称":  "MG34通用机枪(便携)",
+        "致死":  "0.515",
+        "射击间隔":  "0.0775",
+        "弹容":  "150",
+        "基础精度":  "0.6",
+        "姿态精度修正-站":  "0.4",
+        "姿态精度修正-蹲":  "0.5",
+        "姿态精度修正-趴":  "0.6",
+        "姿态精度修正-架":  "0.6",
+        "单发后坐力":  "1",
+        "后坐力恢复":  "3",
+        "弹速":  "110",
+        "衰减开始时间":  "0.42",
+        "衰减结束时间":  "0.73",
+        "速度修正":  "-0.2",
+        "视野修正":  "1x",
+        "缩圈速率":  "1",
+        "射速":  "775",
+        "持续射击一秒恢复时间":  "4.3",
+        "衰减开始距离":  "46",
+        "衰减结束距离":  "80",
+        "站立精度":  "0.24",
+        "蹲伏精度":  "0.3",
+        "趴下精度":  "0.36",
+        "架枪精度":  "0.36",
+        "文件名称":  "mg34_assault"
+    },
+    {
+        "id":  56,
+        "阵营":  "德军",
+        "类型":  "机枪",
+        "枪械名称":  "MG34通用机枪(弹链)",
+        "致死":  "0.55",
+        "射击间隔":  "0.0775",
+        "弹容":  "150",
+        "基础精度":  "0.775",
+        "姿态精度修正-站":  "/",
+        "姿态精度修正-蹲":  "/",
+        "姿态精度修正-趴":  "1.1",
+        "姿态精度修正-架":  "1.1",
+        "单发后坐力":  "0.21",
+        "后坐力恢复":  "1.5",
+        "弹速":  "110",
+        "衰减开始时间":  "0.375",
+        "衰减结束时间":  "0.73",
+        "速度修正":  "-0.15",
+        "视野修正":  "1x",
+        "缩圈速率":  "1",
+        "射速":  "775",
+        "持续射击一秒恢复时间":  "1.81",
+        "衰减开始距离":  "41",
+        "衰减结束距离":  "80",
+        "站立精度":  "/",
+        "蹲伏精度":  "/",
+        "趴下精度":  "0.85",
+        "架枪精度":  "0.85",
+        "文件名称":  "mg34_e_belt"
+    },
+    {
+        "id":  57,
+        "阵营":  "德军",
+        "类型":  "机枪",
+        "枪械名称":  "MG42通用机枪",
+        "致死":  "0.6",
+        "射击间隔":  "0.0525",
+        "弹容":  "50",
+        "基础精度":  "0.65",
+        "姿态精度修正-站":  "/",
+        "姿态精度修正-蹲":  "/",
+        "姿态精度修正-趴":  "1.25",
+        "姿态精度修正-架":  "1.25",
+        "单发后坐力":  "0.11",
+        "后坐力恢复":  "0.875",
+        "弹速":  "100",
+        "衰减开始时间":  "0.55",
+        "衰减结束时间":  "0.8",
+        "速度修正":  "-0.15",
+        "视野修正":  "1x",
+        "缩圈速率":  "1",
+        "射速":  "1143",
+        "持续射击一秒恢复时间":  "2.39",
+        "衰减开始距离":  "55",
+        "衰减结束距离":  "80",
+        "站立精度":  "/",
+        "蹲伏精度":  "/",
+        "趴下精度":  "0.81",
+        "架枪精度":  "0.81",
+        "文件名称":  "mg42"
+    },
+    {
+        "id":  58,
+        "阵营":  "德军",
+        "类型":  "机枪",
+        "枪械名称":  "MG42通用机枪(便携)",
+        "致死":  "0.6",
+        "射击间隔":  "0.0525",
+        "弹容":  "150",
+        "基础精度":  "0.6",
+        "姿态精度修正-站":  "0.4",
+        "姿态精度修正-蹲":  "0.5",
+        "姿态精度修正-趴":  "0.6",
+        "姿态精度修正-架":  "0.6",
+        "单发后坐力":  "1",
+        "后坐力恢复":  "3",
+        "弹速":  "100",
+        "衰减开始时间":  "0.42",
+        "衰减结束时间":  "0.8",
+        "速度修正":  "-0.2",
+        "视野修正":  "1x",
+        "缩圈速率":  "1",
+        "射速":  "1143",
+        "持续射击一秒恢复时间":  "6.35",
+        "衰减开始距离":  "42",
+        "衰减结束距离":  "80",
+        "站立精度":  "0.24",
+        "蹲伏精度":  "0.3",
+        "趴下精度":  "0.36",
+        "架枪精度":  "0.36",
+        "文件名称":  "mg42_assault"
+    },
+    {
+        "id":  59,
+        "阵营":  "德军",
+        "类型":  "机枪",
+        "枪械名称":  "MG42通用机枪(弹链)",
+        "致死":  "0.6",
+        "射击间隔":  "0.0525",
+        "弹容":  "150",
+        "基础精度":  "0.65",
+        "姿态精度修正-站":  "/",
+        "姿态精度修正-蹲":  "/",
+        "姿态精度修正-趴":  "1.25",
+        "姿态精度修正-架":  "1.25",
+        "单发后坐力":  "0.11",
+        "后坐力恢复":  "0.875",
+        "弹速":  "100",
+        "衰减开始时间":  "0.55",
+        "衰减结束时间":  "0.8",
+        "速度修正":  "-0.15",
+        "视野修正":  "1x",
+        "缩圈速率":  "1",
+        "射速":  "1143",
+        "持续射击一秒恢复时间":  "2.39",
+        "衰减开始距离":  "55",
+        "衰减结束距离":  "80",
+        "站立精度":  "/",
+        "蹲伏精度":  "/",
+        "趴下精度":  "0.81",
+        "架枪精度":  "0.81",
+        "文件名称":  "mg42_e_belt"
+    },
+    {
+        "id":  60,
+        "阵营":  "美军",
+        "类型":  "步枪",
+        "枪械名称":  "M1903A3“春田”",
+        "致死":  "1.125",
+        "射击间隔":  "-1",
+        "弹容":  "5",
+        "基础精度":  "0.99",
+        "姿态精度修正-站":  "0.89",
+        "姿态精度修正-蹲":  "0.97",
+        "姿态精度修正-趴":  "1",
+        "姿态精度修正-架":  "1",
+        "单发后坐力":  "3.5",
+        "后坐力恢复":  "0.87",
+        "弹速":  "135",
+        "衰减开始时间":  "0.5",
+        "衰减结束时间":  "0.6",
+        "速度修正":  "-0.1",
+        "视野修正":  "1.1x",
+        "缩圈速率":  "8",
+        "射速":  "/",
+        "持续射击一秒恢复时间":  "/",
+        "衰减开始距离":  "68",
+        "衰减结束距离":  "81",
+        "站立精度":  "0.88",
+        "蹲伏精度":  "0.96",
+        "趴下精度":  "0.99",
+        "架枪精度":  "0.99",
+        "文件名称":  "m1903_rifle"
+    },
+    {
+        "id":  61,
+        "阵营":  "美军",
+        "类型":  "步枪",
+        "枪械名称":  "M1903A3“春田”（刺刀）",
+        "致死":  "1.125",
+        "射击间隔":  "-1",
+        "弹容":  "5",
+        "基础精度":  "0.99",
+        "姿态精度修正-站":  "0.863",
+        "姿态精度修正-蹲":  "0.94",
+        "姿态精度修正-趴":  "0.96",
+        "姿态精度修正-架":  "0.96",
+        "单发后坐力":  "3.5",
+        "后坐力恢复":  "0.87",
+        "弹速":  "135",
+        "衰减开始时间":  "0.5",
+        "衰减结束时间":  "0.6",
+        "速度修正":  "-0.1",
+        "视野修正":  "1.1x",
+        "缩圈速率":  "1.75",
+        "射速":  "/",
+        "持续射击一秒恢复时间":  "/",
+        "衰减开始距离":  "68",
+        "衰减结束距离":  "81",
+        "站立精度":  "0.85",
+        "蹲伏精度":  "0.93",
+        "趴下精度":  "0.95",
+        "架枪精度":  "0.95",
+        "文件名称":  "m1903_rifle_b"
+    },
+    {
+        "id":  62,
+        "阵营":  "美军",
+        "类型":  "步枪",
+        "枪械名称":  "M1“加兰德”",
+        "致死":  "0.85",
+        "射击间隔":  "0.2",
+        "弹容":  "8",
+        "基础精度":  "0.955",
+        "姿态精度修正-站":  "0.865",
+        "姿态精度修正-蹲":  "0.915",
+        "姿态精度修正-趴":  "1",
+        "姿态精度修正-架":  "1",
+        "单发后坐力":  "3",
+        "后坐力恢复":  "1.77",
+        "弹速":  "125",
+        "衰减开始时间":  "0.4",
+        "衰减结束时间":  "0.64",
+        "速度修正":  "-0.1",
+        "视野修正":  "1x",
+        "缩圈速率":  "8",
+        "射速":  "300",
+        "持续射击一秒恢复时间":  "8.47",
+        "衰减开始距离":  "50",
+        "衰减结束距离":  "80",
+        "站立精度":  "0.83",
+        "蹲伏精度":  "0.87",
+        "趴下精度":  "0.96",
+        "架枪精度":  "0.96",
+        "文件名称":  "m1_garand"
+    },
+    {
+        "id":  63,
+        "阵营":  "美军",
+        "类型":  "步枪",
+        "枪械名称":  "M1“加兰德”（刺刀）",
+        "致死":  "0.85",
+        "射击间隔":  "0.2",
+        "弹容":  "8",
+        "基础精度":  "0.955",
+        "姿态精度修正-站":  "0.865",
+        "姿态精度修正-蹲":  "0.915",
+        "姿态精度修正-趴":  "0.96",
+        "姿态精度修正-架":  "0.96",
+        "单发后坐力":  "3",
+        "后坐力恢复":  "1.77",
+        "弹速":  "125",
+        "衰减开始时间":  "0.4",
+        "衰减结束时间":  "0.64",
+        "速度修正":  "-0.1",
+        "视野修正":  "1x",
+        "缩圈速率":  "2",
+        "射速":  "300",
+        "持续射击一秒恢复时间":  "8.47",
+        "衰减开始距离":  "50",
+        "衰减结束距离":  "80",
+        "站立精度":  "0.83",
+        "蹲伏精度":  "0.87",
+        "趴下精度":  "0.92",
+        "架枪精度":  "0.92",
+        "文件名称":  "m1_garand_b"
+    },
+    {
+        "id":  64,
+        "阵营":  "美军",
+        "类型":  "步枪",
+        "枪械名称":  "T22“加兰德”",
+        "致死":  "0.85",
+        "射击间隔":  "0.2",
+        "弹容":  "20",
+        "基础精度":  "0.955",
+        "姿态精度修正-站":  "0.865",
+        "姿态精度修正-蹲":  "0.915",
+        "姿态精度修正-趴":  "1",
+        "姿态精度修正-架":  "1",
+        "单发后坐力":  "3",
+        "后坐力恢复":  "1.77",
+        "弹速":  "125",
+        "衰减开始时间":  "0.4",
+        "衰减结束时间":  "0.64",
+        "速度修正":  "-0.1",
+        "视野修正":  "1x",
+        "缩圈速率":  "2",
+        "射速":  "300",
+        "持续射击一秒恢复时间":  "8.47",
+        "衰减开始距离":  "50",
+        "衰减结束距离":  "80",
+        "站立精度":  "0.83",
+        "蹲伏精度":  "0.87",
+        "趴下精度":  "0.96",
+        "架枪精度":  "0.96",
+        "文件名称":  "m1_garand_l_m"
+    },
+    {
+        "id":  65,
+        "阵营":  "美军",
+        "类型":  "步枪",
+        "枪械名称":  "T22“加兰德”（刺刀）",
+        "致死":  "0.85",
+        "射击间隔":  "0.2",
+        "弹容":  "20",
+        "基础精度":  "0.955",
+        "姿态精度修正-站":  "0.865",
+        "姿态精度修正-蹲":  "0.915",
+        "姿态精度修正-趴":  "0.96",
+        "姿态精度修正-架":  "0.96",
+        "单发后坐力":  "3",
+        "后坐力恢复":  "1.77",
+        "弹速":  "125",
+        "衰减开始时间":  "0.4",
+        "衰减结束时间":  "0.64",
+        "速度修正":  "-0.1",
+        "视野修正":  "1x",
+        "缩圈速率":  "1.5",
+        "射速":  "300",
+        "持续射击一秒恢复时间":  "8.47",
+        "衰减开始距离":  "50",
+        "衰减结束距离":  "80",
+        "站立精度":  "0.83",
+        "蹲伏精度":  "0.87",
+        "趴下精度":  "0.92",
+        "架枪精度":  "0.92",
+        "文件名称":  "m1_garand_l_m_b"
+    },
+    {
+        "id":  66,
+        "阵营":  "美军",
+        "类型":  "步枪",
+        "枪械名称":  "M1941“约翰逊”步枪",
+        "致死":  "1.125",
+        "射击间隔":  "0.25",
+        "弹容":  "10",
+        "基础精度":  "0.975",
+        "姿态精度修正-站":  "0.965",
+        "姿态精度修正-蹲":  "0.985",
+        "姿态精度修正-趴":  "1",
+        "姿态精度修正-架":  "1",
+        "单发后坐力":  "1.75",
+        "后坐力恢复":  "1.33",
+        "弹速":  "125",
+        "衰减开始时间":  "0.48",
+        "衰减结束时间":  "0.64",
+        "速度修正":  "-0.1",
+        "视野修正":  "1x",
+        "缩圈速率":  "3.5",
+        "射速":  "240",
+        "持续射击一秒恢复时间":  "5.26",
+        "衰减开始距离":  "60",
+        "衰减结束距离":  "80",
+        "站立精度":  "0.94",
+        "蹲伏精度":  "0.96",
+        "趴下精度":  "0.98",
+        "架枪精度":  "0.98",
+        "文件名称":  "m1941_john_r"
+    },
+    {
+        "id":  67,
+        "阵营":  "美军",
+        "类型":  "步枪",
+        "枪械名称":  "M1941“约翰逊”步枪（刺刀）",
+        "致死":  "1.125",
+        "射击间隔":  "0.25",
+        "弹容":  "10",
+        "基础精度":  "0.975",
+        "姿态精度修正-站":  "0.92",
+        "姿态精度修正-蹲":  "0.94",
+        "姿态精度修正-趴":  "0.95",
+        "姿态精度修正-架":  "0.95",
+        "单发后坐力":  "1.75",
+        "后坐力恢复":  "1.33",
+        "弹速":  "125",
+        "衰减开始时间":  "0.48",
+        "衰减结束时间":  "0.64",
+        "速度修正":  "-0.1",
+        "视野修正":  "1x",
+        "缩圈速率":  "2",
+        "射速":  "240",
+        "持续射击一秒恢复时间":  "5.26",
+        "衰减开始距离":  "60",
+        "衰减结束距离":  "80",
+        "站立精度":  "0.9",
+        "蹲伏精度":  "0.92",
+        "趴下精度":  "0.93",
+        "架枪精度":  "0.93",
+        "文件名称":  "m1941_john_r_b"
+    },
+    {
+        "id":  68,
+        "阵营":  "美军",
+        "类型":  "步枪",
+        "枪械名称":  "M2卡宾枪",
+        "致死":  "0.65",
+        "射击间隔":  "0.08",
+        "弹容":  "30",
+        "基础精度":  "0.92",
+        "姿态精度修正-站":  "0.85",
+        "姿态精度修正-蹲":  "0.9",
+        "姿态精度修正-趴":  "0.95",
+        "姿态精度修正-架":  "0.9",
+        "单发后坐力":  "0.305",
+        "后坐力恢复":  "1.54",
+        "弹速":  "100",
+        "衰减开始时间":  "0.35",
+        "衰减结束时间":  "0.6",
+        "速度修正":  "-0.05",
+        "视野修正":  "1x",
+        "缩圈速率":  "8",
+        "射速":  "750",
+        "持续射击一秒恢复时间":  "2.48",
+        "衰减开始距离":  "35",
+        "衰减结束距离":  "60",
+        "站立精度":  "0.78",
+        "蹲伏精度":  "0.83",
+        "趴下精度":  "0.87",
+        "架枪精度":  "0.83",
+        "文件名称":  "m2_carbine"
+    },
+    {
+        "id":  69,
+        "阵营":  "美军",
+        "类型":  "步枪",
+        "枪械名称":  "M2卡宾枪（刺刀）",
+        "致死":  "0.65",
+        "射击间隔":  "0.08",
+        "弹容":  "30",
+        "基础精度":  "0.92",
+        "姿态精度修正-站":  "0.85",
+        "姿态精度修正-蹲":  "0.9",
+        "姿态精度修正-趴":  "0.95",
+        "姿态精度修正-架":  "0.9",
+        "单发后坐力":  "0.305",
+        "后坐力恢复":  "1.95",
+        "弹速":  "100",
+        "衰减开始时间":  "0.35",
+        "衰减结束时间":  "0.6",
+        "速度修正":  "-0.05",
+        "视野修正":  "1x",
+        "缩圈速率":  "1.35",
+        "射速":  "750",
+        "持续射击一秒恢复时间":  "1.96",
+        "衰减开始距离":  "35",
+        "衰减结束距离":  "60",
+        "站立精度":  "0.78",
+        "蹲伏精度":  "0.83",
+        "趴下精度":  "0.87",
+        "架枪精度":  "0.83",
+        "文件名称":  "m2_carbine_b"
+    },
+    {
+        "id":  70,
+        "阵营":  "日军",
+        "类型":  "步枪",
+        "枪械名称":  "38式栓动步枪",
+        "致死":  "1",
+        "射击间隔":  "-1",
+        "弹容":  "5",
+        "基础精度":  "0.99",
+        "姿态精度修正-站":  "0.89",
+        "姿态精度修正-蹲":  "0.97",
+        "姿态精度修正-趴":  "1",
+        "姿态精度修正-架":  "1",
+        "单发后坐力":  "0.485",
+        "后坐力恢复":  "0.625",
+        "弹速":  "135",
+        "衰减开始时间":  "0.25",
+        "衰减结束时间":  "0.59",
+        "速度修正":  "-0.1",
+        "视野修正":  "1.1x",
+        "缩圈速率":  "8.5",
+        "射速":  "/",
+        "持续射击一秒恢复时间":  "/",
+        "衰减开始距离":  "34",
+        "衰减结束距离":  "80",
+        "站立精度":  "0.88",
+        "蹲伏精度":  "0.96",
+        "趴下精度":  "0.99",
+        "架枪精度":  "0.99",
+        "文件名称":  "type38_rifle"
+    },
+    {
+        "id":  71,
+        "阵营":  "日军",
+        "类型":  "步枪",
+        "枪械名称":  "38式栓动步枪（刺刀）",
+        "致死":  "1",
+        "射击间隔":  "-1",
+        "弹容":  "5",
+        "基础精度":  "0.99",
+        "姿态精度修正-站":  "0.863",
+        "姿态精度修正-蹲":  "0.94",
+        "姿态精度修正-趴":  "0.96",
+        "姿态精度修正-架":  "0.96",
+        "单发后坐力":  "0.485",
+        "后坐力恢复":  "0.625",
+        "弹速":  "135",
+        "衰减开始时间":  "0.25",
+        "衰减结束时间":  "0.59",
+        "速度修正":  "-0.1",
+        "视野修正":  "1.1x",
+        "缩圈速率":  "1.75",
+        "射速":  "/",
+        "持续射击一秒恢复时间":  "/",
+        "衰减开始距离":  "34",
+        "衰减结束距离":  "80",
+        "站立精度":  "0.85",
+        "蹲伏精度":  "0.93",
+        "趴下精度":  "0.95",
+        "架枪精度":  "0.95",
+        "文件名称":  "type38_rifle_b"
+    },
+    {
+        "id":  72,
+        "阵营":  "日军",
+        "类型":  "步枪",
+        "枪械名称":  "意式卡尔卡诺步枪",
+        "致死":  "1",
+        "射击间隔":  "-1",
+        "弹容":  "5",
+        "基础精度":  "0.99",
+        "姿态精度修正-站":  "0.935",
+        "姿态精度修正-蹲":  "0.975",
+        "姿态精度修正-趴":  "1",
+        "姿态精度修正-架":  "1",
+        "单发后坐力":  "0.585",
+        "后坐力恢复":  "0.625",
+        "弹速":  "130",
+        "衰减开始时间":  "0.307",
+        "衰减结束时间":  "0.62",
+        "速度修正":  "-0.1",
+        "视野修正":  "1.1x",
+        "缩圈速率":  "8.5",
+        "射速":  "/",
+        "持续射击一秒恢复时间":  "/",
+        "衰减开始距离":  "40",
+        "衰减结束距离":  "81",
+        "站立精度":  "0.93",
+        "蹲伏精度":  "0.97",
+        "趴下精度":  "0.99",
+        "架枪精度":  "0.99",
+        "文件名称":  "type_i_rifle"
+    },
+    {
+        "id":  73,
+        "阵营":  "日军",
+        "类型":  "步枪",
+        "枪械名称":  "意式卡尔卡诺步枪（刺刀）",
+        "致死":  "1",
+        "射击间隔":  "-1",
+        "弹容":  "5",
+        "基础精度":  "0.99",
+        "姿态精度修正-站":  "0.907",
+        "姿态精度修正-蹲":  "0.945",
+        "姿态精度修正-趴":  "0.96",
+        "姿态精度修正-架":  "0.96",
+        "单发后坐力":  "0.585",
+        "后坐力恢复":  "0.625",
+        "弹速":  "130",
+        "衰减开始时间":  "0.307",
+        "衰减结束时间":  "0.62",
+        "速度修正":  "-0.1",
+        "视野修正":  "1.1x",
+        "缩圈速率":  "2.5",
+        "射速":  "/",
+        "持续射击一秒恢复时间":  "/",
+        "衰减开始距离":  "40",
+        "衰减结束距离":  "81",
+        "站立精度":  "0.9",
+        "蹲伏精度":  "0.94",
+        "趴下精度":  "0.95",
+        "架枪精度":  "0.95",
+        "文件名称":  "type_i_rifle_b"
+    },
+    {
+        "id":  74,
+        "阵营":  "日军",
+        "类型":  "步枪",
+        "枪械名称":  "99式步枪",
+        "致死":  "1.125",
+        "射击间隔":  "-1",
+        "弹容":  "5",
+        "基础精度":  "0.985",
+        "姿态精度修正-站":  "0.89",
+        "姿态精度修正-蹲":  "0.97",
+        "姿态精度修正-趴":  "1",
+        "姿态精度修正-架":  "1",
+        "单发后坐力":  "2.5",
+        "后坐力恢复":  "0.87",
+        "弹速":  "135",
+        "衰减开始时间":  "0.4",
+        "衰减结束时间":  "0.59",
+        "速度修正":  "-0.1",
+        "视野修正":  "1.1x",
+        "缩圈速率":  "8",
+        "射速":  "/",
+        "持续射击一秒恢复时间":  "/",
+        "衰减开始距离":  "54",
+        "衰减结束距离":  "80",
+        "站立精度":  "0.88",
+        "蹲伏精度":  "0.96",
+        "趴下精度":  "0.99",
+        "架枪精度":  "0.99",
+        "文件名称":  "type99_rifle"
+    },
+    {
+        "id":  75,
+        "阵营":  "日军",
+        "类型":  "步枪",
+        "枪械名称":  "99式步枪（刺刀）",
+        "致死":  "1.125",
+        "射击间隔":  "-1",
+        "弹容":  "5",
+        "基础精度":  "0.985",
+        "姿态精度修正-站":  "0.863",
+        "姿态精度修正-蹲":  "0.94",
+        "姿态精度修正-趴":  "0.96",
+        "姿态精度修正-架":  "0.96",
+        "单发后坐力":  "2.5",
+        "后坐力恢复":  "0.87",
+        "弹速":  "135",
+        "衰减开始时间":  "0.4",
+        "衰减结束时间":  "0.59",
+        "速度修正":  "-0.1",
+        "视野修正":  "1.1x",
+        "缩圈速率":  "1.75",
+        "射速":  "/",
+        "持续射击一秒恢复时间":  "/",
+        "衰减开始距离":  "54",
+        "衰减结束距离":  "80",
+        "站立精度":  "0.85",
+        "蹲伏精度":  "0.93",
+        "趴下精度":  "0.95",
+        "架枪精度":  "0.95",
+        "文件名称":  "type99_rifle_b"
+    },
+    {
+        "id":  76,
+        "阵营":  "日军",
+        "类型":  "步枪",
+        "枪械名称":  "99式高级版",
+        "致死":  "1.125",
+        "射击间隔":  "-1",
+        "弹容":  "5",
+        "基础精度":  "0.99",
+        "姿态精度修正-站":  "0.955",
+        "姿态精度修正-蹲":  "0.98",
+        "姿态精度修正-趴":  "1",
+        "姿态精度修正-架":  "1",
+        "单发后坐力":  "2",
+        "后坐力恢复":  "1.4",
+        "弹速":  "140",
+        "衰减开始时间":  "0.56",
+        "衰减结束时间":  "0.57",
+        "速度修正":  "-0.1",
+        "视野修正":  "1.1x",
+        "缩圈速率":  "8",
+        "射速":  "/",
+        "持续射击一秒恢复时间":  "/",
+        "衰减开始距离":  "78",
+        "衰减结束距离":  "80",
+        "站立精度":  "0.95",
+        "蹲伏精度":  "0.97",
+        "趴下精度":  "0.99",
+        "架枪精度":  "0.99",
+        "文件名称":  "type99_r_e"
+    },
+    {
+        "id":  77,
+        "阵营":  "日军",
+        "类型":  "步枪",
+        "枪械名称":  "99式高级版（刺刀）",
+        "致死":  "1.125",
+        "射击间隔":  "-1",
+        "弹容":  "5",
+        "基础精度":  "0.99",
+        "姿态精度修正-站":  "0.92",
+        "姿态精度修正-蹲":  "0.94",
+        "姿态精度修正-趴":  "0.96",
+        "姿态精度修正-架":  "0.96",
+        "单发后坐力":  "2",
+        "后坐力恢复":  "1.4",
+        "弹速":  "140",
+        "衰减开始时间":  "0.56",
+        "衰减结束时间":  "0.57",
+        "速度修正":  "-0.1",
+        "视野修正":  "1.1x",
+        "缩圈速率":  "2.25",
+        "射速":  "/",
+        "持续射击一秒恢复时间":  "/",
+        "衰减开始距离":  "78",
+        "衰减结束距离":  "80",
+        "站立精度":  "0.91",
+        "蹲伏精度":  "0.93",
+        "趴下精度":  "0.95",
+        "架枪精度":  "0.95",
+        "文件名称":  "type99_r_e_b"
+    },
+    {
+        "id":  78,
+        "阵营":  "日军",
+        "类型":  "步枪",
+        "枪械名称":  "44式卡宾枪",
+        "致死":  "1",
+        "射击间隔":  "-1",
+        "弹容":  "5",
+        "基础精度":  "0.96",
+        "姿态精度修正-站":  "0.885",
+        "姿态精度修正-蹲":  "0.97",
+        "姿态精度修正-趴":  "1",
+        "姿态精度修正-架":  "1",
+        "单发后坐力":  "0.5",
+        "后坐力恢复":  "0.7",
+        "弹速":  "125",
+        "衰减开始时间":  "0.27",
+        "衰减结束时间":  "0.65",
+        "速度修正":  "-0.05",
+        "视野修正":  "1x",
+        "缩圈速率":  "10",
+        "射速":  "/",
+        "持续射击一秒恢复时间":  "/",
+        "衰减开始距离":  "34",
+        "衰减结束距离":  "81",
+        "站立精度":  "0.85",
+        "蹲伏精度":  "0.93",
+        "趴下精度":  "0.96",
+        "架枪精度":  "0.96",
+        "文件名称":  "type44_c"
+    },
+    {
+        "id":  79,
+        "阵营":  "日军",
+        "类型":  "步枪",
+        "枪械名称":  "44式卡宾枪（刺刀）",
+        "致死":  "1",
+        "射击间隔":  "-1",
+        "弹容":  "5",
+        "基础精度":  "0.96",
+        "姿态精度修正-站":  "0.86",
+        "姿态精度修正-蹲":  "0.941",
+        "姿态精度修正-趴":  "1",
+        "姿态精度修正-架":  "1",
+        "单发后坐力":  "0.5",
+        "后坐力恢复":  "0.7",
+        "弹速":  "125",
+        "衰减开始时间":  "0.27",
+        "衰减结束时间":  "0.65",
+        "速度修正":  "-0.05",
+        "视野修正":  "1x",
+        "缩圈速率":  "1.25",
+        "射速":  "/",
+        "持续射击一秒恢复时间":  "/",
+        "衰减开始距离":  "34",
+        "衰减结束距离":  "81",
+        "站立精度":  "0.83",
+        "蹲伏精度":  "0.9",
+        "趴下精度":  "0.96",
+        "架枪精度":  "0.96",
+        "文件名称":  "type44_c_b"
+    },
+    {
+        "id":  80,
+        "阵营":  "日军",
+        "类型":  "步枪",
+        "枪械名称":  "试制甲式半自动步枪",
+        "致死":  "0.85",
+        "射击间隔":  "0.2",
+        "弹容":  "10",
+        "基础精度":  "0.93",
+        "姿态精度修正-站":  "0.865",
+        "姿态精度修正-蹲":  "0.915",
+        "姿态精度修正-趴":  "1",
+        "姿态精度修正-架":  "1",
+        "单发后坐力":  "0.3",
+        "后坐力恢复":  "0.9",
+        "弹速":  "110",
+        "衰减开始时间":  "0.273",
+        "衰减结束时间":  "0.73",
+        "速度修正":  "-0.1",
+        "视野修正":  "1x",
+        "缩圈速率":  "8",
+        "射速":  "300",
+        "持续射击一秒恢复时间":  "1.67",
+        "衰减开始距离":  "30",
+        "衰减结束距离":  "80",
+        "站立精度":  "0.8",
+        "蹲伏精度":  "0.85",
+        "趴下精度":  "0.93",
+        "架枪精度":  "0.93",
+        "文件名称":  "type_ko_r"
+    },
+    {
+        "id":  81,
+        "阵营":  "日军",
+        "类型":  "步枪",
+        "枪械名称":  "试制甲式半自动步枪（刺刀）",
+        "致死":  "0.85",
+        "射击间隔":  "0.2",
+        "弹容":  "10",
+        "基础精度":  "0.93",
+        "姿态精度修正-站":  "0.865",
+        "姿态精度修正-蹲":  "0.915",
+        "姿态精度修正-趴":  "0.96",
+        "姿态精度修正-架":  "0.96",
+        "单发后坐力":  "0.3",
+        "后坐力恢复":  "0.9",
+        "弹速":  "110",
+        "衰减开始时间":  "0.273",
+        "衰减结束时间":  "0.73",
+        "速度修正":  "-0.1",
+        "视野修正":  "1x",
+        "缩圈速率":  "2",
+        "射速":  "300",
+        "持续射击一秒恢复时间":  "1.67",
+        "衰减开始距离":  "30",
+        "衰减结束距离":  "80",
+        "站立精度":  "0.8",
+        "蹲伏精度":  "0.85",
+        "趴下精度":  "0.89",
+        "架枪精度":  "0.89",
+        "文件名称":  "type_ko_r_b"
+    },
+    {
+        "id":  82,
+        "阵营":  "日军",
+        "类型":  "步枪",
+        "枪械名称":  "4式步枪",
+        "致死":  "0.85",
+        "射击间隔":  "0.2",
+        "弹容":  "10",
+        "基础精度":  "0.955",
+        "姿态精度修正-站":  "0.865",
+        "姿态精度修正-蹲":  "0.92",
+        "姿态精度修正-趴":  "1",
+        "姿态精度修正-架":  "0.92",
+        "单发后坐力":  "0.7",
+        "后坐力恢复":  "1.65",
+        "弹速":  "110",
+        "衰减开始时间":  "0.41",
+        "衰减结束时间":  "0.73",
+        "速度修正":  "-0.1",
+        "视野修正":  "1x",
+        "缩圈速率":  "8",
+        "射速":  "300",
+        "持续射击一秒恢复时间":  "2.12",
+        "衰减开始距离":  "45",
+        "衰减结束距离":  "80",
+        "站立精度":  "0.83",
+        "蹲伏精度":  "0.88",
+        "趴下精度":  "0.96",
+        "架枪精度":  "0.88",
+        "文件名称":  "type4_garand"
+    },
+    {
+        "id":  83,
+        "阵营":  "日军",
+        "类型":  "步枪",
+        "枪械名称":  "丙式自动步枪",
+        "致死":  "0.675",
+        "射击间隔":  "0.12",
+        "弹容":  "20",
+        "基础精度":  "0.975",
+        "姿态精度修正-站":  "0.85",
+        "姿态精度修正-蹲":  "0.945",
+        "姿态精度修正-趴":  "0.975",
+        "姿态精度修正-架":  "0.975",
+        "单发后坐力":  "0.25",
+        "后坐力恢复":  "1.47",
+        "弹速":  "85",
+        "衰减开始时间":  "0.4",
+        "衰减结束时间":  "0.94",
+        "速度修正":  "-0.05",
+        "视野修正":  "1x",
+        "缩圈速率":  "8",
+        "射速":  "500",
+        "持续射击一秒恢复时间":  "1.42",
+        "衰减开始距离":  "34",
+        "衰减结束距离":  "80",
+        "站立精度":  "0.83",
+        "蹲伏精度":  "0.92",
+        "趴下精度":  "0.95",
+        "架枪精度":  "0.95",
+        "文件名称":  "type_hei_auto"
+    },
+    {
+        "id":  84,
+        "阵营":  "英军",
+        "类型":  "步枪",
+        "枪械名称":  "李-恩菲尔德步枪",
+        "致死":  "1.125",
+        "射击间隔":  "-1",
+        "弹容":  "10",
+        "基础精度":  "0.99",
+        "姿态精度修正-站":  "0.89",
+        "姿态精度修正-蹲":  "0.97",
+        "姿态精度修正-趴":  "1",
+        "姿态精度修正-架":  "1",
+        "单发后坐力":  "2.5",
+        "后坐力恢复":  "0.9",
+        "弹速":  "127",
+        "衰减开始时间":  "0.34",
+        "衰减结束时间":  "0.62",
+        "速度修正":  "-0.1",
+        "视野修正":  "1.1x",
+        "缩圈速率":  "8",
+        "射速":  "/",
+        "持续射击一秒恢复时间":  "/",
+        "衰减开始距离":  "43",
+        "衰减结束距离":  "79",
+        "站立精度":  "0.88",
+        "蹲伏精度":  "0.96",
+        "趴下精度":  "0.99",
+        "架枪精度":  "0.99",
+        "文件名称":  "smle_no4_mki"
+    },
+    {
+        "id":  85,
+        "阵营":  "英军",
+        "类型":  "步枪",
+        "枪械名称":  "李-恩菲尔德步枪（刺刀）",
+        "致死":  "1.125",
+        "射击间隔":  "-1",
+        "弹容":  "10",
+        "基础精度":  "0.99",
+        "姿态精度修正-站":  "0.863",
+        "姿态精度修正-蹲":  "0.94",
+        "姿态精度修正-趴":  "0.96",
+        "姿态精度修正-架":  "0.96",
+        "单发后坐力":  "2.5",
+        "后坐力恢复":  "0.9",
+        "弹速":  "127",
+        "衰减开始时间":  "0.34",
+        "衰减结束时间":  "0.62",
+        "速度修正":  "-0.1",
+        "视野修正":  "1.1x",
+        "缩圈速率":  "1.75",
+        "射速":  "/",
+        "持续射击一秒恢复时间":  "/",
+        "衰减开始距离":  "43",
+        "衰减结束距离":  "79",
+        "站立精度":  "0.85",
+        "蹲伏精度":  "0.93",
+        "趴下精度":  "0.95",
+        "架枪精度":  "0.95",
+        "文件名称":  "smle_no4_mki_b"
+    },
+    {
+        "id":  86,
+        "阵营":  "英军",
+        "类型":  "步枪",
+        "枪械名称":  "查尔顿自动步枪",
+        "致死":  "0.7",
+        "射击间隔":  "0.11",
+        "弹容":  "20",
+        "基础精度":  "0.975",
+        "姿态精度修正-站":  "0.85",
+        "姿态精度修正-蹲":  "0.955",
+        "姿态精度修正-趴":  "0.985",
+        "姿态精度修正-架":  "0.985",
+        "单发后坐力":  "0.3",
+        "后坐力恢复":  "1.5",
+        "弹速":  "95",
+        "衰减开始时间":  "0.45",
+        "衰减结束时间":  "0.9",
+        "速度修正":  "-0.05",
+        "视野修正":  "1x",
+        "缩圈速率":  "8",
+        "射速":  "546",
+        "持续射击一秒恢复时间":  "1.82",
+        "衰减开始距离":  "43",
+        "衰减结束距离":  "86",
+        "站立精度":  "0.83",
+        "蹲伏精度":  "0.93",
+        "趴下精度":  "0.96",
+        "架枪精度":  "0.96",
+        "文件名称":  "charlton_automatic_rifle"
+    },
+    {
+        "id":  87,
+        "阵营":  "英军",
+        "类型":  "步枪",
+        "枪械名称":  "德利尔卡宾枪",
+        "致死":  "1.05+1.5",
+        "射击间隔":  "-1",
+        "弹容":  "7",
+        "基础精度":  "0.98",
+        "姿态精度修正-站":  "0.885",
+        "姿态精度修正-蹲":  "0.97",
+        "姿态精度修正-趴":  "1",
+        "姿态精度修正-架":  "1",
+        "单发后坐力":  "0.5",
+        "后坐力恢复":  "1",
+        "弹速":  "75",
+        "衰减开始时间":  "0.17",
+        "衰减结束时间":  "0.47",
+        "速度修正":  "-0.05",
+        "视野修正":  "0.9x",
+        "缩圈速率":  "10",
+        "射速":  "/",
+        "持续射击一秒恢复时间":  "/",
+        "衰减开始距离":  "13",
+        "衰减结束距离":  "35",
+        "站立精度":  "0.87",
+        "蹲伏精度":  "0.95",
+        "趴下精度":  "0.98",
+        "架枪精度":  "0.98",
+        "文件名称":  "de_lisle_c"
+    },
+    {
+        "id":  88,
+        "阵营":  "德军",
+        "类型":  "步枪",
+        "枪械名称":  "Kar-98k步枪",
+        "致死":  "1.125",
+        "射击间隔":  "-1",
+        "弹容":  "5",
+        "基础精度":  "0.99",
+        "姿态精度修正-站":  "0.89",
+        "姿态精度修正-蹲":  "0.97",
+        "姿态精度修正-趴":  "1",
+        "姿态精度修正-架":  "1",
+        "单发后坐力":  "4",
+        "后坐力恢复":  "0.87",
+        "弹速":  "135",
+        "衰减开始时间":  "0.59",
+        "衰减结束时间":  "0.6",
+        "速度修正":  "-0.1",
+        "视野修正":  "1.1x",
+        "缩圈速率":  "8",
+        "射速":  "/",
+        "持续射击一秒恢复时间":  "/",
+        "衰减开始距离":  "80",
+        "衰减结束距离":  "81",
+        "站立精度":  "0.88",
+        "蹲伏精度":  "0.96",
+        "趴下精度":  "0.99",
+        "架枪精度":  "0.99",
+        "文件名称":  "kar98k"
+    },
+    {
+        "id":  89,
+        "阵营":  "德军",
+        "类型":  "步枪",
+        "枪械名称":  "Kar-98k步枪（刺刀）",
+        "致死":  "1.125",
+        "射击间隔":  "-1",
+        "弹容":  "5",
+        "基础精度":  "0.99",
+        "姿态精度修正-站":  "0.863",
+        "姿态精度修正-蹲":  "0.94",
+        "姿态精度修正-趴":  "0.96",
+        "姿态精度修正-架":  "0.96",
+        "单发后坐力":  "4",
+        "后坐力恢复":  "0.87",
+        "弹速":  "135",
+        "衰减开始时间":  "0.59",
+        "衰减结束时间":  "0.6",
+        "速度修正":  "-0.1",
+        "视野修正":  "1.1x",
+        "缩圈速率":  "1.75",
+        "射速":  "/",
+        "持续射击一秒恢复时间":  "/",
+        "衰减开始距离":  "80",
+        "衰减结束距离":  "81",
+        "站立精度":  "0.85",
+        "蹲伏精度":  "0.93",
+        "趴下精度":  "0.95",
+        "架枪精度":  "0.95",
+        "文件名称":  "kar98k_b"
+    },
+    {
+        "id":  90,
+        "阵营":  "德军",
+        "类型":  "步枪",
+        "枪械名称":  "kar-98k侦察版",
+        "致死":  "1.125",
+        "射击间隔":  "-1",
+        "弹容":  "5",
+        "基础精度":  "0.99",
+        "姿态精度修正-站":  "0.96",
+        "姿态精度修正-蹲":  "0.98",
+        "姿态精度修正-趴":  "1",
+        "姿态精度修正-架":  "0.98",
+        "单发后坐力":  "4",
+        "后坐力恢复":  "0.87",
+        "弹速":  "140",
+        "衰减开始时间":  "0.643",
+        "衰减结束时间":  "0.71",
+        "速度修正":  "-0.1",
+        "视野修正":  "1.375x",
+        "缩圈速率":  "8",
+        "射速":  "/",
+        "持续射击一秒恢复时间":  "/",
+        "衰减开始距离":  "90",
+        "衰减结束距离":  "99",
+        "站立精度":  "0.95",
+        "蹲伏精度":  "0.97",
+        "趴下精度":  "0.99",
+        "架枪精度":  "0.97",
+        "文件名称":  "kar98k_s_o"
+    },
+    {
+        "id":  91,
+        "阵营":  "德军",
+        "类型":  "步枪",
+        "枪械名称":  "kar-98k侦察版（刺刀）",
+        "致死":  "1.125",
+        "射击间隔":  "-1",
+        "弹容":  "5",
+        "基础精度":  "0.99",
+        "姿态精度修正-站":  "0.921",
+        "姿态精度修正-蹲":  "0.94",
+        "姿态精度修正-趴":  "0.96",
+        "姿态精度修正-架":  "0.96",
+        "单发后坐力":  "4",
+        "后坐力恢复":  "0.87",
+        "弹速":  "140",
+        "衰减开始时间":  "0.643",
+        "衰减结束时间":  "0.71",
+        "速度修正":  "-0.1",
+        "视野修正":  "1.375x",
+        "缩圈速率":  "1.75",
+        "射速":  "/",
+        "持续射击一秒恢复时间":  "/",
+        "衰减开始距离":  "90",
+        "衰减结束距离":  "99",
+        "站立精度":  "0.91",
+        "蹲伏精度":  "0.93",
+        "趴下精度":  "0.95",
+        "架枪精度":  "0.95",
+        "文件名称":  "kar99k_s_o_b"
+    },
+    {
+        "id":  92,
+        "阵营":  "德军",
+        "类型":  "步枪",
+        "枪械名称":  "Kar-98k高级版",
+        "致死":  "1.125",
+        "射击间隔":  "-1",
+        "弹容":  "20",
+        "基础精度":  "0.99",
+        "姿态精度修正-站":  "0.96",
+        "姿态精度修正-蹲":  "0.98",
+        "姿态精度修正-趴":  "0.825",
+        "姿态精度修正-架":  "1",
+        "单发后坐力":  "4",
+        "后坐力恢复":  "0.87",
+        "弹速":  "140",
+        "衰减开始时间":  "0.643",
+        "衰减结束时间":  "0.71",
+        "速度修正":  "-0.1",
+        "视野修正":  "1.375x",
+        "缩圈速率":  "2",
+        "射速":  "/",
+        "持续射击一秒恢复时间":  "/",
+        "衰减开始距离":  "90",
+        "衰减结束距离":  "99",
+        "站立精度":  "0.95",
+        "蹲伏精度":  "0.97",
+        "趴下精度":  "0.82",
+        "架枪精度":  "0.99",
+        "文件名称":  "kar98k_elite"
+    },
+    {
+        "id":  93,
+        "阵营":  "德军",
+        "类型":  "步枪",
+        "枪械名称":  "Kar-98k高级版（刺刀）",
+        "致死":  "1.125",
+        "射击间隔":  "-1",
+        "弹容":  "20",
+        "基础精度":  "0.99",
+        "姿态精度修正-站":  "0.921",
+        "姿态精度修正-蹲":  "0.94",
+        "姿态精度修正-趴":  "0.825",
+        "姿态精度修正-架":  "0.96",
+        "单发后坐力":  "4",
+        "后坐力恢复":  "0.87",
+        "弹速":  "140",
+        "衰减开始时间":  "0.643",
+        "衰减结束时间":  "0.71",
+        "速度修正":  "-0.1",
+        "视野修正":  "1.375x",
+        "缩圈速率":  "1.5",
+        "射速":  "/",
+        "持续射击一秒恢复时间":  "/",
+        "衰减开始距离":  "90",
+        "衰减结束距离":  "99",
+        "站立精度":  "0.91",
+        "蹲伏精度":  "0.93",
+        "趴下精度":  "0.82",
+        "架枪精度":  "0.95",
+        "文件名称":  "kar98k_elite_b"
+    },
+    {
+        "id":  94,
+        "阵营":  "德军",
+        "类型":  "步枪",
+        "枪械名称":  "G43半自动步枪",
+        "致死":  "0.9",
+        "射击间隔":  "0.275",
+        "弹容":  "10",
+        "基础精度":  "0.955",
+        "姿态精度修正-站":  "0.865",
+        "姿态精度修正-蹲":  "0.915",
+        "姿态精度修正-趴":  "1",
+        "姿态精度修正-架":  "1",
+        "单发后坐力":  "3",
+        "后坐力恢复":  "1.7",
+        "弹速":  "115",
+        "衰减开始时间":  "0.435",
+        "衰减结束时间":  "0.7",
+        "速度修正":  "-0.1",
+        "视野修正":  "1x",
+        "缩圈速率":  "8",
+        "射速":  "219",
+        "持续射击一秒恢复时间":  "6.42",
+        "衰减开始距离":  "50",
+        "衰减结束距离":  "81",
+        "站立精度":  "0.83",
+        "蹲伏精度":  "0.87",
+        "趴下精度":  "0.96",
+        "架枪精度":  "0.96",
+        "文件名称":  "kar43"
+    },
+    {
+        "id":  95,
+        "阵营":  "德军",
+        "类型":  "步枪",
+        "枪械名称":  "G43（扩容弹匣）",
+        "致死":  "0.9",
+        "射击间隔":  "0.275",
+        "弹容":  "25",
+        "基础精度":  "0.955",
+        "姿态精度修正-站":  "0.865",
+        "姿态精度修正-蹲":  "0.915",
+        "姿态精度修正-趴":  "0.825",
+        "姿态精度修正-架":  "1",
+        "单发后坐力":  "3",
+        "后坐力恢复":  "1.7",
+        "弹速":  "115",
+        "衰减开始时间":  "0.435",
+        "衰减结束时间":  "0.7",
+        "速度修正":  "-0.1",
+        "视野修正":  "1x",
+        "缩圈速率":  "2",
+        "射速":  "219",
+        "持续射击一秒恢复时间":  "6.42",
+        "衰减开始距离":  "50",
+        "衰减结束距离":  "81",
+        "站立精度":  "0.83",
+        "蹲伏精度":  "0.87",
+        "趴下精度":  "0.79",
+        "架枪精度":  "0.96",
+        "文件名称":  "kar43_l_mag"
+    },
+    {
+        "id":  96,
+        "阵营":  "德军",
+        "类型":  "步枪",
+        "枪械名称":  "STG-44突击步枪",
+        "致死":  "0.625",
+        "射击间隔":  "0.132",
+        "弹容":  "30",
+        "基础精度":  "0.975",
+        "姿态精度修正-站":  "0.85",
+        "姿态精度修正-蹲":  "0.9",
+        "姿态精度修正-趴":  "0.85",
+        "姿态精度修正-架":  "0.9",
+        "单发后坐力":  "0.37",
+        "后坐力恢复":  "1.47",
+        "弹速":  "110",
+        "衰减开始时间":  "0.364",
+        "衰减结束时间":  "0.73",
+        "速度修正":  "-0.05",
+        "视野修正":  "1x",
+        "缩圈速率":  "8",
+        "射速":  "455",
+        "持续射击一秒恢复时间":  "1.91",
+        "衰减开始距离":  "40",
+        "衰减结束距离":  "80",
+        "站立精度":  "0.83",
+        "蹲伏精度":  "0.88",
+        "趴下精度":  "0.83",
+        "架枪精度":  "0.88",
+        "文件名称":  "stg44"
+    },
+    {
+        "id":  97,
+        "阵营":  "德军",
+        "类型":  "步枪",
+        "枪械名称":  "STG-44(瞄镜)",
+        "致死":  "0.65",
+        "射击间隔":  "0.132",
+        "弹容":  "30",
+        "基础精度":  "0.98",
+        "姿态精度修正-站":  "0.85",
+        "姿态精度修正-蹲":  "0.975",
+        "姿态精度修正-趴":  "0.85",
+        "姿态精度修正-架":  "1",
+        "单发后坐力":  "0.37",
+        "后坐力恢复":  "1.47",
+        "弹速":  "110",
+        "衰减开始时间":  "0.364",
+        "衰减结束时间":  "0.909",
+        "速度修正":  "-0.05",
+        "视野修正":  "1.6x",
+        "缩圈速率":  "1",
+        "射速":  "455",
+        "持续射击一秒恢复时间":  "1.91",
+        "衰减开始距离":  "40",
+        "衰减结束距离":  "100",
+        "站立精度":  "0.83",
+        "蹲伏精度":  "0.96",
+        "趴下精度":  "0.83",
+        "架枪精度":  "0.98",
+        "文件名称":  "stg44_s"
+    },
+    {
+        "id":  98,
+        "阵营":  "德军",
+        "类型":  "步枪",
+        "枪械名称":  "STG-44(吸血鬼)",
+        "致死":  "0.675",
+        "射击间隔":  "0.132",
+        "弹容":  "30",
+        "基础精度":  "0.98",
+        "姿态精度修正-站":  "0.85",
+        "姿态精度修正-蹲":  "0.975",
+        "姿态精度修正-趴":  "0.85",
+        "姿态精度修正-架":  "1",
+        "单发后坐力":  "0.35",
+        "后坐力恢复":  "1.47",
+        "弹速":  "110",
+        "衰减开始时间":  "0.591",
+        "衰减结束时间":  "0.909",
+        "速度修正":  "-0.1",
+        "视野修正":  "1.375x",
+        "缩圈速率":  "8",
+        "射速":  "455",
+        "持续射击一秒恢复时间":  "1.8",
+        "衰减开始距离":  "65",
+        "衰减结束距离":  "100",
+        "站立精度":  "0.83",
+        "蹲伏精度":  "0.96",
+        "趴下精度":  "0.83",
+        "架枪精度":  "0.98",
+        "文件名称":  "stg44_n"
+    },
+    {
+        "id":  99,
+        "阵营":  "美军",
+        "类型":  "狙击枪",
+        "枪械名称":  "M1903A1狙击步枪",
+        "致死":  "2",
+        "射击间隔":  "-1",
+        "弹容":  "5",
+        "基础精度":  "0.99",
+        "姿态精度修正-站":  "0.95",
+        "姿态精度修正-蹲":  "1",
+        "姿态精度修正-趴":  "1.1",
+        "姿态精度修正-架":  "1.1",
+        "单发后坐力":  "3",
+        "后坐力恢复":  "0.545",
+        "弹速":  "135",
+        "衰减开始时间":  "0.73",
+        "衰减结束时间":  "0.74",
+        "速度修正":  "-0.1",
+        "视野修正":  "1.85x",
+        "缩圈速率":  "1",
+        "射速":  "/",
+        "持续射击一秒恢复时间":  "/",
+        "衰减开始距离":  "99",
+        "衰减结束距离":  "100",
+        "站立精度":  "0.94",
+        "蹲伏精度":  "0.99",
+        "趴下精度":  "1.09",
+        "架枪精度":  "1.09",
+        "文件名称":  "m1903_rifle_s"
+    },
+    {
+        "id":  100,
+        "阵营":  "美军",
+        "类型":  "狙击枪",
+        "枪械名称":  "M1903A4狙击步枪",
+        "致死":  "2",
+        "射击间隔":  "-1",
+        "弹容":  "5",
+        "基础精度":  "0.985",
+        "姿态精度修正-站":  "0.95",
+        "姿态精度修正-蹲":  "1",
+        "姿态精度修正-趴":  "1.1",
+        "姿态精度修正-架":  "1.1",
+        "单发后坐力":  "3",
+        "后坐力恢复":  "0.7",
+        "弹速":  "135",
+        "衰减开始时间":  "0.73",
+        "衰减结束时间":  "0.74",
+        "速度修正":  "-0.1",
+        "视野修正":  "1.725x",
+        "缩圈速率":  "1.15",
+        "射速":  "/",
+        "持续射击一秒恢复时间":  "/",
+        "衰减开始距离":  "99",
+        "衰减结束距离":  "100",
+        "站立精度":  "0.94",
+        "蹲伏精度":  "0.99",
+        "趴下精度":  "1.08",
+        "架枪精度":  "1.08",
+        "文件名称":  "m1903a4_rifle_s"
+    },
+    {
+        "id":  101,
+        "阵营":  "美军",
+        "类型":  "狙击枪",
+        "枪械名称":  "M1C狙击“加兰德”",
+        "致死":  "1.125",
+        "射击间隔":  "0.2",
+        "弹容":  "8",
+        "基础精度":  "0.955",
+        "姿态精度修正-站":  "0.95",
+        "姿态精度修正-蹲":  "1",
+        "姿态精度修正-趴":  "1",
+        "姿态精度修正-架":  "1",
+        "单发后坐力":  "3",
+        "后坐力恢复":  "1.4",
+        "弹速":  "125",
+        "衰减开始时间":  "0.4",
+        "衰减结束时间":  "0.8",
+        "速度修正":  "-0.1",
+        "视野修正":  "1.475x",
+        "缩圈速率":  "1.1",
+        "射速":  "300",
+        "持续射击一秒恢复时间":  "10.71",
+        "衰减开始距离":  "50",
+        "衰减结束距离":  "100",
+        "站立精度":  "0.91",
+        "蹲伏精度":  "0.96",
+        "趴下精度":  "0.96",
+        "架枪精度":  "0.96",
+        "文件名称":  "m1_garand_s"
+    },
+    {
+        "id":  102,
+        "阵营":  "美军",
+        "类型":  "狙击枪",
+        "枪械名称":  "M1941约翰逊(瞄镜)",
+        "致死":  "1.125",
+        "射击间隔":  "0.25",
+        "弹容":  "10",
+        "基础精度":  "0.975",
+        "姿态精度修正-站":  "0.965",
+        "姿态精度修正-蹲":  "1",
+        "姿态精度修正-趴":  "1",
+        "姿态精度修正-架":  "1",
+        "单发后坐力":  "1.75",
+        "后坐力恢复":  "1.3",
+        "弹速":  "135",
+        "衰减开始时间":  "0.48",
+        "衰减结束时间":  "0.74",
+        "速度修正":  "-0.1",
+        "视野修正":  "1.725x",
+        "缩圈速率":  "1.15",
+        "射速":  "240",
+        "持续射击一秒恢复时间":  "5.38",
+        "衰减开始距离":  "65",
+        "衰减结束距离":  "100",
+        "站立精度":  "0.94",
+        "蹲伏精度":  "0.98",
+        "趴下精度":  "0.98",
+        "架枪精度":  "0.98",
+        "文件名称":  "m1941_j_r_s"
+    },
+    {
+        "id":  103,
+        "阵营":  "日军",
+        "类型":  "狙击枪",
+        "枪械名称":  "97式狙击步枪",
+        "致死":  "1.5",
+        "射击间隔":  "-1",
+        "弹容":  "5",
+        "基础精度":  "0.99",
+        "姿态精度修正-站":  "0.95",
+        "姿态精度修正-蹲":  "1",
+        "姿态精度修正-趴":  "1.1",
+        "姿态精度修正-架":  "1.1",
+        "单发后坐力":  "0.485",
+        "后坐力恢复":  "0.62",
+        "弹速":  "135",
+        "衰减开始时间":  "0.73",
+        "衰减结束时间":  "0.74",
+        "速度修正":  "-0.1",
+        "视野修正":  "1.725x",
+        "缩圈速率":  "1.8",
+        "射速":  "/",
+        "持续射击一秒恢复时间":  "/",
+        "衰减开始距离":  "99",
+        "衰减结束距离":  "100",
+        "站立精度":  "0.94",
+        "蹲伏精度":  "0.99",
+        "趴下精度":  "1.09",
+        "架枪精度":  "1.09",
+        "文件名称":  "type97_s"
+    },
+    {
+        "id":  104,
+        "阵营":  "日军",
+        "类型":  "狙击枪",
+        "枪械名称":  "99式狙击步枪",
+        "致死":  "2",
+        "射击间隔":  "-1",
+        "弹容":  "5",
+        "基础精度":  "0.985",
+        "姿态精度修正-站":  "0.95",
+        "姿态精度修正-蹲":  "1",
+        "姿态精度修正-趴":  "1.1",
+        "姿态精度修正-架":  "1.1",
+        "单发后坐力":  "2.5",
+        "后坐力恢复":  "0.7",
+        "弹速":  "135",
+        "衰减开始时间":  "0.73",
+        "衰减结束时间":  "0.74",
+        "速度修正":  "-0.1",
+        "视野修正":  "2x",
+        "缩圈速率":  "1.21",
+        "射速":  "/",
+        "持续射击一秒恢复时间":  "/",
+        "衰减开始距离":  "99",
+        "衰减结束距离":  "100",
+        "站立精度":  "0.94",
+        "蹲伏精度":  "0.99",
+        "趴下精度":  "1.08",
+        "架枪精度":  "1.08",
+        "文件名称":  "type99_r_s"
+    },
+    {
+        "id":  105,
+        "阵营":  "英军",
+        "类型":  "狙击枪",
+        "枪械名称":  "李-恩菲尔德狙击",
+        "致死":  "2",
+        "射击间隔":  "-1",
+        "弹容":  "10",
+        "基础精度":  "0.99",
+        "姿态精度修正-站":  "0.95",
+        "姿态精度修正-蹲":  "1",
+        "姿态精度修正-趴":  "1.1",
+        "姿态精度修正-架":  "1.1",
+        "单发后坐力":  "2.5",
+        "后坐力恢复":  "0.8",
+        "弹速":  "131",
+        "衰减开始时间":  "0.33",
+        "衰减结束时间":  "0.76",
+        "速度修正":  "-0.1",
+        "视野修正":  "1.725x",
+        "缩圈速率":  "1.15",
+        "射速":  "/",
+        "持续射击一秒恢复时间":  "/",
+        "衰减开始距离":  "43",
+        "衰减结束距离":  "100",
+        "站立精度":  "0.94",
+        "蹲伏精度":  "0.99",
+        "趴下精度":  "1.09",
+        "架枪精度":  "1.09",
+        "文件名称":  "smle_no4_mki_s"
+    },
+    {
+        "id":  106,
+        "阵营":  "英军",
+        "类型":  "狙击枪",
+        "枪械名称":  "P14狙击步枪",
+        "致死":  "2",
+        "射击间隔":  "-1",
+        "弹容":  "5",
+        "基础精度":  "0.985",
+        "姿态精度修正-站":  "0.95",
+        "姿态精度修正-蹲":  "1",
+        "姿态精度修正-趴":  "1.1",
+        "姿态精度修正-架":  "1.1",
+        "单发后坐力":  "4",
+        "后坐力恢复":  "0.7",
+        "弹速":  "150",
+        "衰减开始时间":  "0.66",
+        "衰减结束时间":  "0.67",
+        "速度修正":  "-0.1",
+        "视野修正":  "1.725x",
+        "缩圈速率":  "1.21",
+        "射速":  "/",
+        "持续射击一秒恢复时间":  "/",
+        "衰减开始距离":  "99",
+        "衰减结束距离":  "101",
+        "站立精度":  "0.94",
+        "蹲伏精度":  "0.99",
+        "趴下精度":  "1.08",
+        "架枪精度":  "1.08",
+        "文件名称":  "enfield_p14_s"
+    },
+    {
+        "id":  107,
+        "阵营":  "德军",
+        "类型":  "狙击枪",
+        "枪械名称":  "Kar-98k狙击",
+        "致死":  "2",
+        "射击间隔":  "-1",
+        "弹容":  "5",
+        "基础精度":  "0.99",
+        "姿态精度修正-站":  "0.95",
+        "姿态精度修正-蹲":  "1",
+        "姿态精度修正-趴":  "1.1",
+        "姿态精度修正-架":  "1.1",
+        "单发后坐力":  "3.5",
+        "后坐力恢复":  "0.7",
+        "弹速":  "140",
+        "衰减开始时间":  "0.7",
+        "衰减结束时间":  "0.71",
+        "速度修正":  "-0.1",
+        "视野修正":  "1.725x",
+        "缩圈速率":  "1.15",
+        "射速":  "/",
+        "持续射击一秒恢复时间":  "/",
+        "衰减开始距离":  "98",
+        "衰减结束距离":  "99",
+        "站立精度":  "0.94",
+        "蹲伏精度":  "0.99",
+        "趴下精度":  "1.09",
+        "架枪精度":  "1.09",
+        "文件名称":  "kar98k_s"
+    },
+    {
+        "id":  108,
+        "阵营":  "德军",
+        "类型":  "狙击枪",
+        "枪械名称":  "Kar-98k狙击(高级)",
+        "致死":  "2.25",
+        "射击间隔":  "-1",
+        "弹容":  "5",
+        "基础精度":  "0.995",
+        "姿态精度修正-站":  "0.95",
+        "姿态精度修正-蹲":  "1",
+        "姿态精度修正-趴":  "1.1",
+        "姿态精度修正-架":  "1.1",
+        "单发后坐力":  "3.5",
+        "后坐力恢复":  "0.7",
+        "弹速":  "140",
+        "衰减开始时间":  "0.7",
+        "衰减结束时间":  "0.71",
+        "速度修正":  "-0.1",
+        "视野修正":  "2x",
+        "缩圈速率":  "1.15",
+        "射速":  "/",
+        "持续射击一秒恢复时间":  "/",
+        "衰减开始距离":  "98",
+        "衰减结束距离":  "99",
+        "站立精度":  "0.95",
+        "蹲伏精度":  "1",
+        "趴下精度":  "1.09",
+        "架枪精度":  "1.09",
+        "文件名称":  "kar98k_s_e"
+    },
+    {
+        "id":  109,
+        "阵营":  "德军",
+        "类型":  "狙击枪",
+        "枪械名称":  "G43半自动狙击(瞄镜)",
+        "致死":  "1.125",
+        "射击间隔":  "0.275",
+        "弹容":  "10",
+        "基础精度":  "0.955",
+        "姿态精度修正-站":  "0.95",
+        "姿态精度修正-蹲":  "1",
+        "姿态精度修正-趴":  "1",
+        "姿态精度修正-架":  "1",
+        "单发后坐力":  "3",
+        "后坐力恢复":  "1.34",
+        "弹速":  "115",
+        "衰减开始时间":  "0.435",
+        "衰减结束时间":  "0.87",
+        "速度修正":  "-0.1",
+        "视野修正":  "1.6x",
+        "缩圈速率":  "1.15",
+        "射速":  "219",
+        "持续射击一秒恢复时间":  "8.14",
+        "衰减开始距离":  "50",
+        "衰减结束距离":  "100",
+        "站立精度":  "0.91",
+        "蹲伏精度":  "0.96",
+        "趴下精度":  "0.96",
+        "架枪精度":  "0.96",
+        "文件名称":  "kar43_s"
+    },
+    {
+        "id":  110,
+        "阵营":  "德军",
+        "类型":  "狙击枪",
+        "枪械名称":  "Gew98狙击步枪",
+        "致死":  "2.25",
+        "射击间隔":  "-1",
+        "弹容":  "5",
+        "基础精度":  "0.995",
+        "姿态精度修正-站":  "0.95",
+        "姿态精度修正-蹲":  "1",
+        "姿态精度修正-趴":  "1.1",
+        "姿态精度修正-架":  "1.1",
+        "单发后坐力":  "3",
+        "后坐力恢复":  "0.673",
+        "弹速":  "165",
+        "衰减开始时间":  "0.59",
+        "衰减结束时间":  "0.6",
+        "速度修正":  "-0.1",
+        "视野修正":  "2.2x",
+        "缩圈速率":  "1.15",
+        "射速":  "/",
+        "持续射击一秒恢复时间":  "/",
+        "衰减开始距离":  "97",
+        "衰减结束距离":  "99",
+        "站立精度":  "0.95",
+        "蹲伏精度":  "1",
+        "趴下精度":  "1.09",
+        "架枪精度":  "1.09",
+        "文件名称":  "gew98_s"
+    },
+    {
+        "id":  111,
+        "阵营":  "德军",
+        "类型":  "狙击枪",
+        "枪械名称":  "G43半自动狙击步枪(东线老兵)",
+        "致死":  "爆炸1.01",
+        "射击间隔":  "0.275",
+        "弹容":  "25",
+        "基础精度":  "0.955",
+        "姿态精度修正-站":  "0.95",
+        "姿态精度修正-蹲":  "1",
+        "姿态精度修正-趴":  "0.825",
+        "姿态精度修正-架":  "1",
+        "单发后坐力":  "3",
+        "后坐力恢复":  "1.34",
+        "弹速":  "115",
+        "衰减开始时间":  "/",
+        "衰减结束时间":  "/",
+        "速度修正":  "-0.1",
+        "视野修正":  "1.6x",
+        "缩圈速率":  "1",
+        "射速":  "219",
+        "持续射击一秒恢复时间":  "8.14",
+        "衰减开始距离":  "/",
+        "衰减结束距离":  "/",
+        "站立精度":  "0.91",
+        "蹲伏精度":  "0.96",
+        "趴下精度":  "0.79",
+        "架枪精度":  "0.96",
+        "文件名称":  "kar43_s_e"
+    },
+    {
+        "id":  112,
+        "阵营":  "美军",
+        "类型":  "霰弹枪",
+        "枪械名称":  "M12堑壕枪",
+        "致死":  "0.7*7",
+        "射击间隔":  "-1",
+        "弹容":  "7",
+        "基础精度":  "0.8",
+        "姿态精度修正-站":  "0.85",
+        "姿态精度修正-蹲":  "0.9",
+        "姿态精度修正-趴":  "1",
+        "姿态精度修正-架":  "1",
+        "单发后坐力":  "4",
+        "后坐力恢复":  "1",
+        "弹速":  "90",
+        "衰减开始时间":  "0.15",
+        "衰减结束时间":  "0.4",
+        "速度修正":  "-0.05",
+        "视野修正":  "1x",
+        "缩圈速率":  "8",
+        "射速":  "/",
+        "持续射击一秒恢复时间":  "/",
+        "衰减开始距离":  "14",
+        "衰减结束距离":  "36",
+        "站立精度":  "0.68",
+        "蹲伏精度":  "0.72",
+        "趴下精度":  "0.8",
+        "架枪精度":  "0.8",
+        "文件名称":  "m12_trench_g"
+    },
+    {
+        "id":  113,
+        "阵营":  "美军",
+        "类型":  "霰弹枪",
+        "枪械名称":  "勃朗宁Auto5",
+        "致死":  "0.7*8",
+        "射击间隔":  "0.35",
+        "弹容":  "8",
+        "基础精度":  "0.8",
+        "姿态精度修正-站":  "0.85",
+        "姿态精度修正-蹲":  "0.9",
+        "姿态精度修正-趴":  "1",
+        "姿态精度修正-架":  "1",
+        "单发后坐力":  "4",
+        "后坐力恢复":  "1",
+        "弹速":  "90",
+        "衰减开始时间":  "0.15",
+        "衰减结束时间":  "0.375",
+        "速度修正":  "-0.05",
+        "视野修正":  "1x",
+        "缩圈速率":  "8",
+        "射速":  "172",
+        "持续射击一秒恢复时间":  "11.43",
+        "衰减开始距离":  "14",
+        "衰减结束距离":  "34",
+        "站立精度":  "0.68",
+        "蹲伏精度":  "0.72",
+        "趴下精度":  "0.8",
+        "架枪精度":  "0.8",
+        "文件名称":  "browning_a5_e"
+    },
+    {
+        "id":  114,
+        "阵营":  "美军",
+        "类型":  "霰弹枪",
+        "枪械名称":  "勃朗宁Auto5(截短)",
+        "致死":  "0.7*7",
+        "射击间隔":  "0.35",
+        "弹容":  "5",
+        "基础精度":  "0.785",
+        "姿态精度修正-站":  "0.85",
+        "姿态精度修正-蹲":  "0.9",
+        "姿态精度修正-趴":  "1",
+        "姿态精度修正-架":  "1",
+        "单发后坐力":  "4",
+        "后坐力恢复":  "1",
+        "弹速":  "90",
+        "衰减开始时间":  "0.15",
+        "衰减结束时间":  "0.375",
+        "速度修正":  "-0.05",
+        "视野修正":  "1x",
+        "缩圈速率":  "8",
+        "射速":  "172",
+        "持续射击一秒恢复时间":  "11.43",
+        "衰减开始距离":  "14",
+        "衰减结束距离":  "34",
+        "站立精度":  "0.67",
+        "蹲伏精度":  "0.71",
+        "趴下精度":  "0.79",
+        "架枪精度":  "0.79",
+        "文件名称":  "browning_a5_c"
+    },
+    {
+        "id":  115,
+        "阵营":  "德军",
+        "类型":  "霰弹枪",
+        "枪械名称":  "M30堑壕枪(霰弹)",
+        "致死":  "0.7*7",
+        "射击间隔":  "0.275",
+        "弹容":  "2",
+        "基础精度":  "0.8",
+        "姿态精度修正-站":  "0.85",
+        "姿态精度修正-蹲":  "0.9",
+        "姿态精度修正-趴":  "1",
+        "姿态精度修正-架":  "1",
+        "单发后坐力":  "4",
+        "后坐力恢复":  "1.5",
+        "弹速":  "95",
+        "衰减开始时间":  "0.15",
+        "衰减结束时间":  "0.4",
+        "速度修正":  "-0.05",
+        "视野修正":  "1x",
+        "缩圈速率":  "8",
+        "射速":  "219",
+        "持续射击一秒恢复时间":  "9.7",
+        "衰减开始距离":  "14",
+        "衰减结束距离":  "38",
+        "站立精度":  "0.68",
+        "蹲伏精度":  "0.72",
+        "趴下精度":  "0.8",
+        "架枪精度":  "0.8",
+        "文件名称":  "luftwaffe_d"
+    },
+    {
+        "id":  116,
+        "阵营":  "德军",
+        "类型":  "霰弹枪",
+        "枪械名称":  "M30堑壕枪(步枪)",
+        "致死":  "2.15",
+        "射击间隔":  "0.275",
+        "弹容":  "1",
+        "基础精度":  "0.97",
+        "姿态精度修正-站":  "0.87",
+        "姿态精度修正-蹲":  "0.93",
+        "姿态精度修正-趴":  "1",
+        "姿态精度修正-架":  "1",
+        "单发后坐力":  "7",
+        "后坐力恢复":  "0.8",
+        "弹速":  "135",
+        "衰减开始时间":  "0.2",
+        "衰减结束时间":  "0.59",
+        "速度修正":  "-0.05",
+        "视野修正":  "1x",
+        "缩圈速率":  "1.8",
+        "射速":  "219",
+        "持续射击一秒恢复时间":  "31.82",
+        "衰减开始距离":  "27",
+        "衰减结束距离":  "80",
+        "站立精度":  "0.84",
+        "蹲伏精度":  "0.9",
+        "趴下精度":  "0.97",
+        "架枪精度":  "0.97",
+        "文件名称":  "luftwaffe_d_r"
+    },
+    {
+        "id":  117,
+        "阵营":  "美军",
+        "类型":  "手枪",
+        "枪械名称":  "M1911A1手枪",
+        "致死":  "1.05",
+        "射击间隔":  "0.2",
+        "弹容":  "7",
+        "基础精度":  "0.88",
+        "姿态精度修正-站":  "0.9",
+        "姿态精度修正-蹲":  "0.9",
+        "姿态精度修正-趴":  "0.9",
+        "姿态精度修正-架":  "0.9",
+        "单发后坐力":  "1.5",
+        "后坐力恢复":  "2",
+        "弹速":  "90",
+        "衰减开始时间":  "0.11",
+        "衰减结束时间":  "0.56",
+        "速度修正":  "0",
+        "视野修正":  "1x",
+        "缩圈速率":  "8",
+        "射速":  "300",
+        "持续射击一秒恢复时间":  "3.75",
+        "衰减开始距离":  "10",
+        "衰减结束距离":  "50",
+        "站立精度":  "0.79",
+        "蹲伏精度":  "0.79",
+        "趴下精度":  "0.79",
+        "架枪精度":  "0.79",
+        "文件名称":  "m1911"
+    },
+    {
+        "id":  118,
+        "阵营":  "美军",
+        "类型":  "手枪",
+        "枪械名称":  "M1911A1军官雕花",
+        "致死":  "1.05",
+        "射击间隔":  "0.15",
+        "弹容":  "7",
+        "基础精度":  "0.9",
+        "姿态精度修正-站":  "0.9",
+        "姿态精度修正-蹲":  "0.9",
+        "姿态精度修正-趴":  "0.9",
+        "姿态精度修正-架":  "0.9",
+        "单发后坐力":  "1.5",
+        "后坐力恢复":  "2",
+        "弹速":  "90",
+        "衰减开始时间":  "0.11",
+        "衰减结束时间":  "0.56",
+        "速度修正":  "0",
+        "视野修正":  "1x",
+        "缩圈速率":  "8",
+        "射速":  "400",
+        "持续射击一秒恢复时间":  "5",
+        "衰减开始距离":  "10",
+        "衰减结束距离":  "50",
+        "站立精度":  "0.81",
+        "蹲伏精度":  "0.81",
+        "趴下精度":  "0.81",
+        "架枪精度":  "0.81",
+        "文件名称":  "m1911_officer"
+    },
+    {
+        "id":  119,
+        "阵营":  "美军",
+        "类型":  "手枪",
+        "枪械名称":  "M1917左轮手枪",
+        "致死":  "1.5",
+        "射击间隔":  "0.25",
+        "弹容":  "6",
+        "基础精度":  "0.9",
+        "姿态精度修正-站":  "0.9",
+        "姿态精度修正-蹲":  "0.9",
+        "姿态精度修正-趴":  "0.9",
+        "姿态精度修正-架":  "0.9",
+        "单发后坐力":  "1.25",
+        "后坐力恢复":  "2",
+        "弹速":  "100",
+        "衰减开始时间":  "0.25",
+        "衰减结束时间":  "0.4",
+        "速度修正":  "0",
+        "视野修正":  "1x",
+        "缩圈速率":  "8",
+        "射速":  "240",
+        "持续射击一秒恢复时间":  "2.5",
+        "衰减开始距离":  "25",
+        "衰减结束距离":  "40",
+        "站立精度":  "0.81",
+        "蹲伏精度":  "0.81",
+        "趴下精度":  "0.81",
+        "架枪精度":  "0.81",
+        "文件名称":  "m1917_revolver"
+    },
+    {
+        "id":  120,
+        "阵营":  "美军",
+        "类型":  "手枪",
+        "枪械名称":  "M1899左轮手枪",
+        "致死":  "2.25",
+        "射击间隔":  "0.55",
+        "弹容":  "6",
+        "基础精度":  "0.935",
+        "姿态精度修正-站":  "0.9",
+        "姿态精度修正-蹲":  "0.9",
+        "姿态精度修正-趴":  "0.9",
+        "姿态精度修正-架":  "0.9",
+        "单发后坐力":  "3.75",
+        "后坐力恢复":  "1.6",
+        "弹速":  "100",
+        "衰减开始时间":  "0.35",
+        "衰减结束时间":  "0.4",
+        "速度修正":  "0",
+        "视野修正":  "1x",
+        "缩圈速率":  "1.9",
+        "射速":  "110",
+        "持续射击一秒恢复时间":  "4.26",
+        "衰减开始距离":  "35",
+        "衰减结束距离":  "40",
+        "站立精度":  "0.84",
+        "蹲伏精度":  "0.84",
+        "趴下精度":  "0.84",
+        "架枪精度":  "0.84",
+        "文件名称":  "sw_model10"
+    },
+    {
+        "id":  121,
+        "阵营":  "美军",
+        "类型":  "手枪",
+        "枪械名称":  "M1卡宾枪",
+        "致死":  "0.65",
+        "射击间隔":  "0.135",
+        "弹容":  "15",
+        "基础精度":  "0.92",
+        "姿态精度修正-站":  "0.85",
+        "姿态精度修正-蹲":  "0.9",
+        "姿态精度修正-趴":  "0.95",
+        "姿态精度修正-架":  "0.9",
+        "单发后坐力":  "0.35",
+        "后坐力恢复":  "1.47",
+        "弹速":  "100",
+        "衰减开始时间":  "0.35",
+        "衰减结束时间":  "0.5",
+        "速度修正":  "-0.05",
+        "视野修正":  "1x",
+        "缩圈速率":  "8",
+        "射速":  "445",
+        "持续射击一秒恢复时间":  "1.76",
+        "衰减开始距离":  "35",
+        "衰减结束距离":  "50",
+        "站立精度":  "0.78",
+        "蹲伏精度":  "0.83",
+        "趴下精度":  "0.87",
+        "架枪精度":  "0.83",
+        "文件名称":  "m1_carbine"
+    },
+    {
+        "id":  122,
+        "阵营":  "美军",
+        "类型":  "手枪",
+        "枪械名称":  "M1A1卡宾枪",
+        "致死":  "0.65",
+        "射击间隔":  "0.135",
+        "弹容":  "15",
+        "基础精度":  "0.92",
+        "姿态精度修正-站":  "0.85",
+        "姿态精度修正-蹲":  "0.9",
+        "姿态精度修正-趴":  "0.95",
+        "姿态精度修正-架":  "0.9",
+        "单发后坐力":  "0.375",
+        "后坐力恢复":  "1.47",
+        "弹速":  "100",
+        "衰减开始时间":  "0.35",
+        "衰减结束时间":  "0.5",
+        "速度修正":  "-0.05",
+        "视野修正":  "1x",
+        "缩圈速率":  "8",
+        "射速":  "445",
+        "持续射击一秒恢复时间":  "1.89",
+        "衰减开始距离":  "35",
+        "衰减结束距离":  "50",
+        "站立精度":  "0.78",
+        "蹲伏精度":  "0.83",
+        "趴下精度":  "0.87",
+        "架枪精度":  "0.83",
+        "文件名称":  "m1a1_carb"
+    },
+    {
+        "id":  123,
+        "阵营":  "美军",
+        "类型":  "手枪",
+        "枪械名称":  "M55“雷兴”折叠",
+        "致死":  "0.65",
+        "射击间隔":  "0.075",
+        "弹容":  "20",
+        "基础精度":  "0.9",
+        "姿态精度修正-站":  "0.85",
+        "姿态精度修正-蹲":  "0.885",
+        "姿态精度修正-趴":  "0.95",
+        "姿态精度修正-架":  "0.885",
+        "单发后坐力":  "0.285",
+        "后坐力恢复":  "1.55",
+        "弹速":  "91",
+        "衰减开始时间":  "0.265",
+        "衰减结束时间":  "0.495",
+        "速度修正":  "-0.05",
+        "视野修正":  "1x",
+        "缩圈速率":  "8",
+        "射速":  "800",
+        "持续射击一秒恢复时间":  "2.45",
+        "衰减开始距离":  "24",
+        "衰减结束距离":  "45",
+        "站立精度":  "0.77",
+        "蹲伏精度":  "0.8",
+        "趴下精度":  "0.86",
+        "架枪精度":  "0.8",
+        "文件名称":  "m55_r_folded"
+    },
+    {
+        "id":  124,
+        "阵营":  "美军",
+        "类型":  "手枪",
+        "枪械名称":  "M3“注油枪”折叠",
+        "致死":  "0.675",
+        "射击间隔":  "0.13",
+        "弹容":  "30",
+        "基础精度":  "0.9",
+        "姿态精度修正-站":  "0.85",
+        "姿态精度修正-蹲":  "0.885",
+        "姿态精度修正-趴":  "0.825",
+        "姿态精度修正-架":  "0.885",
+        "单发后坐力":  "0.3",
+        "后坐力恢复":  "1.65",
+        "弹速":  "91",
+        "衰减开始时间":  "0.2",
+        "衰减结束时间":  "0.55",
+        "速度修正":  "-0.05",
+        "视野修正":  "1x",
+        "缩圈速率":  "8",
+        "射速":  "462",
+        "持续射击一秒恢复时间":  "1.4",
+        "衰减开始距离":  "18",
+        "衰减结束距离":  "50",
+        "站立精度":  "0.77",
+        "蹲伏精度":  "0.8",
+        "趴下精度":  "0.74",
+        "架枪精度":  "0.8",
+        "文件名称":  "m3_g_folded"
+    },
+    {
+        "id":  125,
+        "阵营":  "日军",
+        "类型":  "手枪",
+        "枪械名称":  "南部14",
+        "致死":  "0.65",
+        "射击间隔":  "0.15",
+        "弹容":  "8",
+        "基础精度":  "0.87",
+        "姿态精度修正-站":  "0.9",
+        "姿态精度修正-蹲":  "0.9",
+        "姿态精度修正-趴":  "0.9",
+        "姿态精度修正-架":  "0.9",
+        "单发后坐力":  "0.565",
+        "后坐力恢复":  "2",
+        "弹速":  "90",
+        "衰减开始时间":  "0.25",
+        "衰减结束时间":  "0.56",
+        "速度修正":  "0",
+        "视野修正":  "1x",
+        "缩圈速率":  "8",
+        "射速":  "400",
+        "持续射击一秒恢复时间":  "1.88",
+        "衰减开始距离":  "23",
+        "衰减结束距离":  "50",
+        "站立精度":  "0.78",
+        "蹲伏精度":  "0.78",
+        "趴下精度":  "0.78",
+        "架枪精度":  "0.78",
+        "文件名称":  "type14_n_p"
+    },
+    {
+        "id":  126,
+        "阵营":  "日军",
+        "类型":  "手枪",
+        "枪械名称":  "南部14军官雕花",
+        "致死":  "0.65",
+        "射击间隔":  "0.125",
+        "弹容":  "8",
+        "基础精度":  "0.9",
+        "姿态精度修正-站":  "0.9",
+        "姿态精度修正-蹲":  "0.9",
+        "姿态精度修正-趴":  "0.9",
+        "姿态精度修正-架":  "0.9",
+        "单发后坐力":  "0.565",
+        "后坐力恢复":  "2",
+        "弹速":  "90",
+        "衰减开始时间":  "0.25",
+        "衰减结束时间":  "0.56",
+        "速度修正":  "0",
+        "视野修正":  "1x",
+        "缩圈速率":  "8",
+        "射速":  "480",
+        "持续射击一秒恢复时间":  "2.26",
+        "衰减开始距离":  "23",
+        "衰减结束距离":  "50",
+        "站立精度":  "0.81",
+        "蹲伏精度":  "0.81",
+        "趴下精度":  "0.81",
+        "架枪精度":  "0.81",
+        "文件名称":  "type14_n_p_o"
+    },
+    {
+        "id":  127,
+        "阵营":  "日军",
+        "类型":  "手枪",
+        "枪械名称":  "26式左轮手枪",
+        "致死":  "1.5",
+        "射击间隔":  "0.25",
+        "弹容":  "6",
+        "基础精度":  "0.9",
+        "姿态精度修正-站":  "0.9",
+        "姿态精度修正-蹲":  "0.9",
+        "姿态精度修正-趴":  "0.9",
+        "姿态精度修正-架":  "0.9",
+        "单发后坐力":  "1.25",
+        "后坐力恢复":  "2",
+        "弹速":  "100",
+        "衰减开始时间":  "0.25",
+        "衰减结束时间":  "0.4",
+        "速度修正":  "0",
+        "视野修正":  "1x",
+        "缩圈速率":  "8",
+        "射速":  "240",
+        "持续射击一秒恢复时间":  "2.5",
+        "衰减开始距离":  "25",
+        "衰减结束距离":  "40",
+        "站立精度":  "0.81",
+        "蹲伏精度":  "0.81",
+        "趴下精度":  "0.81",
+        "架枪精度":  "0.81",
+        "文件名称":  "type26_revol"
+    },
+    {
+        "id":  128,
+        "阵营":  "日军",
+        "类型":  "手枪",
+        "枪械名称":  "毛瑟卡宾枪",
+        "致死":  "0.65",
+        "射击间隔":  "0.135",
+        "弹容":  "20",
+        "基础精度":  "0.92",
+        "姿态精度修正-站":  "0.85",
+        "姿态精度修正-蹲":  "0.9",
+        "姿态精度修正-趴":  "0.95",
+        "姿态精度修正-架":  "0.9",
+        "单发后坐力":  "0.325",
+        "后坐力恢复":  "1.47",
+        "弹速":  "95",
+        "衰减开始时间":  "0.35",
+        "衰减结束时间":  "0.53",
+        "速度修正":  "0",
+        "视野修正":  "1x",
+        "缩圈速率":  "8",
+        "射速":  "445",
+        "持续射击一秒恢复时间":  "1.64",
+        "衰减开始距离":  "33",
+        "衰减结束距离":  "50",
+        "站立精度":  "0.78",
+        "蹲伏精度":  "0.83",
+        "趴下精度":  "0.87",
+        "架枪精度":  "0.83",
+        "文件名称":  "c96"
+    },
+    {
+        "id":  129,
+        "阵营":  "日军",
+        "类型":  "手枪",
+        "枪械名称":  "百式折叠",
+        "致死":  "0.5",
+        "射击间隔":  "0.133",
+        "弹容":  "30",
+        "基础精度":  "0.91",
+        "姿态精度修正-站":  "0.85",
+        "姿态精度修正-蹲":  "0.89",
+        "姿态精度修正-趴":  "0.95",
+        "姿态精度修正-架":  "0.9",
+        "单发后坐力":  "0.23",
+        "后坐力恢复":  "1.4",
+        "弹速":  "95",
+        "衰减开始时间":  "0.36",
+        "衰减结束时间":  "0.53",
+        "速度修正":  "-0.05",
+        "视野修正":  "1x",
+        "缩圈速率":  "8",
+        "射速":  "452",
+        "持续射击一秒恢复时间":  "1.24",
+        "衰减开始距离":  "34",
+        "衰减结束距离":  "50",
+        "站立精度":  "0.77",
+        "蹲伏精度":  "0.81",
+        "趴下精度":  "0.86",
+        "架枪精度":  "0.82",
+        "文件名称":  "type100_f"
+    },
+    {
+        "id":  130,
+        "阵营":  "英军",
+        "类型":  "手枪",
+        "枪械名称":  "勃朗宁大威力手枪",
+        "致死":  "0.85",
+        "射击间隔":  "0.185",
+        "弹容":  "13",
+        "基础精度":  "0.9",
+        "姿态精度修正-站":  "0.9",
+        "姿态精度修正-蹲":  "0.9",
+        "姿态精度修正-趴":  "0.9",
+        "姿态精度修正-架":  "0.9",
+        "单发后坐力":  "0.785",
+        "后坐力恢复":  "2",
+        "弹速":  "91",
+        "衰减开始时间":  "0.2",
+        "衰减结束时间":  "0.55",
+        "速度修正":  "0",
+        "视野修正":  "1x",
+        "缩圈速率":  "8",
+        "射速":  "325",
+        "持续射击一秒恢复时间":  "2.12",
+        "衰减开始距离":  "18",
+        "衰减结束距离":  "50",
+        "站立精度":  "0.81",
+        "蹲伏精度":  "0.81",
+        "趴下精度":  "0.81",
+        "架枪精度":  "0.81",
+        "文件名称":  "browning_hp"
+    },
+    {
+        "id":  131,
+        "阵营":  "英军",
+        "类型":  "手枪",
+        "枪械名称":  "勃朗宁大威力卡宾枪",
+        "致死":  "0.65",
+        "射击间隔":  "0.135",
+        "弹容":  "15",
+        "基础精度":  "0.92",
+        "姿态精度修正-站":  "0.85",
+        "姿态精度修正-蹲":  "0.9",
+        "姿态精度修正-趴":  "0.95",
+        "姿态精度修正-架":  "0.9",
+        "单发后坐力":  "0.325",
+        "后坐力恢复":  "1.47",
+        "弹速":  "95",
+        "衰减开始时间":  "0.37",
+        "衰减结束时间":  "0.53",
+        "速度修正":  "-0.05",
+        "视野修正":  "1x",
+        "缩圈速率":  "8",
+        "射速":  "445",
+        "持续射击一秒恢复时间":  "1.64",
+        "衰减开始距离":  "35",
+        "衰减结束距离":  "50",
+        "站立精度":  "0.78",
+        "蹲伏精度":  "0.83",
+        "趴下精度":  "0.87",
+        "架枪精度":  "0.83",
+        "文件名称":  "browning_hp_c"
+    },
+    {
+        "id":  132,
+        "阵营":  "英军",
+        "类型":  "手枪",
+        "枪械名称":  "奥斯登折叠",
+        "致死":  "0.535",
+        "射击间隔":  "0.1",
+        "弹容":  "32",
+        "基础精度":  "0.9",
+        "姿态精度修正-站":  "0.785",
+        "姿态精度修正-蹲":  "0.82",
+        "姿态精度修正-趴":  "0.85",
+        "姿态精度修正-架":  "0.82",
+        "单发后坐力":  "0.28",
+        "后坐力恢复":  "1.65",
+        "弹速":  "95",
+        "衰减开始时间":  "0.29",
+        "衰减结束时间":  "0.53",
+        "速度修正":  "-0.05",
+        "视野修正":  "1x",
+        "缩圈速率":  "8",
+        "射速":  "600",
+        "持续射击一秒恢复时间":  "1.7",
+        "衰减开始距离":  "28",
+        "衰减结束距离":  "50",
+        "站立精度":  "0.71",
+        "蹲伏精度":  "0.74",
+        "趴下精度":  "0.77",
+        "架枪精度":  "0.74",
+        "文件名称":  "austen_mki_f"
+    },
+    {
+        "id":  133,
+        "阵营":  "英军",
+        "类型":  "手枪",
+        "枪械名称":  "恩菲尔德左轮",
+        "致死":  "1.5",
+        "射击间隔":  "0.25",
+        "弹容":  "6",
+        "基础精度":  "0.9",
+        "姿态精度修正-站":  "0.9",
+        "姿态精度修正-蹲":  "0.9",
+        "姿态精度修正-趴":  "0.9",
+        "姿态精度修正-架":  "0.9",
+        "单发后坐力":  "1.25",
+        "后坐力恢复":  "2",
+        "弹速":  "100",
+        "衰减开始时间":  "0.25",
+        "衰减结束时间":  "0.4",
+        "速度修正":  "0",
+        "视野修正":  "1x",
+        "缩圈速率":  "8",
+        "射速":  "240",
+        "持续射击一秒恢复时间":  "2.5",
+        "衰减开始距离":  "25",
+        "衰减结束距离":  "40",
+        "站立精度":  "0.81",
+        "蹲伏精度":  "0.81",
+        "趴下精度":  "0.81",
+        "架枪精度":  "0.81",
+        "文件名称":  "enfield_mkii_r"
+    },
+    {
+        "id":  134,
+        "阵营":  "英军",
+        "类型":  "手枪",
+        "枪械名称":  "恩菲尔德军官雕花",
+        "致死":  "1.5",
+        "射击间隔":  "0.2",
+        "弹容":  "6",
+        "基础精度":  "0.9",
+        "姿态精度修正-站":  "0.9",
+        "姿态精度修正-蹲":  "0.9",
+        "姿态精度修正-趴":  "0.9",
+        "姿态精度修正-架":  "0.9",
+        "单发后坐力":  "1.25",
+        "后坐力恢复":  "2",
+        "弹速":  "100",
+        "衰减开始时间":  "0.25",
+        "衰减结束时间":  "0.4",
+        "速度修正":  "0",
+        "视野修正":  "1x",
+        "缩圈速率":  "8",
+        "射速":  "300",
+        "持续射击一秒恢复时间":  "3.13",
+        "衰减开始距离":  "25",
+        "衰减结束距离":  "40",
+        "站立精度":  "0.81",
+        "蹲伏精度":  "0.81",
+        "趴下精度":  "0.81",
+        "架枪精度":  "0.81",
+        "文件名称":  "enfield_ii_r_o"
+    },
+    {
+        "id":  135,
+        "阵营":  "德军",
+        "类型":  "手枪",
+        "枪械名称":  "鲁格P08手枪",
+        "致死":  "0.85",
+        "射击间隔":  "0.165",
+        "弹容":  "8",
+        "基础精度":  "0.9",
+        "姿态精度修正-站":  "0.9",
+        "姿态精度修正-蹲":  "0.9",
+        "姿态精度修正-趴":  "0.9",
+        "姿态精度修正-架":  "0.9",
+        "单发后坐力":  "0.785",
+        "后坐力恢复":  "2",
+        "弹速":  "95",
+        "衰减开始时间":  "0.25",
+        "衰减结束时间":  "0.53",
+        "速度修正":  "0",
+        "视野修正":  "1x",
+        "缩圈速率":  "8",
+        "射速":  "364",
+        "持续射击一秒恢复时间":  "2.38",
+        "衰减开始距离":  "24",
+        "衰减结束距离":  "50",
+        "站立精度":  "0.81",
+        "蹲伏精度":  "0.81",
+        "趴下精度":  "0.81",
+        "架枪精度":  "0.81",
+        "文件名称":  "p08"
+    },
+    {
+        "id":  136,
+        "阵营":  "德军",
+        "类型":  "手枪",
+        "枪械名称":  "P08军官雕花",
+        "致死":  "0.85",
+        "射击间隔":  "0.125",
+        "弹容":  "8",
+        "基础精度":  "0.92",
+        "姿态精度修正-站":  "0.9",
+        "姿态精度修正-蹲":  "0.9",
+        "姿态精度修正-趴":  "0.9",
+        "姿态精度修正-架":  "0.9",
+        "单发后坐力":  "0.785",
+        "后坐力恢复":  "2",
+        "弹速":  "95",
+        "衰减开始时间":  "0.25",
+        "衰减结束时间":  "0.53",
+        "速度修正":  "0",
+        "视野修正":  "1x",
+        "缩圈速率":  "8",
+        "射速":  "480",
+        "持续射击一秒恢复时间":  "3.14",
+        "衰减开始距离":  "24",
+        "衰减结束距离":  "50",
+        "站立精度":  "0.83",
+        "蹲伏精度":  "0.83",
+        "趴下精度":  "0.83",
+        "架枪精度":  "0.83",
+        "文件名称":  "p08_officer"
+    },
+    {
+        "id":  137,
+        "阵营":  "德军",
+        "类型":  "手枪",
+        "枪械名称":  "P08卡宾枪",
+        "致死":  "0.65",
+        "射击间隔":  "0.135",
+        "弹容":  "32",
+        "基础精度":  "0.9",
+        "姿态精度修正-站":  "0.85",
+        "姿态精度修正-蹲":  "0.9",
+        "姿态精度修正-趴":  "0.95",
+        "姿态精度修正-架":  "0.9",
+        "单发后坐力":  "0.325",
+        "后坐力恢复":  "1.47",
+        "弹速":  "95",
+        "衰减开始时间":  "0.265",
+        "衰减结束时间":  "0.53",
+        "速度修正":  "-0.05",
+        "视野修正":  "1x",
+        "缩圈速率":  "8",
+        "射速":  "445",
+        "持续射击一秒恢复时间":  "1.64",
+        "衰减开始距离":  "25",
+        "衰减结束距离":  "50",
+        "站立精度":  "0.77",
+        "蹲伏精度":  "0.81",
+        "趴下精度":  "0.86",
+        "架枪精度":  "0.81",
+        "文件名称":  "p08_carbine"
+    },
+    {
+        "id":  138,
+        "阵营":  "德军",
+        "类型":  "手枪",
+        "枪械名称":  "帝国左轮手枪",
+        "致死":  "2.25",
+        "射击间隔":  "0.55",
+        "弹容":  "6",
+        "基础精度":  "0.935",
+        "姿态精度修正-站":  "0.9",
+        "姿态精度修正-蹲":  "0.9",
+        "姿态精度修正-趴":  "0.9",
+        "姿态精度修正-架":  "0.9",
+        "单发后坐力":  "3.75",
+        "后坐力恢复":  "1.6",
+        "弹速":  "100",
+        "衰减开始时间":  "0.35",
+        "衰减结束时间":  "0.4",
+        "速度修正":  "0",
+        "视野修正":  "1x",
+        "缩圈速率":  "1.9",
+        "射速":  "110",
+        "持续射击一秒恢复时间":  "4.26",
+        "衰减开始距离":  "35",
+        "衰减结束距离":  "40",
+        "站立精度":  "0.84",
+        "蹲伏精度":  "0.84",
+        "趴下精度":  "0.84",
+        "架枪精度":  "0.84",
+        "文件名称":  "reichsrevolver"
+    },
+    {
+        "id":  139,
+        "阵营":  "德军",
+        "类型":  "手枪",
+        "枪械名称":  "毛瑟手枪",
+        "致死":  "0.85",
+        "射击间隔":  "0.155",
+        "弹容":  "10",
+        "基础精度":  "0.9",
+        "姿态精度修正-站":  "0.9",
+        "姿态精度修正-蹲":  "0.9",
+        "姿态精度修正-趴":  "0.9",
+        "姿态精度修正-架":  "0.9",
+        "单发后坐力":  "0.54",
+        "后坐力恢复":  "2",
+        "弹速":  "100",
+        "衰减开始时间":  "0.3",
+        "衰减结束时间":  "0.5",
+        "速度修正":  "0",
+        "视野修正":  "1x",
+        "缩圈速率":  "8",
+        "射速":  "388",
+        "持续射击一秒恢复时间":  "1.74",
+        "衰减开始距离":  "30",
+        "衰减结束距离":  "50",
+        "站立精度":  "0.81",
+        "蹲伏精度":  "0.81",
+        "趴下精度":  "0.81",
+        "架枪精度":  "0.81",
+        "文件名称":  "c96_pistol"
+    },
+    {
+        "id":  140,
+        "阵营":  "德军",
+        "类型":  "手枪",
+        "枪械名称":  "M712冲锋手枪",
+        "致死":  "0.55",
+        "射击间隔":  "0.06",
+        "弹容":  "20",
+        "基础精度":  "0.87",
+        "姿态精度修正-站":  "0.85",
+        "姿态精度修正-蹲":  "0.9",
+        "姿态精度修正-趴":  "0.95",
+        "姿态精度修正-架":  "0.9",
+        "单发后坐力":  "0.2",
+        "后坐力恢复":  "1.85",
+        "弹速":  "103",
+        "衰减开始时间":  "0.39",
+        "衰减结束时间":  "0.485",
+        "速度修正":  "-0.05",
+        "视野修正":  "1x",
+        "缩圈速率":  "8",
+        "射速":  "1000",
+        "持续射击一秒恢复时间":  "1.8",
+        "衰减开始距离":  "40",
+        "衰减结束距离":  "50",
+        "站立精度":  "0.74",
+        "蹲伏精度":  "0.78",
+        "趴下精度":  "0.83",
+        "架枪精度":  "0.78",
+        "文件名称":  "m712"
+    },
+    {
+        "id":  141,
+        "阵营":  "德军",
+        "类型":  "手枪",
+        "枪械名称":  "MP40折叠",
+        "致死":  "0.535",
+        "射击间隔":  "0.095",
+        "弹容":  "32",
+        "基础精度":  "0.9",
+        "姿态精度修正-站":  "0.85",
+        "姿态精度修正-蹲":  "0.885",
+        "姿态精度修正-趴":  "0.825",
+        "姿态精度修正-架":  "0.885",
+        "单发后坐力":  "0.245",
+        "后坐力恢复":  "1.65",
+        "弹速":  "91",
+        "衰减开始时间":  "0.265",
+        "衰减结束时间":  "0.55",
+        "速度修正":  "-0.05",
+        "视野修正":  "1x",
+        "缩圈速率":  "8",
+        "射速":  "632",
+        "持续射击一秒恢复时间":  "1.56",
+        "衰减开始距离":  "24",
+        "衰减结束距离":  "50",
+        "站立精度":  "0.77",
+        "蹲伏精度":  "0.8",
+        "趴下精度":  "0.74",
+        "架枪精度":  "0.8",
+        "文件名称":  "mp40_floded"
+    },
+    {
+        "id":  142,
+        "阵营":  "英军",
+        "类型":  "反坦克步枪",
+        "枪械名称":  "博伊斯反坦克步枪",
+        "致死":  "爆炸2.1",
+        "射击间隔":  "-1",
+        "弹容":  "5",
+        "基础精度":  "0.92",
+        "姿态精度修正-站":  "/",
+        "姿态精度修正-蹲":  "/",
+        "姿态精度修正-趴":  "0.95",
+        "姿态精度修正-架":  "0.95",
+        "单发后坐力":  "6.5",
+        "后坐力恢复":  "1.15",
+        "弹速":  "200",
+        "衰减开始时间":  "/",
+        "衰减结束时间":  "/",
+        "速度修正":  "-0.175",
+        "视野修正":  "1.5x",
+        "缩圈速率":  "1.15",
+        "射速":  "/",
+        "持续射击一秒恢复时间":  "/",
+        "衰减开始距离":  "/",
+        "衰减结束距离":  "/",
+        "站立精度":  "/",
+        "蹲伏精度":  "/",
+        "趴下精度":  "0.87",
+        "架枪精度":  "0.87",
+        "文件名称":  "boys_at_rifle"
+    },
+    {
+        "id":  143,
+        "阵营":  "日军",
+        "类型":  "反坦克步枪",
+        "枪械名称":  "97式反坦克步枪",
+        "致死":  "爆炸1.8",
+        "射击间隔":  "0.7",
+        "弹容":  "7",
+        "基础精度":  "0.8",
+        "姿态精度修正-站":  "/",
+        "姿态精度修正-蹲":  "/",
+        "姿态精度修正-趴":  "0.95",
+        "姿态精度修正-架":  "0.95",
+        "单发后坐力":  "6.5",
+        "后坐力恢复":  "1.15",
+        "弹速":  "200",
+        "衰减开始时间":  "/",
+        "衰减结束时间":  "/",
+        "速度修正":  "-0.175",
+        "视野修正":  "1.25x",
+        "缩圈速率":  "1.15",
+        "射速":  "86",
+        "持续射击一秒恢复时间":  "8.07",
+        "衰减开始距离":  "/",
+        "衰减结束距离":  "/",
+        "站立精度":  "/",
+        "蹲伏精度":  "/",
+        "趴下精度":  "0.76",
+        "架枪精度":  "0.76",
+        "文件名称":  "type97_at_rifle"
+    }
+]
+  </script>
 
+  <script type="application/json" id="vehicleData">
+[
+    {
+        "faction":  "德军",
+        "hp":  2.4,
+        "speed":  22,
+        "acceleration":  6.5,
+        "turret":  null,
+        "threshold":  0,
+        "reduction":  0.5,
+        "name":  "大众82型桶车",
+        "weapon":  "—",
+        "reload":  null,
+        "vision":  1,
+        "blast":  null,
+        "vehicleType":  "light_vehicle"
+    },
+    {
+        "faction":  "德军",
+        "hp":  4.8,
+        "speed":  18,
+        "acceleration":  6,
+        "turret":  null,
+        "threshold":  0,
+        "reduction":  0.5,
+        "name":  "欧宝闪电卡车",
+        "weapon":  "—",
+        "reload":  null,
+        "vision":  1,
+        "blast":  null,
+        "vehicleType":  "light_vehicle"
+    },
+    {
+        "faction":  "德军",
+        "hp":  10,
+        "speed":  9,
+        "acceleration":  12,
+        "turret":  10.31,
+        "threshold":  1.01,
+        "reduction":  0.9,
+        "name":  "Sd.Kfz.251半履带车",
+        "weapon":  "MG34机枪",
+        "reload":  null,
+        "vision":  1,
+        "blast":  null,
+        "vehicleType":  "light_vehicle"
+    },
+    {
+        "faction":  "德军",
+        "hp":  10,
+        "speed":  9,
+        "acceleration":  12,
+        "turret":  10.31,
+        "threshold":  1.01,
+        "reduction":  0.9,
+        "name":  "Sd.Kfz.251/17防空车",
+        "weapon":  "20mm Flak 38机炮",
+        "reload":  null,
+        "vision":  1.6,
+        "blast":  1,
+        "vehicleType":  "light_vehicle"
+    },
+    {
+        "faction":  "德军",
+        "hp":  14,
+        "speed":  12.2,
+        "acceleration":  11,
+        "turret":  7.73,
+        "threshold":  0,
+        "reduction":  0.9,
+        "name":  "二号“山猫”轻型坦克",
+        "weapon":  "20mm KwK30机炮",
+        "reload":  null,
+        "vision":  1.6,
+        "blast":  1,
+        "vehicleType":  "light_armour"
+    },
+    {
+        "faction":  "德军",
+        "hp":  17,
+        "speed":  7,
+        "acceleration":  12,
+        "turret":  2.86,
+        "threshold":  1.02,
+        "reduction":  0.9,
+        "name":  "四号中型坦克",
+        "weapon":  "75mm KwK40型坦克炮",
+        "reload":  5.5,
+        "vision":  1,
+        "blast":  4.7,
+        "vehicleType":  "medium_armour"
+    },
+    {
+        "faction":  "德军",
+        "hp":  17,
+        "speed":  7,
+        "acceleration":  12,
+        "turret":  11.46,
+        "threshold":  1.02,
+        "reduction":  0.9,
+        "name":  "三号突击炮",
+        "weapon":  "75mm StuK40型突击炮",
+        "reload":  5.5,
+        "vision":  1.6,
+        "blast":  6,
+        "vehicleType":  "medium_armour"
+    },
+    {
+        "faction":  "德军",
+        "hp":  30,
+        "speed":  7,
+        "acceleration":  11,
+        "turret":  2.29,
+        "threshold":  1.02,
+        "reduction":  0.9,
+        "name":  "虎式重型坦克",
+        "weapon":  "88mm KwK36型坦克炮",
+        "reload":  6.5,
+        "vision":  1.4,
+        "blast":  8.4,
+        "vehicleType":  "heavy_armour"
+    },
+    {
+        "faction":  "德军",
+        "hp":  40,
+        "speed":  6.5,
+        "acceleration":  7.5,
+        "turret":  0.86,
+        "threshold":  3.91,
+        "reduction":  0.9,
+        "name":  "虎王重型坦克",
+        "weapon":  "88mm KwK43型坦克炮",
+        "reload":  7.5,
+        "vision":  1.4,
+        "blast":  9.9,
+        "vehicleType":  "heavy_armour"
+    },
+    {
+        "faction":  "德军",
+        "hp":  200,
+        "speed":  6.5,
+        "acceleration":  7.5,
+        "turret":  0.86,
+        "threshold":  3.91,
+        "reduction":  0.9,
+        "name":  "虎王重型坦克（精英）",
+        "weapon":  "88mm KwK43型坦克炮",
+        "reload":  7.5,
+        "vision":  1.4,
+        "blast":  9.9,
+        "vehicleType":  "heavy_armour"
+    },
+    {
+        "faction":  "德军",
+        "hp":  300,
+        "speed":  6.5,
+        "acceleration":  7.5,
+        "turret":  0.86,
+        "threshold":  3.91,
+        "reduction":  0.9,
+        "name":  "鼠式超重型坦克",
+        "weapon":  "128mm KwK44型坦克炮",
+        "reload":  7.5,
+        "vision":  1.8,
+        "blast":  9.3,
+        "vehicleType":  "heavy_armour"
+    },
+    {
+        "faction":  "英军",
+        "hp":  4.8,
+        "speed":  18,
+        "acceleration":  6,
+        "turret":  null,
+        "threshold":  0,
+        "reduction":  0.5,
+        "name":  "奥斯汀K5卡车",
+        "weapon":  "—",
+        "reload":  null,
+        "vision":  1,
+        "blast":  null,
+        "vehicleType":  "ligh_vehicle"
+    },
+    {
+        "faction":  "英军",
+        "hp":  6,
+        "speed":  11,
+        "acceleration":  14.6,
+        "turret":  34.38,
+        "threshold":  0,
+        "reduction":  0.9,
+        "name":  "布伦履带运输车",
+        "weapon":  "布伦车载机枪",
+        "reload":  null,
+        "vision":  1,
+        "blast":  null,
+        "vehicleType":  "light_vehicle"
+    },
+    {
+        "faction":  "英军",
+        "hp":  6,
+        "speed":  11,
+        "acceleration":  14.6,
+        "turret":  34.38,
+        "threshold":  0,
+        "reduction":  0.9,
+        "name":  "黄蜂喷火车",
+        "weapon":  "喷火器",
+        "reload":  null,
+        "vision":  1,
+        "blast":  1.01,
+        "vehicleType":  "light_vehicle"
+    },
+    {
+        "faction":  "英军",
+        "hp":  26,
+        "speed":  6,
+        "acceleration":  10,
+        "turret":  2.86,
+        "threshold":  1.02,
+        "reduction":  0.9,
+        "name":  "丘吉尔Mk.VII步兵坦克",
+        "weapon":  "75mm 坦克炮",
+        "reload":  4.4,
+        "vision":  1,
+        "blast":  4.8,
+        "vehicleType":  "medium_armour"
+    },
+    {
+        "faction":  "英军",
+        "hp":  17.5,
+        "speed":  7,
+        "acceleration":  12,
+        "turret":  2.29,
+        "threshold":  1.02,
+        "reduction":  0.9,
+        "name":  "谢尔曼“萤火虫”坦克",
+        "weapon":  "QF 17磅坦克炮",
+        "reload":  5.5,
+        "vision":  1.6,
+        "blast":  7,
+        "vehicleType":  "medium_armour"
+    },
+    {
+        "faction":  "英军",
+        "hp":  300,
+        "speed":  6.5,
+        "acceleration":  7.5,
+        "turret":  0.86,
+        "threshold":  3.91,
+        "reduction":  0.9,
+        "name":  "TOG II 超重型坦克",
+        "weapon":  "QF 17磅坦克炮",
+        "reload":  6.5,
+        "vision":  1.8,
+        "blast":  7,
+        "vehicleType":  "heavy_armour"
+    },
+    {
+        "faction":  "美军",
+        "hp":  2.4,
+        "speed":  22,
+        "acceleration":  6.5,
+        "turret":  null,
+        "threshold":  0,
+        "reduction":  0.5,
+        "name":  "威利斯MB吉普",
+        "weapon":  "—",
+        "reload":  null,
+        "vision":  1,
+        "blast":  null,
+        "vehicleType":  "light_vehicle"
+    },
+    {
+        "faction":  "美军",
+        "hp":  4.8,
+        "speed":  18,
+        "acceleration":  6,
+        "turret":  null,
+        "threshold":  0,
+        "reduction":  0.5,
+        "name":  "DUKW两栖军械车",
+        "weapon":  "—",
+        "reload":  null,
+        "vision":  1,
+        "blast":  null,
+        "vehicleType":  "light_vehicle"
+    },
+    {
+        "faction":  "美军",
+        "hp":  2.4,
+        "speed":  22,
+        "acceleration":  6.5,
+        "turret":  34.38,
+        "threshold":  0,
+        "reduction":  0.5,
+        "name":  "威利斯MB无后坐力炮吉普",
+        "weapon":  "57mm M18无后坐力炮",
+        "reload":  4,
+        "vision":  1,
+        "blast":  6.4,
+        "vehicleType":  "light_vehicle"
+    },
+    {
+        "faction":  "美军",
+        "hp":  2.4,
+        "speed":  22,
+        "acceleration":  6.5,
+        "turret":  34.38,
+        "threshold":  0,
+        "reduction":  0.5,
+        "name":  "威利斯MB机枪吉普",
+        "weapon":  "M2HB 重机枪",
+        "reload":  null,
+        "vision":  1,
+        "blast":  null,
+        "vehicleType":  "light_vehicle"
+    },
+    {
+        "faction":  "美军",
+        "hp":  10,
+        "speed":  9,
+        "acceleration":  12,
+        "turret":  17.19,
+        "threshold":  0,
+        "reduction":  0.9,
+        "name":  "M3半履带车",
+        "weapon":  "M2HB 重机枪",
+        "reload":  null,
+        "vision":  1,
+        "blast":  null,
+        "vehicleType":  "light_vehicle"
+    },
+    {
+        "faction":  "美军",
+        "hp":  11,
+        "speed":  7.5,
+        "acceleration":  8,
+        "turret":  5.73,
+        "threshold":  0,
+        "reduction":  0.9,
+        "name":  "LVT4两栖战车",
+        "weapon":  "M2HB 重机枪",
+        "reload":  null,
+        "vision":  1,
+        "blast":  null,
+        "vehicleType":  "light_vehicle"
+    },
+    {
+        "faction":  "美军",
+        "hp":  13,
+        "speed":  10,
+        "acceleration":  10,
+        "turret":  8.31,
+        "threshold":  0,
+        "reduction":  0.9,
+        "name":  "M3“斯图亚特”轻型坦克",
+        "weapon":  "37mm M6型坦克炮",
+        "reload":  3.75,
+        "vision":  1,
+        "blast":  3.3,
+        "vehicleType":  "light_armour"
+    },
+    {
+        "faction":  "美军",
+        "hp":  15,
+        "speed":  10,
+        "acceleration":  10,
+        "turret":  7.16,
+        "threshold":  1.02,
+        "reduction":  0.9,
+        "name":  "M10“狼獾”坦克歼击车",
+        "weapon":  "3英寸 M7坦克炮",
+        "reload":  5.5,
+        "vision":  1.6,
+        "blast":  7,
+        "vehicleType":  "medium_armour"
+    },
+    {
+        "faction":  "美军",
+        "hp":  17.5,
+        "speed":  7,
+        "acceleration":  12,
+        "turret":  2.86,
+        "threshold":  1.02,
+        "reduction":  0.9,
+        "name":  "谢尔曼中型坦克",
+        "weapon":  "75mm M3坦克炮",
+        "reload":  5.5,
+        "vision":  1,
+        "blast":  4.7,
+        "vehicleType":  "medium_armour"
+    },
+    {
+        "faction":  "美军",
+        "hp":  20,
+        "speed":  70,
+        "acceleration":  7,
+        "turret":  5.73,
+        "threshold":  0,
+        "reduction":  0.9,
+        "name":  "鱼雷艇",
+        "weapon":  "40mm 博福斯机炮",
+        "reload":  null,
+        "vision":  1.8,
+        "blast":  2.5,
+        "vehicleType":  "未定义"
+    },
+    {
+        "faction":  "日军",
+        "hp":  2.4,
+        "speed":  22,
+        "acceleration":  6.5,
+        "turret":  null,
+        "threshold":  0,
+        "reduction":  0.5,
+        "name":  "九五式小型乘用车",
+        "weapon":  "—",
+        "reload":  null,
+        "vision":  1,
+        "blast":  null,
+        "vehicleType":  "light_vehicle"
+    },
+    {
+        "faction":  "日军",
+        "hp":  4.8,
+        "speed":  18,
+        "acceleration":  6,
+        "turret":  null,
+        "threshold":  0,
+        "reduction":  0.5,
+        "name":  "四式两栖军械车",
+        "weapon":  "—",
+        "reload":  null,
+        "vision":  1,
+        "blast":  null,
+        "vehicleType":  "light_vehicle"
+    },
+    {
+        "faction":  "日军",
+        "hp":  12,
+        "speed":  11,
+        "acceleration":  10,
+        "turret":  8.31,
+        "threshold":  0,
+        "reduction":  0.9,
+        "name":  "九五式轻战车",
+        "weapon":  "37mm 九四式坦克炮",
+        "reload":  3.25,
+        "vision":  1,
+        "blast":  3,
+        "vehicleType":  "light_armour"
+    },
+    {
+        "faction":  "日军",
+        "hp":  14.5,
+        "speed":  7,
+        "acceleration":  12,
+        "turret":  2.86,
+        "threshold":  1.02,
+        "reduction":  0.9,
+        "name":  "九七式中战车改",
+        "weapon":  "47mm 一式坦克炮",
+        "reload":  4.25,
+        "vision":  1,
+        "blast":  4.45,
+        "vehicleType":  "medium_armour"
+    },
+    {
+        "faction":  "日军",
+        "hp":  17.5,
+        "speed":  6,
+        "acceleration":  8.5,
+        "turret":  11.46,
+        "threshold":  1.02,
+        "reduction":  0.9,
+        "name":  "特四式内火艇",
+        "weapon":  "13mm 九三式机关炮",
+        "reload":  null,
+        "vision":  1,
+        "blast":  1.01,
+        "vehicleType":  "light_vehicle"
+    },
+    {
+        "faction":  "日军",
+        "hp":  10,
+        "speed":  9,
+        "acceleration":  9,
+        "turret":  17.19,
+        "threshold":  0,
+        "reduction":  0.9,
+        "name":  "一式半履带装甲车",
+        "weapon":  "九七式车载机枪",
+        "reload":  null,
+        "vision":  1.3,
+        "blast":  null,
+        "vehicleType":  "light_vehicle"
+    },
+    {
+        "faction":  "日军",
+        "hp":  28,
+        "speed":  60,
+        "acceleration":  6,
+        "turret":  5.73,
+        "threshold":  0,
+        "reduction":  0.9,
+        "name":  "装甲艇",
+        "weapon":  "57mm 九〇式火炮",
+        "reload":  2.25,
+        "vision":  1.5,
+        "blast":  4,
+        "vehicleType":  "未定义"
+    }
+]
+  </script>
+
+  <script>
+    const vehicles = JSON.parse(document.getElementById("vehicleData").textContent);
+    const weapons = JSON.parse(document.getElementById("weaponData").textContent);
+
+    const tagTabs = document.querySelectorAll(".tag-tab");
+    const vehicleTable = document.getElementById("vehicleTable");
+    const weaponTable = document.getElementById("weaponTable");
     const rowsEl = document.getElementById("vehicleRows");
+    const weaponRowsEl = document.getElementById("weaponRows");
     const searchInput = document.getElementById("searchInput");
     const compareBtn = document.getElementById("compareBtn");
     const confirmCompareBtn = document.getElementById("confirmCompareBtn");
@@ -1359,12 +6474,63 @@
     const threatButtons = document.getElementById("threatButtons");
     const priorityList = document.getElementById("priorityList");
     const toast = document.getElementById("toast");
+    const weaponSections = [
+      {
+        title: "基本信息",
+        detailFields: ["类型", "致死", "射击间隔", "弹速", "射速", "弹容", "速度修正", "视野修正", "缩圈速率"],
+        compareFields: ["致死", "射击间隔", "弹速", "射速", "弹容", "速度修正", "视野修正", "缩圈速率"]
+      },
+      {
+        title: "精度",
+        fields: ["基础精度", "站立精度", "蹲伏精度", "趴下精度", "架枪精度"]
+      },
+      {
+        title: "后坐力",
+        fields: ["单发后坐力", "后坐力恢复", "持续射击一秒恢复时间"]
+      },
+      {
+        title: "伤害衰减",
+        fields: ["衰减开始距离", "衰减结束距离", "衰减开始时间", "衰减结束时间"]
+      }
+    ];
+    const vehicleHigherBetter = new Set(["hp", "speed", "acceleration", "turret", "threshold", "reduction", "vision", "blast"]);
+    const weaponHigherBetter = new Set([
+      "致死",
+      "弹容",
+      "精度",
+      "基础精度",
+      "姿态精度修正-站",
+      "姿态精度修正-蹲",
+      "姿态精度修正-趴",
+      "姿态精度修正-架",
+      "弹速",
+      "后坐力恢复",
+      "持续射击一秒恢复时间",
+      "缩圈速率",
+      "射速",
+      "衰减开始时间",
+      "衰减开始距离",
+      "视野修正",
+      "各姿态精度-站立",
+      "各姿态精度-蹲伏",
+      "各姿态精度-趴下",
+      "各姿态精度-架枪",
+      "站立精度",
+      "蹲伏精度",
+      "趴下精度",
+      "架枪精度"
+    ]);
+    let activeTab = "vehicles";
     let compareMode = false;
     let targetMode = false;
     let selectedIndices = [];
+    let selectedWeaponIndices = [];
     let currentList = vehicles;
     let filteredList = vehicles;
-    let sortState = { key: null, direction: null };
+    let currentWeaponList = weapons;
+    let filteredWeaponList = weapons;
+    let sortState = { key: null, mode: null };
+    let weaponSortState = { key: null, mode: null };
     let scoreFrame = null;
     let pendingScoreUpdate = false;
     const antiTankWeapons = [
@@ -1426,20 +6592,59 @@
     const tankDestroyerThreats = [["",1,0,1,0.5],["heavy_armour",1,0,1,8],["medium_armour",1,0,1,6],["light_armour",1,0,1,5],["at_gun",1,0,1,5.5],["light_at_gun",1,0,1,4],["bazooka",1,0,1,3.5],["light_vehicle",1,0,1,2.5],["defensive_weapon",1,0,1,2]];
     const heavyCannonThreats = [["",1,0,1,0.5],["heavy_armour",1,0,1,10],["medium_armour",1,0,1,7],["light_armour",1,0,1,5.5],["at_gun",1,0,1,7.5],["light_at_gun",1,0,1,4],["bazooka",1,0,1,3.5],["light_vehicle",1,0,1,2.5],["defensive_weapon",1,0,1,2]];
     const lightCannonThreats = [["",1,0,1,0.5],["heavy_armour",1,0,1,1],["medium_armour",1,0,1,3],["light_armour",1,0,1,6],["at_gun",1,0,1,5.5],["light_at_gun",1,0,1,4],["bazooka",1,0,1,3.5],["light_vehicle",1,0,1,2.5],["defensive_weapon",1,0,1,2]];
-    const autoCannonThreats = [["",1,0,1,0.5],["heavy_armour",1,0,1,0],["medium_armour",1,0,1,0],["light_armour",1,0,1,8],["light_vehicle",1,0,1,6]];
+    const stuartCannonThreats = [["",1,0,1,0.5],["heavy_armour",1,0,1,1],["medium_armour",1,0,1,4],["light_armour",1,0,1,6],["at_gun",1,0,1,5.5],["light_at_gun",1,0,1,4],["bazooka",1,0,1,3.5],["light_vehicle",1,0,1,2.5],["defensive_weapon",1,0,1,2]];
+    const lightFlakThreats = [["",1,0,1,0.5],["heavy_armour",1,0,1,0],["medium_armour",1,0,1,0],["light_armour",1,0,1,8],["light_vehicle",1,0,1,6]];
+    const boforsThreats = [["",1,0,1,0.5],["heavy_armour",1,0,1,0],["medium_armour",1,0,1,2],["light_armour",1,0,1,8],["light_vehicle",1,0,1,6]];
     const recoillessThreats = [["",1,0,1,0.5],["heavy_armour",1,0,1,5],["medium_armour",1,0,1,6],["light_armour",1,0,1,6],["at_gun",1,0,1,2],["light_at_gun",1,0,1,2],["light_vehicle",1,0,1,4],["defensive_weapon",1,0,1,2]];
     const mgThreats = [["",1,0,1,0.5],["bazooka",1,0,1,2]];
+    const katsuMgThreats = [["",1,0,1,0.5],["defensive_weapon",1,0,1,2],["bazooka",1,0,1,3],["light_armour",1,0,1,4],["light_vehicle",1,0,1,4],["light_at_gun",1,0,1,5],["at_gun",1,0,1,6]];
     let targetVehicle = null;
     let activeThreats = new Map();
     let dragThreat = null;
 
     function factors(rows) {
-      return rows.map(([tag, distance, direction, squadCommand, baseScore]) => ({ tag, distance, direction, squadCommand: 0, baseScore }));
+      return rows.map(([tag, distance, direction, squadCommand, baseScore]) => ({ tag, distance, direction, squadCommand, baseScore }));
     }
 
     function fmt(value) {
       if (value === null || value === undefined) return "—";
       return Number.isInteger(value) ? String(value) : String(Number(value.toFixed(2)));
+    }
+
+    function displayValue(value) {
+      return value === null || value === undefined || value === "" || value === "/" ? "-" : value;
+    }
+
+    function weaponFieldDisplay(weapon, key) {
+      if (key === "致死") return weaponKillDisplay(weapon);
+      if (key === "射击间隔") {
+        const value = numericValue(weapon[key]);
+        return value !== null && value < 0 ? "栓动" : displayValue(weapon[key]);
+      }
+      return displayValue(weapon[key]);
+    }
+
+    function numericValue(value) {
+      if (value === null || value === undefined) return null;
+      const text = String(value).trim();
+      if (!text || text === "/" || text === "—") return null;
+      if (/^-?\d+(\.\d+)?\s*\*\s*-?\d+(\.\d+)?$/.test(text)) {
+        return text.split("*").map(Number).reduce((total, item) => total * item, 1);
+      }
+      const match = text.replace(/x$/i, "").match(/-?\d+(\.\d+)?/);
+      return match ? Number(match[0]) : null;
+    }
+
+    function weaponKillDisplay(weapon) {
+      const value = displayValue(weapon["致死"]);
+      if (value === "-") return value;
+      if (!String(value).includes("爆炸")) return value;
+      const numeric = numericValue(value);
+      return `${numeric === null ? value.replace("爆炸", "") : fmt(numeric)}（爆炸）`;
+    }
+
+    function isExplosiveKill(value) {
+      return String(value || "").includes("爆炸");
     }
 
     function factionClass(faction) {
@@ -1471,9 +6676,21 @@
       });
     }
 
+    function getFilteredWeapons() {
+      const keyword = searchInput.value.trim().toLowerCase();
+      return weapons.filter((weapon) => {
+        return ["阵营", "类型", "枪械名称", "文件名称", "文件类型"].some((key) => {
+          return String(weapon[key] || "").toLowerCase().includes(keyword);
+        });
+      });
+    }
+
     function getSortedList(list) {
-      if (!sortState.key || !sortState.direction) return list.slice();
-      const multiplier = sortState.direction === "desc" ? -1 : 1;
+      if (!sortState.key || !sortState.mode) return list.slice();
+      const higherBetter = vehicleHigherBetter.has(sortState.key);
+      const multiplier = sortState.mode === "advantage"
+        ? (higherBetter ? -1 : 1)
+        : (higherBetter ? 1 : -1);
       return list.slice().sort((a, b) => {
         const left = a[sortState.key];
         const right = b[sortState.key];
@@ -1487,16 +6704,44 @@
       });
     }
 
+    function getSortedWeapons(list) {
+      if (!weaponSortState.key || !weaponSortState.mode) return list.slice();
+      const higherBetter = weaponHigherBetter.has(weaponSortState.key);
+      const multiplier = weaponSortState.mode === "advantage"
+        ? (higherBetter ? -1 : 1)
+        : (higherBetter ? 1 : -1);
+      return list.slice().sort((a, b) => {
+        const left = numericValue(a[weaponSortState.key]);
+        const right = numericValue(b[weaponSortState.key]);
+        const leftMissing = left === null;
+        const rightMissing = right === null;
+        if (leftMissing && rightMissing) return a.id - b.id;
+        if (leftMissing) return 1;
+        if (rightMissing) return -1;
+        if (left === right) return a.id - b.id;
+        return (left - right) * multiplier;
+      });
+    }
+
     function updateSortHeaders() {
       document.querySelectorAll("th.sortable").forEach((header) => {
         const indicator = header.querySelector(".sort-indicator");
-        const active = header.dataset.sort === sortState.key && sortState.direction;
+        const state = header.classList.contains("weapon-sort") ? weaponSortState : sortState;
+        const active = header.dataset.sort === state.key && state.mode;
         header.classList.toggle("sorted", Boolean(active));
-        indicator.textContent = active ? (sortState.direction === "desc" ? "↓" : "↑") : "";
+        header.classList.toggle("advantage-sort", Boolean(active && state.mode === "advantage"));
+        header.classList.toggle("disadvantage-sort", Boolean(active && state.mode === "disadvantage"));
+        indicator.textContent = "";
       });
     }
 
     function applyView() {
+      if (activeTab === "weapons") {
+        filteredWeaponList = getFilteredWeapons();
+        renderWeaponTable(getSortedWeapons(filteredWeaponList));
+        updateSortHeaders();
+        return;
+      }
       filteredList = getFilteredList();
       renderTable(getSortedList(filteredList));
       updateSortHeaders();
@@ -1529,11 +6774,35 @@
       }).join("");
     }
 
+    function renderWeaponTable(list) {
+      currentWeaponList = list;
+      weaponRowsEl.innerHTML = list.map((weapon) => {
+        const selected = selectedWeaponIndices.includes(weapon.id) ? " class=\"selected\"" : "";
+        return `
+        <tr data-index="${weapon.id}"${selected}>
+          <td>${factionBadge({ faction: weapon["阵营"] })}</td>
+          <td>${displayValue(weapon["类型"])}</td>
+          <td>${displayValue(weapon["枪械名称"])}</td>
+          <td class="num">${displayValue(weapon["基础精度"])}</td>
+          <td class="num">${weaponKillDisplay(weapon)}</td>
+          <td class="num">${displayValue(weapon["射速"])}</td>
+          <td class="num">${displayValue(weapon["单发后坐力"])}</td>
+          <td class="num">${displayValue(weapon["衰减开始距离"])}</td>
+        </tr>
+      `;
+      }).join("");
+    }
+
     function showToast(message) {
       toast.textContent = message;
       toast.classList.add("show");
       window.clearTimeout(showToast.timer);
       showToast.timer = window.setTimeout(() => toast.classList.remove("show"), 1800);
+    }
+
+    function resetDialogScroll(dialogRoot) {
+      const body = dialogRoot.querySelector(".dialog-body");
+      if (body) body.scrollTop = 0;
     }
 
     function compareArrow(left, right) {
@@ -1558,24 +6827,41 @@
       if (enabled && targetMode) setTargetMode(false);
       compareMode = enabled;
       selectedIndices = [];
+      selectedWeaponIndices = [];
       document.body.classList.toggle("compare-mode", enabled);
       compareBtn.textContent = enabled ? "取消" : "比较";
       compareBtn.classList.toggle("danger", enabled);
-      targetModeBtn.disabled = enabled;
+      targetModeBtn.disabled = enabled || activeTab === "weapons";
       confirmCompareBtn.classList.remove("show");
-      compareHint.textContent = enabled ? "点选两个载具进行比较" : "在列表中选两个载具进行对比";
+      compareHint.textContent = enabled
+        ? `点选两个${activeTab === "weapons" ? "枪械" : "载具"}进行比较`
+        : `在列表中选两个${activeTab === "weapons" ? "枪械" : "载具"}进行对比`;
       applyView();
     }
 
     function updateConfirmState() {
-      confirmCompareBtn.classList.toggle("show", selectedIndices.length === 2);
+      const count = activeTab === "weapons" ? selectedWeaponIndices.length : selectedIndices.length;
+      confirmCompareBtn.classList.toggle("show", count === 2);
       compareHint.textContent = compareMode
-        ? `已选择 ${selectedIndices.length}/2 个载具${selectedIndices.length === 2 ? "，是否确认比较" : "。"}`
-        : "在列表中选两个载具进行对比";
+        ? `已选择 ${count}/2 个${activeTab === "weapons" ? "枪械" : "载具"}${count === 2 ? "，是否确认比较" : "。"}`
+        : `在列表中选两个${activeTab === "weapons" ? "枪械" : "载具"}进行对比`;
     }
 
     function toggleRowSelection(index) {
       if (!compareMode) return;
+
+      if (activeTab === "weapons") {
+        if (selectedWeaponIndices.includes(index)) {
+          selectedWeaponIndices = selectedWeaponIndices.filter((item) => item !== index);
+        } else {
+          if (selectedWeaponIndices.length >= 2) selectedWeaponIndices.shift();
+          selectedWeaponIndices.push(index);
+        }
+
+        applyView();
+        updateConfirmState();
+        return;
+      }
 
       if (selectedIndices.includes(index)) {
         selectedIndices = selectedIndices.filter((item) => item !== index);
@@ -1806,19 +7092,39 @@
         renderDetailSection("伤害抗性", detailAntiTankRows(vehicle))
       ].join("");
       detailModal.classList.add("open");
-      detailModal.querySelector(".dialog").scrollTop = 0;
+      resetDialogScroll(detailModal);
     }
 
     function getThreatFactors(vehicle) {
       const weapon = vehicle.weapon || "";
-      if (weapon === "—") return factors(mgThreats);
+      if (weapon === "—") return factors([]);
+      if (vehicle.name === "Sd.Kfz.251/17防空车" || vehicle.name.includes("山猫")) return factors(lightFlakThreats);
+      if (vehicle.name === "鱼雷艇") return factors(boforsThreats);
+      if (vehicle.name === "M3“斯图亚特”轻型坦克") return factors(stuartCannonThreats);
+      if (vehicle.name === "九五式轻战车" || vehicle.name === "装甲艇") return factors(lightCannonThreats);
+      if (vehicle.name === "特四式内火艇") return factors(katsuMgThreats);
+      if (vehicle.name === "三号突击炮" || vehicle.name.includes("萤火虫") || vehicle.name.includes("TOG") || vehicle.name.includes("狼獾")) return factors(tankDestroyerThreats);
       if (weapon.includes("重机枪") || weapon.includes("机枪") || weapon.includes("喷火器")) return factors(mgThreats);
-      if (weapon.includes("20mm") || weapon.includes("40mm") || weapon.includes("13mm")) return factors(autoCannonThreats);
       if (weapon.includes("无后坐力")) return factors(recoillessThreats);
       if (weapon.includes("88mm") || weapon.includes("128mm")) return factors(heavyCannonThreats);
-      if (weapon.includes("17磅") || weapon.includes("3英寸") || vehicle.name.includes("狼獾") || vehicle.name.includes("TOG")) return factors(tankDestroyerThreats);
-      if (weapon.includes("37mm") || weapon.includes("57mm")) return factors(lightCannonThreats);
       return factors(mediumCannonThreats);
+    }
+
+    function setActiveTab(tab) {
+      if (tab === activeTab) return;
+      if (compareMode) setCompareMode(false);
+      if (targetMode) setTargetMode(false);
+      activeTab = tab;
+      tagTabs.forEach((button) => button.classList.toggle("active", button.dataset.tab === tab));
+      vehicleTable.classList.toggle("hidden", tab !== "vehicles");
+      weaponTable.classList.toggle("hidden", tab !== "weapons");
+      targetModeBtn.classList.toggle("hidden", tab === "weapons");
+      targetHint.classList.toggle("hidden", tab === "weapons");
+      targetModeBtn.disabled = tab === "weapons";
+      compareBtn.disabled = false;
+      searchInput.placeholder = tab === "weapons" ? "在枪械页中搜索" : "在载具页中搜索";
+      compareHint.textContent = tab === "weapons" ? "在列表中选两个枪械进行对比" : "在列表中选两个载具进行对比";
+      applyView();
     }
 
     function setTargetMode(enabled) {
@@ -1848,7 +7154,8 @@
       const rows = getThreatFactors(targetVehicle);
       threatButtons.innerHTML = rows.map((row) => {
         const name = threatNames[row.tag] || row.tag;
-        return `<button class="threat-button" data-tag="${row.tag}">${name}</button>`;
+        const title = `distance: ${fmt(row.distance)} / direction: ${fmt(row.direction)} / squad_command: ${fmt(row.squadCommand)} / base_score: ${fmt(row.baseScore)}`;
+        return `<button class="threat-button" data-tag="${row.tag}" title="${title}">${name}</button>`;
       }).join("");
     }
 
@@ -2015,21 +7322,20 @@
       ) || 1;
       const distanceFactor = Math.max(0, 1 - distance / maxDistance);
       const barrelVector = { x: barrelTip.x - barrelBase.x, y: barrelTip.y - barrelBase.y };
-      const targetVector = { x: threatCenter.x - barrelBase.x, y: threatCenter.y - barrelBase.y };
+      const targetVector = { x: threatCenter.x - barrelTip.x, y: threatCenter.y - barrelTip.y };
       const barrelLength = Math.hypot(barrelVector.x, barrelVector.y) || 1;
       const targetLength = Math.hypot(targetVector.x, targetVector.y) || 1;
       const directionFactor = Math.max(0, (barrelVector.x * targetVector.x + barrelVector.y * targetVector.y) / (barrelLength * targetLength));
       return item.factor.baseScore
         + item.factor.distance * distanceFactor
-        + item.factor.direction * directionFactor
-        + item.factor.squadCommand * 0;
+        + item.factor.direction * directionFactor;
     }
 
     function updateThreatScores() {
       const items = Array.from(activeThreats.values());
       items.forEach((item) => item.score = threatScore(item));
       items.sort((a, b) => b.score - a.score);
-      const topTag = items[0]?.tag || null;
+      const topTag = items.length ? items[0].tag : null;
       activeThreats.forEach((item) => item.el.classList.toggle("top-threat", item.tag === topTag));
       renderPriorityList(items, topTag, true);
     }
@@ -2114,6 +7420,121 @@
       });
     }
 
+    function weaponById(id) {
+      return weapons.find((weapon) => weapon.id === id);
+    }
+
+    function weaponSectionFields(section, mode) {
+      if (mode === "compare" && section.compareFields) return section.compareFields;
+      if (mode === "detail" && section.detailFields) return section.detailFields;
+      return section.fields || [];
+    }
+
+    function weaponDetailRows(weapon, section) {
+      return weaponSectionFields(section, "detail").map((key) => ({
+        name: key,
+        value: weaponFieldDisplay(weapon, key)
+      }));
+    }
+
+    function openWeaponDetail(index) {
+      const weapon = weaponById(index);
+      if (!weapon) return;
+      detailTitle.textContent = "枪械详细参数";
+      detailHero.innerHTML = `
+        ${factionBadge({ faction: weapon["阵营"] })}
+        <h3>${displayValue(weapon["枪械名称"])}</h3>
+      `;
+      detailRows.innerHTML = weaponSections
+        .map((section) => renderDetailSection(section.title, weaponDetailRows(weapon, section)))
+        .join("");
+      detailModal.classList.add("open");
+      resetDialogScroll(detailModal);
+    }
+
+    function weaponCompareRow(key, a, b) {
+      const leftValue = numericValue(a[key]);
+      const rightValue = numericValue(b[key]);
+      const leftExplosive = key === "致死" && isExplosiveKill(a[key]);
+      const rightExplosive = key === "致死" && isExplosiveKill(b[key]);
+      let comparable = leftValue !== null && rightValue !== null;
+      let leftCompare = comparable ? leftValue : 0;
+      let rightCompare = comparable ? rightValue : 0;
+
+      if (key === "致死" && leftExplosive !== rightExplosive) {
+        comparable = true;
+        leftCompare = leftExplosive ? 1 : 0;
+        rightCompare = rightExplosive ? 1 : 0;
+      }
+
+      if (key === "射击间隔" && (leftValue === null || rightValue === null || leftValue < 0 || rightValue < 0)) {
+        comparable = false;
+        leftCompare = 0;
+        rightCompare = 0;
+      }
+
+      return {
+        label: key,
+        leftDisplay: weaponFieldDisplay(a, key),
+        rightDisplay: weaponFieldDisplay(b, key),
+        leftCompare,
+        rightCompare,
+        comparable,
+        lowerBetter: !weaponHigherBetter.has(key)
+      };
+    }
+
+    function weaponCompareRows(a, b) {
+      const rows = [];
+      weaponSections.forEach((section) => {
+        rows.push({ type: "group", label: section.title });
+        weaponSectionFields(section, "compare").forEach((key) => rows.push(weaponCompareRow(key, a, b)));
+      });
+      return rows;
+    }
+
+    function openWeaponComparison(indexA, indexB) {
+      if (indexA === undefined || indexB === undefined) {
+        showToast("需要先选择两个枪械");
+        return;
+      }
+
+      if (indexA === indexB) {
+        showToast("请选择两个不同的枪械");
+        return;
+      }
+
+      const a = weaponById(indexA);
+      const b = weaponById(indexB);
+      if (!a || !b) return;
+      const rows = weaponCompareRows(a, b);
+
+      compareCards.innerHTML = `
+        <section class="vehicle-card">
+          <div class="vehicle-head">
+            ${factionBadge({ faction: a["阵营"] })}
+            <h3>${displayValue(a["枪械名称"])}</h3>
+            <div class="weapon">${displayValue(a["类型"])}</div>
+          </div>
+          <div class="side-values">${sideMetricRows(rows, "left")}</div>
+        </section>
+        <section class="metric-labels">${metricLabels(rows)}</section>
+        <section class="vehicle-card">
+          <div class="vehicle-head">
+            ${factionBadge({ faction: b["阵营"] })}
+            <h3>${displayValue(b["枪械名称"])}</h3>
+            <div class="weapon">${displayValue(b["类型"])}</div>
+          </div>
+          <div class="side-values">${sideMetricRows(rows, "right")}</div>
+        </section>
+      `;
+
+      compareMetrics.innerHTML = "";
+      document.getElementById("compareTitle").textContent = "枪械对比";
+      modal.classList.add("open");
+      resetDialogScroll(modal);
+    }
+
     function openComparison(indexA, indexB) {
       if (indexA === undefined || indexB === undefined) {
         showToast("需要先选择两个载具");
@@ -2155,22 +7576,34 @@
 
       document.getElementById("compareTitle").textContent = `斗 兽 棋 结 果`;
       modal.classList.add("open");
-      modal.querySelector(".dialog").scrollTop = 0;
+      resetDialogScroll(modal);
     }
 
     searchInput.addEventListener("input", () => {
       applyView();
     });
 
+    tagTabs.forEach((button) => {
+      button.addEventListener("click", () => setActiveTab(button.dataset.tab));
+    });
+
     document.querySelectorAll("th.sortable").forEach((header) => {
       header.addEventListener("click", () => {
         const key = header.dataset.sort;
-        if (sortState.key !== key) {
-          sortState = { key, direction: "desc" };
-        } else if (sortState.direction === "desc") {
-          sortState.direction = "asc";
+        const isWeaponSort = header.classList.contains("weapon-sort");
+        const state = isWeaponSort ? weaponSortState : sortState;
+        let nextState;
+        if (state.key !== key) {
+          nextState = { key, mode: "advantage" };
+        } else if (state.mode === "advantage") {
+          nextState = { key, mode: "disadvantage" };
         } else {
-          sortState = { key: null, direction: null };
+          nextState = { key: null, mode: null };
+        }
+        if (isWeaponSort) {
+          weaponSortState = nextState;
+        } else {
+          sortState = nextState;
         }
         applyView();
       });
@@ -2179,6 +7612,16 @@
     compareBtn.addEventListener("click", () => setCompareMode(!compareMode));
     targetModeBtn.addEventListener("click", () => setTargetMode(!targetMode));
     confirmCompareBtn.addEventListener("click", () => {
+      if (activeTab === "weapons") {
+        if (selectedWeaponIndices.length !== 2) {
+          showToast("需要点选两个枪械");
+          return;
+        }
+        openWeaponComparison(selectedWeaponIndices[0], selectedWeaponIndices[1]);
+        setCompareMode(false);
+        return;
+      }
+
       if (selectedIndices.length !== 2) {
         showToast("需要点选两个载具");
         return;
@@ -2203,6 +7646,16 @@
         return;
       }
       openDetail(index);
+    });
+    weaponRowsEl.addEventListener("click", (event) => {
+      const row = event.target.closest("tr[data-index]");
+      if (!row) return;
+      const index = Number(row.dataset.index);
+      if (compareMode) {
+        toggleRowSelection(index);
+        return;
+      }
+      openWeaponDetail(index);
     });
     threatButtons.addEventListener("click", (event) => {
       const button = event.target.closest(".threat-button");
@@ -2265,8 +7718,5 @@
   </script>
 </body>
 </html>
-
-
-
 
 
