@@ -634,25 +634,35 @@
     }
 
     .vehicle-head {
+      height: 100px;
       min-height: 100px;
       display: grid;
       justify-items: center;
-      align-content: start;
+      align-content: center;
       gap: 8px;
       text-align: center;
+      overflow: hidden;
     }
 
     .vehicle-card h3 {
       margin: 2px 0 0;
-      font-size: 24px;
+      font-size: 20px;
       line-height: 1.35;
       font-weight: 900;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
 
     .weapon {
       color: var(--muted);
       line-height: 1.45;
       font-weight: 700;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     .metric-labels,
@@ -6504,6 +6514,7 @@
       "姿态精度修正-趴",
       "姿态精度修正-架",
       "弹速",
+      "速度修正",
       "后坐力恢复",
       "持续射击一秒恢复时间",
       "缩圈速率",
