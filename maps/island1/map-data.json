@@ -1,0 +1,303 @@
+﻿{
+  "id": "island1",
+  "group": "太平洋",
+  "name": "island1",
+  "factions": [
+    {
+      "id": "IJA",
+      "label": "日军",
+      "image": "map.png"
+    },
+    {
+      "id": "USMC",
+      "label": "美军",
+      "image": "map.png"
+    }
+  ],
+  "items": [
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Anti-Aircraft Gun",
+      "x": 933.27,
+      "y": 1686.82,
+      "file": "aa_gun.vehicle",
+      "atlasIndex": 42,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Heavy Mortar",
+      "x": 763.25,
+      "y": 790.17,
+      "file": "heavy_mortar.vehicle",
+      "atlasIndex": 46,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Heavy Mortar",
+      "x": 982.41,
+      "y": 304.68,
+      "file": "heavy_mortar.vehicle",
+      "atlasIndex": 46,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Heavy Mortar",
+      "x": 1043.79,
+      "y": 1297.8,
+      "file": "heavy_mortar.vehicle",
+      "atlasIndex": 46,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Heavy Mortar",
+      "x": 1268.08,
+      "y": 754.91,
+      "file": "heavy_mortar.vehicle",
+      "atlasIndex": 46,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "hmg",
+      "x": 782.34,
+      "y": 1684.17,
+      "file": "m1919_hmg.vehicle",
+      "atlasIndex": 48,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "hmg",
+      "x": 1063.43,
+      "y": 1270.04,
+      "file": "m1919_hmg.vehicle",
+      "atlasIndex": 48,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "hmg",
+      "x": 1065.33,
+      "y": 1683.19,
+      "file": "m1919_hmg.vehicle",
+      "atlasIndex": 48,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "hmg",
+      "x": 1239.17,
+      "y": 1224.7,
+      "file": "m1919_hmg.vehicle",
+      "atlasIndex": 48,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "M1919A4 HMG",
+      "x": 747.25,
+      "y": 809.73,
+      "file": "m1919_hmg.vehicle",
+      "atlasIndex": 48,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "M1919A4 HMG",
+      "x": 857.48,
+      "y": 1130.51,
+      "file": "m1919_hmg.vehicle",
+      "atlasIndex": 48,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "M1919A4 HMG",
+      "x": 972.54,
+      "y": 746.58,
+      "file": "m1919_hmg.vehicle",
+      "atlasIndex": 48,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "M1919A4 HMG",
+      "x": 1030.41,
+      "y": 758.34,
+      "file": "m1919_hmg.vehicle",
+      "atlasIndex": 48,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "M1919A4 HMG",
+      "x": 1216.84,
+      "y": 825.54,
+      "file": "m1919_hmg.vehicle",
+      "atlasIndex": 48,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Pillbox",
+      "x": 750.74,
+      "y": 1096.53,
+      "file": "pillbox.vehicle",
+      "atlasIndex": 40,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Pillbox",
+      "x": 1006.77,
+      "y": 340.68,
+      "file": "pillbox.vehicle",
+      "atlasIndex": 40,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Pillbox",
+      "x": 1010.32,
+      "y": 1309.64,
+      "file": "pillbox.vehicle",
+      "atlasIndex": 40,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Pillbox",
+      "x": 1029.75,
+      "y": 1280.33,
+      "file": "pillbox.vehicle",
+      "atlasIndex": 40,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Pillbox",
+      "x": 1091.49,
+      "y": 1683.25,
+      "file": "pillbox.vehicle",
+      "atlasIndex": 40,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Pillbox",
+      "x": 1204.0,
+      "y": 1688.33,
+      "file": "pillbox.vehicle",
+      "atlasIndex": 40,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Type 98 Autocannon",
+      "x": 937.71,
+      "y": 338.45,
+      "file": "type98.vehicle",
+      "atlasIndex": 47,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Willys Jeep",
+      "x": 809.79,
+      "y": 1142.67,
+      "file": "jeep.vehicle",
+      "atlasIndex": 0,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Willys Jeep",
+      "x": 996.27,
+      "y": 834.93,
+      "file": "jeep.vehicle",
+      "atlasIndex": 0,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Willys Jeep",
+      "x": 1010.77,
+      "y": 1583.59,
+      "file": "jeep.vehicle",
+      "atlasIndex": 0,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Willys Jeep",
+      "x": 1011.35,
+      "y": 1598.82,
+      "file": "jeep.vehicle",
+      "atlasIndex": 0,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Willys Jeep",
+      "x": 1268.95,
+      "y": 1336.06,
+      "file": "jeep.vehicle",
+      "atlasIndex": 0,
+      "categories": []
+    }
+  ],
+  "counts": {
+    "radio": 0,
+    "tank": 0,
+    "antiTank": 0,
+    "hmg": 9
+  }
+}

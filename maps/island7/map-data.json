@@ -1,0 +1,1201 @@
+﻿{
+  "id": "island7",
+  "group": "太平洋",
+  "name": "island7",
+  "factions": [
+    {
+      "id": "IJA",
+      "label": "日军",
+      "image": "map.png"
+    },
+    {
+      "id": "USMC",
+      "label": "美军",
+      "image": "map.png"
+    }
+  ],
+  "items": [
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "Daihatsu",
+      "x": 712.33,
+      "y": 1736.36,
+      "file": "landing_craft1_noai.vehicle",
+      "atlasIndex": 38,
+      "categories": []
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "Daihatsu",
+      "x": 817.58,
+      "y": 1742.64,
+      "file": "landing_craft1_noai.vehicle",
+      "atlasIndex": 38,
+      "categories": []
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "fortified_turret",
+      "x": 1508.41,
+      "y": 749.49,
+      "file": "fortified_turret_sherman.vehicle",
+      "atlasIndex": 65,
+      "categories": [
+        "tank"
+      ]
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "radio_jammer",
+      "x": 376.83,
+      "y": 305.2,
+      "file": "radio_jammer.vehicle",
+      "atlasIndex": 9,
+      "categories": [
+        "radio"
+      ]
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "radio_jammer_2",
+      "x": 1630.58,
+      "y": 281.62,
+      "file": "radio_jammer_2.vehicle",
+      "atlasIndex": 9,
+      "categories": [
+        "radio"
+      ]
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "Daihatsu",
+      "x": 712.96,
+      "y": 1736.55,
+      "file": "landing_craft1_noai.vehicle",
+      "atlasIndex": 38,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "Daihatsu",
+      "x": 818.21,
+      "y": 1742.82,
+      "file": "landing_craft1_noai.vehicle",
+      "atlasIndex": 38,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "fortified_turret",
+      "x": 1626.55,
+      "y": 784.54,
+      "file": "fortified_turret_chi_ha.vehicle",
+      "atlasIndex": 65,
+      "categories": [
+        "tank"
+      ]
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "PT Boat",
+      "x": 914.46,
+      "y": 1769.89,
+      "file": "pt_boat.vehicle",
+      "atlasIndex": 36,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "radio_jammer",
+      "x": 376.83,
+      "y": 305.2,
+      "file": "radio_jammer.vehicle",
+      "atlasIndex": 9,
+      "categories": [
+        "radio"
+      ]
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "radio_jammer_2",
+      "x": 1630.58,
+      "y": 281.62,
+      "file": "radio_jammer_2.vehicle",
+      "atlasIndex": 9,
+      "categories": [
+        "radio"
+      ]
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "Rubber boat",
+      "x": 690.54,
+      "y": 1755.26,
+      "file": "rubber_boat.vehicle",
+      "atlasIndex": 4,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "Rubber boat",
+      "x": 853.54,
+      "y": 1746.27,
+      "file": "rubber_boat.vehicle",
+      "atlasIndex": 4,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "5-Inch Gun",
+      "x": 387.29,
+      "y": 1923.52,
+      "file": "5inch_gun.vehicle",
+      "atlasIndex": 41,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "5-Inch Gun",
+      "x": 658.43,
+      "y": 1942.89,
+      "file": "5inch_gun.vehicle",
+      "atlasIndex": 41,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "5-Inch Gun",
+      "x": 921.79,
+      "y": 1933.81,
+      "file": "5inch_gun.vehicle",
+      "atlasIndex": 41,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Bofors Gun",
+      "x": 384.58,
+      "y": 1908.3,
+      "file": "bofors.vehicle",
+      "atlasIndex": 43,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Bofors Gun",
+      "x": 392.32,
+      "y": 1911.49,
+      "file": "bofors.vehicle",
+      "atlasIndex": 43,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Bofors Gun",
+      "x": 393.1,
+      "y": 1699.86,
+      "file": "bofors.vehicle",
+      "atlasIndex": 43,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Bofors Gun",
+      "x": 655.79,
+      "y": 1927.7,
+      "file": "bofors.vehicle",
+      "atlasIndex": 43,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Bofors Gun",
+      "x": 663.5,
+      "y": 1930.89,
+      "file": "bofors.vehicle",
+      "atlasIndex": 43,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Bofors Gun",
+      "x": 665.25,
+      "y": 1719.25,
+      "file": "bofors.vehicle",
+      "atlasIndex": 43,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Bofors Gun",
+      "x": 876.13,
+      "y": 1714.83,
+      "file": "bofors.vehicle",
+      "atlasIndex": 43,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Bofors Gun",
+      "x": 915.67,
+      "y": 1919.69,
+      "file": "bofors.vehicle",
+      "atlasIndex": 43,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Bofors Gun",
+      "x": 923.92,
+      "y": 1921.03,
+      "file": "bofors.vehicle",
+      "atlasIndex": 43,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Coastal Gun",
+      "x": 1194.5,
+      "y": 1681.23,
+      "file": "coastal_gun3.vehicle",
+      "atlasIndex": 44,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Coastal Gun",
+      "x": 1467.53,
+      "y": 1722.62,
+      "file": "coastal_gun3.vehicle",
+      "atlasIndex": 44,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Coastal Gun",
+      "x": 1504.5,
+      "y": 1607.53,
+      "file": "coastal_gun3.vehicle",
+      "atlasIndex": 44,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "fortified_turret",
+      "x": 372.41,
+      "y": 341.98,
+      "file": "fortified_turret_sherman.vehicle",
+      "atlasIndex": 65,
+      "categories": [
+        "tank"
+      ]
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "fortified_turret",
+      "x": 838.75,
+      "y": 582.1,
+      "file": "fortified_turret_sherman.vehicle",
+      "atlasIndex": 65,
+      "categories": [
+        "tank"
+      ]
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "fortified_turret",
+      "x": 850.85,
+      "y": 1468.73,
+      "file": "fortified_turret_sherman.vehicle",
+      "atlasIndex": 65,
+      "categories": [
+        "tank"
+      ]
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "fortified_turret",
+      "x": 1335.41,
+      "y": 1601.07,
+      "file": "fortified_turret_sherman.vehicle",
+      "atlasIndex": 65,
+      "categories": [
+        "tank"
+      ]
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "fortified_turret",
+      "x": 1571.85,
+      "y": 320.39,
+      "file": "fortified_turret_sherman.vehicle",
+      "atlasIndex": 65,
+      "categories": [
+        "tank"
+      ]
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "fortified_turret",
+      "x": 1609.76,
+      "y": 958.17,
+      "file": "fortified_turret_sherman.vehicle",
+      "atlasIndex": 65,
+      "categories": [
+        "tank"
+      ]
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Heavy Mortar",
+      "x": 348.03,
+      "y": 354.53,
+      "file": "heavy_mortar.vehicle",
+      "atlasIndex": 46,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Heavy Mortar",
+      "x": 437.54,
+      "y": 444.96,
+      "file": "heavy_mortar.vehicle",
+      "atlasIndex": 46,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Heavy Mortar",
+      "x": 477.71,
+      "y": 399.79,
+      "file": "heavy_mortar.vehicle",
+      "atlasIndex": 46,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Heavy Mortar",
+      "x": 545.9,
+      "y": 1477.32,
+      "file": "heavy_mortar.vehicle",
+      "atlasIndex": 46,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Heavy Mortar",
+      "x": 628.08,
+      "y": 1436.18,
+      "file": "heavy_mortar.vehicle",
+      "atlasIndex": 46,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Heavy Mortar",
+      "x": 678.43,
+      "y": 1457.49,
+      "file": "heavy_mortar.vehicle",
+      "atlasIndex": 46,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Heavy Mortar",
+      "x": 729.75,
+      "y": 1423.09,
+      "file": "heavy_mortar.vehicle",
+      "atlasIndex": 46,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Heavy Mortar",
+      "x": 945.81,
+      "y": 1256.73,
+      "file": "heavy_mortar.vehicle",
+      "atlasIndex": 46,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Heavy Mortar",
+      "x": 1011.18,
+      "y": 1447.63,
+      "file": "heavy_mortar.vehicle",
+      "atlasIndex": 46,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Heavy Mortar",
+      "x": 1266.43,
+      "y": 1611.4,
+      "file": "heavy_mortar.vehicle",
+      "atlasIndex": 46,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Heavy Mortar",
+      "x": 1297.8,
+      "y": 1555.5,
+      "file": "heavy_mortar.vehicle",
+      "atlasIndex": 46,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Heavy Mortar",
+      "x": 1385.46,
+      "y": 1580.68,
+      "file": "heavy_mortar.vehicle",
+      "atlasIndex": 46,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "hmg",
+      "x": 306.96,
+      "y": 416.98,
+      "file": "m1919_hmg.vehicle",
+      "atlasIndex": 48,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "hmg",
+      "x": 422.13,
+      "y": 470.74,
+      "file": "m1919_hmg.vehicle",
+      "atlasIndex": 48,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "hmg",
+      "x": 463.34,
+      "y": 461.25,
+      "file": "m1919_hmg.vehicle",
+      "atlasIndex": 48,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "hmg",
+      "x": 469.68,
+      "y": 1151.73,
+      "file": "m1919_hmg.vehicle",
+      "atlasIndex": 48,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "hmg",
+      "x": 514.06,
+      "y": 379.57,
+      "file": "m1919_hmg.vehicle",
+      "atlasIndex": 48,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "hmg",
+      "x": 953.37,
+      "y": 867.47,
+      "file": "m1919_hmg.vehicle",
+      "atlasIndex": 48,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "hmg",
+      "x": 977.98,
+      "y": 1229.56,
+      "file": "m1919_hmg.vehicle",
+      "atlasIndex": 48,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "hmg",
+      "x": 1369.91,
+      "y": 910.72,
+      "file": "m1919_hmg.vehicle",
+      "atlasIndex": 48,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "hmg",
+      "x": 1441.36,
+      "y": 314.23,
+      "file": "m1919_hmg.vehicle",
+      "atlasIndex": 48,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "hmg",
+      "x": 1562.42,
+      "y": 322.27,
+      "file": "m1919_hmg.vehicle",
+      "atlasIndex": 48,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "hmg",
+      "x": 1565.68,
+      "y": 374.48,
+      "file": "m1919_hmg.vehicle",
+      "atlasIndex": 48,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "hmg",
+      "x": 1602.41,
+      "y": 388.91,
+      "file": "m1919_hmg.vehicle",
+      "atlasIndex": 48,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "hmg",
+      "x": 1638.43,
+      "y": 299.73,
+      "file": "m1919_hmg.vehicle",
+      "atlasIndex": 48,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "hmg",
+      "x": 1733.12,
+      "y": 899.57,
+      "file": "m1919_hmg.vehicle",
+      "atlasIndex": 48,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "hmg",
+      "x": 1769.67,
+      "y": 312.1,
+      "file": "m1919_hmg.vehicle",
+      "atlasIndex": 48,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "light_tank_damaged",
+      "x": 975.06,
+      "y": 872.81,
+      "file": "stuart_damaged.vehicle",
+      "atlasIndex": 33,
+      "categories": [
+        "tank"
+      ]
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Oerlikon Gun",
+      "x": 380.2,
+      "y": 1831.37,
+      "file": "oerlikon.vehicle",
+      "atlasIndex": 45,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Oerlikon Gun",
+      "x": 381.88,
+      "y": 1798.07,
+      "file": "oerlikon.vehicle",
+      "atlasIndex": 45,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Oerlikon Gun",
+      "x": 400.11,
+      "y": 1835.02,
+      "file": "oerlikon.vehicle",
+      "atlasIndex": 45,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Oerlikon Gun",
+      "x": 401.3,
+      "y": 1800.58,
+      "file": "oerlikon.vehicle",
+      "atlasIndex": 45,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Oerlikon Gun",
+      "x": 651.78,
+      "y": 1850.78,
+      "file": "oerlikon.vehicle",
+      "atlasIndex": 45,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Oerlikon Gun",
+      "x": 653.61,
+      "y": 1817.48,
+      "file": "oerlikon.vehicle",
+      "atlasIndex": 45,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Oerlikon Gun",
+      "x": 671.68,
+      "y": 1854.51,
+      "file": "oerlikon.vehicle",
+      "atlasIndex": 45,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Oerlikon Gun",
+      "x": 672.96,
+      "y": 1820.02,
+      "file": "oerlikon.vehicle",
+      "atlasIndex": 45,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Oerlikon Gun",
+      "x": 887.78,
+      "y": 1813.04,
+      "file": "oerlikon.vehicle",
+      "atlasIndex": 45,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Oerlikon Gun",
+      "x": 893.8,
+      "y": 1845.89,
+      "file": "oerlikon.vehicle",
+      "atlasIndex": 45,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Oerlikon Gun",
+      "x": 907.22,
+      "y": 1811.0,
+      "file": "oerlikon.vehicle",
+      "atlasIndex": 45,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Oerlikon Gun",
+      "x": 913.95,
+      "y": 1844.89,
+      "file": "oerlikon.vehicle",
+      "atlasIndex": 45,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Pillbox",
+      "x": 229.48,
+      "y": 1460.39,
+      "file": "pillbox.vehicle",
+      "atlasIndex": 40,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Pillbox",
+      "x": 294.11,
+      "y": 1438.98,
+      "file": "pillbox.vehicle",
+      "atlasIndex": 40,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Pillbox",
+      "x": 352.77,
+      "y": 403.66,
+      "file": "pillbox.vehicle",
+      "atlasIndex": 40,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Pillbox",
+      "x": 362.11,
+      "y": 1470.16,
+      "file": "pillbox.vehicle",
+      "atlasIndex": 40,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Pillbox",
+      "x": 398.14,
+      "y": 377.31,
+      "file": "pillbox.vehicle",
+      "atlasIndex": 40,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Pillbox",
+      "x": 405.69,
+      "y": 374.11,
+      "file": "pillbox.vehicle",
+      "atlasIndex": 40,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Pillbox",
+      "x": 415.79,
+      "y": 326.63,
+      "file": "pillbox.vehicle",
+      "atlasIndex": 40,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Pillbox",
+      "x": 470.84,
+      "y": 336.8,
+      "file": "pillbox.vehicle",
+      "atlasIndex": 40,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Pillbox",
+      "x": 501.81,
+      "y": 1451.15,
+      "file": "pillbox.vehicle",
+      "atlasIndex": 40,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Pillbox",
+      "x": 510.69,
+      "y": 1533.65,
+      "file": "pillbox.vehicle",
+      "atlasIndex": 40,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Pillbox",
+      "x": 557.77,
+      "y": 1422.36,
+      "file": "pillbox.vehicle",
+      "atlasIndex": 40,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Pillbox",
+      "x": 559.86,
+      "y": 1493.66,
+      "file": "pillbox.vehicle",
+      "atlasIndex": 40,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Pillbox",
+      "x": 673.65,
+      "y": 1413.48,
+      "file": "pillbox.vehicle",
+      "atlasIndex": 40,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Pillbox",
+      "x": 694.03,
+      "y": 1483.07,
+      "file": "pillbox.vehicle",
+      "atlasIndex": 40,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Pillbox",
+      "x": 754.07,
+      "y": 1545.96,
+      "file": "pillbox.vehicle",
+      "atlasIndex": 40,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Pillbox",
+      "x": 930.19,
+      "y": 1458.46,
+      "file": "pillbox.vehicle",
+      "atlasIndex": 40,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Pillbox",
+      "x": 949.72,
+      "y": 1546.81,
+      "file": "pillbox.vehicle",
+      "atlasIndex": 40,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Pillbox",
+      "x": 1031.64,
+      "y": 1492.83,
+      "file": "pillbox.vehicle",
+      "atlasIndex": 40,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Pillbox",
+      "x": 1128.03,
+      "y": 1429.33,
+      "file": "pillbox.vehicle",
+      "atlasIndex": 40,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Pillbox",
+      "x": 1128.64,
+      "y": 1558.59,
+      "file": "pillbox.vehicle",
+      "atlasIndex": 40,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Pillbox",
+      "x": 1268.44,
+      "y": 1510.28,
+      "file": "pillbox.vehicle",
+      "atlasIndex": 40,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Pillbox",
+      "x": 1334.32,
+      "y": 1489.22,
+      "file": "pillbox.vehicle",
+      "atlasIndex": 40,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Pillbox",
+      "x": 1410.71,
+      "y": 1473.22,
+      "file": "pillbox.vehicle",
+      "atlasIndex": 40,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Rubber boat",
+      "x": 1410.73,
+      "y": 1246.15,
+      "file": "rubber_boat.vehicle",
+      "atlasIndex": 4,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Rubber boat",
+      "x": 1429.4,
+      "y": 1070.3,
+      "file": "rubber_boat.vehicle",
+      "atlasIndex": 4,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Rubber boat",
+      "x": 1439.01,
+      "y": 1248.46,
+      "file": "rubber_boat.vehicle",
+      "atlasIndex": 4,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Rubber boat",
+      "x": 1756.86,
+      "y": 1084.03,
+      "file": "rubber_boat.vehicle",
+      "atlasIndex": 4,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Rubber boat",
+      "x": 1828.49,
+      "y": 1118.84,
+      "file": "rubber_boat.vehicle",
+      "atlasIndex": 4,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Type 98 Autocannon",
+      "x": 891.24,
+      "y": 826.25,
+      "file": "type98.vehicle",
+      "atlasIndex": 47,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Type 98 Autocannon",
+      "x": 1704.87,
+      "y": 1040.34,
+      "file": "type98.vehicle",
+      "atlasIndex": 47,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Type 98 Autocannon",
+      "x": 1787.7,
+      "y": 1014.91,
+      "file": "type98.vehicle",
+      "atlasIndex": 47,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Willys Jeep",
+      "x": 367.32,
+      "y": 236.33,
+      "file": "jeep.vehicle",
+      "atlasIndex": 0,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Willys Jeep",
+      "x": 1178.57,
+      "y": 1228.87,
+      "file": "jeep.vehicle",
+      "atlasIndex": 0,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Willys Jeep",
+      "x": 1353.64,
+      "y": 1524.84,
+      "file": "jeep.vehicle",
+      "atlasIndex": 0,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Willys Jeep",
+      "x": 1653.47,
+      "y": 837.44,
+      "file": "jeep.vehicle",
+      "atlasIndex": 0,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Willys Jeep",
+      "x": 1690.95,
+      "y": 1072.4,
+      "file": "jeep.vehicle",
+      "atlasIndex": 0,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Willys Jeep",
+      "x": 1704.47,
+      "y": 705.99,
+      "file": "jeep.vehicle",
+      "atlasIndex": 0,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Willys Jeep",
+      "x": 1794.54,
+      "y": 626.69,
+      "file": "jeep.vehicle",
+      "atlasIndex": 0,
+      "categories": []
+    }
+  ],
+  "counts": {
+    "radio": 4,
+    "tank": 9,
+    "antiTank": 0,
+    "hmg": 15
+  }
+}

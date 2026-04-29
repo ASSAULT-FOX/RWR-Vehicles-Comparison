@@ -1,0 +1,507 @@
+﻿{
+  "id": "island2",
+  "group": "太平洋",
+  "name": "island2",
+  "factions": [
+    {
+      "id": "IJA",
+      "label": "日军",
+      "image": "map.png"
+    },
+    {
+      "id": "USMC",
+      "label": "美军",
+      "image": "map.png"
+    }
+  ],
+  "items": [
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "armory boat",
+      "x": 243.57,
+      "y": 1439.05,
+      "file": "armory_higgins.vehicle",
+      "atlasIndex": 50,
+      "categories": []
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "Daihatsu",
+      "x": 343.0,
+      "y": 1320.27,
+      "file": "landing_craft1_noai.vehicle",
+      "atlasIndex": 38,
+      "categories": []
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "Oerlikon Gun",
+      "x": 1690.67,
+      "y": 1679.63,
+      "file": "oerlikon.vehicle",
+      "atlasIndex": 45,
+      "categories": []
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "Oerlikon Gun",
+      "x": 1705.42,
+      "y": 1659.58,
+      "file": "oerlikon.vehicle",
+      "atlasIndex": 45,
+      "categories": []
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "Oerlikon Gun",
+      "x": 1710.44,
+      "y": 1717.42,
+      "file": "oerlikon.vehicle",
+      "atlasIndex": 45,
+      "categories": []
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "Oerlikon Gun",
+      "x": 1737.36,
+      "y": 1680.61,
+      "file": "oerlikon.vehicle",
+      "atlasIndex": 45,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "armory boat",
+      "x": 1778.77,
+      "y": 1614.8,
+      "file": "armory_daihatsu.vehicle",
+      "atlasIndex": 51,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "Higgins Boat",
+      "x": 1761.43,
+      "y": 1681.25,
+      "file": "landing_craft_noai.vehicle",
+      "atlasIndex": 37,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "Oerlikon Gun",
+      "x": 1690.66,
+      "y": 1679.64,
+      "file": "oerlikon.vehicle",
+      "atlasIndex": 45,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "Oerlikon Gun",
+      "x": 1705.41,
+      "y": 1659.59,
+      "file": "oerlikon.vehicle",
+      "atlasIndex": 45,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "Oerlikon Gun",
+      "x": 1710.43,
+      "y": 1717.44,
+      "file": "oerlikon.vehicle",
+      "atlasIndex": 45,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "Oerlikon Gun",
+      "x": 1737.35,
+      "y": 1680.63,
+      "file": "oerlikon.vehicle",
+      "atlasIndex": 45,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Coastal Gun",
+      "x": 768.11,
+      "y": 434.77,
+      "file": "coastal_gun3.vehicle",
+      "atlasIndex": 44,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Coastal Gun",
+      "x": 1114.11,
+      "y": 298.97,
+      "file": "coastal_gun3.vehicle",
+      "atlasIndex": 44,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Coastal Gun",
+      "x": 1340.62,
+      "y": 493.81,
+      "file": "coastal_gun3.vehicle",
+      "atlasIndex": 44,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Heavy Mortar",
+      "x": 867.21,
+      "y": 1163.7,
+      "file": "heavy_mortar.vehicle",
+      "atlasIndex": 46,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Higgins Boat",
+      "x": 323.21,
+      "y": 1491.03,
+      "file": "landing_craft.vehicle",
+      "atlasIndex": 37,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Higgins Boat",
+      "x": 1646.21,
+      "y": 1712.04,
+      "file": "landing_craft.vehicle",
+      "atlasIndex": 37,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Higgins Boat",
+      "x": 1711.79,
+      "y": 1622.01,
+      "file": "landing_craft.vehicle",
+      "atlasIndex": 37,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "hmg",
+      "x": 374.55,
+      "y": 1391.44,
+      "file": "m1919_hmg.vehicle",
+      "atlasIndex": 48,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "hmg",
+      "x": 643.83,
+      "y": 713.75,
+      "file": "m1919_hmg.vehicle",
+      "atlasIndex": 48,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "hmg",
+      "x": 666.61,
+      "y": 711.24,
+      "file": "m1919_hmg.vehicle",
+      "atlasIndex": 48,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "hmg",
+      "x": 1142.17,
+      "y": 559.58,
+      "file": "m1919_hmg.vehicle",
+      "atlasIndex": 48,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "light_tank",
+      "x": 349.56,
+      "y": 1427.67,
+      "file": "stuart.vehicle",
+      "atlasIndex": 33,
+      "categories": [
+        "tank"
+      ]
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Pillbox",
+      "x": 801.0,
+      "y": 1068.0,
+      "file": "pillbox.vehicle",
+      "atlasIndex": 40,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Pillbox",
+      "x": 895.19,
+      "y": 1150.18,
+      "file": "pillbox.vehicle",
+      "atlasIndex": 40,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Pillbox",
+      "x": 971.55,
+      "y": 982.28,
+      "file": "pillbox.vehicle",
+      "atlasIndex": 40,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Pillbox",
+      "x": 1353.31,
+      "y": 1377.06,
+      "file": "pillbox.vehicle",
+      "atlasIndex": 40,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Pillbox",
+      "x": 1444.47,
+      "y": 1378.51,
+      "file": "pillbox.vehicle",
+      "atlasIndex": 40,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Pillbox",
+      "x": 1473.89,
+      "y": 1226.56,
+      "file": "pillbox.vehicle",
+      "atlasIndex": 40,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Pillbox",
+      "x": 1556.98,
+      "y": 1503.39,
+      "file": "pillbox.vehicle",
+      "atlasIndex": 40,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Prison hatch",
+      "x": 1156.76,
+      "y": 564.57,
+      "file": "prison_door.vehicle",
+      "atlasIndex": 17,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "PT Boat",
+      "x": 309.71,
+      "y": 1381.48,
+      "file": "pt_boat.vehicle",
+      "atlasIndex": 36,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "PT Boat",
+      "x": 1661.63,
+      "y": 1778.87,
+      "file": "pt_boat.vehicle",
+      "atlasIndex": 36,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "radio_jammer",
+      "x": 646.66,
+      "y": 665.59,
+      "file": "radio_jammer.vehicle",
+      "atlasIndex": 9,
+      "categories": [
+        "radio"
+      ]
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Rubber boat",
+      "x": 343.79,
+      "y": 1461.07,
+      "file": "rubber_boat.vehicle",
+      "atlasIndex": 4,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Rubber boat",
+      "x": 1678.56,
+      "y": 1678.12,
+      "file": "rubber_boat.vehicle",
+      "atlasIndex": 4,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Rubber boat",
+      "x": 1686.21,
+      "y": 1666.86,
+      "file": "rubber_boat.vehicle",
+      "atlasIndex": 4,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Type 98 Autocannon",
+      "x": 592.3,
+      "y": 1719.45,
+      "file": "type98.vehicle",
+      "atlasIndex": 47,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Type 98 Autocannon",
+      "x": 661.28,
+      "y": 1774.54,
+      "file": "type98.vehicle",
+      "atlasIndex": 47,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Type 98 Autocannon",
+      "x": 853.98,
+      "y": 1036.36,
+      "file": "type98.vehicle",
+      "atlasIndex": 47,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Type 98 Autocannon",
+      "x": 929.06,
+      "y": 1060.01,
+      "file": "type98.vehicle",
+      "atlasIndex": 47,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Type 98 Autocannon",
+      "x": 974.68,
+      "y": 599.79,
+      "file": "type98.vehicle",
+      "atlasIndex": 47,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Type 98 Autocannon",
+      "x": 1531.55,
+      "y": 1501.77,
+      "file": "type98.vehicle",
+      "atlasIndex": 47,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Willys Jeep",
+      "x": 375.96,
+      "y": 1356.92,
+      "file": "jeep.vehicle",
+      "atlasIndex": 0,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Willys Jeep",
+      "x": 394.34,
+      "y": 1348.97,
+      "file": "jeep.vehicle",
+      "atlasIndex": 0,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Willys Jeep",
+      "x": 643.37,
+      "y": 1616.31,
+      "file": "jeep.vehicle",
+      "atlasIndex": 0,
+      "categories": []
+    }
+  ],
+  "counts": {
+    "radio": 1,
+    "tank": 1,
+    "antiTank": 0,
+    "hmg": 4
+  }
+}

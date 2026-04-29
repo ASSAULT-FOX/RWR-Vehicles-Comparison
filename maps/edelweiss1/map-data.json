@@ -1,0 +1,528 @@
+﻿{
+  "id": "edelweiss1",
+  "group": "雪绒花",
+  "name": "edelweiss1",
+  "factions": [
+    {
+      "id": "Axis",
+      "label": "德军",
+      "image": "map_axis.png"
+    },
+    {
+      "id": "Allies",
+      "label": "盟军",
+      "image": "map_allies.png"
+    }
+  ],
+  "items": [
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "Airdropped Armory",
+      "x": 534.8,
+      "y": 1636.12,
+      "file": "usf_armoury_para.vehicle",
+      "atlasIndex": 22,
+      "categories": []
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "Airdropped Armory",
+      "x": 1255.83,
+      "y": 1492.3,
+      "file": "usf_armoury_para.vehicle",
+      "atlasIndex": 22,
+      "categories": []
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "at_gun_pak40",
+      "x": 358.49,
+      "y": 639.43,
+      "file": "at_gun_pak40.vehicle",
+      "atlasIndex": 13,
+      "categories": [
+        "antiTank"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "hmg",
+      "x": 340.71,
+      "y": 734.26,
+      "file": "m2hb_hmg.vehicle",
+      "atlasIndex": 29,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "hmg",
+      "x": 348.83,
+      "y": 656.73,
+      "file": "m2hb_hmg.vehicle",
+      "atlasIndex": 29,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "hmg",
+      "x": 529.11,
+      "y": 1572.29,
+      "file": "m2hb_hmg.vehicle",
+      "atlasIndex": 29,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "hmg",
+      "x": 557.93,
+      "y": 923.61,
+      "file": "m2hb_hmg.vehicle",
+      "atlasIndex": 29,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "hmg",
+      "x": 600.79,
+      "y": 1541.21,
+      "file": "m2hb_hmg.vehicle",
+      "atlasIndex": 29,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "hmg",
+      "x": 1482.4,
+      "y": 444.93,
+      "file": "m2hb_hmg.vehicle",
+      "atlasIndex": 29,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "hmg",
+      "x": 1503.65,
+      "y": 373.56,
+      "file": "m2hb_hmg.vehicle",
+      "atlasIndex": 29,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "hmg",
+      "x": 1522.55,
+      "y": 470.41,
+      "file": "m2hb_hmg.vehicle",
+      "atlasIndex": 29,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "kublewagon",
+      "x": 1061.67,
+      "y": 636.86,
+      "file": "kubelwagen.vehicle",
+      "atlasIndex": 62,
+      "categories": []
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "kublewagon",
+      "x": 1188.65,
+      "y": 1568.8,
+      "file": "kubelwagen.vehicle",
+      "atlasIndex": 62,
+      "categories": []
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "m3_halftrack",
+      "x": 1578.96,
+      "y": 424.86,
+      "file": "m3_halftrack.vehicle",
+      "atlasIndex": 24,
+      "categories": []
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "m3_halftrack",
+      "x": 1714.01,
+      "y": 1291.15,
+      "file": "m3_halftrack.vehicle",
+      "atlasIndex": 24,
+      "categories": []
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "M5 Anti-Tank Gun",
+      "x": 545.04,
+      "y": 1639.29,
+      "file": "at_gun_m5.vehicle",
+      "atlasIndex": 14,
+      "categories": [
+        "antiTank",
+        "tank"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "Opel Blitz Armory",
+      "x": 1757.77,
+      "y": 1782.78,
+      "file": "opel_blitz_armoury.vehicle",
+      "atlasIndex": 2,
+      "categories": []
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "radio_jammer",
+      "x": 1706.44,
+      "y": 1214.11,
+      "file": "radio_jammer.vehicle",
+      "atlasIndex": 9,
+      "categories": [
+        "radio"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "sdkfz251",
+      "x": 344.72,
+      "y": 692.05,
+      "file": "sdkfz251.vehicle",
+      "atlasIndex": 55,
+      "categories": []
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "sdkfz251",
+      "x": 1744.8,
+      "y": 1220.5,
+      "file": "sdkfz251.vehicle",
+      "atlasIndex": 55,
+      "categories": []
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "truck",
+      "x": 330.29,
+      "y": 715.04,
+      "file": "austin_k5.vehicle",
+      "atlasIndex": 56,
+      "categories": []
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "truck",
+      "x": 1769.3,
+      "y": 1747.74,
+      "file": "austin_k5.vehicle",
+      "atlasIndex": 56,
+      "categories": []
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "truck",
+      "x": 1774.15,
+      "y": 1331.34,
+      "file": "austin_k5.vehicle",
+      "atlasIndex": 56,
+      "categories": []
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "Willys Jeep",
+      "x": 350.34,
+      "y": 674.42,
+      "file": "jeep.vehicle",
+      "atlasIndex": 0,
+      "categories": []
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "Willys Jeep",
+      "x": 576.54,
+      "y": 869.0,
+      "file": "jeep.vehicle",
+      "atlasIndex": 0,
+      "categories": []
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "Willys Jeep",
+      "x": 1005.34,
+      "y": 1165.56,
+      "file": "jeep.vehicle",
+      "atlasIndex": 0,
+      "categories": []
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "Willys MB",
+      "x": 517.75,
+      "y": 1602.12,
+      "file": "willys_mb.vehicle",
+      "atlasIndex": 10,
+      "categories": []
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "Willys MB",
+      "x": 1368.26,
+      "y": 1174.56,
+      "file": "willys_mb.vehicle",
+      "atlasIndex": 10,
+      "categories": []
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "Willys MB AT",
+      "x": 1188.31,
+      "y": 1569.22,
+      "file": "willys_mb_recoilless_rifle.vehicle",
+      "atlasIndex": 0,
+      "categories": []
+    },
+    {
+      "faction": "Allies",
+      "factionLabel": "盟军",
+      "tag": "hmg",
+      "x": 1482.4,
+      "y": 444.93,
+      "file": "mg42_hmg.vehicle",
+      "atlasIndex": 28,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "Allies",
+      "factionLabel": "盟军",
+      "tag": "hmg",
+      "x": 1503.65,
+      "y": 373.56,
+      "file": "mg42_hmg.vehicle",
+      "atlasIndex": 28,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "Allies",
+      "factionLabel": "盟军",
+      "tag": "hmg",
+      "x": 1522.55,
+      "y": 470.41,
+      "file": "mg42_hmg.vehicle",
+      "atlasIndex": 28,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "Allies",
+      "factionLabel": "盟军",
+      "tag": "hmg",
+      "x": 1552.72,
+      "y": 465.56,
+      "file": "mg42_hmg.vehicle",
+      "atlasIndex": 28,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "Allies",
+      "factionLabel": "盟军",
+      "tag": "kublewagon",
+      "x": 329.2,
+      "y": 714.56,
+      "file": "kubelwagen.vehicle",
+      "atlasIndex": 62,
+      "categories": []
+    },
+    {
+      "faction": "Allies",
+      "factionLabel": "盟军",
+      "tag": "kublewagon",
+      "x": 517.34,
+      "y": 1602.05,
+      "file": "kubelwagen.vehicle",
+      "atlasIndex": 62,
+      "categories": []
+    },
+    {
+      "faction": "Allies",
+      "factionLabel": "盟军",
+      "tag": "kublewagon",
+      "x": 576.92,
+      "y": 868.08,
+      "file": "kubelwagen.vehicle",
+      "atlasIndex": 62,
+      "categories": []
+    },
+    {
+      "faction": "Allies",
+      "factionLabel": "盟军",
+      "tag": "kublewagon",
+      "x": 1005.38,
+      "y": 1166.45,
+      "file": "kubelwagen.vehicle",
+      "atlasIndex": 62,
+      "categories": []
+    },
+    {
+      "faction": "Allies",
+      "factionLabel": "盟军",
+      "tag": "kublewagon",
+      "x": 1367.31,
+      "y": 1176.73,
+      "file": "kubelwagen.vehicle",
+      "atlasIndex": 62,
+      "categories": []
+    },
+    {
+      "faction": "Allies",
+      "factionLabel": "盟军",
+      "tag": "kublewagon",
+      "x": 1565.54,
+      "y": 1687.4,
+      "file": "kubelwagen.vehicle",
+      "atlasIndex": 62,
+      "categories": []
+    },
+    {
+      "faction": "Allies",
+      "factionLabel": "盟军",
+      "tag": "kublewagon",
+      "x": 1579.07,
+      "y": 424.86,
+      "file": "kubelwagen.vehicle",
+      "atlasIndex": 62,
+      "categories": []
+    },
+    {
+      "faction": "Allies",
+      "factionLabel": "盟军",
+      "tag": "radio_jammer",
+      "x": 1706.34,
+      "y": 1214.21,
+      "file": "radio_jammer.vehicle",
+      "atlasIndex": 9,
+      "categories": [
+        "radio"
+      ]
+    },
+    {
+      "faction": "Allies",
+      "factionLabel": "盟军",
+      "tag": "sdkfz251",
+      "x": 344.23,
+      "y": 691.57,
+      "file": "sdkfz251.vehicle",
+      "atlasIndex": 55,
+      "categories": []
+    },
+    {
+      "faction": "Allies",
+      "factionLabel": "盟军",
+      "tag": "sdkfz251",
+      "x": 1060.26,
+      "y": 637.23,
+      "file": "sdkfz251.vehicle",
+      "atlasIndex": 55,
+      "categories": []
+    },
+    {
+      "faction": "Allies",
+      "factionLabel": "盟军",
+      "tag": "sdkfz251",
+      "x": 1713.05,
+      "y": 1290.72,
+      "file": "sdkfz251.vehicle",
+      "atlasIndex": 55,
+      "categories": []
+    },
+    {
+      "faction": "Allies",
+      "factionLabel": "盟军",
+      "tag": "truck",
+      "x": 1770.67,
+      "y": 1329.92,
+      "file": "opel_blitz_1.vehicle",
+      "atlasIndex": 1,
+      "categories": []
+    },
+    {
+      "faction": "Allies",
+      "factionLabel": "盟军",
+      "tag": "Willys MB",
+      "x": 1187.59,
+      "y": 1570.6,
+      "file": "willys_mb.vehicle",
+      "atlasIndex": 10,
+      "categories": []
+    },
+    {
+      "faction": "Allies",
+      "factionLabel": "盟军",
+      "tag": "Willys MB",
+      "x": 1301.24,
+      "y": 1519.16,
+      "file": "willys_mb.vehicle",
+      "atlasIndex": 10,
+      "categories": []
+    }
+  ],
+  "counts": {
+    "radio": 2,
+    "tank": 1,
+    "antiTank": 2,
+    "hmg": 12
+  }
+}

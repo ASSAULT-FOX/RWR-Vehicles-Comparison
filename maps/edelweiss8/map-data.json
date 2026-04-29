@@ -1,0 +1,700 @@
+﻿{
+  "id": "edelweiss8",
+  "group": "雪绒花",
+  "name": "edelweiss8",
+  "factions": [
+    {
+      "id": "Axis",
+      "label": "德军",
+      "image": "map.png"
+    }
+  ],
+  "items": [
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "apc",
+      "x": 453.02,
+      "y": 254.54,
+      "file": "m3_halftrack.vehicle",
+      "atlasIndex": 24,
+      "categories": []
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "Heavy Mortar",
+      "x": 333.92,
+      "y": 1705.82,
+      "file": "heavy_mortar.vehicle",
+      "atlasIndex": 46,
+      "categories": []
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "hmg",
+      "x": 268.4,
+      "y": 1646.21,
+      "file": "m2hb_hmg.vehicle",
+      "atlasIndex": 29,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "hmg",
+      "x": 291.27,
+      "y": 1829.11,
+      "file": "m2hb_hmg.vehicle",
+      "atlasIndex": 29,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "hmg",
+      "x": 348.04,
+      "y": 1643.83,
+      "file": "m2hb_hmg.vehicle",
+      "atlasIndex": 29,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "hmg",
+      "x": 366.39,
+      "y": 1804.48,
+      "file": "m2hb_hmg.vehicle",
+      "atlasIndex": 29,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "hmg",
+      "x": 522.9,
+      "y": 1610.89,
+      "file": "m2hb_hmg.vehicle",
+      "atlasIndex": 29,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "hmg",
+      "x": 539.53,
+      "y": 1697.97,
+      "file": "m2hb_hmg.vehicle",
+      "atlasIndex": 29,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "hmg",
+      "x": 580.79,
+      "y": 1763.15,
+      "file": "m2hb_hmg.vehicle",
+      "atlasIndex": 29,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "hmg",
+      "x": 1269.49,
+      "y": 1325.95,
+      "file": "m2hb_hmg.vehicle",
+      "atlasIndex": 29,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "hmg",
+      "x": 1298.32,
+      "y": 1367.2,
+      "file": "m2hb_hmg.vehicle",
+      "atlasIndex": 29,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "m3_halftrack",
+      "x": 894.7,
+      "y": 1196.67,
+      "file": "m3_halftrack.vehicle",
+      "atlasIndex": 24,
+      "categories": []
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "m4_V",
+      "x": 725.94,
+      "y": 1420.8,
+      "file": "m4_V.vehicle",
+      "atlasIndex": 60,
+      "categories": [
+        "tank"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "m4_V",
+      "x": 1149.45,
+      "y": 294.76,
+      "file": "m4_V.vehicle",
+      "atlasIndex": 60,
+      "categories": [
+        "tank"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "M5 Anti-Tank Gun",
+      "x": 819.31,
+      "y": 1379.61,
+      "file": "at_gun_m5.vehicle",
+      "atlasIndex": 14,
+      "categories": [
+        "antiTank",
+        "tank"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "M5 Anti-Tank Gun",
+      "x": 963.22,
+      "y": 1614.42,
+      "file": "at_gun_m5.vehicle",
+      "atlasIndex": 14,
+      "categories": [
+        "antiTank",
+        "tank"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "Opel Blitz",
+      "x": 1543.44,
+      "y": 202.5,
+      "file": "opel_blitz_2.vehicle",
+      "atlasIndex": 1,
+      "categories": []
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "Opel Blitz Armory",
+      "x": 1190.81,
+      "y": 802.96,
+      "file": "opel_blitz_armoury.vehicle",
+      "atlasIndex": 2,
+      "categories": []
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "radio_jammer",
+      "x": 281.47,
+      "y": 1754.83,
+      "file": "radio_jammer.vehicle",
+      "atlasIndex": 9,
+      "categories": [
+        "radio"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "repair_tank",
+      "x": 1464.03,
+      "y": 1558.27,
+      "file": "repair_tank.vehicle",
+      "atlasIndex": 8,
+      "categories": [
+        "tank"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "stuart",
+      "x": 1091.19,
+      "y": 1638.28,
+      "file": "stuart.vehicle",
+      "atlasIndex": 33,
+      "categories": [
+        "tank"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "stuart",
+      "x": 1831.1,
+      "y": 901.58,
+      "file": "stuart.vehicle",
+      "atlasIndex": 33,
+      "categories": [
+        "tank"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "truck",
+      "x": 336.21,
+      "y": 418.18,
+      "file": "austin_k5.vehicle",
+      "atlasIndex": 56,
+      "categories": []
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "truck",
+      "x": 1222.07,
+      "y": 863.4,
+      "file": "austin_k5.vehicle",
+      "atlasIndex": 56,
+      "categories": []
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "universal_carrier",
+      "x": 1726.03,
+      "y": 1278.44,
+      "file": "universal_carrier.vehicle",
+      "atlasIndex": 58,
+      "categories": []
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "Wasp MKII",
+      "x": 457.49,
+      "y": 228.39,
+      "file": "wasp.vehicle",
+      "atlasIndex": 68,
+      "categories": []
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "Wasp MKII",
+      "x": 1217.21,
+      "y": 805.55,
+      "file": "wasp.vehicle",
+      "atlasIndex": 68,
+      "categories": []
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "Willys Jeep",
+      "x": 354.52,
+      "y": 1104.91,
+      "file": "jeep.vehicle",
+      "atlasIndex": 0,
+      "categories": []
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "Willys Jeep",
+      "x": 847.26,
+      "y": 1444.86,
+      "file": "jeep.vehicle",
+      "atlasIndex": 0,
+      "categories": []
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "Willys Jeep",
+      "x": 957.25,
+      "y": 1212.06,
+      "file": "jeep.vehicle",
+      "atlasIndex": 0,
+      "categories": []
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "Willys Jeep",
+      "x": 1075.94,
+      "y": 351.56,
+      "file": "jeep.vehicle",
+      "atlasIndex": 0,
+      "categories": []
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "Willys Jeep",
+      "x": 1430.33,
+      "y": 1539.43,
+      "file": "jeep.vehicle",
+      "atlasIndex": 0,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "apc",
+      "x": 630.27,
+      "y": 671.18,
+      "file": "m3_halftrack.vehicle",
+      "atlasIndex": 24,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Austin K5",
+      "x": 198.79,
+      "y": 968.61,
+      "file": "austin_k5.vehicle",
+      "atlasIndex": 56,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Austin K5 Armory",
+      "x": 185.5,
+      "y": 968.07,
+      "file": "austin_k5_armoury.vehicle",
+      "atlasIndex": 57,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Elite Tiger II",
+      "x": 382.09,
+      "y": 977.14,
+      "file": "king_tiger_boss.vehicle",
+      "atlasIndex": 61,
+      "categories": [
+        "tank"
+      ]
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "hago",
+      "x": 274.81,
+      "y": 918.33,
+      "file": "hago.vehicle",
+      "atlasIndex": 34,
+      "categories": [
+        "tank"
+      ]
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Kubelwagen",
+      "x": 220.18,
+      "y": 996.21,
+      "file": "kubelwagen.vehicle",
+      "atlasIndex": 62,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Kurogane",
+      "x": 199.33,
+      "y": 943.78,
+      "file": "jeep1.vehicle",
+      "atlasIndex": 32,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Kurogane",
+      "x": 220.19,
+      "y": 918.29,
+      "file": "jeep1.vehicle",
+      "atlasIndex": 32,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "LVT-4",
+      "x": 292.86,
+      "y": 919.66,
+      "file": "lvt4.vehicle",
+      "atlasIndex": 35,
+      "categories": [
+        "tank"
+      ]
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "m3_halftrack",
+      "x": 257.48,
+      "y": 968.63,
+      "file": "m3_halftrack.vehicle",
+      "atlasIndex": 24,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "m4_V",
+      "x": 292.65,
+      "y": 968.63,
+      "file": "m4_V.vehicle",
+      "atlasIndex": 60,
+      "categories": [
+        "tank"
+      ]
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "M4A3 Sherman",
+      "x": 292.65,
+      "y": 943.08,
+      "file": "m4_75.vehicle",
+      "atlasIndex": 60,
+      "categories": [
+        "tank"
+      ]
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Maus",
+      "x": 356.46,
+      "y": 996.15,
+      "file": "maus_boss.vehicle",
+      "atlasIndex": 5,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Opel Blitz",
+      "x": 185.5,
+      "y": 996.07,
+      "file": "opel_blitz_2.vehicle",
+      "atlasIndex": 1,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Opel Blitz",
+      "x": 198.79,
+      "y": 996.18,
+      "file": "opel_blitz_2.vehicle",
+      "atlasIndex": 1,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "panzer_iv",
+      "x": 292.65,
+      "y": 996.25,
+      "file": "panzer_iv.vehicle",
+      "atlasIndex": 30,
+      "categories": [
+        "tank"
+      ]
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "repair_tank",
+      "x": 310.54,
+      "y": 968.31,
+      "file": "repair_tank.vehicle",
+      "atlasIndex": 8,
+      "categories": [
+        "tank"
+      ]
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "SdKfz 251/17 Flak",
+      "x": 239.94,
+      "y": 996.21,
+      "file": "sdkfz251_flak.vehicle",
+      "atlasIndex": 54,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "sdkfz251",
+      "x": 257.48,
+      "y": 996.26,
+      "file": "sdkfz251.vehicle",
+      "atlasIndex": 55,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "stuart",
+      "x": 274.8,
+      "y": 968.63,
+      "file": "stuart.vehicle",
+      "atlasIndex": 33,
+      "categories": [
+        "tank"
+      ]
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "stug_iii",
+      "x": 275.15,
+      "y": 996.24,
+      "file": "stug_iii.vehicle",
+      "atlasIndex": 31,
+      "categories": [
+        "tank"
+      ]
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Tiger I",
+      "x": 309.97,
+      "y": 996.24,
+      "file": "tiger.vehicle",
+      "atlasIndex": 11,
+      "categories": [
+        "tank"
+      ]
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Tiger II",
+      "x": 332.42,
+      "y": 996.24,
+      "file": "king_tiger.vehicle",
+      "atlasIndex": 61,
+      "categories": [
+        "tank"
+      ]
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "TOG II*",
+      "x": 356.46,
+      "y": 968.62,
+      "file": "tog2_boss.vehicle",
+      "atlasIndex": 19,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Type 1 Ho-Ha",
+      "x": 257.49,
+      "y": 918.33,
+      "file": "hoha.vehicle",
+      "atlasIndex": 52,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Type 4 Ka-Tsu",
+      "x": 309.97,
+      "y": 917.99,
+      "file": "katsu.vehicle",
+      "atlasIndex": 53,
+      "categories": [
+        "tank"
+      ]
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "universal_carrier",
+      "x": 239.45,
+      "y": 968.64,
+      "file": "universal_carrier.vehicle",
+      "atlasIndex": 58,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "usf_para_armoury",
+      "x": 184.01,
+      "y": 943.81,
+      "file": "usf_armoury_para.vehicle",
+      "atlasIndex": 22,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Willys Jeep",
+      "x": 220.18,
+      "y": 943.04,
+      "file": "jeep.vehicle",
+      "atlasIndex": 0,
+      "categories": []
+    },
+    {
+      "faction": "公用",
+      "factionLabel": "公用",
+      "tag": "Willys MB",
+      "x": 220.18,
+      "y": 968.59,
+      "file": "willys_mb.vehicle",
+      "atlasIndex": 10,
+      "categories": []
+    }
+  ],
+  "counts": {
+    "radio": 1,
+    "tank": 19,
+    "antiTank": 2,
+    "hmg": 9
+  }
+}

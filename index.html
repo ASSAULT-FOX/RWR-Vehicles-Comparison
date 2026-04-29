@@ -521,6 +521,16 @@
       color: #167d82;
     }
 
+    .faction.map-edelweiss {
+      background: rgba(63, 124, 255, 0.13);
+      color: #245ea8;
+    }
+
+    .faction.map-island {
+      background: rgba(22, 163, 107, 0.14);
+      color: #0d7b54;
+    }
+
     .modal {
       position: fixed;
       inset: 0;
@@ -610,6 +620,75 @@
       color: var(--text);
       background: #fff;
       transform: translateY(-1px);
+    }
+
+    .map-dialog {
+      width: min(1500px, calc(100vw - 44px));
+      height: min(920px, calc(100vh - 44px));
+      max-height: calc(100vh - 44px);
+      grid-template-rows: auto auto minmax(0, 1fr);
+    }
+
+    .map-subtitle {
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.35;
+    }
+
+    .map-toolbar {
+      display: flex;
+      gap: 8px;
+      padding: 10px 18px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.68);
+    }
+
+    .map-faction-button {
+      border: 1px solid rgba(93, 125, 159, 0.18);
+      border-radius: 8px;
+      min-height: 38px;
+      padding: 0 16px;
+      color: #52677a;
+      background: rgba(255, 255, 255, 0.74);
+      cursor: pointer;
+      font-weight: 850;
+      transition: color 0.16s ease, background 0.16s ease, box-shadow 0.16s ease, transform 0.16s ease;
+    }
+
+    .map-faction-button:hover {
+      color: #fff;
+      background: linear-gradient(135deg, #20c8d4, var(--accent-2));
+      box-shadow: 0 10px 22px rgba(43, 122, 230, 0.2);
+      transform: translateY(-1px);
+    }
+
+    .map-body {
+      padding: 16px;
+      background: rgba(244, 249, 255, 0.68);
+      overflow: auto;
+    }
+
+    .map-stage {
+      position: relative;
+      width: fit-content;
+      max-width: 100%;
+      margin: 0 auto;
+      line-height: 0;
+      border: 1px solid rgba(93, 125, 159, 0.22);
+      border-radius: 8px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.68);
+      box-shadow: var(--soft-shadow);
+    }
+
+    .map-stage img#mapImage {
+      display: block;
+      width: auto;
+      height: auto;
+      max-width: min(100%, calc(100vw - 92px));
+      max-height: calc(100vh - 190px);
+      object-fit: contain;
     }
 
     .compare-grid {
@@ -1335,6 +1414,7 @@
         <nav class="tag-tabs" aria-label="参数查询分类">
           <button class="tag-tab active" data-tab="vehicles" type="button">载具查询</button>
           <button class="tag-tab" data-tab="weapons" type="button">枪械查询</button>
+          <button class="tag-tab" data-tab="maps" type="button">地图查询</button>
         </nav>
         <label class="search">
           <span>⌕</span>
@@ -1409,6 +1489,27 @@
           </thead>
           <tbody id="weaponRows"></tbody>
         </table>
+        <table id="mapTable" class="hidden">
+          <colgroup>
+            <col class="medium-col">
+            <col class="name-col">
+            <col class="medium-col">
+            <col class="medium-col">
+            <col class="medium-col">
+            <col class="medium-col">
+          </colgroup>
+          <thead>
+            <tr>
+              <th>地图组</th>
+              <th>地图名</th>
+              <th>无线电干扰器数量</th>
+              <th>坦克数量</th>
+              <th>反坦克炮数量</th>
+              <th>重机枪数量</th>
+            </tr>
+          </thead>
+          <tbody id="mapRows"></tbody>
+        </table>
       </section>
     </main>
   </div>
@@ -1465,17 +1566,39 @@
     </div>
   </div>
 
+  <div class="modal" id="mapModal" role="dialog" aria-modal="true" aria-labelledby="mapTitle">
+    <div class="dialog map-dialog">
+      <div class="dialog-head">
+        <div>
+          <h2 id="mapTitle">地图详情</h2>
+          <div class="map-subtitle" id="mapSubtitle"></div>
+        </div>
+        <button class="icon-button" id="closeMapModal" title="关闭">×</button>
+      </div>
+      <div class="map-toolbar" id="mapFactionButtons"></div>
+      <div class="dialog-body map-body">
+        <div class="map-stage" id="mapStage">
+          <img id="mapImage" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="toast" id="toast"></div>
 
   <script>
     let vehicles = [];
     let weapons = [];
+    let maps = [];
+    let currentMap = null;
 
     const tagTabs = document.querySelectorAll(".tag-tab");
     const vehicleTable = document.getElementById("vehicleTable");
     const weaponTable = document.getElementById("weaponTable");
+    const mapTable = document.getElementById("mapTable");
     const rowsEl = document.getElementById("vehicleRows");
     const weaponRowsEl = document.getElementById("weaponRows");
+    const mapRowsEl = document.getElementById("mapRows");
     const searchInput = document.getElementById("searchInput");
     const compareBtn = document.getElementById("compareBtn");
     const confirmCompareBtn = document.getElementById("confirmCompareBtn");
@@ -1499,6 +1622,12 @@
     const targetTankLabel = document.getElementById("targetTankLabel");
     const threatButtons = document.getElementById("threatButtons");
     const priorityList = document.getElementById("priorityList");
+    const mapModal = document.getElementById("mapModal");
+    const closeMapModal = document.getElementById("closeMapModal");
+    const mapTitle = document.getElementById("mapTitle");
+    const mapSubtitle = document.getElementById("mapSubtitle");
+    const mapFactionButtons = document.getElementById("mapFactionButtons");
+    const mapImage = document.getElementById("mapImage");
     const toast = document.getElementById("toast");
     const weaponSections = [
       {
@@ -1667,18 +1796,23 @@
     }
 
     async function loadData() {
-      const [vehicleResponse, weaponResponse] = await Promise.all([
+      const [vehicleResponse, weaponResponse, mapResponse] = await Promise.all([
         fetch("data/vehicles.json"),
-        fetch("data/weapons.json")
+        fetch("data/weapons.json"),
+        fetch("data/maps.json")
       ]);
       if (!vehicleResponse.ok) throw new Error(`载具数据加载失败：${vehicleResponse.status}`);
       if (!weaponResponse.ok) throw new Error(`枪械数据加载失败：${weaponResponse.status}`);
+      if (!mapResponse.ok) throw new Error(`地图数据加载失败：${mapResponse.status}`);
       const vehicleData = await vehicleResponse.json();
       const weaponData = await weaponResponse.json();
+      const mapData = await mapResponse.json();
       if (!Array.isArray(vehicleData)) throw new Error("载具数据格式错误：根节点必须是数组");
       if (!Array.isArray(weaponData)) throw new Error("枪械数据格式错误：根节点必须是数组");
+      if (!Array.isArray(mapData)) throw new Error("地图数据格式错误：根节点必须是数组");
       vehicles = vehicleData.map(normalizeVehicle);
       weapons = weaponData;
+      maps = mapData;
       currentList = vehicles;
       filteredList = vehicles;
       currentWeaponList = weapons;
@@ -1742,6 +1876,14 @@
       return `<span class="faction ${escapeHtml(factionClass(vehicle.faction))}">${escapeHtml(vehicle.faction)}</span>`;
     }
 
+    function mapGroupClass(group) {
+      return group === "雪绒花" ? "map-edelweiss" : "map-island";
+    }
+
+    function mapGroupBadge(group) {
+      return `<span class="faction ${escapeHtml(mapGroupClass(group))}">${escapeHtml(group)}</span>`;
+    }
+
     function isUnarmedVehicle(vehicle) {
       return !vehicle.weapon || vehicle.weapon === "—";
     }
@@ -1766,6 +1908,17 @@
           return String(weapon[key] || "").toLowerCase().includes(keyword);
         });
       });
+    }
+
+    function getFilteredMaps() {
+      const keyword = searchInput.value.trim().toLowerCase();
+      return maps.filter((map) => {
+        return [map.group, map.name, map.id].some((value) => String(value || "").toLowerCase().includes(keyword));
+      });
+    }
+
+    function countDisplay(value) {
+      return value ? String(value) : "-";
     }
 
     function getSortedList(list) {
@@ -1819,6 +1972,11 @@
     }
 
     function applyView() {
+      if (activeTab === "maps") {
+        renderMapTable(getFilteredMaps());
+        updateSortHeaders();
+        return;
+      }
       if (activeTab === "weapons") {
         filteredWeaponList = getFilteredWeapons();
         renderWeaponTable(getSortedWeapons(filteredWeaponList));
@@ -1914,7 +2072,7 @@
       document.body.classList.toggle("compare-mode", enabled);
       compareBtn.textContent = enabled ? "取消" : "比较";
       compareBtn.classList.toggle("danger", enabled);
-      targetModeBtn.disabled = enabled || activeTab === "weapons";
+      targetModeBtn.disabled = enabled || activeTab !== "vehicles";
       confirmCompareBtn.classList.remove("show");
       compareHint.textContent = enabled
         ? `点选两个${activeTab === "weapons" ? "枪械" : "载具"}进行比较`
@@ -2092,6 +2250,19 @@
       }).join("");
     }
 
+    function renderMapTable(list) {
+      mapRowsEl.innerHTML = list.map((map) => `
+        <tr data-map-id="${escapeHtml(map.id)}">
+          <td>${mapGroupBadge(map.group)}</td>
+          <td>${escapeHtml(map.name)}</td>
+          <td class="num">${countDisplay(map.counts?.radio)}</td>
+          <td class="num">${countDisplay(map.counts?.tank)}</td>
+          <td class="num">${countDisplay(map.counts?.antiTank)}</td>
+          <td class="num">${countDisplay(map.counts?.hmg)}</td>
+        </tr>
+      `).join("");
+    }
+
     function detailBaseRows(vehicle) {
       return [
         { name: "生命值", value: fmt(vehicle.hp) },
@@ -2201,12 +2372,17 @@
       tagTabs.forEach((button) => button.classList.toggle("active", button.dataset.tab === tab));
       vehicleTable.classList.toggle("hidden", tab !== "vehicles");
       weaponTable.classList.toggle("hidden", tab !== "weapons");
-      targetModeBtn.classList.toggle("hidden", tab === "weapons");
-      targetHint.classList.toggle("hidden", tab === "weapons");
-      targetModeBtn.disabled = tab === "weapons";
-      compareBtn.disabled = false;
-      searchInput.placeholder = tab === "weapons" ? "在枪械页中搜索" : "在载具页中搜索";
-      compareHint.textContent = tab === "weapons" ? "在列表中选两个枪械进行对比" : "在列表中选两个载具进行对比";
+      mapTable.classList.toggle("hidden", tab !== "maps");
+      targetModeBtn.classList.toggle("hidden", tab !== "vehicles");
+      targetHint.classList.toggle("hidden", tab !== "vehicles");
+      targetModeBtn.disabled = tab !== "vehicles";
+      compareBtn.disabled = tab === "maps";
+      compareBtn.classList.toggle("hidden", tab === "maps");
+      confirmCompareBtn.classList.toggle("hidden", tab === "maps");
+      compareHint.textContent = tab === "maps"
+        ? "点选地图查看载具设施分布"
+        : (tab === "weapons" ? "在列表中选两个枪械进行对比" : "在列表中选两个载具进行对比");
+      searchInput.placeholder = tab === "maps" ? "在地图页中搜索" : (tab === "weapons" ? "在枪械页中搜索" : "在载具页中搜索");
       applyView();
     }
 
@@ -2231,6 +2407,102 @@
       priorityList.innerHTML = "";
       targetModal.classList.add("open");
       setTargetMode(false);
+    }
+
+    async function openMapDetail(mapId) {
+      const summary = maps.find((item) => item.id === mapId);
+      if (!summary) return;
+      const response = await fetch(summary.data);
+      if (!response.ok) {
+        showToast("地图数据加载失败");
+        return;
+      }
+      currentMap = await response.json();
+      mapTitle.textContent = `${currentMap.group} / ${currentMap.name}`;
+      mapSubtitle.textContent = "当前显示原始地图，点击阵营按钮会在新窗口显示已叠加图标的图片";
+      mapFactionButtons.innerHTML = (currentMap.factions || []).map((faction) => `
+        <button class="map-faction-button" data-faction="${escapeHtml(faction.id)}" type="button">${escapeHtml(faction.label)} (${escapeHtml(faction.id)})</button>
+      `).join("");
+      mapModal.classList.add("open");
+      renderMapDetail();
+      resetDialogScroll(mapModal);
+    }
+
+    function renderMapDetail() {
+      if (!currentMap) return;
+      mapFactionButtons.querySelectorAll(".map-faction-button").forEach((button) => {
+        button.classList.remove("active");
+      });
+      const defaultImage = currentMap.factions.find((item) => item.image === "map.png")?.image || currentMap.factions[0]?.image || "map.png";
+      const image = defaultImage;
+      mapImage.src = `maps/${currentMap.id}/${image}`;
+      mapImage.alt = `${currentMap.name} 原始地图`;
+    }
+
+    function loadImageElement(src) {
+      return new Promise((resolve, reject) => {
+        const image = new Image();
+        image.onload = () => resolve(image);
+        image.onerror = reject;
+        image.src = src;
+      });
+    }
+
+    async function openProcessedMap(factionId) {
+      if (!currentMap) return;
+      const faction = currentMap.factions.find((item) => item.id === factionId) || currentMap.factions[0];
+      if (!faction) return;
+      const popup = window.open("", "_blank");
+      if (!popup) {
+        showToast("浏览器阻止了新窗口，请允许弹窗后重试");
+        return;
+      }
+      popup.document.title = `${currentMap.name} ${faction.label}`;
+      popup.document.body.style.margin = "0";
+      popup.document.body.style.background = "#101820";
+      popup.document.body.style.display = "grid";
+      popup.document.body.style.placeItems = "center";
+      popup.document.body.textContent = "正在生成地图图片...";
+
+      try {
+        const mapSrc = `maps/${currentMap.id}/${faction.image || "map.png"}`;
+        const baseImage = await loadImageElement(mapSrc);
+        const canvas = document.createElement("canvas");
+        canvas.width = baseImage.naturalWidth || baseImage.width;
+        canvas.height = baseImage.naturalHeight || baseImage.height;
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(baseImage, 0, 0);
+
+        const items = currentMap.items.filter((item) => item.faction === factionId || item.faction === "公用");
+        const iconCache = new Map();
+        for (const item of items) {
+          const iconSrc = `images/${item.atlasIndex}.png`;
+          if (!iconCache.has(iconSrc)) {
+            iconCache.set(iconSrc, loadImageElement(iconSrc).catch(() => null));
+          }
+          const icon = await iconCache.get(iconSrc);
+          if (!icon) continue;
+          const naturalW = icon.naturalWidth || icon.width || 32;
+          const naturalH = icon.naturalHeight || icon.height || 32;
+          const scale = Math.min(1, 48 / Math.max(naturalW, naturalH));
+          const width = naturalW * scale;
+          const height = naturalH * scale;
+          ctx.drawImage(icon, item.x - width / 2, item.y - height / 2, width, height);
+        }
+
+        canvas.toBlob((blob) => {
+          if (!blob) {
+            popup.close();
+            showToast("地图图片生成失败");
+            return;
+          }
+          popup.location.href = URL.createObjectURL(blob);
+        }, "image/png");
+      } catch (error) {
+        console.error(error);
+        popup.close();
+        showToast("地图图片生成失败");
+      }
     }
 
     function renderThreatButtons() {
@@ -2740,6 +3012,19 @@
       }
       openWeaponDetail(index);
     });
+    mapRowsEl.addEventListener("click", (event) => {
+      const row = event.target.closest("tr[data-map-id]");
+      if (!row) return;
+      openMapDetail(row.dataset.mapId).catch((error) => {
+        console.error(error);
+        showToast("地图详情打开失败");
+      });
+    });
+    mapFactionButtons.addEventListener("click", (event) => {
+      const button = event.target.closest(".map-faction-button");
+      if (!button) return;
+      openProcessedMap(button.dataset.faction);
+    });
     threatButtons.addEventListener("click", (event) => {
       const button = event.target.closest(".threat-button");
       if (!button) return;
@@ -2785,6 +3070,10 @@
     targetModal.addEventListener("click", (event) => {
       if (event.target === targetModal) targetModal.classList.remove("open");
     });
+    closeMapModal.addEventListener("click", () => mapModal.classList.remove("open"));
+    mapModal.addEventListener("click", (event) => {
+      if (event.target === mapModal) mapModal.classList.remove("open");
+    });
     window.addEventListener("resize", () => {
       activeThreats.forEach((item) => placeThreat(item, item.x, item.y));
       if (targetModal.classList.contains("open")) updateThreatScores();
@@ -2794,6 +3083,7 @@
         modal.classList.remove("open");
         detailModal.classList.remove("open");
         targetModal.classList.remove("open");
+        mapModal.classList.remove("open");
       }
     });
 
