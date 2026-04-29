@@ -1634,6 +1634,38 @@
       return rows.map(([tag, distance, direction, squadCommand, baseScore]) => ({ tag, distance, direction, squadCommand, baseScore }));
     }
 
+    function escapeHtml(value) {
+      return String(value ?? "").replace(/[&<>"']/g, (char) => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "\"": "&quot;",
+        "'": "&#39;"
+      }[char]));
+    }
+
+    function safeDisplayHtml(value) {
+      return value === '<span class="bad-word">太硬了</span>' ? value : escapeHtml(value);
+    }
+
+    function normalizeVehicle(vehicle) {
+      return {
+        faction: vehicle["阵营"] ?? vehicle.faction ?? "",
+        hp: vehicle["生命值"] ?? vehicle.hp ?? null,
+        speed: vehicle["最大速度"] ?? vehicle.speed ?? null,
+        acceleration: vehicle["加速度"] ?? vehicle.acceleration ?? null,
+        turret: vehicle["炮塔转速"] ?? vehicle.turret ?? null,
+        threshold: vehicle["受击门槛"] ?? vehicle.threshold ?? null,
+        reduction: vehicle["爆炸减伤"] ?? vehicle.reduction ?? null,
+        name: vehicle["载具名"] ?? vehicle.name ?? "",
+        weapon: vehicle["武器名"] ?? vehicle.weapon ?? "—",
+        reload: vehicle["装填速度"] ?? vehicle.reload ?? null,
+        vision: vehicle["玩家视野修正"] ?? vehicle.vision ?? null,
+        blast: vehicle["爆炸伤害"] ?? vehicle.blast ?? null,
+        vehicleType: vehicle["载具类型"] ?? vehicle.vehicleType ?? ""
+      };
+    }
+
     async function loadData() {
       const [vehicleResponse, weaponResponse] = await Promise.all([
         fetch("data/vehicles.json"),
@@ -1641,8 +1673,12 @@
       ]);
       if (!vehicleResponse.ok) throw new Error(`载具数据加载失败：${vehicleResponse.status}`);
       if (!weaponResponse.ok) throw new Error(`枪械数据加载失败：${weaponResponse.status}`);
-      vehicles = await vehicleResponse.json();
-      weapons = await weaponResponse.json();
+      const vehicleData = await vehicleResponse.json();
+      const weaponData = await weaponResponse.json();
+      if (!Array.isArray(vehicleData)) throw new Error("载具数据格式错误：根节点必须是数组");
+      if (!Array.isArray(weaponData)) throw new Error("枪械数据格式错误：根节点必须是数组");
+      vehicles = vehicleData.map(normalizeVehicle);
+      weapons = weaponData;
       currentList = vehicles;
       filteredList = vehicles;
       currentWeaponList = weapons;
@@ -1703,7 +1739,7 @@
     }
 
     function factionBadge(vehicle) {
-      return `<span class="faction ${factionClass(vehicle.faction)}">${vehicle.faction}</span>`;
+      return `<span class="faction ${escapeHtml(factionClass(vehicle.faction))}">${escapeHtml(vehicle.faction)}</span>`;
     }
 
     function isUnarmedVehicle(vehicle) {
@@ -1718,7 +1754,7 @@
       const keyword = searchInput.value.trim().toLowerCase();
       return vehicles.filter((vehicle) => {
         return [vehicle.faction, vehicle.name, vehicle.weapon].some((value) => {
-          return value.toLowerCase().includes(keyword);
+          return String(value || "").toLowerCase().includes(keyword);
         });
       });
     }
@@ -1803,16 +1839,16 @@
         if (targetMode && isUnarmedVehicle(vehicle)) rowClasses.push("no-target-weapon");
         const classAttr = rowClasses.length ? ` class="${rowClasses.join(" ")}"` : "";
         return `
-        <tr data-index="${index}"${classAttr}>
+        <tr data-index="${escapeHtml(index)}"${classAttr}>
           <td>${factionBadge(vehicle)}</td>
-          <td>${vehicle.name}</td>
+          <td>${escapeHtml(vehicle.name)}</td>
           <td class="num">${fmt(vehicle.hp)}</td>
           <td class="num">${fmt(vehicle.speed)}</td>
           <td class="num">${fmt(vehicle.acceleration)}</td>
           <td class="num">${fmt(vehicle.turret)}</td>
           <td class="num">${fmt(vehicle.threshold)}</td>
           <td class="num">${fmt(vehicle.reduction)}</td>
-          <td>${vehicle.weapon}</td>
+          <td>${escapeHtml(vehicle.weapon)}</td>
           <td class="num">${fmt(vehicle.reload)}</td>
           <td class="num">${fmt(vehicle.vision)}</td>
           <td class="num">${fmt(vehicle.blast)}</td>
@@ -1826,15 +1862,15 @@
       weaponRowsEl.innerHTML = list.map((weapon) => {
         const selected = selectedWeaponIndices.includes(weapon.id) ? " class=\"selected\"" : "";
         return `
-        <tr data-index="${weapon.id}"${selected}>
+        <tr data-index="${escapeHtml(weapon.id)}"${selected}>
           <td>${factionBadge({ faction: weapon["阵营"] })}</td>
-          <td>${displayValue(weapon["类型"])}</td>
-          <td>${displayValue(weapon["枪械名称"])}</td>
-          <td class="num">${displayValue(weapon["基础精度"])}</td>
-          <td class="num">${weaponKillDisplay(weapon)}</td>
-          <td class="num">${displayValue(weapon["射速"])}</td>
-          <td class="num">${displayValue(weapon["单发后坐力"])}</td>
-          <td class="num">${displayValue(weapon["衰减开始距离"])}</td>
+          <td>${escapeHtml(displayValue(weapon["类型"]))}</td>
+          <td>${escapeHtml(displayValue(weapon["枪械名称"]))}</td>
+          <td class="num">${escapeHtml(displayValue(weapon["基础精度"]))}</td>
+          <td class="num">${escapeHtml(weaponKillDisplay(weapon))}</td>
+          <td class="num">${escapeHtml(displayValue(weapon["射速"]))}</td>
+          <td class="num">${escapeHtml(displayValue(weapon["单发后坐力"]))}</td>
+          <td class="num">${escapeHtml(displayValue(weapon["衰减开始距离"]))}</td>
         </tr>
       `;
       }).join("");
@@ -2027,8 +2063,8 @@
         const symbolClass = comparable ? (side === "left" ? arrow.leftClass : arrow.rightClass) : "hidden";
         const display = side === "left" ? row.leftDisplay : row.rightDisplay;
         return `
-          <div class="side-value ${side}" data-label="${row.label}">
-            <span class="value-text">${display}</span>
+          <div class="side-value ${side}" data-label="${escapeHtml(row.label)}">
+            <span class="value-text">${safeDisplayHtml(display)}</span>
             <span class="arrow ${symbolClass}">${symbol}</span>
           </div>
         `;
@@ -2038,21 +2074,21 @@
     function metricLabels(rows) {
       return rows.map((row) => {
         if (row.type === "group") {
-          return `<div class="group-label">${row.label}</div>`;
+          return `<div class="group-label">${escapeHtml(row.label)}</div>`;
         }
 
         if (row.subtitle) {
           return `
             <div class="metric-label">
               <div>
-                <div class="metric-title">${row.label}</div>
-                <div class="metric-subtitle">${row.subtitle}</div>
+                <div class="metric-title">${escapeHtml(row.label)}</div>
+                <div class="metric-subtitle">${escapeHtml(row.subtitle)}</div>
               </div>
             </div>
           `;
         }
 
-        return `<div class="metric-label">${row.label}</div>`;
+        return `<div class="metric-label">${escapeHtml(row.label)}</div>`;
       }).join("");
     }
 
@@ -2099,20 +2135,20 @@
           <div class="detail-row at-row">
             <div class="detail-name">
               <div>
-                <div class="detail-at-title">${row.name}</div>
+                <div class="detail-at-title">${escapeHtml(row.name)}</div>
                 <div class="detail-at-subtitle">单发命中伤害百分比 / 摧毁需多少发</div>
               </div>
             </div>
-            <div class="detail-value detail-percent">${row.percent}</div>
-            <div class="detail-value">${row.shots}</div>
+            <div class="detail-value detail-percent">${safeDisplayHtml(row.percent)}</div>
+            <div class="detail-value">${safeDisplayHtml(row.shots)}</div>
           </div>
         `;
       }
 
       return `
         <div class="detail-row">
-          <div class="detail-name">${row.name}</div>
-          <div class="detail-value">${row.value}</div>
+          <div class="detail-name">${escapeHtml(row.name)}</div>
+          <div class="detail-value">${safeDisplayHtml(row.value)}</div>
         </div>
       `;
     }
@@ -2120,7 +2156,7 @@
     function renderDetailSection(title, rows) {
       return `
         <section class="detail-section">
-          <div class="detail-section-title">${title}</div>
+          <div class="detail-section-title">${escapeHtml(title)}</div>
           ${rows.map(renderDetailRow).join("")}
         </section>
       `;
@@ -2131,7 +2167,7 @@
       detailTitle.textContent = `载具详细参数`;
       detailHero.innerHTML = `
         ${factionBadge(vehicle)}
-        <h3>${vehicle.name}</h3>
+        <h3>${escapeHtml(vehicle.name)}</h3>
       `;
       detailRows.innerHTML = [
         renderDetailSection("基本信息", detailBaseRows(vehicle)),
@@ -2202,7 +2238,7 @@
       threatButtons.innerHTML = rows.map((row) => {
         const name = threatNames[row.tag] || row.tag;
         const title = `distance: ${fmt(row.distance)} / direction: ${fmt(row.direction)} / squad_command: ${fmt(row.squadCommand)} / base_score: ${fmt(row.baseScore)}`;
-        return `<button class="threat-button" data-tag="${row.tag}" title="${title}">${name}</button>`;
+        return `<button class="threat-button" data-tag="${escapeHtml(row.tag)}" title="${escapeHtml(title)}">${escapeHtml(name)}</button>`;
       }).join("");
     }
 
@@ -2490,7 +2526,7 @@
       detailTitle.textContent = "枪械详细参数";
       detailHero.innerHTML = `
         ${factionBadge({ faction: weapon["阵营"] })}
-        <h3>${displayValue(weapon["枪械名称"])}</h3>
+        <h3>${escapeHtml(displayValue(weapon["枪械名称"]))}</h3>
       `;
       detailRows.innerHTML = weaponSections
         .map((section) => renderDetailSection(section.title, weaponDetailRows(weapon, section)))
@@ -2560,8 +2596,8 @@
         <section class="vehicle-card">
           <div class="vehicle-head">
             ${factionBadge({ faction: a["阵营"] })}
-            <h3>${displayValue(a["枪械名称"])}</h3>
-            <div class="weapon">${displayValue(a["类型"])}</div>
+            <h3>${escapeHtml(displayValue(a["枪械名称"]))}</h3>
+            <div class="weapon">${escapeHtml(displayValue(a["类型"]))}</div>
           </div>
           <div class="side-values">${sideMetricRows(rows, "left")}</div>
         </section>
@@ -2569,8 +2605,8 @@
         <section class="vehicle-card">
           <div class="vehicle-head">
             ${factionBadge({ faction: b["阵营"] })}
-            <h3>${displayValue(b["枪械名称"])}</h3>
-            <div class="weapon">${displayValue(b["类型"])}</div>
+            <h3>${escapeHtml(displayValue(b["枪械名称"]))}</h3>
+            <div class="weapon">${escapeHtml(displayValue(b["类型"]))}</div>
           </div>
           <div class="side-values">${sideMetricRows(rows, "right")}</div>
         </section>
@@ -2603,8 +2639,8 @@
         <section class="vehicle-card">
           <div class="vehicle-head">
             ${factionBadge(a)}
-            <h3>${a.name}</h3>
-            <div class="weapon">${a.weapon}</div>
+            <h3>${escapeHtml(a.name)}</h3>
+            <div class="weapon">${escapeHtml(a.weapon)}</div>
           </div>
           <div class="side-values">${sideMetricRows(rows, "left")}</div>
         </section>
@@ -2612,8 +2648,8 @@
         <section class="vehicle-card">
           <div class="vehicle-head">
             ${factionBadge(b)}
-            <h3>${b.name}</h3>
-            <div class="weapon">${b.weapon}</div>
+            <h3>${escapeHtml(b.name)}</h3>
+            <div class="weapon">${escapeHtml(b.weapon)}</div>
           </div>
           <div class="side-values">${sideMetricRows(rows, "right")}</div>
         </section>
