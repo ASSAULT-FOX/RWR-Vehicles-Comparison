@@ -1,0 +1,554 @@
+{
+  "id": "island1",
+  "group": "太平洋",
+  "name": "island1",
+  "factions": [
+    {
+      "id": "USMC",
+      "label": "美军",
+      "image": "mapview_card_usmc.png"
+    },
+    {
+      "id": "IJA",
+      "label": "日军",
+      "image": "mapview_card_ija.png"
+    }
+  ],
+  "items": [
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "Heavy Mortar",
+      "x": 985.53,
+      "y": 307.8,
+      "file": "heavy_mortar.vehicle",
+      "atlasIndex": 46,
+      "categories": []
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "Type 98 Autocannon",
+      "x": 939.26,
+      "y": 340.28,
+      "file": "type98.vehicle",
+      "atlasIndex": 47,
+      "categories": []
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "pillbox",
+      "x": 1009.16,
+      "y": 344.39,
+      "file": "pillbox1.vehicle",
+      "atlasIndex": 39,
+      "categories": []
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "M1919A4 HMG",
+      "x": 970.38,
+      "y": 745.53,
+      "file": "m1919_hmg.vehicle",
+      "atlasIndex": 48,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "Heavy Mortar",
+      "x": 1265.35,
+      "y": 751.44,
+      "file": "heavy_mortar.vehicle",
+      "atlasIndex": 46,
+      "categories": []
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "M1919A4 HMG",
+      "x": 1030.34,
+      "y": 755.94,
+      "file": "m1919_hmg.vehicle",
+      "atlasIndex": 48,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "Heavy Mortar",
+      "x": 762.69,
+      "y": 785.79,
+      "file": "heavy_mortar.vehicle",
+      "atlasIndex": 46,
+      "categories": []
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "M1919A4 HMG",
+      "x": 747.59,
+      "y": 807.35,
+      "file": "m1919_hmg.vehicle",
+      "atlasIndex": 48,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "jeep",
+      "x": 993.92,
+      "y": 831.45,
+      "file": "jeep.vehicle",
+      "atlasIndex": 0,
+      "categories": []
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "pillbox",
+      "x": 748.46,
+      "y": 1092.75,
+      "file": "pillbox.vehicle",
+      "atlasIndex": 40,
+      "categories": []
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "M1919A4 HMG",
+      "x": 857.23,
+      "y": 1128.13,
+      "file": "m1919_hmg.vehicle",
+      "atlasIndex": 48,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "jeep",
+      "x": 807.21,
+      "y": 1145.99,
+      "file": "jeep.vehicle",
+      "atlasIndex": 0,
+      "categories": []
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "hmg",
+      "x": 1237.08,
+      "y": 1223.51,
+      "file": "m1919_hmg.vehicle",
+      "atlasIndex": 48,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "hmg",
+      "x": 1061.5,
+      "y": 1268.61,
+      "file": "m1919_hmg.vehicle",
+      "atlasIndex": 48,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "pillbox",
+      "x": 1025.34,
+      "y": 1280.51,
+      "file": "pillbox.vehicle",
+      "atlasIndex": 40,
+      "categories": []
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "Heavy Mortar",
+      "x": 1039.49,
+      "y": 1298.83,
+      "file": "heavy_mortar.vehicle",
+      "atlasIndex": 46,
+      "categories": []
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "pillbox",
+      "x": 1006.01,
+      "y": 1310.62,
+      "file": "pillbox.vehicle",
+      "atlasIndex": 40,
+      "categories": []
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "jeep",
+      "x": 1270.58,
+      "y": 1339.92,
+      "file": "jeep.vehicle",
+      "atlasIndex": 0,
+      "categories": []
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "jeep",
+      "x": 1014.75,
+      "y": 1582.25,
+      "file": "jeep.vehicle",
+      "atlasIndex": 0,
+      "categories": []
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "jeep",
+      "x": 1015.0,
+      "y": 1596.75,
+      "file": "jeep.vehicle",
+      "atlasIndex": 0,
+      "categories": []
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "pillbox",
+      "x": 1087.69,
+      "y": 1681.01,
+      "file": "pillbox.vehicle",
+      "atlasIndex": 40,
+      "categories": []
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "hmg",
+      "x": 1063.6,
+      "y": 1681.53,
+      "file": "m1919_hmg.vehicle",
+      "atlasIndex": 48,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "hmg",
+      "x": 780.25,
+      "y": 1683.0,
+      "file": "m1919_hmg.vehicle",
+      "atlasIndex": 48,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "Anti-Aircraft Gun",
+      "x": 930.38,
+      "y": 1683.49,
+      "file": "aa_gun.vehicle",
+      "atlasIndex": 42,
+      "categories": []
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "pillbox",
+      "x": 1201.95,
+      "y": 1684.42,
+      "file": "pillbox.vehicle",
+      "atlasIndex": 40,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "Heavy Mortar",
+      "x": 985.53,
+      "y": 307.8,
+      "file": "heavy_mortar.vehicle",
+      "atlasIndex": 46,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "Type 98 Autocannon",
+      "x": 939.26,
+      "y": 340.28,
+      "file": "type98.vehicle",
+      "atlasIndex": 47,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "pillbox",
+      "x": 1009.16,
+      "y": 344.39,
+      "file": "pillbox1.vehicle",
+      "atlasIndex": 39,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "M1919A4 HMG",
+      "x": 970.38,
+      "y": 745.53,
+      "file": "m1919_hmg.vehicle",
+      "atlasIndex": 48,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "Heavy Mortar",
+      "x": 1265.35,
+      "y": 751.44,
+      "file": "heavy_mortar.vehicle",
+      "atlasIndex": 46,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "M1919A4 HMG",
+      "x": 1030.34,
+      "y": 755.94,
+      "file": "m1919_hmg.vehicle",
+      "atlasIndex": 48,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "Heavy Mortar",
+      "x": 762.69,
+      "y": 785.79,
+      "file": "heavy_mortar.vehicle",
+      "atlasIndex": 46,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "M1919A4 HMG",
+      "x": 747.59,
+      "y": 807.35,
+      "file": "m1919_hmg.vehicle",
+      "atlasIndex": 48,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "jeep",
+      "x": 993.92,
+      "y": 831.45,
+      "file": "jeep.vehicle",
+      "atlasIndex": 0,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "pillbox",
+      "x": 748.46,
+      "y": 1092.75,
+      "file": "pillbox.vehicle",
+      "atlasIndex": 40,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "M1919A4 HMG",
+      "x": 857.23,
+      "y": 1128.13,
+      "file": "m1919_hmg.vehicle",
+      "atlasIndex": 48,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "jeep",
+      "x": 807.21,
+      "y": 1145.99,
+      "file": "jeep.vehicle",
+      "atlasIndex": 0,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "hmg",
+      "x": 1237.08,
+      "y": 1223.51,
+      "file": "m1919_hmg.vehicle",
+      "atlasIndex": 48,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "hmg",
+      "x": 1061.5,
+      "y": 1268.61,
+      "file": "m1919_hmg.vehicle",
+      "atlasIndex": 48,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "pillbox",
+      "x": 1025.34,
+      "y": 1280.51,
+      "file": "pillbox.vehicle",
+      "atlasIndex": 40,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "Heavy Mortar",
+      "x": 1039.49,
+      "y": 1298.83,
+      "file": "heavy_mortar.vehicle",
+      "atlasIndex": 46,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "pillbox",
+      "x": 1006.01,
+      "y": 1310.62,
+      "file": "pillbox.vehicle",
+      "atlasIndex": 40,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "jeep",
+      "x": 1270.58,
+      "y": 1339.92,
+      "file": "jeep.vehicle",
+      "atlasIndex": 0,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "jeep",
+      "x": 1014.75,
+      "y": 1582.25,
+      "file": "jeep.vehicle",
+      "atlasIndex": 0,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "jeep",
+      "x": 1015.0,
+      "y": 1596.75,
+      "file": "jeep.vehicle",
+      "atlasIndex": 0,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "pillbox",
+      "x": 1087.69,
+      "y": 1681.01,
+      "file": "pillbox.vehicle",
+      "atlasIndex": 40,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "hmg",
+      "x": 1063.6,
+      "y": 1681.53,
+      "file": "m1919_hmg.vehicle",
+      "atlasIndex": 48,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "hmg",
+      "x": 780.25,
+      "y": 1683.0,
+      "file": "m1919_hmg.vehicle",
+      "atlasIndex": 48,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "Anti-Aircraft Gun",
+      "x": 930.38,
+      "y": 1683.49,
+      "file": "aa_gun.vehicle",
+      "atlasIndex": 42,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "pillbox",
+      "x": 1201.95,
+      "y": 1684.42,
+      "file": "pillbox.vehicle",
+      "atlasIndex": 40,
+      "categories": []
+    }
+  ],
+  "counts": {
+    "hmg": 16
+  }
+}

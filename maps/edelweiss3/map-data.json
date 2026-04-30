@@ -1,469 +1,505 @@
 ﻿{
-  "id": "edelweiss3",
-  "group": "雪绒花",
-  "name": "edelweiss3",
-  "factions": [
-    {
-      "id": "Axis",
-      "label": "德军",
-      "image": "map_axis.png"
-    },
-    {
-      "id": "Allies",
-      "label": "盟军",
-      "image": "map_allies.png"
-    }
-  ],
-  "items": [
-    {
-      "faction": "Axis",
-      "factionLabel": "德军",
-      "tag": "light_tank",
-      "x": 903.72,
-      "y": 1493.7,
-      "file": "m4_75.vehicle",
-      "atlasIndex": 60,
-      "categories": [
-        "tank"
-      ]
-    },
-    {
-      "faction": "Axis",
-      "factionLabel": "德军",
-      "tag": "m3_halftrack_fastrespawn",
-      "x": 702.01,
-      "y": 368.62,
-      "file": "m3_halftrack_fastrespawn.vehicle",
-      "atlasIndex": 24,
-      "categories": []
-    },
-    {
-      "faction": "Axis",
-      "factionLabel": "德军",
-      "tag": "m3_halftrack_fastrespawn",
-      "x": 787.32,
-      "y": 1409.46,
-      "file": "m3_halftrack_fastrespawn.vehicle",
-      "atlasIndex": 24,
-      "categories": []
-    },
-    {
-      "faction": "Axis",
-      "factionLabel": "德军",
-      "tag": "m4_firefly_fastrespawn",
-      "x": 820.69,
-      "y": 365.04,
-      "file": "m4_firefly_fastrespawn.vehicle",
-      "atlasIndex": 59,
-      "categories": [
-        "tank"
-      ]
-    },
-    {
-      "faction": "Axis",
-      "factionLabel": "德军",
-      "tag": "m4_firefly_fastrespawn",
-      "x": 861.35,
-      "y": 1536.65,
-      "file": "m4_firefly_fastrespawn.vehicle",
-      "atlasIndex": 59,
-      "categories": [
-        "tank"
-      ]
-    },
-    {
-      "faction": "Axis",
-      "factionLabel": "德军",
-      "tag": "m4_V_fastrespawn",
-      "x": 763.9,
-      "y": 366.14,
-      "file": "m4_V_fastrespawn.vehicle",
-      "atlasIndex": 60,
-      "categories": [
-        "tank"
-      ]
-    },
-    {
-      "faction": "Axis",
-      "factionLabel": "德军",
-      "tag": "m4_V_fastrespawn",
-      "x": 865.32,
-      "y": 1422.67,
-      "file": "m4_V_fastrespawn.vehicle",
-      "atlasIndex": 60,
-      "categories": [
-        "tank"
-      ]
-    },
-    {
-      "faction": "Axis",
-      "factionLabel": "德军",
-      "tag": "Opel Blitz Armory",
-      "x": 650.04,
-      "y": 794.16,
-      "file": "opel_blitz_armoury.vehicle",
-      "atlasIndex": 2,
-      "categories": []
-    },
-    {
-      "faction": "Axis",
-      "factionLabel": "德军",
-      "tag": "panzer_iv_fastrespawn",
-      "x": 1410.86,
-      "y": 474.69,
-      "file": "panzer_iv_fastrespawn.vehicle",
-      "atlasIndex": 30,
-      "categories": [
-        "tank"
-      ]
-    },
-    {
-      "faction": "Axis",
-      "factionLabel": "德军",
-      "tag": "radio_jammer",
-      "x": 1082.2,
-      "y": 887.18,
-      "file": "radio_jammer.vehicle",
-      "atlasIndex": 9,
-      "categories": [
-        "radio"
-      ]
-    },
-    {
-      "faction": "Axis",
-      "factionLabel": "德军",
-      "tag": "sdkfz251_fastrespawn",
-      "x": 595.41,
-      "y": 940.02,
-      "file": "sdkfz251_fastrespawn.vehicle",
-      "atlasIndex": 55,
-      "categories": []
-    },
-    {
-      "faction": "Axis",
-      "factionLabel": "德军",
-      "tag": "sdkfz251_fastrespawn",
-      "x": 1483.29,
-      "y": 543.44,
-      "file": "sdkfz251_fastrespawn.vehicle",
-      "atlasIndex": 55,
-      "categories": []
-    },
-    {
-      "faction": "Axis",
-      "factionLabel": "德军",
-      "tag": "stug_iii_fastrespawn",
-      "x": 1481.35,
-      "y": 524.57,
-      "file": "stug_iii_fastrespawn.vehicle",
-      "atlasIndex": 31,
-      "categories": [
-        "tank"
-      ]
-    },
-    {
-      "faction": "Axis",
-      "factionLabel": "德军",
-      "tag": "Tiger I",
-      "x": 582.94,
-      "y": 821.42,
-      "file": "tiger.vehicle",
-      "atlasIndex": 11,
-      "categories": [
-        "tank"
-      ]
-    },
-    {
-      "faction": "Axis",
-      "factionLabel": "德军",
-      "tag": "truck",
-      "x": 1383.78,
-      "y": 512.28,
-      "file": "austin_k5.vehicle",
-      "atlasIndex": 56,
-      "categories": []
-    },
-    {
-      "faction": "Axis",
-      "factionLabel": "德军",
-      "tag": "universal_carrier_fastrespawn",
-      "x": 808.05,
-      "y": 1476.75,
-      "file": "universal_carrier_fastrespawn.vehicle",
-      "atlasIndex": 58,
-      "categories": []
-    },
-    {
-      "faction": "Axis",
-      "factionLabel": "德军",
-      "tag": "Wasp MKII",
-      "x": 930.69,
-      "y": 1496.21,
-      "file": "wasp.vehicle",
-      "atlasIndex": 68,
-      "categories": []
-    },
-    {
-      "faction": "Axis",
-      "factionLabel": "德军",
-      "tag": "Willys Jeep",
-      "x": 560.3,
-      "y": 849.63,
-      "file": "jeep.vehicle",
-      "atlasIndex": 0,
-      "categories": []
-    },
-    {
-      "faction": "Axis",
-      "factionLabel": "德军",
-      "tag": "Willys Jeep",
-      "x": 820.92,
-      "y": 363.9,
-      "file": "jeep.vehicle",
-      "atlasIndex": 0,
-      "categories": []
-    },
-    {
-      "faction": "Axis",
-      "factionLabel": "德军",
-      "tag": "Willys Jeep",
-      "x": 908.61,
-      "y": 1490.7,
-      "file": "jeep.vehicle",
-      "atlasIndex": 0,
-      "categories": []
-    },
-    {
-      "faction": "Axis",
-      "factionLabel": "德军",
-      "tag": "Willys Jeep",
-      "x": 1371.62,
-      "y": 553.24,
-      "file": "jeep.vehicle",
-      "atlasIndex": 0,
-      "categories": []
-    },
-    {
-      "faction": "Allies",
-      "factionLabel": "盟军",
-      "tag": "Austin K5 Armory",
-      "x": 945.22,
-      "y": 1485.64,
-      "file": "austin_k5_armoury.vehicle",
-      "atlasIndex": 57,
-      "categories": []
-    },
-    {
-      "faction": "Allies",
-      "factionLabel": "盟军",
-      "tag": "jeep",
-      "x": 864.03,
-      "y": 1422.9,
-      "file": "kubelwagen.vehicle",
-      "atlasIndex": 62,
-      "categories": []
-    },
-    {
-      "faction": "Allies",
-      "factionLabel": "盟军",
-      "tag": "light_tank",
-      "x": 903.72,
-      "y": 1493.7,
-      "file": "luchs.vehicle",
-      "atlasIndex": 71,
-      "categories": [
-        "tank"
-      ]
-    },
-    {
-      "faction": "Allies",
-      "factionLabel": "盟军",
-      "tag": "m3_halftrack_fastrespawn",
-      "x": 702.01,
-      "y": 368.62,
-      "file": "m3_halftrack_fastrespawn.vehicle",
-      "atlasIndex": 24,
-      "categories": []
-    },
-    {
-      "faction": "Allies",
-      "factionLabel": "盟军",
-      "tag": "m3_halftrack_fastrespawn",
-      "x": 787.32,
-      "y": 1409.46,
-      "file": "m3_halftrack_fastrespawn.vehicle",
-      "atlasIndex": 24,
-      "categories": []
-    },
-    {
-      "faction": "Allies",
-      "factionLabel": "盟军",
-      "tag": "m4_firefly_fastrespawn",
-      "x": 861.35,
-      "y": 1536.65,
-      "file": "m4_firefly_fastrespawn.vehicle",
-      "atlasIndex": 59,
-      "categories": [
-        "tank"
-      ]
-    },
-    {
-      "faction": "Allies",
-      "factionLabel": "盟军",
-      "tag": "m4_V_fastrespawn",
-      "x": 763.9,
-      "y": 366.14,
-      "file": "m4_V_fastrespawn.vehicle",
-      "atlasIndex": 60,
-      "categories": [
-        "tank"
-      ]
-    },
-    {
-      "faction": "Allies",
-      "factionLabel": "盟军",
-      "tag": "panzer_iv_fastrespawn",
-      "x": 584.17,
-      "y": 819.98,
-      "file": "panzer_iv_fastrespawn.vehicle",
-      "atlasIndex": 30,
-      "categories": [
-        "tank"
-      ]
-    },
-    {
-      "faction": "Allies",
-      "factionLabel": "盟军",
-      "tag": "panzer_iv_fastrespawn",
-      "x": 1410.86,
-      "y": 474.69,
-      "file": "panzer_iv_fastrespawn.vehicle",
-      "atlasIndex": 30,
-      "categories": [
-        "tank"
-      ]
-    },
-    {
-      "faction": "Allies",
-      "factionLabel": "盟军",
-      "tag": "sdkfz251_fastrespawn",
-      "x": 595.41,
-      "y": 940.02,
-      "file": "sdkfz251_fastrespawn.vehicle",
-      "atlasIndex": 55,
-      "categories": []
-    },
-    {
-      "faction": "Allies",
-      "factionLabel": "盟军",
-      "tag": "sdkfz251_fastrespawn",
-      "x": 1482.7,
-      "y": 524.46,
-      "file": "sdkfz251_fastrespawn.vehicle",
-      "atlasIndex": 55,
-      "categories": []
-    },
-    {
-      "faction": "Allies",
-      "factionLabel": "盟军",
-      "tag": "sdkfz251_fastrespawn",
-      "x": 1483.29,
-      "y": 543.44,
-      "file": "sdkfz251_fastrespawn.vehicle",
-      "atlasIndex": 55,
-      "categories": []
-    },
-    {
-      "faction": "Allies",
-      "factionLabel": "盟军",
-      "tag": "stug_iii_fastrespawn",
-      "x": 1371.92,
-      "y": 552.8,
-      "file": "stug_iii_fastrespawn.vehicle",
-      "atlasIndex": 31,
-      "categories": [
-        "tank"
-      ]
-    },
-    {
-      "faction": "Allies",
-      "factionLabel": "盟军",
-      "tag": "stug_iii_fastrespawn",
-      "x": 1383.78,
-      "y": 512.28,
-      "file": "stug_iii_fastrespawn.vehicle",
-      "atlasIndex": 31,
-      "categories": [
-        "tank"
-      ]
-    },
-    {
-      "faction": "Allies",
-      "factionLabel": "盟军",
-      "tag": "Tiger I",
-      "x": 647.28,
-      "y": 790.83,
-      "file": "tiger.vehicle",
-      "atlasIndex": 11,
-      "categories": [
-        "tank"
-      ]
-    },
-    {
-      "faction": "Allies",
-      "factionLabel": "盟军",
-      "tag": "truck",
-      "x": 865.2,
-      "y": 1423.35,
-      "file": "opel_blitz_1.vehicle",
-      "atlasIndex": 1,
-      "categories": []
-    },
-    {
-      "faction": "Allies",
-      "factionLabel": "盟军",
-      "tag": "universal_carrier_fastrespawn",
-      "x": 808.05,
-      "y": 1476.75,
-      "file": "universal_carrier_fastrespawn.vehicle",
-      "atlasIndex": 58,
-      "categories": []
-    },
-    {
-      "faction": "Allies",
-      "factionLabel": "盟军",
-      "tag": "universal_carrier_fastrespawn",
-      "x": 821.76,
-      "y": 365.11,
-      "file": "universal_carrier_fastrespawn.vehicle",
-      "atlasIndex": 58,
-      "categories": []
-    },
-    {
-      "faction": "Allies",
-      "factionLabel": "盟军",
-      "tag": "Wasp MKII",
-      "x": 930.15,
-      "y": 1495.48,
-      "file": "wasp.vehicle",
-      "atlasIndex": 68,
-      "categories": []
-    },
-    {
-      "faction": "Allies",
-      "factionLabel": "盟军",
-      "tag": "Wasp MKII",
-      "x": 930.69,
-      "y": 1494.97,
-      "file": "wasp.vehicle",
-      "atlasIndex": 68,
-      "categories": []
-    }
-  ],
-  "counts": {
-    "radio": 1,
-    "tank": 16,
-    "antiTank": 0,
-    "hmg": 0
-  }
+    "id":  "edelweiss3",
+    "group":  "雪绒花",
+    "name":  "edelweiss3",
+    "factions":  [
+                     {
+                         "id":  "Axis",
+                         "label":  "德军",
+                         "image":  "map_axis.png"
+                     },
+                     {
+                         "id":  "Allies",
+                         "label":  "盟军",
+                         "image":  "map_allies.png"
+                     }
+                 ],
+    "items":  [
+                  {
+                      "faction":  "Allies",
+                      "factionLabel":  "盟军",
+                      "tag":  "Universal Carrier",
+                      "x":  822.99,
+                      "y":  369.13,
+                      "file":  "universal_carrier_fastrespawn.vehicle",
+                      "atlasIndex":  58,
+                      "categories":  [
+
+                                     ]
+                  },
+                  {
+                      "faction":  "Allies",
+                      "factionLabel":  "盟军",
+                      "tag":  "M4A4 Sherman V",
+                      "x":  766.49,
+                      "y":  369.45,
+                      "file":  "m4_V_fastrespawn.vehicle",
+                      "atlasIndex":  60,
+                      "categories":  [
+                                         "tank"
+                                     ]
+                  },
+                  {
+                      "faction":  "Allies",
+                      "factionLabel":  "盟军",
+                      "tag":  "M3 Halftrack",
+                      "x":  703.93,
+                      "y":  372.36,
+                      "file":  "m3_halftrack_fastrespawn.vehicle",
+                      "atlasIndex":  24,
+                      "categories":  [
+
+                                     ]
+                  },
+                  {
+                      "faction":  "Allies",
+                      "factionLabel":  "盟军",
+                      "tag":  "Panzer IV",
+                      "x":  1412.44,
+                      "y":  478.57,
+                      "file":  "panzer_iv_fastrespawn.vehicle",
+                      "atlasIndex":  30,
+                      "categories":  [
+                                         "tank"
+                                     ]
+                  },
+                  {
+                      "faction":  "Allies",
+                      "factionLabel":  "盟军",
+                      "tag":  "StuG III",
+                      "x":  1387.52,
+                      "y":  514.21,
+                      "file":  "stug_iii_fastrespawn.vehicle",
+                      "atlasIndex":  31,
+                      "categories":  [
+                                         "tank"
+                                     ]
+                  },
+                  {
+                      "faction":  "Allies",
+                      "factionLabel":  "盟军",
+                      "tag":  "Sdkfz 251 Halftrack",
+                      "x":  1478.97,
+                      "y":  526.39,
+                      "file":  "sdkfz251_fastrespawn.vehicle",
+                      "atlasIndex":  55,
+                      "categories":  [
+
+                                     ]
+                  },
+                  {
+                      "faction":  "Allies",
+                      "factionLabel":  "盟军",
+                      "tag":  "Sdkfz 251 Halftrack",
+                      "x":  1479.74,
+                      "y":  545.67,
+                      "file":  "sdkfz251_fastrespawn.vehicle",
+                      "atlasIndex":  55,
+                      "categories":  [
+
+                                     ]
+                  },
+                  {
+                      "faction":  "Allies",
+                      "factionLabel":  "盟军",
+                      "tag":  "StuG III",
+                      "x":  1375.47,
+                      "y":  550.54,
+                      "file":  "stug_iii_fastrespawn.vehicle",
+                      "atlasIndex":  31,
+                      "categories":  [
+                                         "tank"
+                                     ]
+                  },
+                  {
+                      "faction":  "Allies",
+                      "factionLabel":  "盟军",
+                      "tag":  "Tiger I",
+                      "x":  651.44,
+                      "y":  791.42,
+                      "file":  "tiger.vehicle",
+                      "atlasIndex":  11,
+                      "categories":  [
+                                         "tank"
+                                     ]
+                  },
+                  {
+                      "faction":  "Allies",
+                      "factionLabel":  "盟军",
+                      "tag":  "Panzer IV",
+                      "x":  587.51,
+                      "y":  822.53,
+                      "file":  "panzer_iv_fastrespawn.vehicle",
+                      "atlasIndex":  30,
+                      "categories":  [
+                                         "tank"
+                                     ]
+                  },
+                  {
+                      "faction":  "Allies",
+                      "factionLabel":  "盟军",
+                      "tag":  "Sdkfz 251 Halftrack",
+                      "x":  593.56,
+                      "y":  936.25,
+                      "file":  "sdkfz251_fastrespawn.vehicle",
+                      "atlasIndex":  55,
+                      "categories":  [
+
+                                     ]
+                  },
+                  {
+                      "faction":  "Allies",
+                      "factionLabel":  "盟军",
+                      "tag":  "M3 Halftrack",
+                      "x":  790.82,
+                      "y":  1411.78,
+                      "file":  "m3_halftrack_fastrespawn.vehicle",
+                      "atlasIndex":  24,
+                      "categories":  [
+
+                                     ]
+                  },
+                  {
+                      "faction":  "Allies",
+                      "factionLabel":  "盟军",
+                      "tag":  "truck",
+                      "x":  869.15,
+                      "y":  1421.91,
+                      "file":  "austin_k5.vehicle",
+                      "atlasIndex":  56,
+                      "categories":  [
+
+                                     ]
+                  },
+                  {
+                      "faction":  "Allies",
+                      "factionLabel":  "盟军",
+                      "tag":  "Willys Jeep",
+                      "x":  868.13,
+                      "y":  1421.99,
+                      "file":  "jeep.vehicle",
+                      "atlasIndex":  0,
+                      "categories":  [
+
+                                     ]
+                  },
+                  {
+                      "faction":  "Allies",
+                      "factionLabel":  "盟军",
+                      "tag":  "Universal Carrier",
+                      "x":  810.31,
+                      "y":  1473.21,
+                      "file":  "universal_carrier_fastrespawn.vehicle",
+                      "atlasIndex":  58,
+                      "categories":  [
+
+                                     ]
+                  },
+                  {
+                      "faction":  "Allies",
+                      "factionLabel":  "盟军",
+                      "tag":  "Austin K5 Armory",
+                      "x":  941.06,
+                      "y":  1485.05,
+                      "file":  "austin_k5_armoury.vehicle",
+                      "atlasIndex":  57,
+                      "categories":  [
+
+                                     ]
+                  },
+                  {
+                      "faction":  "Allies",
+                      "factionLabel":  "盟军",
+                      "tag":  "light_tank",
+                      "x":  906.06,
+                      "y":  1490.21,
+                      "file":  "stuart.vehicle",
+                      "atlasIndex":  33,
+                      "categories":  [
+                                         "tank"
+                                     ]
+                  },
+                  {
+                      "faction":  "Allies",
+                      "factionLabel":  "盟军",
+                      "tag":  "Wasp MKII",
+                      "x":  927.43,
+                      "y":  1492.28,
+                      "file":  "wasp.vehicle",
+                      "atlasIndex":  68,
+                      "categories":  [
+
+                                     ]
+                  },
+                  {
+                      "faction":  "Allies",
+                      "factionLabel":  "盟军",
+                      "tag":  "Sherman Firefly",
+                      "x":  857.77,
+                      "y":  1534.45,
+                      "file":  "m4_firefly_fastrespawn.vehicle",
+                      "atlasIndex":  59,
+                      "categories":  [
+                                         "tank"
+                                     ]
+                  },
+                  {
+                      "faction":  "Axis",
+                      "factionLabel":  "德军",
+                      "tag":  "jeep",
+                      "x":  822.55,
+                      "y":  367.78,
+                      "file":  "jeep.vehicle",
+                      "atlasIndex":  0,
+                      "categories":  [
+
+                                     ]
+                  },
+                  {
+                      "faction":  "Axis",
+                      "factionLabel":  "德军",
+                      "tag":  "Sherman Firefly",
+                      "x":  822.35,
+                      "y":  368.89,
+                      "file":  "m4_firefly_fastrespawn.vehicle",
+                      "atlasIndex":  59,
+                      "categories":  [
+                                         "tank"
+                                     ]
+                  },
+                  {
+                      "faction":  "Axis",
+                      "factionLabel":  "德军",
+                      "tag":  "M4A4 Sherman V",
+                      "x":  766.49,
+                      "y":  369.45,
+                      "file":  "m4_V_fastrespawn.vehicle",
+                      "atlasIndex":  60,
+                      "categories":  [
+                                         "tank"
+                                     ]
+                  },
+                  {
+                      "faction":  "Axis",
+                      "factionLabel":  "德军",
+                      "tag":  "M3 Halftrack",
+                      "x":  703.93,
+                      "y":  372.36,
+                      "file":  "m3_halftrack_fastrespawn.vehicle",
+                      "atlasIndex":  24,
+                      "categories":  [
+
+                                     ]
+                  },
+                  {
+                      "faction":  "Axis",
+                      "factionLabel":  "德军",
+                      "tag":  "Panzer IV",
+                      "x":  1412.44,
+                      "y":  478.57,
+                      "file":  "panzer_iv_fastrespawn.vehicle",
+                      "atlasIndex":  30,
+                      "categories":  [
+                                         "tank"
+                                     ]
+                  },
+                  {
+                      "faction":  "Axis",
+                      "factionLabel":  "德军",
+                      "tag":  "truck",
+                      "x":  1387.52,
+                      "y":  514.21,
+                      "file":  "opel_blitz_1.vehicle",
+                      "atlasIndex":  1,
+                      "categories":  [
+
+                                     ]
+                  },
+                  {
+                      "faction":  "Axis",
+                      "factionLabel":  "德军",
+                      "tag":  "StuG III",
+                      "x":  1477.81,
+                      "y":  526.83,
+                      "file":  "stug_iii_fastrespawn.vehicle",
+                      "atlasIndex":  31,
+                      "categories":  [
+                                         "tank"
+                                     ]
+                  },
+                  {
+                      "faction":  "Axis",
+                      "factionLabel":  "德军",
+                      "tag":  "Sdkfz 251 Halftrack",
+                      "x":  1479.74,
+                      "y":  545.67,
+                      "file":  "sdkfz251_fastrespawn.vehicle",
+                      "atlasIndex":  55,
+                      "categories":  [
+
+                                     ]
+                  },
+                  {
+                      "faction":  "Axis",
+                      "factionLabel":  "德军",
+                      "tag":  "jeep",
+                      "x":  1375.22,
+                      "y":  551.08,
+                      "file":  "kubelwagen.vehicle",
+                      "atlasIndex":  62,
+                      "categories":  [
+
+                                     ]
+                  },
+                  {
+                      "faction":  "Axis",
+                      "factionLabel":  "德军",
+                      "tag":  "Opel Blitz Armory",
+                      "x":  654.41,
+                      "y":  793.51,
+                      "file":  "opel_blitz_armoury.vehicle",
+                      "atlasIndex":  2,
+                      "categories":  [
+
+                                     ]
+                  },
+                  {
+                      "faction":  "Axis",
+                      "factionLabel":  "德军",
+                      "tag":  "Tiger I",
+                      "x":  586.27,
+                      "y":  823.97,
+                      "file":  "tiger.vehicle",
+                      "atlasIndex":  11,
+                      "categories":  [
+                                         "tank"
+                                     ]
+                  },
+                  {
+                      "faction":  "Axis",
+                      "factionLabel":  "德军",
+                      "tag":  "jeep",
+                      "x":  562.57,
+                      "y":  846.09,
+                      "file":  "kubelwagen.vehicle",
+                      "atlasIndex":  62,
+                      "categories":  [
+
+                                     ]
+                  },
+                  {
+                      "faction":  "Axis",
+                      "factionLabel":  "德军",
+                      "tag":  "Radio jammer",
+                      "x":  1077.91,
+                      "y":  891.34,
+                      "file":  "radio_jammer.vehicle",
+                      "atlasIndex":  9,
+                      "categories":  [
+                                         "radio"
+                                     ]
+                  },
+                  {
+                      "faction":  "Axis",
+                      "factionLabel":  "德军",
+                      "tag":  "Sdkfz 251 Halftrack",
+                      "x":  593.56,
+                      "y":  936.25,
+                      "file":  "sdkfz251_fastrespawn.vehicle",
+                      "atlasIndex":  55,
+                      "categories":  [
+
+                                     ]
+                  },
+                  {
+                      "faction":  "Axis",
+                      "factionLabel":  "德军",
+                      "tag":  "M3 Halftrack",
+                      "x":  790.82,
+                      "y":  1411.78,
+                      "file":  "m3_halftrack_fastrespawn.vehicle",
+                      "atlasIndex":  24,
+                      "categories":  [
+
+                                     ]
+                  },
+                  {
+                      "faction":  "Axis",
+                      "factionLabel":  "德军",
+                      "tag":  "M4A4 Sherman V",
+                      "x":  869.44,
+                      "y":  1421.85,
+                      "file":  "m4_V_fastrespawn.vehicle",
+                      "atlasIndex":  60,
+                      "categories":  [
+                                         "tank"
+                                     ]
+                  },
+                  {
+                      "faction":  "Axis",
+                      "factionLabel":  "德军",
+                      "tag":  "Universal Carrier",
+                      "x":  810.31,
+                      "y":  1473.21,
+                      "file":  "universal_carrier_fastrespawn.vehicle",
+                      "atlasIndex":  58,
+                      "categories":  [
+
+                                     ]
+                  },
+                  {
+                      "faction":  "Axis",
+                      "factionLabel":  "德军",
+                      "tag":  "Willys Jeep",
+                      "x":  909.91,
+                      "y":  1486.71,
+                      "file":  "jeep.vehicle",
+                      "atlasIndex":  0,
+                      "categories":  [
+
+                                     ]
+                  },
+                  {
+                      "faction":  "Axis",
+                      "factionLabel":  "德军",
+                      "tag":  "light_tank",
+                      "x":  906.06,
+                      "y":  1490.21,
+                      "file":  "stuart.vehicle",
+                      "atlasIndex":  33,
+                      "categories":  [
+                                         "tank"
+                                     ]
+                  },
+                  {
+                      "faction":  "Axis",
+                      "factionLabel":  "德军",
+                      "tag":  "Wasp MKII",
+                      "x":  927.7,
+                      "y":  1493.26,
+                      "file":  "wasp.vehicle",
+                      "atlasIndex":  68,
+                      "categories":  [
+
+                                     ]
+                  },
+                  {
+                      "faction":  "Axis",
+                      "factionLabel":  "德军",
+                      "tag":  "Sherman Firefly",
+                      "x":  857.77,
+                      "y":  1534.45,
+                      "file":  "m4_firefly_fastrespawn.vehicle",
+                      "atlasIndex":  59,
+                      "categories":  [
+                                         "tank"
+                                     ]
+                  }
+              ],
+    "counts":  {
+                   "radio":  1,
+                   "tank":  16,
+                   "antiTank":  0,
+                   "hmg":  0
+               }
 }

@@ -57,8 +57,7 @@
       min-width: 0;
       border: 1px solid var(--line);
       border-radius: 20px;
-      background: var(--panel);
-      backdrop-filter: blur(24px) saturate(150%);
+      background: rgba(255, 255, 255, 0.74);
       box-shadow: var(--shadow);
       display: grid;
       grid-template-rows: auto auto minmax(0, 1fr);
@@ -74,7 +73,6 @@
       gap: 16px;
       border-bottom: 1px solid var(--line);
       background: rgba(255, 255, 255, 0.72);
-      backdrop-filter: blur(18px) saturate(150%);
     }
 
     .tag-tabs {
@@ -152,7 +150,6 @@
       padding: 12px 22px;
       border-bottom: 1px solid var(--line);
       background: rgba(255, 255, 255, 0.62);
-      backdrop-filter: blur(18px) saturate(150%);
     }
 
     .primary {
@@ -320,8 +317,7 @@
       top: 0;
       z-index: 8;
       color: #3d515d;
-      background: rgba(255, 255, 255, 0.88);
-      backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.96);
       border-bottom: 1px solid var(--line);
       padding: 0 8px;
       height: 58px;
@@ -345,7 +341,6 @@
       cursor: pointer;
       user-select: none;
       white-space: normal;
-      border-radius: 8px;
       transition: background 0.16s ease, color 0.16s ease, box-shadow 0.16s ease;
     }
 
@@ -369,12 +364,12 @@
 
     thead th.sorted.advantage-sort {
       background: linear-gradient(135deg, #25c685, #0c9f72);
-      box-shadow: inset 0 0 0 1px rgba(12, 159, 114, 0.18), 0 8px 18px rgba(7, 158, 104, 0.18);
+      box-shadow: inset 0 0 0 1px rgba(12, 159, 114, 0.18);
     }
 
     thead th.sorted.disadvantage-sort {
       background: linear-gradient(135deg, #e25555, #c92f52);
-      box-shadow: inset 0 0 0 1px rgba(201, 47, 82, 0.18), 0 8px 18px rgba(201, 47, 82, 0.16);
+      box-shadow: inset 0 0 0 1px rgba(201, 47, 82, 0.18);
     }
 
     thead th.sorted .sort-indicator {
@@ -390,14 +385,14 @@
       line-height: 1.28;
       overflow-wrap: anywhere;
       word-break: break-word;
-      transition: background 0.18s ease, color 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease, font-size 0.18s ease, font-weight 0.18s ease;
+      transition: background 0.14s ease, color 0.14s ease;
     }
 
     tbody tr {
       position: relative;
       background: rgba(255, 255, 255, 0.42);
       transform-origin: center;
-      transition: background 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+      transition: background 0.14s ease, box-shadow 0.14s ease;
     }
 
     tbody tr:nth-child(even) {
@@ -412,13 +407,10 @@
         inset 0 0 0 9999px rgba(206, 245, 221, 0.18),
         0 12px 26px rgba(24, 126, 82, 0.12);
       cursor: pointer;
-      filter: saturate(1.08);
     }
 
     body:not(.compare-mode) tbody tr:hover td {
       background: rgba(206, 245, 221, 0.28);
-      font-size: 14px;
-      font-weight: 850;
     }
 
     body.target-mode tbody tr.no-target-weapon,
@@ -454,12 +446,10 @@
         inset 4px 0 0 rgba(32, 182, 108, 0.92),
         inset 0 0 0 9999px rgba(206, 245, 221, 0.18),
         0 12px 26px rgba(24, 126, 82, 0.12);
-      filter: saturate(1.08);
     }
 
     body.compare-mode tbody tr.selected td {
       background: rgba(206, 245, 221, 0.28);
-      font-size: 14px;
       font-weight: 850;
     }
 
@@ -538,8 +528,8 @@
       display: none;
       place-items: center;
       padding: 24px;
-      background: rgba(30, 55, 86, 0.2);
-      backdrop-filter: blur(16px) saturate(140%);
+      background: rgba(30, 55, 86, 0.22);
+      backdrop-filter: blur(5px) saturate(120%);
       z-index: 10;
     }
 
@@ -557,11 +547,12 @@
       overflow: hidden;
       border: 1px solid rgba(255, 255, 255, 0.72);
       border-radius: 16px;
-      background: rgba(255, 255, 255, 0.82);
-      backdrop-filter: blur(26px) saturate(160%);
-      box-shadow: 0 28px 90px rgba(21, 54, 94, 0.26);
+      background: #ffffff;
+      box-shadow: 0 22px 58px rgba(21, 54, 94, 0.22);
       backface-visibility: hidden;
       transform: translateZ(0);
+      will-change: transform, opacity;
+      contain: layout paint;
       display: grid;
       grid-template-rows: auto minmax(0, 1fr);
     }
@@ -581,8 +572,7 @@
     .dialog-head {
       z-index: 2;
       padding: 16px 18px;
-      background: rgba(255, 255, 255, 0.82);
-      backdrop-filter: blur(18px) saturate(150%);
+      background: #ffffff;
       border-bottom: 1px solid var(--line);
       display: flex;
       align-items: center;
@@ -683,7 +673,7 @@
       border-radius: 8px;
       overflow: hidden;
       background: rgba(255, 255, 255, 0.68);
-      box-shadow: var(--soft-shadow);
+      box-shadow: 0 6px 18px rgba(35, 76, 124, 0.08);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -711,7 +701,7 @@
       border: 1px solid var(--line);
       border-radius: 12px;
       background: rgba(255, 255, 255, 0.76);
-      box-shadow: var(--soft-shadow);
+      box-shadow: 0 8px 22px rgba(35, 76, 124, 0.08);
       overflow: hidden;
     }
 
@@ -917,7 +907,7 @@
       border: 1px solid var(--line);
       border-radius: 14px;
       background: linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(235, 249, 249, 0.9));
-      box-shadow: var(--soft-shadow);
+      box-shadow: 0 8px 22px rgba(35, 76, 124, 0.08);
       text-align: center;
       display: grid;
       justify-items: center;
@@ -965,7 +955,7 @@
       border-radius: 12px;
       overflow: hidden;
       background: rgba(255, 255, 255, 0.76);
-      box-shadow: 0 8px 24px rgba(35, 76, 124, 0.06);
+      box-shadow: 0 4px 12px rgba(35, 76, 124, 0.045);
     }
 
     .detail-name,
@@ -996,7 +986,7 @@
       overflow: hidden;
       border: 1px solid rgba(255, 255, 255, 0.72);
       border-radius: 18px;
-      background: rgba(247, 251, 255, 0.86);
+      background: #f7fbff;
       display: grid;
       grid-template-rows: auto minmax(0, 1fr);
     }
@@ -1028,7 +1018,7 @@
       background: #ffffff;
       overflow: hidden;
       contain: layout paint;
-      box-shadow: var(--soft-shadow);
+      box-shadow: 0 6px 18px rgba(35, 76, 124, 0.08);
     }
 
     .tank-model {
@@ -1040,7 +1030,6 @@
       transform: translate(-50%, -50%);
       background: transparent;
       border: 0;
-      filter: drop-shadow(0 16px 34px rgba(33, 62, 47, 0.18));
       z-index: 4;
     }
 
@@ -1094,7 +1083,7 @@
       z-index: 3;
       will-change: transform;
       backface-visibility: hidden;
-      transition: box-shadow 0.16s ease, filter 0.16s ease;
+      transition: box-shadow 0.16s ease;
     }
 
     .threat-token::before,
@@ -1111,7 +1100,6 @@
       inset: -4px;
       background: inherit;
       z-index: -1;
-      filter: saturate(1.08);
     }
 
     .threat-token::after {
@@ -1133,8 +1121,7 @@
 
     .threat-token.top-threat {
       z-index: 4;
-      filter: saturate(1.16);
-      box-shadow: 0 14px 30px rgba(229, 57, 53, 0.18), 0 10px 26px rgba(28, 59, 72, 0.16);
+      box-shadow: 0 12px 26px rgba(229, 57, 53, 0.16), 0 8px 20px rgba(28, 59, 72, 0.14);
     }
 
     .threat-token.top-threat::before,
@@ -1173,7 +1160,7 @@
       border: 1px solid var(--line);
       border-radius: 14px;
       background: rgba(255, 255, 255, 0.78);
-      box-shadow: var(--soft-shadow);
+      box-shadow: 0 8px 22px rgba(35, 76, 124, 0.08);
       overflow: hidden;
     }
 
@@ -1188,7 +1175,6 @@
       font-size: 15px;
       border-bottom: 1px solid var(--line);
       background: rgba(255, 255, 255, 0.74);
-      backdrop-filter: blur(12px);
     }
 
     .threat-buttons {
@@ -1691,8 +1677,11 @@
     let filteredList = [];
     let currentWeaponList = [];
     let filteredWeaponList = [];
+    let weaponLookup = new Map();
+    let mapLookup = new Map();
     let sortState = { key: null, mode: null };
     let weaponSortState = { key: null, mode: null };
+    let viewFrame = null;
     let scoreFrame = null;
     let pendingScoreUpdate = false;
     const antiTankWeapons = [
@@ -1763,6 +1752,7 @@
     let targetVehicle = null;
     let activeThreats = new Map();
     let dragThreat = null;
+    let targetGeometry = null;
 
     function factors(rows) {
       return rows.map(([tag, distance, direction, squadCommand, baseScore]) => ({ tag, distance, direction, squadCommand, baseScore }));
@@ -1815,9 +1805,11 @@
       if (!Array.isArray(vehicleData)) throw new Error("载具数据格式错误：根节点必须是数组");
       if (!Array.isArray(weaponData)) throw new Error("枪械数据格式错误：根节点必须是数组");
       if (!Array.isArray(mapData)) throw new Error("地图数据格式错误：根节点必须是数组");
-      vehicles = vehicleData.map(normalizeVehicle);
+      vehicles = vehicleData.map((vehicle, index) => ({ ...normalizeVehicle(vehicle), index }));
       weapons = weaponData;
       maps = mapData;
+      weaponLookup = new Map(weapons.map((weapon) => [weapon.id, weapon]));
+      mapLookup = new Map(maps.map((map) => [map.id, map]));
       currentList = vehicles;
       filteredList = vehicles;
       currentWeaponList = weapons;
@@ -1937,10 +1929,10 @@
         const right = b[sortState.key];
         const leftMissing = left === null || left === undefined;
         const rightMissing = right === null || right === undefined;
-        if (leftMissing && rightMissing) return vehicles.indexOf(a) - vehicles.indexOf(b);
+        if (leftMissing && rightMissing) return a.index - b.index;
         if (leftMissing) return 1;
         if (rightMissing) return -1;
-        if (left === right) return vehicles.indexOf(a) - vehicles.indexOf(b);
+        if (left === right) return a.index - b.index;
         return (left - right) * multiplier;
       });
     }
@@ -1977,6 +1969,7 @@
     }
 
     function applyView() {
+      viewFrame = null;
       if (activeTab === "maps") {
         renderMapTable(getFilteredMaps());
         updateSortHeaders();
@@ -1993,10 +1986,15 @@
       updateSortHeaders();
     }
 
+    function scheduleApplyView() {
+      if (viewFrame !== null) return;
+      viewFrame = window.requestAnimationFrame(applyView);
+    }
+
     function renderTable(list) {
       currentList = list;
       rowsEl.innerHTML = list.map((vehicle) => {
-        const index = vehicles.indexOf(vehicle);
+        const index = vehicle.index;
         const rowClasses = [];
         if (selectedIndices.includes(index)) rowClasses.push("selected");
         if (targetMode && isUnarmedVehicle(vehicle)) rowClasses.push("no-target-weapon");
@@ -2407,6 +2405,7 @@
       activeThreats = new Map();
       targetTitle.textContent = `${targetVehicle.name} 载具索敌优选`;
       targetTankLabel.textContent = "";
+      invalidateTargetGeometry();
       targetStage.querySelectorAll(".threat-token").forEach((node) => node.remove());
       renderThreatButtons();
       priorityList.innerHTML = "";
@@ -2415,7 +2414,7 @@
     }
 
     async function openMapDetail(mapId) {
-      const summary = maps.find((item) => item.id === mapId);
+      const summary = mapLookup.get(mapId);
       if (!summary) return;
       const response = await fetch(summary.data);
       if (!response.ok) {
@@ -2437,10 +2436,39 @@
       mapFactionButtons.querySelectorAll(".map-faction-button").forEach((button) => {
         button.classList.remove("active");
       });
-      const defaultImage = currentMap.factions.find((item) => item.image === "map.png")?.image || currentMap.factions[0]?.image || "map.png";
-      const image = defaultImage;
-      mapImage.src = `maps/${currentMap.id}/${image}`;
+      const factions = currentMap.factions || [];
+      const defaultFaction = factions.find((item) => item.image === "map.png") || factions[0] || {};
+      setMapImageWithFallback(mapImage, defaultFaction);
       mapImage.alt = `${currentMap.name} 原始地图`;
+    }
+
+    function mapImageNames(faction) {
+      const names = [];
+      const add = (name) => {
+        if (name && !names.includes(name)) names.push(name);
+      };
+      add(faction?.image);
+      if (faction?.id) add(`map_${String(faction.id).toLowerCase()}.png`);
+      add("map.png");
+      return names;
+    }
+
+    function mapImageSources(faction) {
+      return mapImageNames(faction).map((name) => `maps/${currentMap.id}/${name}`);
+    }
+
+    function setMapImageWithFallback(imageElement, faction) {
+      const sources = mapImageSources(faction);
+      let index = 0;
+      imageElement.onerror = () => {
+        index += 1;
+        if (index < sources.length) {
+          imageElement.src = sources[index];
+        } else {
+          imageElement.onerror = null;
+        }
+      };
+      imageElement.src = sources[index];
     }
 
     function loadImageElement(src) {
@@ -2450,6 +2478,18 @@
         image.onerror = reject;
         image.src = src;
       });
+    }
+
+    async function loadFirstImageElement(srcList) {
+      let lastError = null;
+      for (const src of srcList) {
+        try {
+          return await loadImageElement(src);
+        } catch (error) {
+          lastError = error;
+        }
+      }
+      throw lastError || new Error("No map image source available");
     }
 
     async function openProcessedMap(factionId) {
@@ -2469,8 +2509,7 @@
       popup.document.body.textContent = "正在生成地图图片...";
 
       try {
-        const mapSrc = `maps/${currentMap.id}/${faction.image || "map.png"}`;
-        const baseImage = await loadImageElement(mapSrc);
+        const baseImage = await loadFirstImageElement(mapImageSources(faction));
         const canvas = document.createElement("canvas");
         canvas.width = baseImage.naturalWidth || baseImage.width;
         canvas.height = baseImage.naturalHeight || baseImage.height;
@@ -2551,25 +2590,42 @@
       return { left: tankRect.left - stageRect.left, top: tankRect.top - stageRect.top, right: tankRect.right - stageRect.left, bottom: tankRect.bottom - stageRect.top };
     }
 
-    function barrelRectInStage() {
-      const tank = tankRectInStage();
-      return {
+    function getTargetGeometry() {
+      if (targetGeometry) return targetGeometry;
+      const stageRect = targetStage.getBoundingClientRect();
+      const tankRect = targetTank.getBoundingClientRect();
+      const tank = {
+        left: tankRect.left - stageRect.left,
+        top: tankRect.top - stageRect.top,
+        right: tankRect.right - stageRect.left,
+        bottom: tankRect.bottom - stageRect.top
+      };
+      const barrel = {
         left: tank.left + 92,
         top: tank.top + 25,
         right: tank.left + 174,
         bottom: tank.top + 37
       };
-    }
-
-    function blockedTankRectInStage() {
-      const tank = tankRectInStage();
-      const barrel = barrelRectInStage();
-      return {
+      const blockedTank = {
         left: Math.min(tank.left, barrel.left),
         top: Math.min(tank.top, barrel.top),
         right: Math.max(tank.right, barrel.right),
         bottom: Math.max(tank.bottom, barrel.bottom)
       };
+      targetGeometry = { stageRect, tank, barrel, blockedTank };
+      return targetGeometry;
+    }
+
+    function invalidateTargetGeometry() {
+      targetGeometry = null;
+    }
+
+    function barrelRectInStage() {
+      return getTargetGeometry().barrel;
+    }
+
+    function blockedTankRectInStage() {
+      return getTargetGeometry().blockedTank;
     }
 
     function overlapsRect(x, y, size, rect) {
@@ -2577,7 +2633,7 @@
     }
 
     function overlapsTank(x, y, size = 54) {
-      return overlapsRect(x, y, size, tankRectInStage());
+      return overlapsRect(x, y, size, getTargetGeometry().tank);
     }
 
     function overlapsThreats(x, y, size = 54, ignoredItem = null) {
@@ -2597,7 +2653,7 @@
     }
 
     function placeThreat(item, x, y) {
-      const stageRect = targetStage.getBoundingClientRect();
+      const stageRect = getTargetGeometry().stageRect;
       const size = 54;
       const padding = 8;
       const step = size + 8;
@@ -2666,9 +2722,9 @@
       item.el.style.transform = `translate3d(${nextX}px, ${nextY}px, 0)`;
     }
 
-    function threatScore(item) {
-      const stageRect = targetStage.getBoundingClientRect();
-      const barrel = barrelRectInStage();
+    function threatScore(item, geometry = getTargetGeometry()) {
+      const stageRect = geometry.stageRect;
+      const barrel = geometry.barrel;
       const barrelBase = { x: barrel.left, y: (barrel.top + barrel.bottom) / 2 };
       const barrelTip = { x: barrel.right, y: (barrel.top + barrel.bottom) / 2 };
       const threatCenter = { x: item.x + 27, y: item.y + 27 };
@@ -2690,13 +2746,14 @@
         + item.factor.direction * directionFactor;
     }
 
-    function updateThreatScores() {
+    function updateThreatScores(allowReorder = true) {
       const items = Array.from(activeThreats.values());
-      items.forEach((item) => item.score = threatScore(item));
+      const geometry = getTargetGeometry();
+      items.forEach((item) => item.score = threatScore(item, geometry));
       items.sort((a, b) => b.score - a.score);
       const topTag = items.length ? items[0].tag : null;
       activeThreats.forEach((item) => item.el.classList.toggle("top-threat", item.tag === topTag));
-      renderPriorityList(items, topTag, true);
+      renderPriorityList(items, topTag, allowReorder);
     }
 
     function scheduleThreatScores() {
@@ -2706,7 +2763,7 @@
         scoreFrame = null;
         if (!pendingScoreUpdate) return;
         pendingScoreUpdate = false;
-        updateThreatScores();
+        updateThreatScores(!dragThreat);
       });
     }
 
@@ -2736,7 +2793,7 @@
         node.classList.toggle("top", item.tag === topTag);
         node.querySelector(".priority-name").textContent = threatNames[item.tag] || item.tag;
         node.querySelector(".priority-score").textContent = fmt(item.score);
-        if (allowReorder && priorityList.children[index] !== node) {
+        if (priorityList.children[index] !== node) {
           priorityList.insertBefore(node, priorityList.children[index] || null);
         } else if (!node.parentNode) {
           priorityList.appendChild(node);
@@ -2780,7 +2837,7 @@
     }
 
     function weaponById(id) {
-      return weapons.find((weapon) => weapon.id === id);
+      return weaponLookup.get(id);
     }
 
     function weaponSectionFields(section, mode) {
@@ -2939,7 +2996,7 @@
     }
 
     searchInput.addEventListener("input", () => {
-      applyView();
+      scheduleApplyView();
     });
 
     tagTabs.forEach((button) => {
@@ -3039,6 +3096,7 @@
       if (!token) return;
       const item = activeThreats.get(token.dataset.tag);
       if (!item) return;
+      invalidateTargetGeometry();
       const rect = token.getBoundingClientRect();
       dragThreat = { item, offsetX: event.clientX - rect.left, offsetY: event.clientY - rect.top };
       token.classList.add("dragging");
@@ -3047,7 +3105,7 @@
     targetStage.addEventListener("pointermove", (event) => {
       if (!dragThreat) return;
       event.preventDefault();
-      const stageRect = targetStage.getBoundingClientRect();
+      const stageRect = getTargetGeometry().stageRect;
       placeThreat(dragThreat.item, event.clientX - stageRect.left - dragThreat.offsetX, event.clientY - stageRect.top - dragThreat.offsetY);
       scheduleThreatScores();
     });
@@ -3079,6 +3137,7 @@
       if (event.target === mapModal) mapModal.classList.remove("open");
     });
     window.addEventListener("resize", () => {
+      invalidateTargetGeometry();
       activeThreats.forEach((item) => placeThreat(item, item.x, item.y));
       if (targetModal.classList.contains("open")) updateThreatScores();
     });

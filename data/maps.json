@@ -1,472 +1,472 @@
 ﻿[
-  {
-    "id": "edelweiss1",
-    "group": "雪绒花",
-    "name": "edelweiss1",
-    "factions": [
-      {
-        "id": "Axis",
-        "label": "德军",
-        "image": "map_axis.png"
-      },
-      {
-        "id": "Allies",
-        "label": "盟军",
-        "image": "map_allies.png"
-      }
-    ],
-    "counts": {
-      "radio": 2,
-      "tank": 1,
-      "antiTank": 2,
-      "hmg": 12
+    {
+        "id":  "edelweiss1",
+        "group":  "雪绒花",
+        "name":  "edelweiss1",
+        "factions":  [
+                         {
+                             "id":  "Axis",
+                             "label":  "德军",
+                             "image":  "map_axis.png"
+                         },
+                         {
+                             "id":  "Allies",
+                             "label":  "盟军",
+                             "image":  "map_allies.png"
+                         }
+                     ],
+        "counts":  {
+                       "radio":  2,
+                       "tank":  0,
+                       "antiTank":  2,
+                       "hmg":  6
+                   },
+        "data":  "maps/edelweiss1/map-data.json"
     },
-    "data": "maps/edelweiss1/map-data.json"
-  },
-  {
-    "id": "edelweiss2",
-    "group": "雪绒花",
-    "name": "edelweiss2",
-    "factions": [
-      {
-        "id": "Axis",
-        "label": "德军",
-        "image": "map_axis.png"
-      },
-      {
-        "id": "Allies",
-        "label": "盟军",
-        "image": "map_allies.png"
-      }
-    ],
-    "counts": {
-      "radio": 7,
-      "tank": 10,
-      "antiTank": 1,
-      "hmg": 7
+    {
+        "id":  "edelweiss2",
+        "group":  "雪绒花",
+        "name":  "edelweiss2",
+        "factions":  [
+                         {
+                             "id":  "Axis",
+                             "label":  "德军",
+                             "image":  "map_axis.png"
+                         },
+                         {
+                             "id":  "Allies",
+                             "label":  "盟军",
+                             "image":  "map_allies.png"
+                         }
+                     ],
+        "counts":  {
+                       "radio":  7,
+                       "tank":  9,
+                       "antiTank":  1,
+                       "hmg":  1
+                   },
+        "data":  "maps/edelweiss2/map-data.json"
     },
-    "data": "maps/edelweiss2/map-data.json"
-  },
-  {
-    "id": "edelweiss3",
-    "group": "雪绒花",
-    "name": "edelweiss3",
-    "factions": [
-      {
-        "id": "Axis",
-        "label": "德军",
-        "image": "map_axis.png"
-      },
-      {
-        "id": "Allies",
-        "label": "盟军",
-        "image": "map_allies.png"
-      }
-    ],
-    "counts": {
-      "radio": 1,
-      "tank": 16,
-      "antiTank": 0,
-      "hmg": 0
+    {
+        "id":  "edelweiss3",
+        "group":  "雪绒花",
+        "name":  "edelweiss3",
+        "factions":  [
+                         {
+                             "id":  "Axis",
+                             "label":  "德军",
+                             "image":  "map_axis.png"
+                         },
+                         {
+                             "id":  "Allies",
+                             "label":  "盟军",
+                             "image":  "map_allies.png"
+                         }
+                     ],
+        "counts":  {
+                       "radio":  1,
+                       "tank":  16,
+                       "antiTank":  0,
+                       "hmg":  0
+                   },
+        "data":  "maps/edelweiss3/map-data.json"
     },
-    "data": "maps/edelweiss3/map-data.json"
-  },
-  {
-    "id": "edelweiss4",
-    "group": "雪绒花",
-    "name": "edelweiss4",
-    "factions": [
-      {
-        "id": "Axis",
-        "label": "德军",
-        "image": "map_axis.png"
-      },
-      {
-        "id": "Allies",
-        "label": "盟军",
-        "image": "map_allies.png"
-      }
-    ],
-    "counts": {
-      "radio": 3,
-      "tank": 28,
-      "antiTank": 24,
-      "hmg": 14
+    {
+        "id":  "edelweiss4",
+        "group":  "雪绒花",
+        "name":  "edelweiss4",
+        "factions":  [
+                         {
+                             "id":  "Axis",
+                             "label":  "德军",
+                             "image":  "map_axis.png"
+                         },
+                         {
+                             "id":  "Allies",
+                             "label":  "盟军",
+                             "image":  "map_allies.png"
+                         }
+                     ],
+        "counts":  {
+                       "radio":  3,
+                       "tank":  13,
+                       "antiTank":  25,
+                       "hmg":  6
+                   },
+        "data":  "maps/edelweiss4/map-data.json"
     },
-    "data": "maps/edelweiss4/map-data.json"
-  },
-  {
-    "id": "edelweiss5",
-    "group": "雪绒花",
-    "name": "edelweiss5",
-    "factions": [
-      {
-        "id": "Axis",
-        "label": "德军",
-        "image": "map_axis.png"
-      },
-      {
-        "id": "Allies",
-        "label": "盟军",
-        "image": "map_allies.png"
-      }
-    ],
-    "counts": {
-      "radio": 4,
-      "tank": 4,
-      "antiTank": 0,
-      "hmg": 42
+    {
+        "id":  "edelweiss5",
+        "group":  "雪绒花",
+        "name":  "edelweiss5",
+        "factions":  [
+                         {
+                             "id":  "Axis",
+                             "label":  "德军",
+                             "image":  "map_axis.png"
+                         },
+                         {
+                             "id":  "Allies",
+                             "label":  "盟军",
+                             "image":  "map_allies.png"
+                         }
+                     ],
+        "counts":  {
+                       "radio":  4,
+                       "tank":  4,
+                       "antiTank":  0,
+                       "hmg":  11
+                   },
+        "data":  "maps/edelweiss5/map-data.json"
     },
-    "data": "maps/edelweiss5/map-data.json"
-  },
-  {
-    "id": "edelweiss6",
-    "group": "雪绒花",
-    "name": "edelweiss6",
-    "factions": [
-      {
-        "id": "Axis",
-        "label": "德军",
-        "image": "map_axis.png"
-      },
-      {
-        "id": "Allies",
-        "label": "盟军",
-        "image": "map_allies.png"
-      }
-    ],
-    "counts": {
-      "radio": 2,
-      "tank": 34,
-      "antiTank": 23,
-      "hmg": 37
+    {
+        "id":  "edelweiss6",
+        "group":  "雪绒花",
+        "name":  "edelweiss6",
+        "factions":  [
+                         {
+                             "id":  "Axis",
+                             "label":  "德军",
+                             "image":  "map_axis.png"
+                         },
+                         {
+                             "id":  "Allies",
+                             "label":  "盟军",
+                             "image":  "map_allies.png"
+                         }
+                     ],
+        "counts":  {
+                       "radio":  2,
+                       "tank":  11,
+                       "antiTank":  23,
+                       "hmg":  22
+                   },
+        "data":  "maps/edelweiss6/map-data.json"
     },
-    "data": "maps/edelweiss6/map-data.json"
-  },
-  {
-    "id": "edelweiss7",
-    "group": "雪绒花",
-    "name": "edelweiss7",
-    "factions": [
-      {
-        "id": "Allies",
-        "label": "盟军",
-        "image": "map.png"
-      }
-    ],
-    "counts": {
-      "radio": 2,
-      "tank": 8,
-      "antiTank": 8,
-      "hmg": 15
+    {
+        "id":  "edelweiss7",
+        "group":  "雪绒花",
+        "name":  "edelweiss7",
+        "factions":  [
+                         {
+                             "id":  "Allies",
+                             "label":  "盟军",
+                             "image":  "map.png"
+                         }
+                     ],
+        "counts":  {
+                       "radio":  2,
+                       "tank":  8,
+                       "antiTank":  8,
+                       "hmg":  0
+                   },
+        "data":  "maps/edelweiss7/map-data.json"
     },
-    "data": "maps/edelweiss7/map-data.json"
-  },
-  {
-    "id": "edelweiss8",
-    "group": "雪绒花",
-    "name": "edelweiss8",
-    "factions": [
-      {
-        "id": "Axis",
-        "label": "德军",
-        "image": "map.png"
-      }
-    ],
-    "counts": {
-      "radio": 1,
-      "tank": 19,
-      "antiTank": 2,
-      "hmg": 9
+    {
+        "id":  "edelweiss8",
+        "group":  "雪绒花",
+        "name":  "edelweiss8",
+        "factions":  [
+                         {
+                             "id":  "Axis",
+                             "label":  "德军",
+                             "image":  "map.png"
+                         }
+                     ],
+        "counts":  {
+                       "radio":  1,
+                       "tank":  17,
+                       "antiTank":  2,
+                       "hmg":  9
+                   },
+        "data":  "maps/edelweiss8/map-data.json"
     },
-    "data": "maps/edelweiss8/map-data.json"
-  },
-  {
-    "id": "edelweiss9",
-    "group": "雪绒花",
-    "name": "edelweiss9",
-    "factions": [
-      {
-        "id": "Axis",
-        "label": "德军",
-        "image": "map_axis.png"
-      },
-      {
-        "id": "Allies",
-        "label": "盟军",
-        "image": "map_allies.png"
-      }
-    ],
-    "counts": {
-      "radio": 6,
-      "tank": 3,
-      "antiTank": 18,
-      "hmg": 78
+    {
+        "id":  "edelweiss9",
+        "group":  "雪绒花",
+        "name":  "edelweiss9",
+        "factions":  [
+                         {
+                             "id":  "Axis",
+                             "label":  "德军",
+                             "image":  "map_axis.png"
+                         },
+                         {
+                             "id":  "Allies",
+                             "label":  "盟军",
+                             "image":  "map_allies.png"
+                         }
+                     ],
+        "counts":  {
+                       "radio":  4,
+                       "tank":  3,
+                       "antiTank":  18,
+                       "hmg":  39
+                   },
+        "data":  "maps/edelweiss9/map-data.json"
     },
-    "data": "maps/edelweiss9/map-data.json"
-  },
-  {
-    "id": "edelweiss11",
-    "group": "雪绒花",
-    "name": "edelweiss11",
-    "factions": [
-      {
-        "id": "Axis",
-        "label": "德军",
-        "image": "map_axis.png"
-      },
-      {
-        "id": "Allies",
-        "label": "盟军",
-        "image": "map_allies.png"
-      }
-    ],
-    "counts": {
-      "radio": 5,
-      "tank": 4,
-      "antiTank": 11,
-      "hmg": 39
+    {
+        "id":  "edelweiss11",
+        "group":  "雪绒花",
+        "name":  "edelweiss11",
+        "factions":  [
+                         {
+                             "id":  "Axis",
+                             "label":  "德军",
+                             "image":  "map_axis.png"
+                         },
+                         {
+                             "id":  "Allies",
+                             "label":  "盟军",
+                             "image":  "map_allies.png"
+                         }
+                     ],
+        "counts":  {
+                       "radio":  5,
+                       "tank":  5,
+                       "antiTank":  20,
+                       "hmg":  49
+                   },
+        "data":  "maps/edelweiss11/map-data.json"
     },
-    "data": "maps/edelweiss11/map-data.json"
-  },
-  {
-    "id": "island1",
-    "group": "太平洋",
-    "name": "island1",
-    "factions": [
-      {
-        "id": "IJA",
-        "label": "日军",
-        "image": "map.png"
-      },
-      {
-        "id": "USMC",
-        "label": "美军",
-        "image": "map.png"
-      }
-    ],
-    "counts": {
-      "radio": 0,
-      "tank": 0,
-      "antiTank": 0,
-      "hmg": 9
+    {
+        "id":  "island1",
+        "group":  "太平洋",
+        "name":  "island1",
+        "factions":  [
+                         {
+                             "id":  "USMC",
+                             "label":  "美军",
+                             "image":  "map.png"
+                         },
+                         {
+                             "id":  "IJA",
+                             "label":  "日军",
+                             "image":  "map.png"
+                         }
+                     ],
+        "counts":  {
+                       "radio":  0,
+                       "tank":  0,
+                       "antiTank":  0,
+                       "hmg":  16
+                   },
+        "data":  "maps/island1/map-data.json"
     },
-    "data": "maps/island1/map-data.json"
-  },
-  {
-    "id": "island2",
-    "group": "太平洋",
-    "name": "island2",
-    "factions": [
-      {
-        "id": "IJA",
-        "label": "日军",
-        "image": "map.png"
-      },
-      {
-        "id": "USMC",
-        "label": "美军",
-        "image": "map.png"
-      }
-    ],
-    "counts": {
-      "radio": 1,
-      "tank": 1,
-      "antiTank": 0,
-      "hmg": 4
+    {
+        "id":  "island2",
+        "group":  "太平洋",
+        "name":  "island2",
+        "factions":  [
+                         {
+                             "id":  "USMC",
+                             "label":  "美军",
+                             "image":  "map.png"
+                         },
+                         {
+                             "id":  "IJA",
+                             "label":  "日军",
+                             "image":  "map.png"
+                         }
+                     ],
+        "counts":  {
+                       "radio":  2,
+                       "tank":  2,
+                       "antiTank":  6,
+                       "hmg":  8
+                   },
+        "data":  "maps/island2/map-data.json"
     },
-    "data": "maps/island2/map-data.json"
-  },
-  {
-    "id": "island3",
-    "group": "太平洋",
-    "name": "island3",
-    "factions": [
-      {
-        "id": "IJA",
-        "label": "日军",
-        "image": "map_ija.png"
-      },
-      {
-        "id": "USMC",
-        "label": "美军",
-        "image": "map_usmc.png"
-      }
-    ],
-    "counts": {
-      "radio": 3,
-      "tank": 0,
-      "antiTank": 0,
-      "hmg": 3
+    {
+        "id":  "island3",
+        "group":  "太平洋",
+        "name":  "island3",
+        "factions":  [
+                         {
+                             "id":  "USMC",
+                             "label":  "美军",
+                             "image":  "map_usmc.png"
+                         },
+                         {
+                             "id":  "IJA",
+                             "label":  "日军",
+                             "image":  "map_ija.png"
+                         }
+                     ],
+        "counts":  {
+                       "radio":  2,
+                       "tank":  0,
+                       "antiTank":  4,
+                       "hmg":  6
+                   },
+        "data":  "maps/island3/map-data.json"
     },
-    "data": "maps/island3/map-data.json"
-  },
-  {
-    "id": "island4",
-    "group": "太平洋",
-    "name": "island4",
-    "factions": [
-      {
-        "id": "IJA",
-        "label": "日军",
-        "image": "map.png"
-      },
-      {
-        "id": "USMC",
-        "label": "美军",
-        "image": "map.png"
-      }
-    ],
-    "counts": {
-      "radio": 1,
-      "tank": 5,
-      "antiTank": 0,
-      "hmg": 0
+    {
+        "id":  "island4",
+        "group":  "太平洋",
+        "name":  "island4",
+        "factions":  [
+                         {
+                             "id":  "USMC",
+                             "label":  "美军",
+                             "image":  "map.png"
+                         },
+                         {
+                             "id":  "IJA",
+                             "label":  "日军",
+                             "image":  "map.png"
+                         }
+                     ],
+        "counts":  {
+                       "radio":  2,
+                       "tank":  4,
+                       "antiTank":  8,
+                       "hmg":  0
+                   },
+        "data":  "maps/island4/map-data.json"
     },
-    "data": "maps/island4/map-data.json"
-  },
-  {
-    "id": "island5",
-    "group": "太平洋",
-    "name": "island5",
-    "factions": [
-      {
-        "id": "IJA",
-        "label": "日军",
-        "image": "map.png"
-      },
-      {
-        "id": "USMC",
-        "label": "美军",
-        "image": "map.png"
-      }
-    ],
-    "counts": {
-      "radio": 3,
-      "tank": 2,
-      "antiTank": 0,
-      "hmg": 3
+    {
+        "id":  "island5",
+        "group":  "太平洋",
+        "name":  "island5",
+        "factions":  [
+                         {
+                             "id":  "USMC",
+                             "label":  "美军",
+                             "image":  "map.png"
+                         },
+                         {
+                             "id":  "IJA",
+                             "label":  "日军",
+                             "image":  "map.png"
+                         }
+                     ],
+        "counts":  {
+                       "radio":  3,
+                       "tank":  0,
+                       "antiTank":  4,
+                       "hmg":  6
+                   },
+        "data":  "maps/island5/map-data.json"
     },
-    "data": "maps/island5/map-data.json"
-  },
-  {
-    "id": "island6",
-    "group": "太平洋",
-    "name": "island6",
-    "factions": [
-      {
-        "id": "IJA",
-        "label": "日军",
-        "image": "map.png"
-      },
-      {
-        "id": "USMC",
-        "label": "美军",
-        "image": "map.png"
-      }
-    ],
-    "counts": {
-      "radio": 1,
-      "tank": 8,
-      "antiTank": 0,
-      "hmg": 5
+    {
+        "id":  "island6",
+        "group":  "太平洋",
+        "name":  "island6",
+        "factions":  [
+                         {
+                             "id":  "USMC",
+                             "label":  "美军",
+                             "image":  "map.png"
+                         },
+                         {
+                             "id":  "IJA",
+                             "label":  "日军",
+                             "image":  "map.png"
+                         }
+                     ],
+        "counts":  {
+                       "radio":  2,
+                       "tank":  4,
+                       "antiTank":  17,
+                       "hmg":  10
+                   },
+        "data":  "maps/island6/map-data.json"
     },
-    "data": "maps/island6/map-data.json"
-  },
-  {
-    "id": "island7",
-    "group": "太平洋",
-    "name": "island7",
-    "factions": [
-      {
-        "id": "IJA",
-        "label": "日军",
-        "image": "map.png"
-      },
-      {
-        "id": "USMC",
-        "label": "美军",
-        "image": "map.png"
-      }
-    ],
-    "counts": {
-      "radio": 4,
-      "tank": 9,
-      "antiTank": 0,
-      "hmg": 15
+    {
+        "id":  "island7",
+        "group":  "太平洋",
+        "name":  "island7",
+        "factions":  [
+                         {
+                             "id":  "USMC",
+                             "label":  "美军",
+                             "image":  "map.png"
+                         },
+                         {
+                             "id":  "IJA",
+                             "label":  "日军",
+                             "image":  "map.png"
+                         }
+                     ],
+        "counts":  {
+                       "radio":  4,
+                       "tank":  2,
+                       "antiTank":  20,
+                       "hmg":  30
+                   },
+        "data":  "maps/island7/map-data.json"
     },
-    "data": "maps/island7/map-data.json"
-  },
-  {
-    "id": "island8",
-    "group": "太平洋",
-    "name": "island8",
-    "factions": [
-      {
-        "id": "IJA",
-        "label": "日军",
-        "image": "map.png"
-      },
-      {
-        "id": "USMC",
-        "label": "美军",
-        "image": "map.png"
-      }
-    ],
-    "counts": {
-      "radio": 3,
-      "tank": 10,
-      "antiTank": 0,
-      "hmg": 7
+    {
+        "id":  "island8",
+        "group":  "太平洋",
+        "name":  "island8",
+        "factions":  [
+                         {
+                             "id":  "USMC",
+                             "label":  "美军",
+                             "image":  "map.png"
+                         },
+                         {
+                             "id":  "IJA",
+                             "label":  "日军",
+                             "image":  "map.png"
+                         }
+                     ],
+        "counts":  {
+                       "radio":  5,
+                       "tank":  4,
+                       "antiTank":  8,
+                       "hmg":  14
+                   },
+        "data":  "maps/island8/map-data.json"
     },
-    "data": "maps/island8/map-data.json"
-  },
-  {
-    "id": "island9",
-    "group": "太平洋",
-    "name": "island9",
-    "factions": [
-      {
-        "id": "IJA",
-        "label": "日军",
-        "image": "map_ija.png"
-      },
-      {
-        "id": "USMC",
-        "label": "美军",
-        "image": "map_usmc.png"
-      }
-    ],
-    "counts": {
-      "radio": 4,
-      "tank": 6,
-      "antiTank": 0,
-      "hmg": 2
+    {
+        "id":  "island9",
+        "group":  "太平洋",
+        "name":  "island9",
+        "factions":  [
+                         {
+                             "id":  "USMC",
+                             "label":  "美军",
+                             "image":  "map_usmc.png"
+                         },
+                         {
+                             "id":  "IJA",
+                             "label":  "日军",
+                             "image":  "map_ija.png"
+                         }
+                     ],
+        "counts":  {
+                       "radio":  2,
+                       "tank":  6,
+                       "antiTank":  2,
+                       "hmg":  2
+                   },
+        "data":  "maps/island9/map-data.json"
     },
-    "data": "maps/island9/map-data.json"
-  },
-  {
-    "id": "island10",
-    "group": "太平洋",
-    "name": "island10",
-    "factions": [
-      {
-        "id": "IJA",
-        "label": "日军",
-        "image": "map_ija.png"
-      },
-      {
-        "id": "USMC",
-        "label": "美军",
-        "image": "map_usmc.png"
-      }
-    ],
-    "counts": {
-      "radio": 2,
-      "tank": 5,
-      "antiTank": 0,
-      "hmg": 5
-    },
-    "data": "maps/island10/map-data.json"
-  }
+    {
+        "id":  "island10",
+        "group":  "太平洋",
+        "name":  "island10",
+        "factions":  [
+                         {
+                             "id":  "USMC",
+                             "label":  "美军",
+                             "image":  "map_usmc.png"
+                         },
+                         {
+                             "id":  "IJA",
+                             "label":  "日军",
+                             "image":  "map_ija.png"
+                         }
+                     ],
+        "counts":  {
+                       "radio":  2,
+                       "tank":  5,
+                       "antiTank":  2,
+                       "hmg":  10
+                   },
+        "data":  "maps/island10/map-data.json"
+    }
 ]

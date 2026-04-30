@@ -1,0 +1,870 @@
+{
+  "id": "island5",
+  "group": "太平洋",
+  "name": "island5",
+  "factions": [
+    {
+      "id": "USMC",
+      "label": "美军",
+      "image": "mapview_card_usmc.png"
+    },
+    {
+      "id": "IJA",
+      "label": "日军",
+      "image": "mapview_card_ija.png"
+    }
+  ],
+  "items": [
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "pt_boat",
+      "x": 1571.37,
+      "y": 346.57,
+      "file": "pt_boat.vehicle",
+      "atlasIndex": 36,
+      "categories": []
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "Radio jammer",
+      "x": 1734.34,
+      "y": 375.48,
+      "file": "radio_jammer.vehicle",
+      "atlasIndex": 9,
+      "categories": [
+        "radio"
+      ]
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "Type 98 Autocannon",
+      "x": 1715.25,
+      "y": 415.65,
+      "file": "type98.vehicle",
+      "atlasIndex": 47,
+      "categories": []
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "jeep",
+      "x": 1765.3,
+      "y": 468.53,
+      "file": "jeep1.vehicle",
+      "atlasIndex": 32,
+      "categories": []
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "hmg",
+      "x": 1499.91,
+      "y": 501.18,
+      "file": "m1919_hmg.vehicle",
+      "atlasIndex": 48,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "hmg",
+      "x": 1424.49,
+      "y": 501.94,
+      "file": "m1919_hmg.vehicle",
+      "atlasIndex": 48,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "armory boat",
+      "x": 1673.51,
+      "y": 550.51,
+      "file": "armory_daihatsu.vehicle",
+      "atlasIndex": 51,
+      "categories": []
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "Type 98 Autocannon",
+      "x": 1482.23,
+      "y": 566.95,
+      "file": "type98.vehicle",
+      "atlasIndex": 47,
+      "categories": []
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "Daihatsu",
+      "x": 1645.2,
+      "y": 567.28,
+      "file": "landing_craft1_noai.vehicle",
+      "atlasIndex": 38,
+      "categories": []
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "landing_craft",
+      "x": 1631.68,
+      "y": 595.65,
+      "file": "landing_craft1_noai.vehicle",
+      "atlasIndex": 38,
+      "categories": []
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "pillbox",
+      "x": 1089.31,
+      "y": 686.16,
+      "file": "pillbox.vehicle",
+      "atlasIndex": 40,
+      "categories": []
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "pillbox",
+      "x": 1156.75,
+      "y": 754.74,
+      "file": "pillbox.vehicle",
+      "atlasIndex": 40,
+      "categories": []
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "Prison Building",
+      "x": 1051.26,
+      "y": 811.28,
+      "file": "prison_building.vehicle",
+      "atlasIndex": 17,
+      "categories": []
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "fortified_turret",
+      "x": 914.31,
+      "y": 873.67,
+      "file": "fortified_turret_sherman.vehicle",
+      "atlasIndex": 65,
+      "categories": [
+        "antiTank"
+      ]
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "pillbox",
+      "x": 844.48,
+      "y": 882.85,
+      "file": "pillbox.vehicle",
+      "atlasIndex": 40,
+      "categories": []
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "pillbox",
+      "x": 945.3,
+      "y": 892.89,
+      "file": "pillbox.vehicle",
+      "atlasIndex": 40,
+      "categories": []
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "jeep",
+      "x": 909.18,
+      "y": 918.76,
+      "file": "jeep.vehicle",
+      "atlasIndex": 0,
+      "categories": []
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "Bofors Gun",
+      "x": 362.11,
+      "y": 919.2,
+      "file": "bofors.vehicle",
+      "atlasIndex": 43,
+      "categories": []
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "Type 98 Autocannon",
+      "x": 866.85,
+      "y": 937.58,
+      "file": "type98.vehicle",
+      "atlasIndex": 47,
+      "categories": []
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "pt_boat",
+      "x": 318.63,
+      "y": 946.7,
+      "file": "pt_boat.vehicle",
+      "atlasIndex": 36,
+      "categories": []
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "pillbox",
+      "x": 938.06,
+      "y": 966.82,
+      "file": "pillbox.vehicle",
+      "atlasIndex": 40,
+      "categories": []
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "pillbox",
+      "x": 837.06,
+      "y": 983.05,
+      "file": "pillbox.vehicle",
+      "atlasIndex": 40,
+      "categories": []
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "landing_craft",
+      "x": 296.78,
+      "y": 988.34,
+      "file": "landing_craft_noai.vehicle",
+      "atlasIndex": 37,
+      "categories": []
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "Oerlikon Gun",
+      "x": 308.69,
+      "y": 1005.38,
+      "file": "oerlikon.vehicle",
+      "atlasIndex": 45,
+      "categories": []
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "landing_craft",
+      "x": 350.41,
+      "y": 1014.31,
+      "file": "landing_craft_noai.vehicle",
+      "atlasIndex": 37,
+      "categories": []
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "Rubber boat",
+      "x": 283.73,
+      "y": 1014.66,
+      "file": "rubber_boat.vehicle",
+      "atlasIndex": 4,
+      "categories": []
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "Oerlikon Gun",
+      "x": 328.23,
+      "y": 1014.81,
+      "file": "oerlikon.vehicle",
+      "atlasIndex": 45,
+      "categories": []
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "Rubber boat",
+      "x": 276.3,
+      "y": 1030.61,
+      "file": "rubber_boat.vehicle",
+      "atlasIndex": 4,
+      "categories": []
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "Oerlikon Gun",
+      "x": 292.72,
+      "y": 1036.55,
+      "file": "oerlikon.vehicle",
+      "atlasIndex": 45,
+      "categories": []
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "Rubber boat",
+      "x": 337.76,
+      "y": 1040.96,
+      "file": "rubber_boat.vehicle",
+      "atlasIndex": 4,
+      "categories": []
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "Oerlikon Gun",
+      "x": 313.66,
+      "y": 1046.76,
+      "file": "oerlikon.vehicle",
+      "atlasIndex": 45,
+      "categories": []
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "landing_craft",
+      "x": 262.84,
+      "y": 1054.81,
+      "file": "landing_craft_noai.vehicle",
+      "atlasIndex": 37,
+      "categories": []
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "Rubber boat",
+      "x": 330.23,
+      "y": 1056.87,
+      "file": "rubber_boat.vehicle",
+      "atlasIndex": 4,
+      "categories": []
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "landing_craft",
+      "x": 318.31,
+      "y": 1080.28,
+      "file": "landing_craft_noai.vehicle",
+      "atlasIndex": 37,
+      "categories": []
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "Bofors Gun",
+      "x": 264.21,
+      "y": 1110.32,
+      "file": "bofors.vehicle",
+      "atlasIndex": 43,
+      "categories": []
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "pillbox",
+      "x": 456.65,
+      "y": 1112.45,
+      "file": "pillbox.vehicle",
+      "atlasIndex": 40,
+      "categories": []
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "Bofors Gun",
+      "x": 274.16,
+      "y": 1115.43,
+      "file": "bofors.vehicle",
+      "atlasIndex": 43,
+      "categories": []
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "Radio jammer",
+      "x": 726.05,
+      "y": 1124.09,
+      "file": "radio_jammer.vehicle",
+      "atlasIndex": 9,
+      "categories": [
+        "radio"
+      ]
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "5-Inch Gun",
+      "x": 262.87,
+      "y": 1125.26,
+      "file": "5inch_gun.vehicle",
+      "atlasIndex": 41,
+      "categories": [
+        "antiTank"
+      ]
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "hmg",
+      "x": 448.21,
+      "y": 1143.19,
+      "file": "m1919_hmg.vehicle",
+      "atlasIndex": 48,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "jeep",
+      "x": 1225.55,
+      "y": 1219.11,
+      "file": "jeep.vehicle",
+      "atlasIndex": 0,
+      "categories": []
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "Type 98 Autocannon",
+      "x": 716.46,
+      "y": 1370.41,
+      "file": "type98.vehicle",
+      "atlasIndex": 47,
+      "categories": []
+    },
+    {
+      "faction": "IJA",
+      "factionLabel": "日军",
+      "tag": "Prison hatch",
+      "x": 492.31,
+      "y": 1404.57,
+      "file": "prison_door.vehicle",
+      "atlasIndex": 17,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "PT Boat",
+      "x": 1571.02,
+      "y": 345.51,
+      "file": "pt_boat.vehicle",
+      "atlasIndex": 36,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "Type 98 Autocannon",
+      "x": 1715.25,
+      "y": 415.65,
+      "file": "type98.vehicle",
+      "atlasIndex": 47,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "jeep",
+      "x": 1765.3,
+      "y": 468.53,
+      "file": "jeep1.vehicle",
+      "atlasIndex": 32,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "hmg",
+      "x": 1499.91,
+      "y": 501.18,
+      "file": "type92_hmg.vehicle",
+      "atlasIndex": 49,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "hmg",
+      "x": 1424.49,
+      "y": 501.94,
+      "file": "type92_hmg.vehicle",
+      "atlasIndex": 49,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "Type 98 Autocannon",
+      "x": 1482.23,
+      "y": 566.95,
+      "file": "type98.vehicle",
+      "atlasIndex": 47,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "Daihatsu",
+      "x": 1645.55,
+      "y": 567.67,
+      "file": "landing_craft1.vehicle",
+      "atlasIndex": 38,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "landing_craft",
+      "x": 1631.93,
+      "y": 595.99,
+      "file": "landing_craft1_noai.vehicle",
+      "atlasIndex": 38,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "pillbox",
+      "x": 1089.31,
+      "y": 686.16,
+      "file": "pillbox1.vehicle",
+      "atlasIndex": 39,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "pillbox",
+      "x": 1156.75,
+      "y": 754.74,
+      "file": "pillbox1.vehicle",
+      "atlasIndex": 39,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "Prison Building",
+      "x": 1051.26,
+      "y": 811.28,
+      "file": "prison_building.vehicle",
+      "atlasIndex": 17,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "pillbox",
+      "x": 844.48,
+      "y": 882.85,
+      "file": "pillbox1.vehicle",
+      "atlasIndex": 39,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "pillbox",
+      "x": 945.3,
+      "y": 892.89,
+      "file": "pillbox1.vehicle",
+      "atlasIndex": 39,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "jeep",
+      "x": 909.18,
+      "y": 918.76,
+      "file": "jeep1.vehicle",
+      "atlasIndex": 32,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "Bofors Gun",
+      "x": 362.11,
+      "y": 919.2,
+      "file": "bofors.vehicle",
+      "atlasIndex": 43,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "Type 98 Autocannon",
+      "x": 866.85,
+      "y": 937.58,
+      "file": "type98.vehicle",
+      "atlasIndex": 47,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "pillbox",
+      "x": 938.06,
+      "y": 966.82,
+      "file": "pillbox1.vehicle",
+      "atlasIndex": 39,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "Higgins Boat",
+      "x": 302.49,
+      "y": 979.57,
+      "file": "landing_craft_noai.vehicle",
+      "atlasIndex": 37,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "pillbox",
+      "x": 837.06,
+      "y": 983.05,
+      "file": "pillbox1.vehicle",
+      "atlasIndex": 39,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "Oerlikon Gun",
+      "x": 308.69,
+      "y": 1005.38,
+      "file": "oerlikon.vehicle",
+      "atlasIndex": 45,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "Rubber boat",
+      "x": 345.28,
+      "y": 1014.29,
+      "file": "rubber_boat.vehicle",
+      "atlasIndex": 4,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "Oerlikon Gun",
+      "x": 328.23,
+      "y": 1014.81,
+      "file": "oerlikon.vehicle",
+      "atlasIndex": 45,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "armory boat",
+      "x": 286.04,
+      "y": 1015.49,
+      "file": "armory_higgins.vehicle",
+      "atlasIndex": 50,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "Oerlikon Gun",
+      "x": 292.72,
+      "y": 1036.55,
+      "file": "oerlikon.vehicle",
+      "atlasIndex": 45,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "Oerlikon Gun",
+      "x": 313.66,
+      "y": 1046.76,
+      "file": "oerlikon.vehicle",
+      "atlasIndex": 45,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "landing_craft",
+      "x": 271.24,
+      "y": 1048.12,
+      "file": "landing_craft_noai.vehicle",
+      "atlasIndex": 37,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "Rubber boat",
+      "x": 321.74,
+      "y": 1063.21,
+      "file": "rubber_boat.vehicle",
+      "atlasIndex": 4,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "Higgins Boat",
+      "x": 400.67,
+      "y": 1084.51,
+      "file": "landing_craft_noai.vehicle",
+      "atlasIndex": 37,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "fortified_turret",
+      "x": 669.48,
+      "y": 1109.11,
+      "file": "fortified_turret_chi_ha.vehicle",
+      "atlasIndex": 65,
+      "categories": [
+        "antiTank"
+      ]
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "Bofors Gun",
+      "x": 264.21,
+      "y": 1110.32,
+      "file": "bofors.vehicle",
+      "atlasIndex": 43,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "pillbox",
+      "x": 456.65,
+      "y": 1112.45,
+      "file": "pillbox1.vehicle",
+      "atlasIndex": 39,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "Bofors Gun",
+      "x": 274.16,
+      "y": 1115.43,
+      "file": "bofors.vehicle",
+      "atlasIndex": 43,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "Radio jammer",
+      "x": 726.05,
+      "y": 1124.09,
+      "file": "radio_jammer.vehicle",
+      "atlasIndex": 9,
+      "categories": [
+        "radio"
+      ]
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "5-Inch Gun",
+      "x": 262.87,
+      "y": 1125.26,
+      "file": "5inch_gun.vehicle",
+      "atlasIndex": 41,
+      "categories": [
+        "antiTank"
+      ]
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "PT Boat",
+      "x": 254.72,
+      "y": 1142.36,
+      "file": "pt_boat.vehicle",
+      "atlasIndex": 36,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "hmg",
+      "x": 448.21,
+      "y": 1143.19,
+      "file": "type92_hmg.vehicle",
+      "atlasIndex": 49,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "jeep",
+      "x": 1225.55,
+      "y": 1219.11,
+      "file": "jeep1.vehicle",
+      "atlasIndex": 32,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "Type 98 Autocannon",
+      "x": 716.46,
+      "y": 1370.41,
+      "file": "type98.vehicle",
+      "atlasIndex": 47,
+      "categories": []
+    },
+    {
+      "faction": "USMC",
+      "factionLabel": "美军",
+      "tag": "Prison hatch",
+      "x": 492.31,
+      "y": 1404.57,
+      "file": "prison_door.vehicle",
+      "atlasIndex": 17,
+      "categories": []
+    }
+  ],
+  "counts": {
+    "antiTank": 4,
+    "hmg": 6,
+    "radio": 3
+  }
+}
