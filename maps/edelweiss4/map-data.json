@@ -1,997 +1,945 @@
-﻿{
-    "id":  "edelweiss4",
-    "group":  "雪绒花",
-    "name":  "edelweiss4",
-    "factions":  [
-                     {
-                         "id":  "Axis",
-                         "label":  "德军",
-                         "image":  "map_axis.png"
-                     },
-                     {
-                         "id":  "Allies",
-                         "label":  "盟军",
-                         "image":  "map_allies.png"
-                     }
-                 ],
-    "items":  [
-                  {
-                      "faction":  "Allies",
-                      "factionLabel":  "盟军",
-                      "tag":  "jeep",
-                      "x":  1812.65,
-                      "y":  317.64,
-                      "file":  "kubelwagen.vehicle",
-                      "atlasIndex":  62,
-                      "categories":  [
-
-                                     ]
-                  },
-                  {
-                      "faction":  "Allies",
-                      "factionLabel":  "盟军",
-                      "tag":  "tank",
-                      "x":  1830.32,
-                      "y":  333.02,
-                      "file":  "panzer_iv.vehicle",
-                      "atlasIndex":  30,
-                      "categories":  [
-                                         "tank"
-                                     ]
-                  },
-                  {
-                      "faction":  "Allies",
-                      "factionLabel":  "盟军",
-                      "tag":  "Radio jammer",
-                      "x":  1842.34,
-                      "y":  369.27,
-                      "file":  "radio_jammer.vehicle",
-                      "atlasIndex":  9,
-                      "categories":  [
-                                         "radio"
-                                     ]
-                  },
-                  {
-                      "faction":  "Allies",
-                      "factionLabel":  "盟军",
-                      "tag":  "apc",
-                      "x":  1816.67,
-                      "y":  370.29,
-                      "file":  "sdkfz251_base.vehicle",
-                      "atlasIndex":  55,
-                      "categories":  [
-
-                                     ]
-                  },
-                  {
-                      "faction":  "Allies",
-                      "factionLabel":  "盟军",
-                      "tag":  "Pak 40 Anti-Tank Gun",
-                      "x":  1705.48,
-                      "y":  444.19,
-                      "file":  "at_gun_pak40.vehicle",
-                      "atlasIndex":  13,
-                      "categories":  [
-                                         "antiTank"
-                                     ]
-                  },
-                  {
-                      "faction":  "Allies",
-                      "factionLabel":  "盟军",
-                      "tag":  "hmg",
-                      "x":  1686.27,
-                      "y":  612.71,
-                      "file":  "mg42_hmg.vehicle",
-                      "atlasIndex":  28,
-                      "categories":  [
-                                         "hmg"
-                                     ]
-                  },
-                  {
-                      "faction":  "Allies",
-                      "factionLabel":  "盟军",
-                      "tag":  "hmg",
-                      "x":  1655.94,
-                      "y":  738.56,
-                      "file":  "mg42_hmg.vehicle",
-                      "atlasIndex":  28,
-                      "categories":  [
-                                         "hmg"
-                                     ]
-                  },
-                  {
-                      "faction":  "Allies",
-                      "factionLabel":  "盟军",
-                      "tag":  "Pak 40 Anti-Tank Gun",
-                      "x":  1707.59,
-                      "y":  914.95,
-                      "file":  "at_gun_pak40.vehicle",
-                      "atlasIndex":  13,
-                      "categories":  [
-                                         "antiTank"
-                                     ]
-                  },
-                  {
-                      "faction":  "Allies",
-                      "factionLabel":  "盟军",
-                      "tag":  "Pak 40 Anti-Tank Gun",
-                      "x":  1871.88,
-                      "y":  953.55,
-                      "file":  "at_gun_pak40.vehicle",
-                      "atlasIndex":  13,
-                      "categories":  [
-                                         "antiTank"
-                                     ]
-                  },
-                  {
-                      "faction":  "Allies",
-                      "factionLabel":  "盟军",
-                      "tag":  "jeep",
-                      "x":  1587.91,
-                      "y":  1275.74,
-                      "file":  "kubelwagen.vehicle",
-                      "atlasIndex":  62,
-                      "categories":  [
-
-                                     ]
-                  },
-                  {
-                      "faction":  "Allies",
-                      "factionLabel":  "盟军",
-                      "tag":  "tank",
-                      "x":  1481.22,
-                      "y":  1500.97,
-                      "file":  "panzer_iv.vehicle",
-                      "atlasIndex":  30,
-                      "categories":  [
-                                         "tank"
-                                     ]
-                  },
-                  {
-                      "faction":  "Allies",
-                      "factionLabel":  "盟军",
-                      "tag":  "Pak 40 Anti-Tank Gun",
-                      "x":  1492.26,
-                      "y":  1538.87,
-                      "file":  "at_gun_pak40.vehicle",
-                      "atlasIndex":  13,
-                      "categories":  [
-                                         "antiTank"
-                                     ]
-                  },
-                  {
-                      "faction":  "Allies",
-                      "factionLabel":  "盟军",
-                      "tag":  "Pak 40 Anti-Tank Gun",
-                      "x":  1739.61,
-                      "y":  1568.98,
-                      "file":  "at_gun_pak40.vehicle",
-                      "atlasIndex":  13,
-                      "categories":  [
-                                         "antiTank"
-                                     ]
-                  },
-                  {
-                      "faction":  "Allies",
-                      "factionLabel":  "盟军",
-                      "tag":  "Panzer IV",
-                      "x":  1571.3,
-                      "y":  1625.78,
-                      "file":  "panzer_iv.vehicle",
-                      "atlasIndex":  30,
-                      "categories":  [
-                                         "tank"
-                                     ]
-                  },
-                  {
-                      "faction":  "Allies",
-                      "factionLabel":  "盟军",
-                      "tag":  "Pak 40 Anti-Tank Gun",
-                      "x":  1355.02,
-                      "y":  1762.75,
-                      "file":  "at_gun_pak40.vehicle",
-                      "atlasIndex":  13,
-                      "categories":  [
-                                         "antiTank"
-                                     ]
-                  },
-                  {
-                      "faction":  "Allies",
-                      "factionLabel":  "盟军",
-                      "tag":  "Pak 40 Anti-Tank Gun",
-                      "x":  1312.89,
-                      "y":  1784.89,
-                      "file":  "at_gun_pak40.vehicle",
-                      "atlasIndex":  13,
-                      "categories":  [
-                                         "antiTank"
-                                     ]
-                  },
-                  {
-                      "faction":  "Allies",
-                      "factionLabel":  "盟军",
-                      "tag":  "Pak 40 Anti-Tank Gun",
-                      "x":  1473.71,
-                      "y":  1808.43,
-                      "file":  "at_gun_pak40.vehicle",
-                      "atlasIndex":  13,
-                      "categories":  [
-                                         "antiTank"
-                                     ]
-                  },
-                  {
-                      "faction":  "Allies",
-                      "factionLabel":  "盟军",
-                      "tag":  "jeep",
-                      "x":  1028.11,
-                      "y":  1893.72,
-                      "file":  "kubelwagen.vehicle",
-                      "atlasIndex":  62,
-                      "categories":  [
-
-                                     ]
-                  },
-                  {
-                      "faction":  "Allies",
-                      "factionLabel":  "盟军",
-                      "tag":  "M4A4 Sherman V",
-                      "x":  1433.74,
-                      "y":  1906.4,
-                      "file":  "m4_V.vehicle",
-                      "atlasIndex":  60,
-                      "categories":  [
-                                         "tank"
-                                     ]
-                  },
-                  {
-                      "faction":  "Allies",
-                      "factionLabel":  "盟军",
-                      "tag":  "hmg",
-                      "x":  1002.47,
-                      "y":  1916.43,
-                      "file":  "mg42_hmg.vehicle",
-                      "atlasIndex":  28,
-                      "categories":  [
-                                         "hmg"
-                                     ]
-                  },
-                  {
-                      "faction":  "Allies",
-                      "factionLabel":  "盟军",
-                      "tag":  "jeep",
-                      "x":  1271.69,
-                      "y":  2126.95,
-                      "file":  "kubelwagen.vehicle",
-                      "atlasIndex":  62,
-                      "categories":  [
-
-                                     ]
-                  },
-                  {
-                      "faction":  "Allies",
-                      "factionLabel":  "盟军",
-                      "tag":  "M4A4 Sherman V",
-                      "x":  1239.15,
-                      "y":  2194.91,
-                      "file":  "m4_V.vehicle",
-                      "atlasIndex":  60,
-                      "categories":  [
-                                         "tank"
-                                     ]
-                  },
-                  {
-                      "faction":  "Allies",
-                      "factionLabel":  "盟军",
-                      "tag":  "tank",
-                      "x":  1243.34,
-                      "y":  2197.03,
-                      "file":  "panzer_iv.vehicle",
-                      "atlasIndex":  30,
-                      "categories":  [
-                                         "tank"
-                                     ]
-                  },
-                  {
-                      "faction":  "Allies",
-                      "factionLabel":  "盟军",
-                      "tag":  "hmg",
-                      "x":  1221.86,
-                      "y":  2235.99,
-                      "file":  "mg42_hmg.vehicle",
-                      "atlasIndex":  28,
-                      "categories":  [
-                                         "hmg"
-                                     ]
-                  },
-                  {
-                      "faction":  "Allies",
-                      "factionLabel":  "盟军",
-                      "tag":  "Pak 40 Anti-Tank Gun",
-                      "x":  1285.01,
-                      "y":  2287.52,
-                      "file":  "at_gun_pak40.vehicle",
-                      "atlasIndex":  13,
-                      "categories":  [
-                                         "antiTank"
-                                     ]
-                  },
-                  {
-                      "faction":  "Allies",
-                      "factionLabel":  "盟军",
-                      "tag":  "Opel Blitz Armory",
-                      "x":  2052.93,
-                      "y":  2288.08,
-                      "file":  "opel_blitz_armoury.vehicle",
-                      "atlasIndex":  2,
-                      "categories":  [
-
-                                     ]
-                  },
-                  {
-                      "faction":  "Allies",
-                      "factionLabel":  "盟军",
-                      "tag":  "Willys Jeep",
-                      "x":  994.53,
-                      "y":  2362.83,
-                      "file":  "jeep.vehicle",
-                      "atlasIndex":  0,
-                      "categories":  [
-
-                                     ]
-                  },
-                  {
-                      "faction":  "Allies",
-                      "factionLabel":  "盟军",
-                      "tag":  "jeep",
-                      "x":  993.95,
-                      "y":  2363.4,
-                      "file":  "kubelwagen.vehicle",
-                      "atlasIndex":  62,
-                      "categories":  [
-
-                                     ]
-                  },
-                  {
-                      "faction":  "Allies",
-                      "factionLabel":  "盟军",
-                      "tag":  "apc",
-                      "x":  944.26,
-                      "y":  2828.15,
-                      "file":  "m3_halftrack.vehicle",
-                      "atlasIndex":  24,
-                      "categories":  [
-
-                                     ]
-                  },
-                  {
-                      "faction":  "Allies",
-                      "factionLabel":  "盟军",
-                      "tag":  "tank_destroyer",
-                      "x":  1050.12,
-                      "y":  2851.22,
-                      "file":  "m10.vehicle",
-                      "atlasIndex":  63,
-                      "categories":  [
-                                         "tank"
-                                     ]
-                  },
-                  {
-                      "faction":  "Allies",
-                      "factionLabel":  "盟军",
-                      "tag":  "jeep",
-                      "x":  956.5,
-                      "y":  2858.88,
-                      "file":  "jeep.vehicle",
-                      "atlasIndex":  0,
-                      "categories":  [
-
-                                     ]
-                  },
-                  {
-                      "faction":  "Allies",
-                      "factionLabel":  "盟军",
-                      "tag":  "truck",
-                      "x":  1047.86,
-                      "y":  2875.55,
-                      "file":  "austin_k5.vehicle",
-                      "atlasIndex":  56,
-                      "categories":  [
-
-                                     ]
-                  },
-                  {
-                      "faction":  "Allies",
-                      "factionLabel":  "盟军",
-                      "tag":  "truck",
-                      "x":  949.17,
-                      "y":  2876.1,
-                      "file":  "austin_k5.vehicle",
-                      "atlasIndex":  56,
-                      "categories":  [
-
-                                     ]
-                  },
-                  {
-                      "faction":  "Allies",
-                      "factionLabel":  "盟军",
-                      "tag":  "tank",
-                      "x":  1043.09,
-                      "y":  2893.22,
-                      "file":  "m4_75.vehicle",
-                      "atlasIndex":  60,
-                      "categories":  [
-                                         "tank"
-                                     ]
-                  },
-                  {
-                      "faction":  "Allies",
-                      "factionLabel":  "盟军",
-                      "tag":  "Austin K5 Armory",
-                      "x":  959.57,
-                      "y":  2899.84,
-                      "file":  "austin_k5_armoury.vehicle",
-                      "atlasIndex":  57,
-                      "categories":  [
-
-                                     ]
-                  },
-                  {
-                      "faction":  "Allies",
-                      "factionLabel":  "盟军",
-                      "tag":  "jeep",
-                      "x":  1052.87,
-                      "y":  2923.56,
-                      "file":  "jeep.vehicle",
-                      "atlasIndex":  0,
-                      "categories":  [
-
-                                     ]
-                  },
-                  {
-                      "faction":  "Allies",
-                      "factionLabel":  "盟军",
-                      "tag":  "Wasp MKII",
-                      "x":  1039.63,
-                      "y":  2935.88,
-                      "file":  "wasp.vehicle",
-                      "atlasIndex":  68,
-                      "categories":  [
-
-                                     ]
-                  },
-                  {
-                      "faction":  "Axis",
-                      "factionLabel":  "德军",
-                      "tag":  "hmg",
-                      "x":  1338.33,
-                      "y":  284.42,
-                      "file":  "m2hb_hmg.vehicle",
-                      "atlasIndex":  29,
-                      "categories":  [
-
-                                     ]
-                  },
-                  {
-                      "faction":  "Axis",
-                      "factionLabel":  "德军",
-                      "tag":  "M4A4 Sherman V",
-                      "x":  1827.67,
-                      "y":  332.78,
-                      "file":  "m4_V.vehicle",
-                      "atlasIndex":  60,
-                      "categories":  [
-                                         "tank"
-                                     ]
-                  },
-                  {
-                      "faction":  "Axis",
-                      "factionLabel":  "德军",
-                      "tag":  "hmg",
-                      "x":  948.3,
-                      "y":  341.67,
-                      "file":  "mg42_hmg.vehicle",
-                      "atlasIndex":  28,
-                      "categories":  [
-                                         "hmg"
-                                     ]
-                  },
-                  {
-                      "faction":  "Axis",
-                      "factionLabel":  "德军",
-                      "tag":  "truck",
-                      "x":  870.77,
-                      "y":  355.78,
-                      "file":  "opel_blitz_1.vehicle",
-                      "atlasIndex":  1,
-                      "categories":  [
-
-                                     ]
-                  },
-                  {
-                      "faction":  "Axis",
-                      "factionLabel":  "德军",
-                      "tag":  "M5 Anti-Tank Gun",
-                      "x":  1334.81,
-                      "y":  359.01,
-                      "file":  "at_gun_m5.vehicle",
-                      "atlasIndex":  14,
-                      "categories":  [
-                                         "antiTank"
-                                     ]
-                  },
-                  {
-                      "faction":  "Axis",
-                      "factionLabel":  "德军",
-                      "tag":  "Austin K5",
-                      "x":  1819.95,
-                      "y":  370.72,
-                      "file":  "austin_k5.vehicle",
-                      "atlasIndex":  56,
-                      "categories":  [
-
-                                     ]
-                  },
-                  {
-                      "faction":  "Axis",
-                      "factionLabel":  "德军",
-                      "tag":  "cargo_tank",
-                      "x":  788.67,
-                      "y":  375.31,
-                      "file":  "cargo_tank.vehicle",
-                      "atlasIndex":  8,
-                      "categories":  [
-                                         "tank"
-                                     ]
-                  },
-                  {
-                      "faction":  "Axis",
-                      "factionLabel":  "德军",
-                      "tag":  "apc",
-                      "x":  908.97,
-                      "y":  423.84,
-                      "file":  "sdkfz251_base.vehicle",
-                      "atlasIndex":  55,
-                      "categories":  [
-
-                                     ]
-                  },
-                  {
-                      "faction":  "Axis",
-                      "factionLabel":  "德军",
-                      "tag":  "jeep",
-                      "x":  950.64,
-                      "y":  430.97,
-                      "file":  "kubelwagen.vehicle",
-                      "atlasIndex":  62,
-                      "categories":  [
-
-                                     ]
-                  },
-                  {
-                      "faction":  "Axis",
-                      "factionLabel":  "德军",
-                      "tag":  "Opel Blitz Armory",
-                      "x":  796.73,
-                      "y":  436.07,
-                      "file":  "opel_blitz_armoury.vehicle",
-                      "atlasIndex":  2,
-                      "categories":  [
-
-                                     ]
-                  },
-                  {
-                      "faction":  "Axis",
-                      "factionLabel":  "德军",
-                      "tag":  "Pak 40 Anti-Tank Gun",
-                      "x":  965.81,
-                      "y":  495.2,
-                      "file":  "at_gun_pak40.vehicle",
-                      "atlasIndex":  13,
-                      "categories":  [
-                                         "antiTank"
-                                     ]
-                  },
-                  {
-                      "faction":  "Axis",
-                      "factionLabel":  "德军",
-                      "tag":  "hmg",
-                      "x":  871.52,
-                      "y":  519.77,
-                      "file":  "mg42_hmg.vehicle",
-                      "atlasIndex":  28,
-                      "categories":  [
-                                         "hmg"
-                                     ]
-                  },
-                  {
-                      "faction":  "Axis",
-                      "factionLabel":  "德军",
-                      "tag":  "hmg",
-                      "x":  1685.07,
-                      "y":  609.11,
-                      "file":  "m2hb_hmg.vehicle",
-                      "atlasIndex":  29,
-                      "categories":  [
-
-                                     ]
-                  },
-                  {
-                      "faction":  "Axis",
-                      "factionLabel":  "德军",
-                      "tag":  "hmg",
-                      "x":  1655.01,
-                      "y":  735.01,
-                      "file":  "m2hb_hmg.vehicle",
-                      "atlasIndex":  29,
-                      "categories":  [
-
-                                     ]
-                  },
-                  {
-                      "faction":  "Axis",
-                      "factionLabel":  "德军",
-                      "tag":  "Radio jammer",
-                      "x":  1485.53,
-                      "y":  768.99,
-                      "file":  "radio_jammer_2.vehicle",
-                      "atlasIndex":  9,
-                      "categories":  [
-                                         "radio"
-                                     ]
-                  },
-                  {
-                      "faction":  "Axis",
-                      "factionLabel":  "德军",
-                      "tag":  "M5 Anti-Tank Gun",
-                      "x":  1710.66,
-                      "y":  910.91,
-                      "file":  "at_gun_m5.vehicle",
-                      "atlasIndex":  14,
-                      "categories":  [
-                                         "antiTank"
-                                     ]
-                  },
-                  {
-                      "faction":  "Axis",
-                      "factionLabel":  "德军",
-                      "tag":  "M5 Anti-Tank Gun",
-                      "x":  1871.0,
-                      "y":  950.56,
-                      "file":  "at_gun_m5.vehicle",
-                      "atlasIndex":  14,
-                      "categories":  [
-                                         "antiTank"
-                                     ]
-                  },
-                  {
-                      "faction":  "Axis",
-                      "factionLabel":  "德军",
-                      "tag":  "M5 Anti-Tank Gun",
-                      "x":  1283.34,
-                      "y":  1028.76,
-                      "file":  "at_gun_m5.vehicle",
-                      "atlasIndex":  14,
-                      "categories":  [
-                                         "antiTank"
-                                     ]
-                  },
-                  {
-                      "faction":  "Axis",
-                      "factionLabel":  "德军",
-                      "tag":  "hmg",
-                      "x":  1646.9,
-                      "y":  1072.07,
-                      "file":  "m2hb_hmg.vehicle",
-                      "atlasIndex":  29,
-                      "categories":  [
-
-                                     ]
-                  },
-                  {
-                      "faction":  "Axis",
-                      "factionLabel":  "德军",
-                      "tag":  "Sherman Firefly",
-                      "x":  1583.74,
-                      "y":  1273.67,
-                      "file":  "m4_firefly.vehicle",
-                      "atlasIndex":  59,
-                      "categories":  [
-                                         "tank"
-                                     ]
-                  },
-                  {
-                      "faction":  "Axis",
-                      "factionLabel":  "德军",
-                      "tag":  "hmg",
-                      "x":  1527.33,
-                      "y":  1364.01,
-                      "file":  "m2hb_hmg.vehicle",
-                      "atlasIndex":  29,
-                      "categories":  [
-
-                                     ]
-                  },
-                  {
-                      "faction":  "Axis",
-                      "factionLabel":  "德军",
-                      "tag":  "jeep",
-                      "x":  1479.63,
-                      "y":  1501.84,
-                      "file":  "jeep.vehicle",
-                      "atlasIndex":  0,
-                      "categories":  [
-
-                                     ]
-                  },
-                  {
-                      "faction":  "Axis",
-                      "factionLabel":  "德军",
-                      "tag":  "M5 Anti-Tank Gun",
-                      "x":  1492.12,
-                      "y":  1538.25,
-                      "file":  "at_gun_m5.vehicle",
-                      "atlasIndex":  14,
-                      "categories":  [
-                                         "antiTank"
-                                     ]
-                  },
-                  {
-                      "faction":  "Axis",
-                      "factionLabel":  "德军",
-                      "tag":  "M5 Anti-Tank Gun",
-                      "x":  1740.64,
-                      "y":  1567.22,
-                      "file":  "at_gun_m5.vehicle",
-                      "atlasIndex":  14,
-                      "categories":  [
-                                         "antiTank"
-                                     ]
-                  },
-                  {
-                      "faction":  "Axis",
-                      "factionLabel":  "德军",
-                      "tag":  "M5 Anti-Tank Gun",
-                      "x":  1356.02,
-                      "y":  1761.32,
-                      "file":  "at_gun_m5.vehicle",
-                      "atlasIndex":  14,
-                      "categories":  [
-                                         "antiTank"
-                                     ]
-                  },
-                  {
-                      "faction":  "Axis",
-                      "factionLabel":  "德军",
-                      "tag":  "M5 Anti-Tank Gun",
-                      "x":  1311.69,
-                      "y":  1785.03,
-                      "file":  "at_gun_m5.vehicle",
-                      "atlasIndex":  14,
-                      "categories":  [
-                                         "antiTank"
-                                     ]
-                  },
-                  {
-                      "faction":  "Axis",
-                      "factionLabel":  "德军",
-                      "tag":  "M5 Anti-Tank Gun",
-                      "x":  1470.22,
-                      "y":  1868.78,
-                      "file":  "at_gun_m5.vehicle",
-                      "atlasIndex":  14,
-                      "categories":  [
-                                         "antiTank"
-                                     ]
-                  },
-                  {
-                      "faction":  "Axis",
-                      "factionLabel":  "德军",
-                      "tag":  "apc",
-                      "x":  1429.04,
-                      "y":  1903.94,
-                      "file":  "m3_halftrack.vehicle",
-                      "atlasIndex":  24,
-                      "categories":  [
-
-                                     ]
-                  },
-                  {
-                      "faction":  "Axis",
-                      "factionLabel":  "德军",
-                      "tag":  "M5 Anti-Tank Gun",
-                      "x":  1006.81,
-                      "y":  1968.69,
-                      "file":  "at_gun_m5.vehicle",
-                      "atlasIndex":  14,
-                      "categories":  [
-                                         "antiTank"
-                                     ]
-                  },
-                  {
-                      "faction":  "Axis",
-                      "factionLabel":  "德军",
-                      "tag":  "Sherman Firefly",
-                      "x":  1371.17,
-                      "y":  2177.01,
-                      "file":  "m4_firefly.vehicle",
-                      "atlasIndex":  59,
-                      "categories":  [
-                                         "tank"
-                                     ]
-                  },
-                  {
-                      "faction":  "Axis",
-                      "factionLabel":  "德军",
-                      "tag":  "M5 Anti-Tank Gun",
-                      "x":  1269.03,
-                      "y":  2198.44,
-                      "file":  "at_gun_m5.vehicle",
-                      "atlasIndex":  14,
-                      "categories":  [
-                                         "antiTank"
-                                     ]
-                  },
-                  {
-                      "faction":  "Axis",
-                      "factionLabel":  "德军",
-                      "tag":  "jeep",
-                      "x":  1995.27,
-                      "y":  2242.65,
-                      "file":  "jeep.vehicle",
-                      "atlasIndex":  0,
-                      "categories":  [
-
-                                     ]
-                  },
-                  {
-                      "faction":  "Axis",
-                      "factionLabel":  "德军",
-                      "tag":  "M5 Anti-Tank Gun",
-                      "x":  1927.95,
-                      "y":  2267.05,
-                      "file":  "at_gun_m5.vehicle",
-                      "atlasIndex":  14,
-                      "categories":  [
-                                         "antiTank"
-                                     ]
-                  },
-                  {
-                      "faction":  "Axis",
-                      "factionLabel":  "德军",
-                      "tag":  "Austin K5 Armory",
-                      "x":  2052.93,
-                      "y":  2288.08,
-                      "file":  "austin_k5_armoury.vehicle",
-                      "atlasIndex":  57,
-                      "categories":  [
-
-                                     ]
-                  },
-                  {
-                      "faction":  "Axis",
-                      "factionLabel":  "德军",
-                      "tag":  "hmg",
-                      "x":  973.4,
-                      "y":  2351.03,
-                      "file":  "m2hb_hmg.vehicle",
-                      "atlasIndex":  29,
-                      "categories":  [
-
-                                     ]
-                  },
-                  {
-                      "faction":  "Axis",
-                      "factionLabel":  "德军",
-                      "tag":  "M5 Anti-Tank Gun",
-                      "x":  1423.09,
-                      "y":  2453.64,
-                      "file":  "at_gun_m5.vehicle",
-                      "atlasIndex":  14,
-                      "categories":  [
-                                         "antiTank"
-                                     ]
-                  },
-                  {
-                      "faction":  "Axis",
-                      "factionLabel":  "德军",
-                      "tag":  "hmg",
-                      "x":  1385.97,
-                      "y":  2506.36,
-                      "file":  "m2hb_hmg.vehicle",
-                      "atlasIndex":  29,
-                      "categories":  [
-
-                                     ]
-                  },
-                  {
-                      "faction":  "Axis",
-                      "factionLabel":  "德军",
-                      "tag":  "M5 Anti-Tank Gun",
-                      "x":  1873.38,
-                      "y":  2560.38,
-                      "file":  "at_gun_m5.vehicle",
-                      "atlasIndex":  14,
-                      "categories":  [
-                                         "antiTank"
-                                     ]
-                  },
-                  {
-                      "faction":  "Axis",
-                      "factionLabel":  "德军",
-                      "tag":  "M5 Anti-Tank Gun",
-                      "x":  998.17,
-                      "y":  2680.41,
-                      "file":  "at_gun_m5.vehicle",
-                      "atlasIndex":  14,
-                      "categories":  [
-                                         "antiTank"
-                                     ]
-                  },
-                  {
-                      "faction":  "Axis",
-                      "factionLabel":  "德军",
-                      "tag":  "truck",
-                      "x":  1761.57,
-                      "y":  2782.95,
-                      "file":  "austin_k5.vehicle",
-                      "atlasIndex":  56,
-                      "categories":  [
-
-                                     ]
-                  },
-                  {
-                      "faction":  "Axis",
-                      "factionLabel":  "德军",
-                      "tag":  "apc",
-                      "x":  957.62,
-                      "y":  2858.81,
-                      "file":  "m3_halftrack.vehicle",
-                      "atlasIndex":  24,
-                      "categories":  [
-
-                                     ]
-                  },
-                  {
-                      "faction":  "Axis",
-                      "factionLabel":  "德军",
-                      "tag":  "Sherman Firefly",
-                      "x":  1045.34,
-                      "y":  2874.07,
-                      "file":  "m4_firefly.vehicle",
-                      "atlasIndex":  59,
-                      "categories":  [
-                                         "tank"
-                                     ]
-                  },
-                  {
-                      "faction":  "Axis",
-                      "factionLabel":  "德军",
-                      "tag":  "hmg",
-                      "x":  981.25,
-                      "y":  2877.21,
-                      "file":  "m2hb_hmg.vehicle",
-                      "atlasIndex":  29,
-                      "categories":  [
-
-                                     ]
-                  },
-                  {
-                      "faction":  "Axis",
-                      "factionLabel":  "德军",
-                      "tag":  "Radio jammer",
-                      "x":  930.52,
-                      "y":  2880.11,
-                      "file":  "radio_jammer.vehicle",
-                      "atlasIndex":  9,
-                      "categories":  [
-                                         "radio"
-                                     ]
-                  }
-              ],
-    "counts":  {
-                   "radio":  3,
-                   "tank":  13,
-                   "antiTank":  25,
-                   "hmg":  6
-               }
+{
+  "id": "edelweiss4",
+  "group": "雪绒花",
+  "name": "edelweiss4",
+  "factions": [
+    {
+      "id": "Axis",
+      "label": "德军",
+      "image": "map_axis.png"
+    },
+    {
+      "id": "Allies",
+      "label": "盟军",
+      "image": "map_allies.png"
+    }
+  ],
+  "items": [
+    {
+      "faction": "Allies",
+      "factionLabel": "盟军",
+      "tag": "jeep",
+      "x": 1812.65,
+      "y": 317.64,
+      "file": "kubelwagen.vehicle",
+      "atlasIndex": 62,
+      "categories": []
+    },
+    {
+      "faction": "Allies",
+      "factionLabel": "盟军",
+      "tag": "tank",
+      "x": 1830.32,
+      "y": 333.02,
+      "file": "panzer_iv.vehicle",
+      "atlasIndex": 30,
+      "categories": [
+        "tank"
+      ]
+    },
+    {
+      "faction": "Allies",
+      "factionLabel": "盟军",
+      "tag": "Radio jammer",
+      "x": 1842.34,
+      "y": 369.27,
+      "file": "radio_jammer.vehicle",
+      "atlasIndex": 9,
+      "categories": [
+        "radio"
+      ]
+    },
+    {
+      "faction": "Allies",
+      "factionLabel": "盟军",
+      "tag": "apc",
+      "x": 1816.67,
+      "y": 370.29,
+      "file": "sdkfz251_base.vehicle",
+      "atlasIndex": 55,
+      "categories": []
+    },
+    {
+      "faction": "Allies",
+      "factionLabel": "盟军",
+      "tag": "Pak 40 Anti-Tank Gun",
+      "x": 1705.48,
+      "y": 444.19,
+      "file": "at_gun_pak40.vehicle",
+      "atlasIndex": 13,
+      "categories": [
+        "antiTank"
+      ]
+    },
+    {
+      "faction": "Allies",
+      "factionLabel": "盟军",
+      "tag": "hmg",
+      "x": 1686.27,
+      "y": 612.71,
+      "file": "mg42_hmg.vehicle",
+      "atlasIndex": 28,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "Allies",
+      "factionLabel": "盟军",
+      "tag": "hmg",
+      "x": 1655.94,
+      "y": 738.56,
+      "file": "mg42_hmg.vehicle",
+      "atlasIndex": 28,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "Allies",
+      "factionLabel": "盟军",
+      "tag": "Pak 40 Anti-Tank Gun",
+      "x": 1707.59,
+      "y": 914.95,
+      "file": "at_gun_pak40.vehicle",
+      "atlasIndex": 13,
+      "categories": [
+        "antiTank"
+      ]
+    },
+    {
+      "faction": "Allies",
+      "factionLabel": "盟军",
+      "tag": "Pak 40 Anti-Tank Gun",
+      "x": 1871.88,
+      "y": 953.55,
+      "file": "at_gun_pak40.vehicle",
+      "atlasIndex": 13,
+      "categories": [
+        "antiTank"
+      ]
+    },
+    {
+      "faction": "Allies",
+      "factionLabel": "盟军",
+      "tag": "jeep",
+      "x": 1587.91,
+      "y": 1275.74,
+      "file": "kubelwagen.vehicle",
+      "atlasIndex": 62,
+      "categories": []
+    },
+    {
+      "faction": "Allies",
+      "factionLabel": "盟军",
+      "tag": "tank",
+      "x": 1481.22,
+      "y": 1500.97,
+      "file": "panzer_iv.vehicle",
+      "atlasIndex": 30,
+      "categories": [
+        "tank"
+      ]
+    },
+    {
+      "faction": "Allies",
+      "factionLabel": "盟军",
+      "tag": "Pak 40 Anti-Tank Gun",
+      "x": 1492.26,
+      "y": 1538.87,
+      "file": "at_gun_pak40.vehicle",
+      "atlasIndex": 13,
+      "categories": [
+        "antiTank"
+      ]
+    },
+    {
+      "faction": "Allies",
+      "factionLabel": "盟军",
+      "tag": "Pak 40 Anti-Tank Gun",
+      "x": 1739.61,
+      "y": 1568.98,
+      "file": "at_gun_pak40.vehicle",
+      "atlasIndex": 13,
+      "categories": [
+        "antiTank"
+      ]
+    },
+    {
+      "faction": "Allies",
+      "factionLabel": "盟军",
+      "tag": "Panzer IV",
+      "x": 1571.3,
+      "y": 1625.78,
+      "file": "panzer_iv.vehicle",
+      "atlasIndex": 30,
+      "categories": [
+        "tank"
+      ]
+    },
+    {
+      "faction": "Allies",
+      "factionLabel": "盟军",
+      "tag": "Pak 40 Anti-Tank Gun",
+      "x": 1355.02,
+      "y": 1762.75,
+      "file": "at_gun_pak40.vehicle",
+      "atlasIndex": 13,
+      "categories": [
+        "antiTank"
+      ]
+    },
+    {
+      "faction": "Allies",
+      "factionLabel": "盟军",
+      "tag": "Pak 40 Anti-Tank Gun",
+      "x": 1312.89,
+      "y": 1784.89,
+      "file": "at_gun_pak40.vehicle",
+      "atlasIndex": 13,
+      "categories": [
+        "antiTank"
+      ]
+    },
+    {
+      "faction": "Allies",
+      "factionLabel": "盟军",
+      "tag": "Pak 40 Anti-Tank Gun",
+      "x": 1473.71,
+      "y": 1808.43,
+      "file": "at_gun_pak40.vehicle",
+      "atlasIndex": 13,
+      "categories": [
+        "antiTank"
+      ]
+    },
+    {
+      "faction": "Allies",
+      "factionLabel": "盟军",
+      "tag": "jeep",
+      "x": 1028.11,
+      "y": 1893.72,
+      "file": "kubelwagen.vehicle",
+      "atlasIndex": 62,
+      "categories": []
+    },
+    {
+      "faction": "Allies",
+      "factionLabel": "盟军",
+      "tag": "Churchill Mk VII",
+      "x": 1433.74,
+      "y": 1906.4,
+      "file": "churchill_mkvii.vehicle",
+      "atlasIndex": 73,
+      "categories": [
+        "tank"
+      ]
+    },
+    {
+      "faction": "Allies",
+      "factionLabel": "盟军",
+      "tag": "hmg",
+      "x": 1002.47,
+      "y": 1916.43,
+      "file": "mg42_hmg.vehicle",
+      "atlasIndex": 28,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "Allies",
+      "factionLabel": "盟军",
+      "tag": "jeep",
+      "x": 1271.69,
+      "y": 2126.95,
+      "file": "kubelwagen.vehicle",
+      "atlasIndex": 62,
+      "categories": []
+    },
+    {
+      "faction": "Allies",
+      "factionLabel": "盟军",
+      "tag": "Churchill Mk VII",
+      "x": 1239.15,
+      "y": 2194.91,
+      "file": "churchill_mkvii.vehicle",
+      "atlasIndex": 73,
+      "categories": [
+        "tank"
+      ]
+    },
+    {
+      "faction": "Allies",
+      "factionLabel": "盟军",
+      "tag": "tank",
+      "x": 1243.34,
+      "y": 2197.03,
+      "file": "panzer_iv.vehicle",
+      "atlasIndex": 30,
+      "categories": [
+        "tank"
+      ]
+    },
+    {
+      "faction": "Allies",
+      "factionLabel": "盟军",
+      "tag": "hmg",
+      "x": 1221.86,
+      "y": 2235.99,
+      "file": "mg42_hmg.vehicle",
+      "atlasIndex": 28,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "Allies",
+      "factionLabel": "盟军",
+      "tag": "Pak 40 Anti-Tank Gun",
+      "x": 1285.01,
+      "y": 2287.52,
+      "file": "at_gun_pak40.vehicle",
+      "atlasIndex": 13,
+      "categories": [
+        "antiTank"
+      ]
+    },
+    {
+      "faction": "Allies",
+      "factionLabel": "盟军",
+      "tag": "Opel Blitz Armory",
+      "x": 2052.93,
+      "y": 2288.08,
+      "file": "opel_blitz_armoury.vehicle",
+      "atlasIndex": 2,
+      "categories": []
+    },
+    {
+      "faction": "Allies",
+      "factionLabel": "盟军",
+      "tag": "Willys Jeep",
+      "x": 994.53,
+      "y": 2362.83,
+      "file": "jeep.vehicle",
+      "atlasIndex": 0,
+      "categories": []
+    },
+    {
+      "faction": "Allies",
+      "factionLabel": "盟军",
+      "tag": "jeep",
+      "x": 993.95,
+      "y": 2363.4,
+      "file": "kubelwagen.vehicle",
+      "atlasIndex": 62,
+      "categories": []
+    },
+    {
+      "faction": "Allies",
+      "factionLabel": "盟军",
+      "tag": "apc",
+      "x": 944.26,
+      "y": 2828.15,
+      "file": "m3_halftrack.vehicle",
+      "atlasIndex": 24,
+      "categories": []
+    },
+    {
+      "faction": "Allies",
+      "factionLabel": "盟军",
+      "tag": "Sherman Firefly",
+      "x": 1050.12,
+      "y": 2851.22,
+      "file": "m4_firefly.vehicle",
+      "atlasIndex": 59,
+      "categories": [
+        "tank"
+      ]
+    },
+    {
+      "faction": "Allies",
+      "factionLabel": "盟军",
+      "tag": "jeep",
+      "x": 956.5,
+      "y": 2858.88,
+      "file": "jeep.vehicle",
+      "atlasIndex": 0,
+      "categories": []
+    },
+    {
+      "faction": "Allies",
+      "factionLabel": "盟军",
+      "tag": "truck",
+      "x": 1047.86,
+      "y": 2875.55,
+      "file": "austin_k5.vehicle",
+      "atlasIndex": 56,
+      "categories": []
+    },
+    {
+      "faction": "Allies",
+      "factionLabel": "盟军",
+      "tag": "truck",
+      "x": 949.17,
+      "y": 2876.1,
+      "file": "austin_k5.vehicle",
+      "atlasIndex": 56,
+      "categories": []
+    },
+    {
+      "faction": "Allies",
+      "factionLabel": "盟军",
+      "tag": "Churchill Mk VII",
+      "x": 1043.09,
+      "y": 2893.22,
+      "file": "churchill_mkvii.vehicle",
+      "atlasIndex": 73,
+      "categories": [
+        "tank"
+      ]
+    },
+    {
+      "faction": "Allies",
+      "factionLabel": "盟军",
+      "tag": "Austin K5 Armory",
+      "x": 959.57,
+      "y": 2899.84,
+      "file": "austin_k5_armoury.vehicle",
+      "atlasIndex": 57,
+      "categories": []
+    },
+    {
+      "faction": "Allies",
+      "factionLabel": "盟军",
+      "tag": "jeep",
+      "x": 1052.87,
+      "y": 2923.56,
+      "file": "jeep.vehicle",
+      "atlasIndex": 0,
+      "categories": []
+    },
+    {
+      "faction": "Allies",
+      "factionLabel": "盟军",
+      "tag": "Wasp MKII",
+      "x": 1039.63,
+      "y": 2935.88,
+      "file": "wasp.vehicle",
+      "atlasIndex": 68,
+      "categories": []
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "Vickers Mk I HMG",
+      "x": 1338.33,
+      "y": 284.42,
+      "file": "vickers_hmg.vehicle",
+      "atlasIndex": 7,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "M4A4 Sherman V",
+      "x": 1827.67,
+      "y": 332.78,
+      "file": "m4_V.vehicle",
+      "atlasIndex": 60,
+      "categories": [
+        "tank"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "hmg",
+      "x": 948.3,
+      "y": 341.67,
+      "file": "mg42_hmg.vehicle",
+      "atlasIndex": 28,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "truck",
+      "x": 870.77,
+      "y": 355.78,
+      "file": "opel_blitz_1.vehicle",
+      "atlasIndex": 1,
+      "categories": []
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "M5 Anti-Tank Gun",
+      "x": 1334.81,
+      "y": 359.01,
+      "file": "at_gun_m5.vehicle",
+      "atlasIndex": 14,
+      "categories": [
+        "antiTank"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "Austin K5",
+      "x": 1819.95,
+      "y": 370.72,
+      "file": "austin_k5.vehicle",
+      "atlasIndex": 56,
+      "categories": []
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "cargo_tank",
+      "x": 788.67,
+      "y": 375.31,
+      "file": "cargo_tank.vehicle",
+      "atlasIndex": 8,
+      "categories": [
+        "tank"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "apc",
+      "x": 908.97,
+      "y": 423.84,
+      "file": "sdkfz251_base.vehicle",
+      "atlasIndex": 55,
+      "categories": []
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "jeep",
+      "x": 950.64,
+      "y": 430.97,
+      "file": "kubelwagen.vehicle",
+      "atlasIndex": 62,
+      "categories": []
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "Opel Blitz Armory",
+      "x": 796.73,
+      "y": 436.07,
+      "file": "opel_blitz_armoury.vehicle",
+      "atlasIndex": 2,
+      "categories": []
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "Pak 40 Anti-Tank Gun",
+      "x": 965.81,
+      "y": 495.2,
+      "file": "at_gun_pak40.vehicle",
+      "atlasIndex": 13,
+      "categories": [
+        "antiTank"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "hmg",
+      "x": 871.52,
+      "y": 519.77,
+      "file": "mg42_hmg.vehicle",
+      "atlasIndex": 28,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "Vickers Mk I HMG",
+      "x": 1685.07,
+      "y": 609.11,
+      "file": "vickers_hmg.vehicle",
+      "atlasIndex": 7,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "Vickers Mk I HMG",
+      "x": 1655.01,
+      "y": 735.01,
+      "file": "vickers_hmg.vehicle",
+      "atlasIndex": 7,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "Radio jammer",
+      "x": 1485.53,
+      "y": 768.99,
+      "file": "radio_jammer_2.vehicle",
+      "atlasIndex": 9,
+      "categories": [
+        "radio"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "M5 Anti-Tank Gun",
+      "x": 1710.66,
+      "y": 910.91,
+      "file": "at_gun_m5.vehicle",
+      "atlasIndex": 14,
+      "categories": [
+        "antiTank"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "M5 Anti-Tank Gun",
+      "x": 1871,
+      "y": 950.56,
+      "file": "at_gun_m5.vehicle",
+      "atlasIndex": 14,
+      "categories": [
+        "antiTank"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "M5 Anti-Tank Gun",
+      "x": 1283.34,
+      "y": 1028.76,
+      "file": "at_gun_m5.vehicle",
+      "atlasIndex": 14,
+      "categories": [
+        "antiTank"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "Vickers Mk I HMG",
+      "x": 1646.9,
+      "y": 1072.07,
+      "file": "vickers_hmg.vehicle",
+      "atlasIndex": 7,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "Sherman Firefly",
+      "x": 1583.74,
+      "y": 1273.67,
+      "file": "m4_firefly.vehicle",
+      "atlasIndex": 59,
+      "categories": [
+        "tank"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "Vickers Mk I HMG",
+      "x": 1527.33,
+      "y": 1364.01,
+      "file": "vickers_hmg.vehicle",
+      "atlasIndex": 7,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "jeep",
+      "x": 1479.63,
+      "y": 1501.84,
+      "file": "jeep.vehicle",
+      "atlasIndex": 0,
+      "categories": []
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "M5 Anti-Tank Gun",
+      "x": 1492.12,
+      "y": 1538.25,
+      "file": "at_gun_m5.vehicle",
+      "atlasIndex": 14,
+      "categories": [
+        "antiTank"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "M5 Anti-Tank Gun",
+      "x": 1740.64,
+      "y": 1567.22,
+      "file": "at_gun_m5.vehicle",
+      "atlasIndex": 14,
+      "categories": [
+        "antiTank"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "M5 Anti-Tank Gun",
+      "x": 1356.02,
+      "y": 1761.32,
+      "file": "at_gun_m5.vehicle",
+      "atlasIndex": 14,
+      "categories": [
+        "antiTank"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "M5 Anti-Tank Gun",
+      "x": 1311.69,
+      "y": 1785.03,
+      "file": "at_gun_m5.vehicle",
+      "atlasIndex": 14,
+      "categories": [
+        "antiTank"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "M5 Anti-Tank Gun",
+      "x": 1470.22,
+      "y": 1868.78,
+      "file": "at_gun_m5.vehicle",
+      "atlasIndex": 14,
+      "categories": [
+        "antiTank"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "apc",
+      "x": 1429.04,
+      "y": 1903.94,
+      "file": "m3_halftrack.vehicle",
+      "atlasIndex": 24,
+      "categories": []
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "M5 Anti-Tank Gun",
+      "x": 1006.81,
+      "y": 1968.69,
+      "file": "at_gun_m5.vehicle",
+      "atlasIndex": 14,
+      "categories": [
+        "antiTank"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "Sherman Firefly",
+      "x": 1371.17,
+      "y": 2177.01,
+      "file": "m4_firefly.vehicle",
+      "atlasIndex": 59,
+      "categories": [
+        "tank"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "M5 Anti-Tank Gun",
+      "x": 1269.03,
+      "y": 2198.44,
+      "file": "at_gun_m5.vehicle",
+      "atlasIndex": 14,
+      "categories": [
+        "antiTank"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "jeep",
+      "x": 1995.27,
+      "y": 2242.65,
+      "file": "jeep.vehicle",
+      "atlasIndex": 0,
+      "categories": []
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "M5 Anti-Tank Gun",
+      "x": 1927.95,
+      "y": 2267.05,
+      "file": "at_gun_m5.vehicle",
+      "atlasIndex": 14,
+      "categories": [
+        "antiTank"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "Austin K5 Armory",
+      "x": 2052.93,
+      "y": 2288.08,
+      "file": "austin_k5_armoury.vehicle",
+      "atlasIndex": 57,
+      "categories": []
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "Vickers Mk I HMG",
+      "x": 973.4,
+      "y": 2351.03,
+      "file": "vickers_hmg.vehicle",
+      "atlasIndex": 7,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "M5 Anti-Tank Gun",
+      "x": 1423.09,
+      "y": 2453.64,
+      "file": "at_gun_m5.vehicle",
+      "atlasIndex": 14,
+      "categories": [
+        "antiTank"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "Vickers Mk I HMG",
+      "x": 1385.97,
+      "y": 2506.36,
+      "file": "vickers_hmg.vehicle",
+      "atlasIndex": 7,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "M5 Anti-Tank Gun",
+      "x": 1873.38,
+      "y": 2560.38,
+      "file": "at_gun_m5.vehicle",
+      "atlasIndex": 14,
+      "categories": [
+        "antiTank"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "M5 Anti-Tank Gun",
+      "x": 998.17,
+      "y": 2680.41,
+      "file": "at_gun_m5.vehicle",
+      "atlasIndex": 14,
+      "categories": [
+        "antiTank"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "truck",
+      "x": 1761.57,
+      "y": 2782.95,
+      "file": "austin_k5.vehicle",
+      "atlasIndex": 56,
+      "categories": []
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "apc",
+      "x": 957.62,
+      "y": 2858.81,
+      "file": "m3_halftrack.vehicle",
+      "atlasIndex": 24,
+      "categories": []
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "Sherman Firefly",
+      "x": 1045.34,
+      "y": 2874.07,
+      "file": "m4_firefly.vehicle",
+      "atlasIndex": 59,
+      "categories": [
+        "tank"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "Vickers Mk I HMG",
+      "x": 981.25,
+      "y": 2877.21,
+      "file": "vickers_hmg.vehicle",
+      "atlasIndex": 7,
+      "categories": [
+        "hmg"
+      ]
+    },
+    {
+      "faction": "Axis",
+      "factionLabel": "德军",
+      "tag": "Radio jammer",
+      "x": 930.52,
+      "y": 2880.11,
+      "file": "radio_jammer.vehicle",
+      "atlasIndex": 9,
+      "categories": [
+        "radio"
+      ]
+    }
+  ],
+  "counts": {
+    "radio": 3,
+    "tank": 13,
+    "antiTank": 25,
+    "hmg": 14
+  }
 }
