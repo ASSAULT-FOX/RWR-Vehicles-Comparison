@@ -206,18 +206,6 @@
     {
       "faction": "IJA",
       "factionLabel": "日军",
-      "tag": "medium_tank",
-      "x": 1022.59,
-      "y": 1302.65,
-      "file": "m4_75.vehicle",
-      "atlasIndex": 60,
-      "categories": [
-        "tank"
-      ]
-    },
-    {
-      "faction": "IJA",
-      "factionLabel": "日军",
       "tag": "Coastal Gun",
       "x": 1158,
       "y": 1423.29,
@@ -226,16 +214,6 @@
       "categories": [
         "antiTank"
       ]
-    },
-    {
-      "faction": "USMC",
-      "factionLabel": "美军",
-      "tag": "pt_boat",
-      "x": 400.08,
-      "y": 381.09,
-      "file": "soukoutei.vehicle",
-      "atlasIndex": 67,
-      "categories": []
     },
     {
       "faction": "USMC",
@@ -359,18 +337,6 @@
       "y": 849.68,
       "file": "hago.vehicle",
       "atlasIndex": 34,
-      "categories": [
-        "tank"
-      ]
-    },
-    {
-      "faction": "USMC",
-      "factionLabel": "美军",
-      "tag": "medium_tank",
-      "x": 1381.62,
-      "y": 1044.11,
-      "file": "chi_ha.vehicle",
-      "atlasIndex": 64,
       "categories": [
         "tank"
       ]

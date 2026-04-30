@@ -896,16 +896,6 @@
     {
       "faction": "USMC",
       "factionLabel": "美军",
-      "tag": "LVT-4",
-      "x": 1599.86,
-      "y": 1552.49,
-      "file": "lvt4.vehicle",
-      "atlasIndex": 35,
-      "categories": []
-    },
-    {
-      "faction": "USMC",
-      "factionLabel": "美军",
       "tag": "Oerlikon Gun",
       "x": 1686.96,
       "y": 1557.41,

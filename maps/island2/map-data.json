@@ -232,11 +232,11 @@
     {
       "faction": "IJA",
       "factionLabel": "日军",
-      "tag": "pt_boat",
+      "tag": "soukoutei",
       "x": 293.3,
       "y": 1388.21,
-      "file": "pt_boat.vehicle",
-      "atlasIndex": 36,
+      "file": "soukoutei.vehicle",
+      "atlasIndex": 67,
       "categories": []
     },
     {

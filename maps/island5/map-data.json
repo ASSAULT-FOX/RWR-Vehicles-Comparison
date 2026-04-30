@@ -18,11 +18,11 @@
     {
       "faction": "IJA",
       "factionLabel": "日军",
-      "tag": "pt_boat",
+      "tag": "soukoutei",
       "x": 1571.37,
       "y": 346.57,
-      "file": "pt_boat.vehicle",
-      "atlasIndex": 36,
+      "file": "soukoutei.vehicle",
+      "atlasIndex": 67,
       "categories": []
     },
     {
@@ -462,11 +462,11 @@
     {
       "faction": "USMC",
       "factionLabel": "美军",
-      "tag": "PT Boat",
+      "tag": "soukoutei",
       "x": 1571.02,
       "y": 345.51,
-      "file": "pt_boat.vehicle",
-      "atlasIndex": 36,
+      "file": "soukoutei.vehicle",
+      "atlasIndex": 67,
       "categories": []
     },
     {

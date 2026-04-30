@@ -48,21 +48,21 @@
     {
       "faction": "IJA",
       "factionLabel": "日军",
-      "tag": "pt_boat",
+      "tag": "soukoutei",
       "x": 1182.01,
       "y": 354.28,
-      "file": "pt_boat.vehicle",
-      "atlasIndex": 36,
+      "file": "soukoutei.vehicle",
+      "atlasIndex": 67,
       "categories": []
     },
     {
       "faction": "IJA",
       "factionLabel": "日军",
-      "tag": "landing_craft",
+      "tag": "landing_craft1",
       "x": 1222.52,
       "y": 357.5,
-      "file": "landing_craft_noai.vehicle",
-      "atlasIndex": 37,
+      "file": "landing_craft1_noai.vehicle",
+      "atlasIndex": 38,
       "categories": []
     },
     {
