@@ -261,6 +261,7 @@
     }
 
     .table-wrap {
+      position: relative;
       min-height: 0;
       overflow-x: hidden;
       overflow-y: auto;
@@ -270,6 +271,63 @@
       scrollbar-gutter: stable;
       contain: layout paint;
       will-change: scroll-position;
+    }
+
+    .loading-panel {
+      position: absolute;
+      inset: 0;
+      z-index: 20;
+      display: none;
+      place-items: center;
+      padding: 24px;
+      background: rgba(247, 251, 255, 0.82);
+      backdrop-filter: blur(12px) saturate(135%);
+      -webkit-backdrop-filter: blur(12px) saturate(135%);
+    }
+
+    .loading-panel.open {
+      display: grid;
+    }
+
+    .loading-card {
+      display: grid;
+      justify-items: center;
+      gap: 14px;
+      min-width: min(280px, 82vw);
+      padding: 26px 30px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.72);
+      background: rgba(255, 255, 255, 0.78);
+      box-shadow: 0 18px 42px rgba(35, 76, 124, 0.14);
+    }
+
+    .loading-spinner {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 4px solid rgba(63, 124, 255, 0.14);
+      border-top-color: var(--accent-2);
+      border-right-color: var(--accent);
+      animation: loadingSpin 0.82s linear infinite;
+    }
+
+    .loading-title {
+      font-weight: 900;
+      color: var(--text);
+      line-height: 1.3;
+    }
+
+    .loading-subtitle {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.4;
+      text-align: center;
+    }
+
+    @keyframes loadingSpin {
+      to {
+        transform: rotate(360deg);
+      }
     }
 
     table {
@@ -1461,6 +1519,13 @@
       </section>
 
       <section class="table-wrap" aria-label="载具数据表">
+        <div class="loading-panel open" id="loadingPanel" role="status" aria-live="polite">
+          <div class="loading-card">
+            <div class="loading-spinner" aria-hidden="true"></div>
+            <div class="loading-title">正在加载数据</div>
+            <div class="loading-subtitle">正在请求并解析载具、枪械和地图数据</div>
+          </div>
+        </div>
         <table id="vehicleTable">
           <colgroup>
             <col class="faction-col">
@@ -1622,6 +1687,7 @@
     const rowsEl = document.getElementById("vehicleRows");
     const weaponRowsEl = document.getElementById("weaponRows");
     const mapRowsEl = document.getElementById("mapRows");
+    const loadingPanel = document.getElementById("loadingPanel");
     const searchInput = document.getElementById("searchInput");
     const compareBtn = document.getElementById("compareBtn");
     const confirmCompareBtn = document.getElementById("confirmCompareBtn");
@@ -1820,7 +1886,15 @@
       };
     }
 
+    function setLoading(loading, subtitle = "正在请求并解析载具、枪械和地图数据") {
+      if (!loadingPanel) return;
+      loadingPanel.classList.toggle("open", loading);
+      const subtitleEl = loadingPanel.querySelector(".loading-subtitle");
+      if (subtitleEl) subtitleEl.textContent = subtitle;
+    }
+
     async function loadData() {
+      setLoading(true);
       const [vehicleResponse, weaponResponse, mapResponse] = await Promise.all([
         fetch("data/vehicles.json"),
         fetch("data/weapons.json"),
@@ -3233,9 +3307,13 @@
     });
 
     loadData()
-      .then(applyView)
+      .then(() => {
+        applyView();
+        setLoading(false);
+      })
       .catch((error) => {
         console.error(error);
+        setLoading(false);
         showToast("数据加载失败，请通过本地服务器打开页面");
       });
   </script>
