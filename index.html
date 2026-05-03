@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>DLC参数查询器</title>
   <link rel="icon" type="image/png" href="ico.png">
+  <link rel="preload" href="data/vehicles.json" as="fetch" crossorigin>
+  <link rel="preload" href="data/weapons.json" as="fetch" crossorigin>
+  <link rel="preload" href="data/maps.json" as="fetch" crossorigin>
   <style>
     :root {
       color-scheme: light;
@@ -57,7 +60,8 @@
       min-width: 0;
       border: 1px solid var(--line);
       border-radius: 20px;
-      background: rgba(255, 255, 255, 0.74);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 252, 255, 0.76) 30%, rgba(255, 255, 255, 0.58) 100%);
       box-shadow: var(--shadow);
       display: grid;
       grid-template-rows: auto auto minmax(0, 1fr);
@@ -65,25 +69,29 @@
     }
 
     .topbar {
+      position: relative;
+      z-index: 6;
       min-height: 72px;
       padding: 16px 22px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 16px;
-      border-bottom: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.72);
+      border-bottom: 0;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: none;
+      backdrop-filter: blur(14px) saturate(130%);
     }
 
     .tag-tabs {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      padding: 5px;
-      border: 1px solid rgba(93, 125, 159, 0.16);
+      gap: 4px;
+      padding: 4px;
+      border: 0;
       border-radius: 12px;
-      background: rgba(255, 255, 255, 0.68);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.84), 0 10px 26px rgba(35, 76, 124, 0.08);
+      background: rgba(235, 244, 252, 0.72);
+      box-shadow: inset 0 1px 2px rgba(35, 76, 124, 0.06);
     }
 
     .tag-tab {
@@ -101,8 +109,8 @@
 
     .tag-tab.active {
       color: #fff;
-      background: linear-gradient(135deg, #20c8d4, var(--accent-2));
-      box-shadow: 0 10px 22px rgba(43, 122, 230, 0.2);
+      background: linear-gradient(135deg, rgba(32, 200, 212, 0.96), rgba(63, 124, 255, 0.96));
+      box-shadow: 0 8px 18px rgba(43, 122, 230, 0.16);
     }
 
     .hidden {
@@ -117,20 +125,19 @@
 
     .search input {
       width: 100%;
-      border: 1px solid var(--line);
+      border: 0;
       border-radius: 8px;
-      background: rgba(255, 255, 255, 0.78);
+      background: rgba(235, 244, 252, 0.7);
       padding: 10px 12px 10px 36px;
       outline: 0;
       color: var(--text);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.88);
+      box-shadow: inset 0 1px 2px rgba(35, 76, 124, 0.06);
       transition: border-color 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
     }
 
     .search input:focus {
-      border-color: rgba(63, 124, 255, 0.38);
       background: #fff;
-      box-shadow: 0 0 0 4px rgba(63, 124, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.88);
+      box-shadow: 0 0 0 4px rgba(63, 124, 255, 0.1), inset 0 1px 2px rgba(35, 76, 124, 0.04);
     }
 
     .search span {
@@ -142,14 +149,18 @@
     }
 
     .compare-bar {
+      position: relative;
+      z-index: 5;
       display: grid;
       grid-template-columns: auto auto auto auto auto;
       justify-content: start;
       align-items: center;
       gap: 10px;
-      padding: 12px 22px;
-      border-bottom: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.62);
+      padding: 4px 22px 16px;
+      border-bottom: 0;
+      background: rgba(255, 255, 255, 0.82);
+      box-shadow: none;
+      backdrop-filter: blur(12px) saturate(125%);
     }
 
     .primary {
@@ -253,10 +264,12 @@
       min-height: 0;
       overflow-x: hidden;
       overflow-y: auto;
-      background: rgba(255, 255, 255, 0.34);
+      background: rgba(255, 255, 255, 0.28);
       padding-bottom: 76px;
       overscroll-behavior: contain;
       scrollbar-gutter: stable;
+      contain: layout paint;
+      will-change: scroll-position;
     }
 
     table {
@@ -266,6 +279,14 @@
       border-collapse: separate;
       border-spacing: 0;
       font-size: 13px;
+    }
+
+    thead {
+      position: sticky;
+      top: 0;
+      z-index: 12;
+      background: #fbfdff;
+      box-shadow: 0 1px 0 var(--line), 0 8px 18px rgba(35, 76, 124, 0.045);
     }
 
     col.faction-col {
@@ -312,13 +333,24 @@
       width: 11%;
     }
 
+    col.map-group-col {
+      width: 14%;
+    }
+
+    col.map-name-col {
+      width: 18%;
+    }
+
+    col.map-actions-col {
+      width: 68%;
+    }
+
     thead th {
-      position: sticky;
-      top: 0;
-      z-index: 8;
+      position: relative;
       color: #3d515d;
-      background: rgba(255, 255, 255, 0.96);
-      border-bottom: 1px solid var(--line);
+      background: transparent;
+      border-bottom: 0;
+      box-shadow: none;
       padding: 0 8px;
       height: 58px;
       line-height: 1.22;
@@ -341,7 +373,7 @@
       cursor: pointer;
       user-select: none;
       white-space: normal;
-      transition: background 0.16s ease, color 0.16s ease, box-shadow 0.16s ease;
+      transition: background 0.16s ease, color 0.16s ease;
     }
 
     .sort-indicator {
@@ -364,12 +396,10 @@
 
     thead th.sorted.advantage-sort {
       background: linear-gradient(135deg, #25c685, #0c9f72);
-      box-shadow: inset 0 0 0 1px rgba(12, 159, 114, 0.18);
     }
 
     thead th.sorted.disadvantage-sort {
       background: linear-gradient(135deg, #e25555, #c92f52);
-      box-shadow: inset 0 0 0 1px rgba(201, 47, 82, 0.18);
     }
 
     thead th.sorted .sort-indicator {
@@ -528,8 +558,9 @@
       display: none;
       place-items: center;
       padding: 24px;
-      background: rgba(30, 55, 86, 0.22);
-      backdrop-filter: blur(5px) saturate(120%);
+      background: rgba(24, 43, 68, 0.32);
+      backdrop-filter: blur(18px) saturate(150%);
+      -webkit-backdrop-filter: blur(18px) saturate(150%);
       z-index: 10;
     }
 
@@ -547,8 +578,10 @@
       overflow: hidden;
       border: 1px solid rgba(255, 255, 255, 0.72);
       border-radius: 16px;
-      background: #ffffff;
+      background: rgba(255, 255, 255, 0.88);
       box-shadow: 0 22px 58px rgba(21, 54, 94, 0.22);
+      backdrop-filter: blur(22px) saturate(145%);
+      -webkit-backdrop-filter: blur(22px) saturate(145%);
       backface-visibility: hidden;
       transform: translateZ(0);
       will-change: transform, opacity;
@@ -572,8 +605,9 @@
     .dialog-head {
       z-index: 2;
       padding: 16px 18px;
-      background: #ffffff;
+      background: rgba(255, 255, 255, 0.94);
       border-bottom: 1px solid var(--line);
+      box-shadow: 0 8px 18px rgba(35, 76, 124, 0.045);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -586,6 +620,7 @@
       overflow: auto;
       overscroll-behavior: contain;
       scrollbar-gutter: stable;
+      contain: layout paint;
     }
 
     .dialog-head h2 {
@@ -625,31 +660,33 @@
       gap: 16px;
     }
 
-    .map-toolbar {
+    .map-actions {
       display: flex;
-      flex: 1;
       justify-content: center;
+      align-items: center;
+      gap: 18px;
       flex-wrap: wrap;
-      gap: 8px;
-      min-width: 0;
+      padding: 4px 0;
     }
 
-    .map-faction-button {
-      border: 1px solid rgba(93, 125, 159, 0.18);
+    .map-action-button {
+      border: 0;
       border-radius: 8px;
-      min-height: 38px;
+      min-height: 36px;
       padding: 0 16px;
-      color: #52677a;
-      background: rgba(255, 255, 255, 0.74);
+      color: #345365;
+      background: rgba(235, 244, 252, 0.86);
+      box-shadow: inset 0 1px 2px rgba(35, 76, 124, 0.06);
       cursor: pointer;
       font-weight: 850;
+      white-space: nowrap;
       transition: color 0.16s ease, background 0.16s ease, box-shadow 0.16s ease, transform 0.16s ease;
     }
 
-    .map-faction-button:hover {
+    .map-action-button:hover {
       color: #fff;
       background: linear-gradient(135deg, #20c8d4, var(--accent-2));
-      box-shadow: 0 10px 22px rgba(43, 122, 230, 0.2);
+      box-shadow: 0 10px 22px rgba(43, 122, 230, 0.16);
       transform: translateY(-1px);
     }
 
@@ -986,7 +1023,7 @@
       overflow: hidden;
       border: 1px solid rgba(255, 255, 255, 0.72);
       border-radius: 18px;
-      background: #f7fbff;
+      background: rgba(247, 251, 255, 0.9);
       display: grid;
       grid-template-rows: auto minmax(0, 1fr);
     }
@@ -1484,21 +1521,15 @@
         </table>
         <table id="mapTable" class="hidden">
           <colgroup>
-            <col class="medium-col">
-            <col class="name-col">
-            <col class="medium-col">
-            <col class="medium-col">
-            <col class="medium-col">
-            <col class="medium-col">
+            <col class="map-group-col">
+            <col class="map-name-col">
+            <col class="map-actions-col">
           </colgroup>
           <thead>
             <tr>
               <th>地图组</th>
               <th>地图名</th>
-              <th>无线电干扰器数量</th>
-              <th>坦克数量</th>
-              <th>反坦克炮数量</th>
-              <th>重机枪数量</th>
+              <th>操作</th>
             </tr>
           </thead>
           <tbody id="mapRows"></tbody>
@@ -1565,7 +1596,6 @@
         <div>
           <h2 id="mapTitle">地图详情</h2>
         </div>
-        <div class="map-toolbar" id="mapFactionButtons"></div>
         <button class="icon-button" id="closeMapModal" title="关闭">×</button>
       </div>
       <div class="dialog-body map-body">
@@ -1583,6 +1613,7 @@
     let weapons = [];
     let maps = [];
     let currentMap = null;
+    const mapDataCache = new Map();
 
     const tagTabs = document.querySelectorAll(".tag-tab");
     const vehicleTable = document.getElementById("vehicleTable");
@@ -1617,7 +1648,6 @@
     const mapModal = document.getElementById("mapModal");
     const closeMapModal = document.getElementById("closeMapModal");
     const mapTitle = document.getElementById("mapTitle");
-    const mapFactionButtons = document.getElementById("mapFactionButtons");
     const mapImage = document.getElementById("mapImage");
     const toast = document.getElementById("toast");
     const weaponSections = [
@@ -2258,10 +2288,14 @@
         <tr data-map-id="${escapeHtml(map.id)}">
           <td>${mapGroupBadge(map.group)}</td>
           <td>${escapeHtml(map.name)}</td>
-          <td class="num">${countDisplay(map.counts?.radio)}</td>
-          <td class="num">${countDisplay(map.counts?.tank)}</td>
-          <td class="num">${countDisplay(map.counts?.antiTank)}</td>
-          <td class="num">${countDisplay(map.counts?.hmg)}</td>
+          <td>
+            <div class="map-actions">
+              <button class="map-action-button map-open-button" data-map-id="${escapeHtml(map.id)}" type="button">查看地图</button>
+              ${(map.factions || []).map((faction) => `
+                <button class="map-action-button map-perspective-button" data-map-id="${escapeHtml(map.id)}" data-faction="${escapeHtml(faction.id)}" type="button">查看${escapeHtml(faction.label)}视角</button>
+              `).join("")}
+            </div>
+          </td>
         </tr>
       `).join("");
     }
@@ -2414,28 +2448,30 @@
     }
 
     async function openMapDetail(mapId) {
-      const summary = mapLookup.get(mapId);
-      if (!summary) return;
-      const response = await fetch(summary.data);
-      if (!response.ok) {
-        showToast("地图数据加载失败");
-        return;
-      }
-      currentMap = await response.json();
+      currentMap = await loadMapData(mapId);
+      if (!currentMap) return;
       mapTitle.textContent = `${currentMap.group} / ${currentMap.name}`;
-      mapFactionButtons.innerHTML = (currentMap.factions || []).map((faction) => `
-        <button class="map-faction-button" data-faction="${escapeHtml(faction.id)}" type="button">${escapeHtml(faction.label)} (${escapeHtml(faction.id)})</button>
-      `).join("");
       mapModal.classList.add("open");
       renderMapDetail();
       resetDialogScroll(mapModal);
     }
 
+    async function loadMapData(mapId) {
+      const summary = mapLookup.get(mapId);
+      if (!summary) return null;
+      if (mapDataCache.has(mapId)) return mapDataCache.get(mapId);
+      const response = await fetch(summary.data);
+      if (!response.ok) {
+        showToast("地图数据加载失败");
+        return null;
+      }
+      const mapData = await response.json();
+      mapDataCache.set(mapId, mapData);
+      return mapData;
+    }
+
     function renderMapDetail() {
       if (!currentMap) return;
-      mapFactionButtons.querySelectorAll(".map-faction-button").forEach((button) => {
-        button.classList.remove("active");
-      });
       const factions = currentMap.factions || [];
       const defaultFaction = factions.find((item) => item.image === "map.png") || factions[0] || {};
       setMapImageWithFallback(mapImage, defaultFaction);
@@ -2453,8 +2489,8 @@
       return names;
     }
 
-    function mapImageSources(faction) {
-      return mapImageNames(faction).map((name) => `maps/${currentMap.id}/${name}`);
+    function mapImageSources(faction, mapData = currentMap) {
+      return mapImageNames(faction).map((name) => `maps/${mapData.id}/${name}`);
     }
 
     function setMapImageWithFallback(imageElement, faction) {
@@ -2492,16 +2528,18 @@
       throw lastError || new Error("No map image source available");
     }
 
-    async function openProcessedMap(factionId) {
-      if (!currentMap) return;
-      const faction = currentMap.factions.find((item) => item.id === factionId) || currentMap.factions[0];
+    async function openProcessedMap(factionId, mapData = currentMap, popup = null) {
+      if (!mapData) return;
+      const factions = mapData.factions || [];
+      const faction = factions.find((item) => item.id === factionId) || factions[0];
       if (!faction) return;
-      const popup = window.open("", "_blank");
+      popup = popup || window.open("", "_blank");
       if (!popup) {
         showToast("浏览器阻止了新窗口，请允许弹窗后重试");
         return;
       }
-      popup.document.title = `${currentMap.name} ${faction.label}`;
+      const pageTitle = `${mapData.name} ${faction.label}视角`;
+      popup.document.title = pageTitle;
       popup.document.body.style.margin = "0";
       popup.document.body.style.background = "#101820";
       popup.document.body.style.display = "grid";
@@ -2509,14 +2547,14 @@
       popup.document.body.textContent = "正在生成地图图片...";
 
       try {
-        const baseImage = await loadFirstImageElement(mapImageSources(faction));
+        const baseImage = await loadFirstImageElement(mapImageSources(faction, mapData));
         const canvas = document.createElement("canvas");
         canvas.width = baseImage.naturalWidth || baseImage.width;
         canvas.height = baseImage.naturalHeight || baseImage.height;
         const ctx = canvas.getContext("2d");
         ctx.drawImage(baseImage, 0, 0);
 
-        const items = currentMap.items.filter((item) => item.faction === factionId || item.faction === "公用");
+        const items = mapData.items.filter((item) => item.faction === factionId || item.faction === "公用");
         const iconCache = new Map();
         for (const item of items) {
           const iconSrc = `images/${item.atlasIndex}.png`;
@@ -2539,7 +2577,34 @@
             showToast("地图图片生成失败");
             return;
           }
-          popup.location.href = URL.createObjectURL(blob);
+          const objectUrl = URL.createObjectURL(blob);
+          popup.document.title = pageTitle;
+          popup.document.body.innerHTML = "";
+          popup.document.body.style.overflow = "hidden";
+          const image = popup.document.createElement("img");
+          image.src = objectUrl;
+          image.alt = pageTitle;
+          image.style.display = "block";
+          image.style.maxWidth = "100vw";
+          image.style.maxHeight = "100vh";
+          image.style.width = "auto";
+          image.style.height = "auto";
+          image.style.objectFit = "contain";
+          image.style.cursor = "zoom-in";
+          image.style.userSelect = "none";
+          image.addEventListener("click", () => {
+            const native = image.dataset.native !== "true";
+            image.dataset.native = native ? "true" : "false";
+            popup.document.body.style.display = native ? "block" : "grid";
+            popup.document.body.style.placeItems = native ? "" : "center";
+            popup.document.body.style.overflow = native ? "auto" : "hidden";
+            image.style.maxWidth = native ? "none" : "100vw";
+            image.style.maxHeight = native ? "none" : "100vh";
+            image.style.cursor = native ? "zoom-out" : "zoom-in";
+            if (!native) popup.scrollTo(0, 0);
+          });
+          popup.document.body.appendChild(image);
+          popup.addEventListener("beforeunload", () => URL.revokeObjectURL(objectUrl), { once: true });
         }, "image/png");
       } catch (error) {
         console.error(error);
@@ -3074,17 +3139,34 @@
       openWeaponDetail(index);
     });
     mapRowsEl.addEventListener("click", (event) => {
-      const row = event.target.closest("tr[data-map-id]");
-      if (!row) return;
-      openMapDetail(row.dataset.mapId).catch((error) => {
+      const openButton = event.target.closest(".map-open-button");
+      if (openButton) {
+        openMapDetail(openButton.dataset.mapId).catch((error) => {
+          console.error(error);
+          showToast("地图详情打开失败");
+        });
+        return;
+      }
+      const perspectiveButton = event.target.closest(".map-perspective-button");
+      if (!perspectiveButton) return;
+      const popup = window.open("", "_blank");
+      if (!popup) {
+        showToast("浏览器阻止了新窗口，请允许弹窗后重试");
+        return;
+      }
+      popup.document.body.style.margin = "0";
+      popup.document.body.style.background = "#101820";
+      popup.document.body.style.display = "grid";
+      popup.document.body.style.placeItems = "center";
+      popup.document.body.textContent = "正在生成地图图片...";
+      loadMapData(perspectiveButton.dataset.mapId).then((mapData) => {
+        if (mapData) return openProcessedMap(perspectiveButton.dataset.faction, mapData, popup);
+        popup.close();
+      }).catch((error) => {
         console.error(error);
-        showToast("地图详情打开失败");
+        popup.close();
+        showToast("地图图片生成失败");
       });
-    });
-    mapFactionButtons.addEventListener("click", (event) => {
-      const button = event.target.closest(".map-faction-button");
-      if (!button) return;
-      openProcessedMap(button.dataset.faction);
     });
     threatButtons.addEventListener("click", (event) => {
       const button = event.target.closest(".threat-button");
